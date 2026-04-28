@@ -6,6 +6,23 @@ namespace EBay\ListingManagement\Clients\GraphQL;
 
 use EBay\ListingManagement\Configuration\RequestOptions;
 use EBay\ListingManagement\GraphQL\Operations\ListingOperations;
+use EBay\ListingManagement\GraphQL\Types\Inputs\BulkUpdateInventoryInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\CreateListingInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\CreateSecondChanceListingInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\EndListingInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\ItemBiddingActivityInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\RelistListingInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\SellerListingsInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\UpdateListingInput;
+use EBay\ListingManagement\GraphQL\Types\Results\BulkUpdateInventoryOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\CreateListingOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\CreateSecondChanceListingOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\EndListingOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\ItemBiddingActivityResult;
+use EBay\ListingManagement\GraphQL\Types\Results\RelistListingOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\SellerListingSearchResult;
+use EBay\ListingManagement\GraphQL\Types\Results\SellerListingsResult;
+use EBay\ListingManagement\GraphQL\Types\Results\UpdateListingOutput;
 
 /**
  * Typed wrapper around the eBay GraphQL listing operations.
@@ -21,44 +38,36 @@ final class ListingGraphQLClient
 
     /**
      * Returns auction and bid information for a specified listing.
-     *
-     * @param array{itemId: string} $input
-     * @return array<string, mixed>
      */
-    public function itemBiddingActivity(array $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
+    public function itemBiddingActivity(ItemBiddingActivityInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ItemBiddingActivityResult
     {
         $data = $this->dynamic->execute(
             ListingOperations::ITEM_BIDDING_ACTIVITY,
-            ['input' => $input],
+            ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
         );
-        return $data['itemBiddingActivity'] ?? [];
+        return ItemBiddingActivityResult::fromArray($data['itemBiddingActivity'] ?? []);
     }
 
     /**
      * Retrieve details of one or more seller listings by listing ID.
-     *
-     * @param array{listings: array<array{listingId?: string, sku?: string}>} $input
-     * @return array<string, mixed>
      */
-    public function sellerListings(array $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
+    public function sellerListings(SellerListingsInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): SellerListingsResult
     {
         $data = $this->dynamic->execute(
             ListingOperations::SELLER_LISTINGS,
-            ['input' => $input],
+            ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
         );
-        return $data['sellerListings'] ?? [];
+        return SellerListingsResult::fromArray($data['sellerListings'] ?? []);
     }
 
     /**
      * Search seller's active, ended, and scheduled listings.
-     *
-     * @return array<string, mixed>
      */
-    public function sellerListingSearch(?string $accessToken = null, ?RequestOptions $requestOptions = null): array
+    public function sellerListingSearch(?string $accessToken = null, ?RequestOptions $requestOptions = null): SellerListingSearchResult
     {
         $data = $this->dynamic->execute(
             ListingOperations::SELLER_LISTING_SEARCH,
@@ -66,111 +75,93 @@ final class ListingGraphQLClient
             $accessToken,
             $requestOptions
         );
-        return $data['sellerListingSearch'] ?? [];
+        return SellerListingSearchResult::fromArray($data['sellerListingSearch'] ?? []);
     }
 
     // ── Mutations ────────────────────────────────────────────────────────────
 
     /**
      * Bulk update price and/or quantity for fixed-price listing items.
-     *
-     * @param array{inventory: array<array<string, mixed>>} $input
-     * @return array<string, mixed>
      */
-    public function bulkUpdateInventory(array $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
+    public function bulkUpdateInventory(BulkUpdateInventoryInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): BulkUpdateInventoryOutput
     {
         $data = $this->dynamic->execute(
             ListingOperations::BULK_UPDATE_INVENTORY,
-            ['input' => $input],
+            ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
         );
-        return $data['bulkUpdateInventory'] ?? [];
+        return BulkUpdateInventoryOutput::fromArray($data['bulkUpdateInventory'] ?? []);
     }
 
     /**
      * Create a new eBay listing.
-     *
-     * @param array<string, mixed> $input See CreateListingInput schema fields.
-     * @return array<string, mixed>
      */
-    public function createListing(array $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
+    public function createListing(CreateListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): CreateListingOutput
     {
         $data = $this->dynamic->execute(
             ListingOperations::CREATE_LISTING,
-            ['input' => $input],
+            ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
         );
-        return $data['createListing'] ?? [];
+        return CreateListingOutput::fromArray($data['createListing'] ?? []);
     }
 
     /**
      * Create a Second Chance Offer listing from a recently ended auction.
-     *
-     * @param array<string, mixed> $input See CreateSecondChanceListingInput schema fields.
-     * @return array<string, mixed>
      */
-    public function createSecondChanceListing(array $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
+    public function createSecondChanceListing(CreateSecondChanceListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): CreateSecondChanceListingOutput
     {
         $data = $this->dynamic->execute(
             ListingOperations::CREATE_SECOND_CHANCE_LISTING,
-            ['input' => $input],
+            ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
         );
-        return $data['createSecondChanceListing'] ?? [];
+        return CreateSecondChanceListingOutput::fromArray($data['createSecondChanceListing'] ?? []);
     }
 
     /**
      * End an active listing before its scheduled end time.
-     *
-     * @param array{listingIdentifierInput: array<string, mixed>, endListingReason: string} $input
-     * @return array<string, mixed>
      */
-    public function endListing(array $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
+    public function endListing(EndListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): EndListingOutput
     {
         $data = $this->dynamic->execute(
             ListingOperations::END_LISTING,
-            ['input' => $input],
+            ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
         );
-        return $data['endListing'] ?? [];
+        return EndListingOutput::fromArray($data['endListing'] ?? []);
     }
 
     /**
      * Relist an ended eBay listing.
-     *
-     * @param array<string, mixed> $input See RelistListingInput schema fields.
-     * @return array<string, mixed>
      */
-    public function relistListing(array $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
+    public function relistListing(RelistListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): RelistListingOutput
     {
         $data = $this->dynamic->execute(
             ListingOperations::RELIST_LISTING,
-            ['input' => $input],
+            ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
         );
-        return $data['relistListing'] ?? [];
+        return RelistListingOutput::fromArray($data['relistListing'] ?? []);
     }
 
     /**
      * Update one or more fields of an active or scheduled listing.
-     *
-     * @param array<string, mixed> $input See UpdateListingInput schema fields.
-     * @return array<string, mixed>
      */
-    public function updateListing(array $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
+    public function updateListing(UpdateListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): UpdateListingOutput
     {
         $data = $this->dynamic->execute(
             ListingOperations::UPDATE_LISTING,
-            ['input' => $input],
+            ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
         );
-        return $data['updateListing'] ?? [];
+        return UpdateListingOutput::fromArray($data['updateListing'] ?? []);
     }
 
     // ── Escape hatch ─────────────────────────────────────────────────────────
