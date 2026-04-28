@@ -1,0 +1,40 @@
+<?php
+
+namespace EBay\ListingManagement\Generated\Feed\Schedule;
+
+use Microsoft\Kiota\Abstractions\BaseRequestConfiguration;
+use Microsoft\Kiota\Abstractions\RequestOption;
+
+/**
+ * Configuration for the request such as headers, query parameters, and middleware options.
+*/
+class ScheduleRequestBuilderGetRequestConfiguration extends BaseRequestConfiguration 
+{
+    /**
+     * @var ScheduleRequestBuilderGetQueryParameters|null $queryParameters Request query parameters
+    */
+    public ?ScheduleRequestBuilderGetQueryParameters $queryParameters = null;
+    
+    /**
+     * Instantiates a new ScheduleRequestBuilderGetRequestConfiguration and sets the default values.
+     * @param array<string, array<string>|string>|null $headers Request headers
+     * @param array<RequestOption>|null $options Request options
+     * @param ScheduleRequestBuilderGetQueryParameters|null $queryParameters Request query parameters
+    */
+    public function __construct(?array $headers = null, ?array $options = null, ?ScheduleRequestBuilderGetQueryParameters $queryParameters = null) {
+        parent::__construct($headers ?? [], $options ?? []);
+        $this->queryParameters = $queryParameters;
+    }
+
+    /**
+     * Instantiates a new ScheduleRequestBuilderGetQueryParameters.
+     * @param string|null $feed_type The feed type associated with the schedules being retrieved.<br><br><span class="tablenote"><b>Note:</b> Schedules are currently only available for <code>LMS_ORDER_REPORT</code>.</span>
+     * @param string|null $limit The maximum number of schedules that can be returned on each page of the paginated response. Use this parameter in conjunction with the <strong>offset</strong> parameter to control the pagination of the output. <p> <span class="tablenote"><strong>Note:</strong> This feature employs a zero-based list, where the first item in the list has an offset of <code>0</code>.</span></p><p>For example, if <strong>offset</strong> is set to 10 and <strong>limit</strong> is set to 10, the call retrieves schedules 11 thru 20 from the result set.</p><p>If this parameter is omitted, the default value is used. <br /><br /><b>Default: </b> 10 <br /><br /><b>Maximum: </b>500
+     * @param string|null $offset The number of schedules to skip in the result set before returning the first schedule in the paginated response. <p>Combine <strong>offset</strong> with the <strong>limit</strong> query parameter to control the items returned in the response. For example, if you supply an <strong>offset</strong> of <code>0</code> and a <strong>limit</strong> of <code>10</code>, the first page of the response contains the first 10 items from the complete list of items retrieved by the call. If <strong>offset</strong> is <code>10</code> and <strong>limit</strong> is <code>20</code>, the first page of the response contains items 11-30 from the complete result set. If this query parameter is not set, the default value is used and the first page of records is returned.<br /><br /><b>Default: </b>0
+     * @return ScheduleRequestBuilderGetQueryParameters
+    */
+    public static function createQueryParameters(?string $feed_type = null, ?string $limit = null, ?string $offset = null): ScheduleRequestBuilderGetQueryParameters {
+        return new ScheduleRequestBuilderGetQueryParameters($feed_type, $limit, $offset);
+    }
+
+}

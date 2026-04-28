@@ -1,0 +1,22 @@
+<?php
+
+namespace EBay\ListingManagement\Generated\Feed\Schedule_template\Item;
+
+use Microsoft\Kiota\Abstractions\BaseRequestConfiguration;
+use Microsoft\Kiota\Abstractions\RequestOption;
+
+/**
+ * Configuration for the request such as headers, query parameters, and middleware options.
+*/
+class WithSchedule_template_ItemRequestBuilderGetRequestConfiguration extends BaseRequestConfiguration 
+{
+    /**
+     * Instantiates a new WithSchedule_template_ItemRequestBuilderGetRequestConfiguration and sets the default values.
+     * @param array<string, array<string>|string>|null $headers Request headers
+     * @param array<RequestOption>|null $options Request options
+    */
+    public function __construct(?array $headers = null, ?array $options = null) {
+        parent::__construct($headers ?? [], $options ?? []);
+    }
+
+}

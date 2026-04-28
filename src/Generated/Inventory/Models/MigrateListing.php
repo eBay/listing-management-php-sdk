@@ -1,0 +1,93 @@
+<?php
+
+namespace EBay\ListingManagement\Generated\Inventory\Models;
+
+use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
+use Microsoft\Kiota\Abstractions\Serialization\Parsable;
+use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
+use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
+
+/**
+ * This type is used to specify one to five eBay listings that will be migrated to the new Inventory model.
+*/
+class MigrateListing implements AdditionalDataHolder, Parsable 
+{
+    /**
+     * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    */
+    private ?array $additionalData = null;
+    
+    /**
+     * @var string|null $listingId The unique identifier of the eBay listing to migrate to the new Inventory model. In the Trading API, this field is known as the <strong>ItemID</strong>.<br><br>Up to five unique eBay listings may be specified here in separate <strong>listingId</strong> fields. The seller should make sure that each of these listings meet the requirements that are stated at the top of this Call Reference page.
+    */
+    private ?string $listingId = null;
+    
+    /**
+     * Instantiates a new MigrateListing and sets the default values.
+    */
+    public function __construct() {
+        $this->setAdditionalData([]);
+    }
+
+    /**
+     * Creates a new instance of the appropriate class based on discriminator value
+     * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
+     * @return MigrateListing
+    */
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): MigrateListing {
+        return new MigrateListing();
+    }
+
+    /**
+     * Gets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @return array<string, mixed>|null
+    */
+    public function getAdditionalData(): ?array {
+        return $this->additionalData;
+    }
+
+    /**
+     * The deserialization information for the current model
+     * @return array<string, callable(ParseNode): void>
+    */
+    public function getFieldDeserializers(): array {
+        $o = $this;
+        return  [
+            'listingId' => fn(ParseNode $n) => $o->setListingId($n->getStringValue()),
+        ];
+    }
+
+    /**
+     * Gets the listingId property value. The unique identifier of the eBay listing to migrate to the new Inventory model. In the Trading API, this field is known as the <strong>ItemID</strong>.<br><br>Up to five unique eBay listings may be specified here in separate <strong>listingId</strong> fields. The seller should make sure that each of these listings meet the requirements that are stated at the top of this Call Reference page.
+     * @return string|null
+    */
+    public function getListingId(): ?string {
+        return $this->listingId;
+    }
+
+    /**
+     * Serializes information the current object
+     * @param SerializationWriter $writer Serialization writer to use to serialize this model
+    */
+    public function serialize(SerializationWriter $writer): void {
+        $writer->writeStringValue('listingId', $this->getListingId());
+        $writer->writeAdditionalData($this->getAdditionalData());
+    }
+
+    /**
+     * Sets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @param array<string,mixed> $value Value to set for the AdditionalData property.
+    */
+    public function setAdditionalData(?array $value): void {
+        $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the listingId property value. The unique identifier of the eBay listing to migrate to the new Inventory model. In the Trading API, this field is known as the <strong>ItemID</strong>.<br><br>Up to five unique eBay listings may be specified here in separate <strong>listingId</strong> fields. The seller should make sure that each of these listings meet the requirements that are stated at the top of this Call Reference page.
+     * @param string|null $value Value to set for the listingId property.
+    */
+    public function setListingId(?string $value): void {
+        $this->listingId = $value;
+    }
+
+}

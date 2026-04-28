@@ -1,0 +1,93 @@
+<?php
+
+namespace EBay\ListingManagement\Generated\Inventory\Models;
+
+use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
+use Microsoft\Kiota\Abstractions\Serialization\Parsable;
+use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
+use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
+
+/**
+ * This type provides an array of one or more regulatory documents associated with a listing for Regulatory Compliance.
+*/
+class Document implements AdditionalDataHolder, Parsable 
+{
+    /**
+     * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    */
+    private ?array $additionalData = null;
+    
+    /**
+     * @var string|null $documentId The unique identifier of a regulatory document associated with the listing.<br><br>This value can be found in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method of the Media API.
+    */
+    private ?string $documentId = null;
+    
+    /**
+     * Instantiates a new Document and sets the default values.
+    */
+    public function __construct() {
+        $this->setAdditionalData([]);
+    }
+
+    /**
+     * Creates a new instance of the appropriate class based on discriminator value
+     * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
+     * @return Document
+    */
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): Document {
+        return new Document();
+    }
+
+    /**
+     * Gets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @return array<string, mixed>|null
+    */
+    public function getAdditionalData(): ?array {
+        return $this->additionalData;
+    }
+
+    /**
+     * Gets the documentId property value. The unique identifier of a regulatory document associated with the listing.<br><br>This value can be found in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method of the Media API.
+     * @return string|null
+    */
+    public function getDocumentId(): ?string {
+        return $this->documentId;
+    }
+
+    /**
+     * The deserialization information for the current model
+     * @return array<string, callable(ParseNode): void>
+    */
+    public function getFieldDeserializers(): array {
+        $o = $this;
+        return  [
+            'documentId' => fn(ParseNode $n) => $o->setDocumentId($n->getStringValue()),
+        ];
+    }
+
+    /**
+     * Serializes information the current object
+     * @param SerializationWriter $writer Serialization writer to use to serialize this model
+    */
+    public function serialize(SerializationWriter $writer): void {
+        $writer->writeStringValue('documentId', $this->getDocumentId());
+        $writer->writeAdditionalData($this->getAdditionalData());
+    }
+
+    /**
+     * Sets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @param array<string,mixed> $value Value to set for the AdditionalData property.
+    */
+    public function setAdditionalData(?array $value): void {
+        $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the documentId property value. The unique identifier of a regulatory document associated with the listing.<br><br>This value can be found in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method of the Media API.
+     * @param string|null $value Value to set for the documentId property.
+    */
+    public function setDocumentId(?string $value): void {
+        $this->documentId = $value;
+    }
+
+}
