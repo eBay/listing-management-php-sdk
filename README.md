@@ -12,4 +12,4 @@ PHP SDK for eBay Listing Management APIs, combining REST and GraphQL clients.
 
 ## Specs
 
-OpenAPI specs and GraphQL schema are in `specs/`. Implementation not yet started.
+OpenAPI specs and GraphQL schema are in `specs/`.
