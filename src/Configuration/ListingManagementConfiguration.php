@@ -15,7 +15,15 @@ final class ListingManagementConfiguration
     /** Static fallback access token; per-call token takes precedence. */
     public ?string $accessToken = null;
 
+    /** Default headers applied to every REST and GraphQL request. */
+    public RequestOptions $defaultRequestOptions;
+
     public bool $diagnosticLogging = false;
+
+    public function __construct()
+    {
+        $this->defaultRequestOptions = new RequestOptions();
+    }
 
     /** Hostnames tokens may be sent to — passed to AllowedHostsValidator. */
     public function getAllowedHosts(): array

@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace EBay\ListingManagement\Clients\GraphQL;
 
 use EBay\ListingManagement\Configuration\ListingManagementConfiguration;
+use EBay\ListingManagement\Configuration\RequestOptions;
 use EBay\ListingManagement\Configuration\TokenContext;
 use EBay\ListingManagement\Exceptions\GraphQLException;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\RequestException;
 
 final class DynamicGraphQLClient
 {
@@ -21,9 +23,9 @@ final class DynamicGraphQLClient
      *
      * @param array<string, mixed> $variables
      * @return array<string, mixed> The `data` field of the GraphQL response.
-     * @throws GraphQLException When the response contains GraphQL errors.
+     * @throws GraphQLException When the response contains GraphQL errors or an HTTP error occurs.
      */
-    public function execute(string $query, array $variables = [], ?string $accessToken = null): array
+    public function execute(string $query, array $variables = [], ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
     {
         $token = $accessToken ?? TokenContext::get() ?? $this->config->accessToken
             ?? throw new \RuntimeException(
@@ -35,13 +37,38 @@ final class DynamicGraphQLClient
             $payload['variables'] = $variables;
         }
 
-        $response = $this->guzzle->request('POST', $this->config->graphQLBaseUrl, [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $token,
-                'Content-Type'  => 'application/json',
-            ],
-            'json' => $payload,
-        ]);
+        // Build merged headers: defaults first, then per-request fills gaps.
+        $headers = [
+            'Authorization' => 'Bearer ' . $token,
+            'Content-Type'  => 'application/json',
+        ];
+        foreach ($this->config->defaultRequestOptions->headers as $key => $value) {
+            if (!array_key_exists($key, $headers)) {
+                $headers[$key] = $value;
+            }
+        }
+        foreach ($requestOptions?->headers ?? [] as $key => $value) {
+            if (!array_key_exists($key, $headers)) {
+                $headers[$key] = $value;
+            }
+        }
+
+        try {
+            $response = $this->guzzle->request('POST', $this->config->graphQLBaseUrl, [
+                'headers' => $headers,
+                'json'    => $payload,
+            ]);
+        } catch (RequestException $e) {
+            $status = $e->getResponse()?->getStatusCode() ?? 0;
+            $body   = $e->getResponse()?->getBody()->getContents() ?? $e->getMessage();
+            throw new GraphQLException(["HTTP $status: $body"]);
+        }
+
+        $statusCode = $response->getStatusCode();
+        if ($statusCode < 200 || $statusCode >= 300) {
+            $body = $response->getBody()->getContents();
+            throw new GraphQLException(["HTTP $statusCode: $body"]);
+        }
 
         $body = json_decode(
             $response->getBody()->getContents(),
@@ -51,7 +78,11 @@ final class DynamicGraphQLClient
         );
 
         if (!empty($body['errors'])) {
-            throw new GraphQLException(array_column($body['errors'], 'message'));
+            $messages = array_map(
+                static fn(array $e): string => $e['message'] ?? 'Unknown GraphQL error',
+                $body['errors']
+            );
+            throw new GraphQLException($messages);
         }
 
         return $body['data'] ?? [];
