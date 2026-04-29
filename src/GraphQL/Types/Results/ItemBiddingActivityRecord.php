@@ -5,27 +5,28 @@ declare(strict_types=1);
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
 /**
- * One item's bidding activity data (inner object from itemBiddingActivity query).
- * Note: __typename is present in the query but not exposed as a property.
+ * AuctionData payload from the itemBiddingActivity query.
+ * Maps the AuctionData type from the schema.
  */
 readonly class ItemBiddingActivityRecord
 {
     public function __construct(
-        public ?MoneyAmount $currentPrice = null,
-        public ?int $bidCount = null,
-        public ?BidHighBidder $highBidder = null,
-        public ?bool $reserveMet = null,
-        public ?MoneyAmount $minimumBidPrice = null,
+        /** @var array{userSubmittedBidCount: int}|null */
+        public ?array $bidStatistics = null,
+        /** @var array{bidAmount: array{value: string, currency: string}}|null */
+        public ?array $leadingBid = null,
+        public ?bool $reservePriceMet = null,
+        /** @var array{minimumQualifyingBidForMaxBid: array{value: string, currency: string}, userBiddingStatus: ?string}|null */
+        public ?array $bidderAuctionDetails = null,
     ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
-            currentPrice:    isset($data['currentPrice']) ? MoneyAmount::fromArray($data['currentPrice']) : null,
-            bidCount:        isset($data['bidCount']) ? (int) $data['bidCount'] : null,
-            highBidder:      isset($data['highBidder']) ? BidHighBidder::fromArray($data['highBidder']) : null,
-            reserveMet:      isset($data['reserveMet']) ? (bool) $data['reserveMet'] : null,
-            minimumBidPrice: isset($data['minimumBidPrice']) ? MoneyAmount::fromArray($data['minimumBidPrice']) : null,
+            bidStatistics:        $data['bidStatistics'] ?? null,
+            leadingBid:           $data['leadingBid'] ?? null,
+            reservePriceMet:      isset($data['reservePriceMet']) ? (bool) $data['reservePriceMet'] : null,
+            bidderAuctionDetails: $data['bidderAuctionDetails'] ?? null,
         );
     }
 }

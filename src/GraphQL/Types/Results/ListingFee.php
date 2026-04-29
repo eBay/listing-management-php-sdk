@@ -7,15 +7,19 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class ListingFee
 {
     public function __construct(
-        public ?string $feeType = null,
-        public ?MoneyAmount $amount = null,
+        public ?string $listingFeeType = null,
+        /** @var array{value: string, currency: string}|null */
+        public ?array $feeAmount = null,
+        /** @var array{value: string, currency: string}|null */
+        public ?array $promotionalDiscount = null,
     ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
-            feeType: $data['feeType'] ?? null,
-            amount:  isset($data['amount']) ? MoneyAmount::fromArray($data['amount']) : null,
+            listingFeeType:     $data['listingFeeType'] ?? null,
+            feeAmount:          $data['feeAmount'] ?? null,
+            promotionalDiscount: $data['promotionalDiscount'] ?? null,
         );
     }
 }

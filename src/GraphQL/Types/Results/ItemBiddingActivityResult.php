@@ -6,22 +6,20 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 
 /**
  * Top-level result of the itemBiddingActivity query.
- * Wraps the itemBiddingActivity array of activity records.
+ * Wraps the single AuctionData object returned by itemBiddingActivity.
  */
 readonly class ItemBiddingActivityResult
 {
     public function __construct(
-        /** @var ItemBiddingActivityRecord[] */
-        public array $itemBiddingActivity = [],
+        public ?ItemBiddingActivityRecord $itemBiddingActivity = null,
     ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
-            itemBiddingActivity: array_map(
-                fn($r) => ItemBiddingActivityRecord::fromArray($r),
-                $data['itemBiddingActivity'] ?? []
-            ),
+            itemBiddingActivity: isset($data['itemBiddingActivity'])
+                ? ItemBiddingActivityRecord::fromArray($data['itemBiddingActivity'])
+                : null,
         );
     }
 }

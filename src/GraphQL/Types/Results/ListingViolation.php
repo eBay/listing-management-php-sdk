@@ -7,15 +7,21 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class ListingViolation
 {
     public function __construct(
-        public ?string $code = null,
-        public ?string $message = null,
+        public ?string $violationCode = null,
+        public ?string $violationDescription = null,
+        /** @var string[] */
+        public array $inputPath = [],
+        /** @var array<array{name: ?string, value: ?string}> */
+        public array $additionalInformation = [],
     ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
-            code:    $data['code'] ?? null,
-            message: $data['message'] ?? null,
+            violationCode:         $data['violationCode'] ?? null,
+            violationDescription:  $data['violationDescription'] ?? null,
+            inputPath:             $data['inputPath'] ?? [],
+            additionalInformation: $data['additionalInformation'] ?? [],
         );
     }
 }

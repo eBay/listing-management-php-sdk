@@ -8,16 +8,12 @@ readonly class ActiveListingRef
 {
     public function __construct(
         public ?string $listingId = null,
-        public ?string $status = null,
-        public ?string $sku = null,
     ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
             listingId: $data['listingId'] ?? null,
-            status:    $data['status'] ?? null,
-            sku:       $data['sku'] ?? null,
         );
     }
 }

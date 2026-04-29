@@ -7,8 +7,8 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class BulkInventorySuccessItem
 {
     public function __construct(
-        public ?string $listingId = null,
-        public ?string $sku = null,
+        /** @var array{listingId: ?string, sku: ?string}|null */
+        public ?array $listingItemIdentifier = null,
         /** @var ListingWarning[] */
         public array $warnings = [],
     ) {}
@@ -16,9 +16,8 @@ readonly class BulkInventorySuccessItem
     public static function fromArray(array $data): self
     {
         return new self(
-            listingId: $data['listingId'] ?? null,
-            sku:       $data['sku'] ?? null,
-            warnings:  array_map(fn($w) => ListingWarning::fromArray($w), $data['warnings'] ?? []),
+            listingItemIdentifier: $data['listingItemIdentifier'] ?? null,
+            warnings:              array_map(fn($w) => ListingWarning::fromArray($w), $data['warnings'] ?? []),
         );
     }
 }

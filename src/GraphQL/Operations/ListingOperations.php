@@ -13,12 +13,13 @@ final class ListingOperations
         query ItemBiddingActivity($input: ItemBiddingActivityInput!) {
             itemBiddingActivity(input: $input) {
                 itemBiddingActivity {
-                    __typename
-                    currentPrice { value currency }
-                    bidCount
-                    highBidder { userId }
-                    reserveMet
-                    minimumBidPrice { value currency }
+                    bidStatistics { userSubmittedBidCount }
+                    leadingBid { bidAmount { value currency } }
+                    reservePriceMet
+                    bidderAuctionDetails {
+                        minimumQualifyingBidForMaxBid { value currency }
+                        userBiddingStatus
+                    }
                 }
             }
         }
@@ -29,16 +30,30 @@ final class ListingOperations
             bulkUpdateInventory(input: $input) {
                 __typename
                 ... on BulkUpdateInventorySuccess {
-                    successes { listingId sku warnings { code message } }
+                    successes {
+                        listingItemIdentifier { listingId sku }
+                        warnings { warningCode warningMessage inputPath }
+                    }
                 }
                 ... on BulkUpdateInventoryPartialFailure {
                     errorCode errorMessage
-                    successes { listingId sku warnings { code message } }
-                    failures { listingId sku errors { code message } warnings { code message } }
+                    successes {
+                        listingItemIdentifier { listingId sku }
+                        warnings { warningCode warningMessage inputPath }
+                    }
+                    failures {
+                        listingItemIdentifier { listingId sku }
+                        violations { violationCode violationDescription inputPath }
+                        warnings { warningCode warningMessage inputPath }
+                    }
                 }
                 ... on BulkUpdateInventoryFailure {
                     errorCode errorMessage
-                    failures { listingId sku errors { code message } warnings { code message } }
+                    failures {
+                        listingItemIdentifier { listingId sku }
+                        violations { violationCode violationDescription inputPath }
+                        warnings { warningCode warningMessage inputPath }
+                    }
                 }
             }
         }
@@ -49,17 +64,19 @@ final class ListingOperations
             createListing(input: $input) {
                 __typename
                 ... on CreateListingSuccess {
-                    listing { listingId status sku }
-                    listingFees { feeType amount { value currency } }
-                    warnings { code message }
+                    listing { listingId sku }
+                    listingFees { listingFeeType feeAmount { value currency } }
+                    warnings { warningCode warningMessage inputPath }
                 }
                 ... on CreateListingValidationError {
                     errorCode errorMessage
-                    violations { code message }
-                    warnings { code message }
+                    violations { violationCode violationDescription inputPath }
+                    warnings { warningCode warningMessage inputPath }
                 }
                 ... on CreateListingValidationSuccess {
-                    warnings { code message }
+                    listing { listingId sku }
+                    listingFees { listingFeeType feeAmount { value currency } }
+                    warnings { warningCode warningMessage inputPath }
                 }
             }
         }
@@ -70,16 +87,17 @@ final class ListingOperations
             createSecondChanceListing(input: $input) {
                 __typename
                 ... on CreateSecondChanceListingSuccess {
-                    listing { listingId status sku }
-                    warnings { code message }
+                    listing { listingId sku }
+                    warnings { warningCode warningMessage inputPath }
                 }
                 ... on CreateSecondChanceListingValidationError {
                     errorCode errorMessage
-                    violations { code message }
-                    warnings { code message }
+                    violations { violationCode violationDescription inputPath }
+                    warnings { warningCode warningMessage inputPath }
                 }
                 ... on CreateSecondChanceListingValidationSuccess {
-                    warnings { code message }
+                    listing { listingId sku }
+                    warnings { warningCode warningMessage inputPath }
                 }
             }
         }
@@ -90,13 +108,13 @@ final class ListingOperations
             endListing(input: $input) {
                 __typename
                 ... on EndListingSuccess {
-                    listing { listingId status sku }
-                    warnings { code message }
+                    listing { listingId sku }
+                    warnings { warningCode warningMessage inputPath }
                 }
                 ... on EndListingValidationError {
                     errorCode errorMessage
-                    violations { code message }
-                    warnings { code message }
+                    violations { violationCode violationDescription inputPath }
+                    warnings { warningCode warningMessage inputPath }
                 }
             }
         }
@@ -107,17 +125,19 @@ final class ListingOperations
             relistListing(input: $input) {
                 __typename
                 ... on RelistListingSuccess {
-                    listing { listingId status sku }
-                    listingFees { feeType amount { value currency } }
-                    warnings { code message }
+                    listing { listingId sku }
+                    listingFees { listingFeeType feeAmount { value currency } }
+                    warnings { warningCode warningMessage inputPath }
                 }
                 ... on RelistListingValidationError {
                     errorCode errorMessage
-                    violations { code message }
-                    warnings { code message }
+                    violations { violationCode violationDescription inputPath }
+                    warnings { warningCode warningMessage inputPath }
                 }
                 ... on RelistListingValidationSuccess {
-                    warnings { code message }
+                    listing { listingId sku }
+                    listingFees { listingFeeType feeAmount { value currency } }
+                    warnings { warningCode warningMessage inputPath }
                 }
             }
         }
@@ -127,8 +147,9 @@ final class ListingOperations
         query SellerListings($input: SellerListingsInput!) {
             sellerListings(input: $input) {
                 listings {
-                    listingId status sku
-                    items { sku price { value currency } availableQuantity }
+                    ... on ListingSuccess {
+                        listingId
+                    }
                 }
             }
         }
@@ -139,16 +160,19 @@ final class ListingOperations
             updateListing(input: $input) {
                 __typename
                 ... on UpdateListingSuccess {
-                    listing { listingId status sku }
-                    warnings { code message }
+                    listing { listingId sku }
+                    listingFees { listingFeeType feeAmount { value currency } }
+                    warnings { warningCode warningMessage inputPath }
                 }
                 ... on UpdateListingValidationError {
                     errorCode errorMessage
-                    violations { code message }
-                    warnings { code message }
+                    violations { violationCode violationDescription inputPath }
+                    warnings { warningCode warningMessage inputPath }
                 }
                 ... on UpdateListingValidationSuccess {
-                    warnings { code message }
+                    listing { listingId sku }
+                    listingFees { listingFeeType feeAmount { value currency } }
+                    warnings { warningCode warningMessage inputPath }
                 }
             }
         }
@@ -160,7 +184,10 @@ final class ListingOperations
                 activeListings {
                     __typename
                     ... on SellerListings {
-                        listings { listingId status sku }
+                        listings { listingId }
+                    }
+                    ... on SellerListingSearchInvalidInput {
+                        errorCode errorMessage
                     }
                 }
             }

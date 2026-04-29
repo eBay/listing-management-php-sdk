@@ -7,17 +7,18 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class ListingItem
 {
     public function __construct(
+        public ?string $itemId = null,
         public ?string $sku = null,
-        public ?MoneyAmount $price = null,
-        public ?int $availableQuantity = null,
+        /** @var array{pricingTerms: array{fixedPrice: array{value: string, currency: string}|null}|null, availability: array{quantityAvailable: ?int}|null}|null */
+        public ?array $itemTerms = null,
     ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
-            sku:               $data['sku'] ?? null,
-            price:             isset($data['price']) ? MoneyAmount::fromArray($data['price']) : null,
-            availableQuantity: isset($data['availableQuantity']) ? (int) $data['availableQuantity'] : null,
+            itemId:    $data['itemId'] ?? null,
+            sku:       $data['sku'] ?? null,
+            itemTerms: $data['itemTerms'] ?? null,
         );
     }
 }

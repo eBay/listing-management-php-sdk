@@ -8,7 +8,6 @@ readonly class ListingRef
 {
     public function __construct(
         public ?string $listingId = null,
-        public ?string $status = null,
         public ?string $sku = null,
     ) {}
 
@@ -16,7 +15,6 @@ readonly class ListingRef
     {
         return new self(
             listingId: $data['listingId'] ?? null,
-            status:    $data['status'] ?? null,
             sku:       $data['sku'] ?? null,
         );
     }
