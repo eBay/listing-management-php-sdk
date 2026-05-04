@@ -13,12 +13,46 @@ final class ListingOperations
         query ItemBiddingActivity($input: ItemBiddingActivityInput!) {
             itemBiddingActivity(input: $input) {
                 itemBiddingActivity {
-                    bidStatistics { userSubmittedBidCount }
-                    leadingBid { bidAmount { value currency } }
-                    reservePriceMet
-                    bidderAuctionDetails {
-                        minimumQualifyingBidForMaxBid { value currency }
-                        userBiddingStatus
+                    activeBidHistoryRecords {
+                        paginationOutput { previousCursor nextCursor }
+                        bidHistoryRecords {
+                            bidAmount { original { value currency } }
+                            bidder { username userId }
+                        }
+                    }
+                    cancelledBidHistoryRecords {
+                        paginationOutput { previousCursor nextCursor }
+                        bidHistoryRecords {
+                            bidAmount { original { value currency } }
+                            bidder { username userId }
+                        }
+                    }
+                    retractedBidHistoryRecords {
+                        paginationOutput { previousCursor nextCursor }
+                        bidHistoryRecords {
+                            bidAmount { original { value currency } }
+                        }
+                    }
+                    leadingBid {
+                        buyerBiddingSummary {
+                            bidsWithSellerPercentage
+                            retractedBidCount
+                            totalBidCount
+                            uniqueListingCategoryBidCount
+                            uniqueSellerBidCount
+                            itemBids { bidCount mostRecentBidAt }
+                        }
+                        bidder { username userId }
+                        bidAmount {
+                            original { value currency }
+                            converted { value currency }
+                        }
+                        bidMetadata {
+                            ... on ActiveBidMetadata {
+                                placedAt
+                                isHighestBid
+                            }
+                        }
                     }
                 }
             }
