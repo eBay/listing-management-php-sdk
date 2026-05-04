@@ -66,27 +66,27 @@ final class ListingOperations
                 ... on BulkUpdateInventorySuccess {
                     successes {
                         listingItemIdentifier { listingId sku }
-                        warnings { warningCode warningMessage inputPath }
+                        warnings { warningCode warningMessage additionalInformation { name value } }
                     }
                 }
                 ... on BulkUpdateInventoryPartialFailure {
                     errorCode errorMessage
                     successes {
                         listingItemIdentifier { listingId sku }
-                        warnings { warningCode warningMessage inputPath }
+                        warnings { warningCode warningMessage additionalInformation { name value } }
                     }
                     failures {
                         listingItemIdentifier { listingId sku }
-                        violations { violationCode violationDescription inputPath }
-                        warnings { warningCode warningMessage inputPath }
+                        violations { violationCode violationDescription inputPath additionalInformation { name value } }
+                        warnings { warningCode warningMessage additionalInformation { name value } }
                     }
                 }
                 ... on BulkUpdateInventoryFailure {
                     errorCode errorMessage
                     failures {
                         listingItemIdentifier { listingId sku }
-                        violations { violationCode violationDescription inputPath }
-                        warnings { warningCode warningMessage inputPath }
+                        violations { violationCode violationDescription inputPath additionalInformation { name value } }
+                        warnings { warningCode warningMessage additionalInformation { name value } }
                     }
                 }
             }
@@ -100,17 +100,17 @@ final class ListingOperations
                 ... on CreateListingSuccess {
                     listing { listingId sku }
                     listingFees { listingFeeType feeAmount { value currency } }
-                    warnings { warningCode warningMessage inputPath }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
                 ... on CreateListingValidationError {
                     errorCode errorMessage
-                    violations { violationCode violationDescription inputPath }
-                    warnings { warningCode warningMessage inputPath }
+                    violations { violationCode violationDescription inputPath additionalInformation { name value } }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
                 ... on CreateListingValidationSuccess {
                     listing { listingId sku }
                     listingFees { listingFeeType feeAmount { value currency } }
-                    warnings { warningCode warningMessage inputPath }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
             }
         }
@@ -122,16 +122,16 @@ final class ListingOperations
                 __typename
                 ... on CreateSecondChanceListingSuccess {
                     listing { listingId sku }
-                    warnings { warningCode warningMessage inputPath }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
                 ... on CreateSecondChanceListingValidationError {
                     errorCode errorMessage
-                    violations { violationCode violationDescription inputPath }
-                    warnings { warningCode warningMessage inputPath }
+                    violations { violationCode violationDescription inputPath additionalInformation { name value } }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
                 ... on CreateSecondChanceListingValidationSuccess {
                     listing { listingId sku }
-                    warnings { warningCode warningMessage inputPath }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
             }
         }
@@ -143,12 +143,12 @@ final class ListingOperations
                 __typename
                 ... on EndListingSuccess {
                     listing { listingId sku }
-                    warnings { warningCode warningMessage inputPath }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
                 ... on EndListingValidationError {
                     errorCode errorMessage
-                    violations { violationCode violationDescription inputPath }
-                    warnings { warningCode warningMessage inputPath }
+                    violations { violationCode violationDescription inputPath additionalInformation { name value } }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
             }
         }
@@ -161,17 +161,17 @@ final class ListingOperations
                 ... on RelistListingSuccess {
                     listing { listingId sku }
                     listingFees { listingFeeType feeAmount { value currency } }
-                    warnings { warningCode warningMessage inputPath }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
                 ... on RelistListingValidationError {
                     errorCode errorMessage
-                    violations { violationCode violationDescription inputPath }
-                    warnings { warningCode warningMessage inputPath }
+                    violations { violationCode violationDescription inputPath additionalInformation { name value } }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
                 ... on RelistListingValidationSuccess {
                     listing { listingId sku }
                     listingFees { listingFeeType feeAmount { value currency } }
-                    warnings { warningCode warningMessage inputPath }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
             }
         }
@@ -196,17 +196,17 @@ final class ListingOperations
                 ... on UpdateListingSuccess {
                     listing { listingId sku }
                     listingFees { listingFeeType feeAmount { value currency } }
-                    warnings { warningCode warningMessage inputPath }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
                 ... on UpdateListingValidationError {
                     errorCode errorMessage
-                    violations { violationCode violationDescription inputPath }
-                    warnings { warningCode warningMessage inputPath }
+                    violations { violationCode violationDescription inputPath additionalInformation { name value } }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
                 ... on UpdateListingValidationSuccess {
                     listing { listingId sku }
                     listingFees { listingFeeType feeAmount { value currency } }
-                    warnings { warningCode warningMessage inputPath }
+                    warnings { warningCode warningMessage additionalInformation { name value } }
                 }
             }
         }
