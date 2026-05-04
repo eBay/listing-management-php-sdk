@@ -190,6 +190,24 @@ final class ListingOperations
                         errorCode errorMessage
                     }
                 }
+                endedListings {
+                    __typename
+                    ... on SellerListings {
+                        listings { listingId }
+                    }
+                    ... on SellerListingSearchInvalidInput {
+                        errorCode errorMessage
+                    }
+                }
+                scheduledListings {
+                    __typename
+                    ... on SellerListings {
+                        listings { listingId }
+                    }
+                    ... on SellerListingSearchInvalidInput {
+                        errorCode errorMessage
+                    }
+                }
             }
         }
         GRAPHQL;
