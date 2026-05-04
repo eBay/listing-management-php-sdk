@@ -7,14 +7,14 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class SellerListingsResult
 {
     public function __construct(
-        /** @var ListingRef[] */
+        /** @var SellerListing[] */
         public array $listings = [],
     ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
-            listings: array_map(fn($l) => ListingRef::fromArray($l), $data['listings'] ?? []),
+            listings: array_map(fn($l) => SellerListing::fromArray($l), $data['listings'] ?? []),
         );
     }
 }

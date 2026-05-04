@@ -8,17 +8,15 @@ readonly class SellerListing
 {
     public function __construct(
         public ?string $listingId = null,
-        public ?string $sku = null,
-        /** @var ListingItem[] */
-        public array $items = [],
+        /** @var array<string, mixed>|null Full listing detail including listingTerms, sellerProduct, etc. */
+        public ?array $listing = null,
     ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
             listingId: $data['listingId'] ?? null,
-            sku:       $data['sku'] ?? null,
-            items:     array_map(fn($i) => ListingItem::fromArray($i), $data['items'] ?? []),
+            listing:   $data['listing'] ?? null,
         );
     }
 }
