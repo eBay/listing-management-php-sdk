@@ -8,7 +8,7 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
  * Union base for the activeListings field in sellerListingSearch.
  * Only SellerListings variant is present in the query.
  */
-abstract class ActiveListingsOutput
+abstract readonly class ActiveListingsOutput
 {
     abstract public function getTypename(): string;
 
