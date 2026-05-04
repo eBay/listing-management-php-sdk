@@ -67,22 +67,22 @@ final class ListingManagementClient
         $auth = new BaseBearerTokenAuthenticationProvider(new KiotaAuthProvider($config));
 
         // Inventory
-        $inventoryAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $inventoryAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $inventoryAdapter->setBaseUrl($config->inventoryBaseUrl);
         $this->inventory = new InventoryClient(new InventoryApiClient($inventoryAdapter), $config);
 
         // Feed
-        $feedAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $feedAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $feedAdapter->setBaseUrl($config->feedBaseUrl);
         $this->feed = new FeedClient(new FeedApiClient($feedAdapter), $config);
 
         // Media
-        $mediaAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $mediaAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $mediaAdapter->setBaseUrl($config->mediaBaseUrl);
         $this->media = new MediaClient(new MediaApiClient($mediaAdapter), $config);
 
         // Stores
-        $storesAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $storesAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $storesAdapter->setBaseUrl($config->storesBaseUrl);
         $this->stores = new StoresClient(new StoresApiClient($storesAdapter), $config);
 
