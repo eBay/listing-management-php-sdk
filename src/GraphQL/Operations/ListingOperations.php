@@ -98,8 +98,52 @@ final class ListingOperations
             createListing(input: $input) {
                 __typename
                 ... on CreateListingSuccess {
-                    listing { listingId sku }
-                    listingFees { listingFeeType feeAmount { value currency } }
+                    listing {
+                        listingId sku marketplace
+                        sellerProduct {
+                            title description
+                            aspects { name values }
+                            images { ebayImageUrl }
+                            categories { primaryCategory { id } }
+                            itemCondition { itemConditionId }
+                        }
+                        items {
+                            sku
+                            itemTerms {
+                                availability { quantityAvailable }
+                                pricingTerms { fixedPrice { original { value currency } } }
+                            }
+                        }
+                        listingTerms {
+                            fulfillmentTerms {
+                                ... on FulfillmentTerms {
+                                    packageSpecifications {
+                                        packageDimensions { length width height }
+                                        packageWeight { majorUnit minorUnit }
+                                        listingUnitOfMeasure
+                                    }
+                                    shippingTerms {
+                                        handlingTimeDuration
+                                        shippingServices { rank }
+                                    }
+                                }
+                            }
+                            paymentTerms { ... on PaymentTerms { immediatePay } }
+                            listingFormat
+                            lifecycleTerms { listingDurationInDays startAt }
+                            bestOfferTerms {
+                                acceptBestOffer
+                                autoAcceptThresholdAmount { original { value currency } }
+                                autoDeclineThresholdAmount { original { value currency } }
+                            }
+                            itemLocation { country postalCode location }
+                        }
+                    }
+                    listingFees {
+                        listingFeeType
+                        feeAmount { value currency }
+                        promotionalDiscount { value currency }
+                    }
                     warnings { warningCode warningMessage additionalInformation { name value } }
                 }
                 ... on CreateListingValidationError {
@@ -108,8 +152,52 @@ final class ListingOperations
                     warnings { warningCode warningMessage additionalInformation { name value } }
                 }
                 ... on CreateListingValidationSuccess {
-                    listing { listingId sku }
-                    listingFees { listingFeeType feeAmount { value currency } }
+                    listing {
+                        listingId sku marketplace
+                        sellerProduct {
+                            title description
+                            aspects { name values }
+                            images { ebayImageUrl }
+                            categories { primaryCategory { id } }
+                            itemCondition { itemConditionId }
+                        }
+                        items {
+                            sku
+                            itemTerms {
+                                availability { quantityAvailable }
+                                pricingTerms { fixedPrice { original { value currency } } }
+                            }
+                        }
+                        listingTerms {
+                            fulfillmentTerms {
+                                ... on FulfillmentTerms {
+                                    packageSpecifications {
+                                        packageDimensions { length width height }
+                                        packageWeight { majorUnit minorUnit }
+                                        listingUnitOfMeasure
+                                    }
+                                    shippingTerms {
+                                        handlingTimeDuration
+                                        shippingServices { rank }
+                                    }
+                                }
+                            }
+                            paymentTerms { ... on PaymentTerms { immediatePay } }
+                            listingFormat
+                            lifecycleTerms { listingDurationInDays startAt }
+                            bestOfferTerms {
+                                acceptBestOffer
+                                autoAcceptThresholdAmount { original { value currency } }
+                                autoDeclineThresholdAmount { original { value currency } }
+                            }
+                            itemLocation { country postalCode location }
+                        }
+                    }
+                    listingFees {
+                        listingFeeType
+                        feeAmount { value currency }
+                        promotionalDiscount { value currency }
+                    }
                     warnings { warningCode warningMessage additionalInformation { name value } }
                 }
             }
