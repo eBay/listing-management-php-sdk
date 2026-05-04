@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-abstract class CreateSecondChanceListingOutput
+abstract readonly class CreateSecondChanceListingOutput
 {
     abstract public function getTypename(): string;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-abstract class BulkUpdateInventoryOutput
+abstract readonly class BulkUpdateInventoryOutput
 {
     abstract public function getTypename(): string;
 
