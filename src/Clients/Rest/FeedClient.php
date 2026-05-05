@@ -64,11 +64,29 @@ final class FeedClient
 
     // ── Generic Tasks ────────────────────────────────────────────────────────
 
-    public function getTasks(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
+    public function getTasks(
+        ?string $dateRange = null,
+        ?string $feedType = null,
+        ?string $limit = null,
+        ?string $lookBackDays = null,
+        ?string $offset = null,
+        ?string $scheduleId = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
         TokenContext::set($accessToken);
         return $this->kiota->task()->get(
-            new TaskRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new TaskRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: TaskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    date_range: $dateRange,
+                    feed_type: $feedType,
+                    limit: $limit,
+                    look_back_days: $lookBackDays,
+                    offset: $offset,
+                    schedule_id: $scheduleId,
+                ),
+            )
         )->wait();
     }
 
@@ -117,11 +135,27 @@ final class FeedClient
 
     // ── Customer Service Metric Tasks ────────────────────────────────────────
 
-    public function getCustomerServiceMetricTasks(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
+    public function getCustomerServiceMetricTasks(
+        ?string $dateRange = null,
+        ?string $feedType = null,
+        ?string $limit = null,
+        ?string $lookBackDays = null,
+        ?string $offset = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
         TokenContext::set($accessToken);
         return $this->kiota->customer_service_metric_task()->get(
-            new Customer_service_metric_taskRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new Customer_service_metric_taskRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Customer_service_metric_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    date_range: $dateRange,
+                    feed_type: $feedType,
+                    limit: $limit,
+                    look_back_days: $lookBackDays,
+                    offset: $offset,
+                ),
+            )
         )->wait();
     }
 
@@ -144,11 +178,29 @@ final class FeedClient
 
     // ── Inventory Tasks ──────────────────────────────────────────────────────
 
-    public function getInventoryTasks(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
+    public function getInventoryTasks(
+        ?string $dateRange = null,
+        ?string $feedType = null,
+        ?string $limit = null,
+        ?string $lookBackDays = null,
+        ?string $offset = null,
+        ?string $scheduleId = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
         TokenContext::set($accessToken);
         return $this->kiota->inventory_task()->get(
-            new Inventory_taskRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new Inventory_taskRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Inventory_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    date_range: $dateRange,
+                    feed_type: $feedType,
+                    limit: $limit,
+                    look_back_days: $lookBackDays,
+                    offset: $offset,
+                    schedule_id: $scheduleId,
+                ),
+            )
         )->wait();
     }
 
@@ -171,11 +223,29 @@ final class FeedClient
 
     // ── Order Tasks ──────────────────────────────────────────────────────────
 
-    public function getOrderTasks(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
+    public function getOrderTasks(
+        ?string $dateRange = null,
+        ?string $feedType = null,
+        ?string $limit = null,
+        ?string $lookBackDays = null,
+        ?string $offset = null,
+        ?string $scheduleId = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
         TokenContext::set($accessToken);
         return $this->kiota->order_task()->get(
-            new Order_taskRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new Order_taskRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Order_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    date_range: $dateRange,
+                    feed_type: $feedType,
+                    limit: $limit,
+                    look_back_days: $lookBackDays,
+                    offset: $offset,
+                    schedule_id: $scheduleId,
+                ),
+            )
         )->wait();
     }
 
@@ -198,11 +268,23 @@ final class FeedClient
 
     // ── Schedules ────────────────────────────────────────────────────────────
 
-    public function getSchedules(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
+    public function getSchedules(
+        ?string $feedType = null,
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
         TokenContext::set($accessToken);
         return $this->kiota->schedule()->get(
-            new ScheduleRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new ScheduleRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: ScheduleRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    feed_type: $feedType,
+                    limit: $limit,
+                    offset: $offset,
+                ),
+            )
         )->wait();
     }
 
@@ -250,11 +332,23 @@ final class FeedClient
 
     // ── Schedule Templates ───────────────────────────────────────────────────
 
-    public function getScheduleTemplates(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
+    public function getScheduleTemplates(
+        ?string $feedType = null,
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
         TokenContext::set($accessToken);
         return $this->kiota->schedule_template()->get(
-            new Schedule_templateRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new Schedule_templateRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Schedule_templateRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    feed_type: $feedType,
+                    limit: $limit,
+                    offset: $offset,
+                ),
+            )
         )->wait();
     }
 
