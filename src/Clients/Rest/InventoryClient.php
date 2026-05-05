@@ -8,6 +8,7 @@ use EBay\ListingManagement\Configuration\ListingManagementConfiguration;
 use EBay\ListingManagement\Configuration\RequestOptions;
 use EBay\ListingManagement\Configuration\TokenContext;
 use EBay\ListingManagement\Generated\Inventory\InventoryApiClient;
+use EBay\ListingManagement\Generated\Inventory\Models\BulkGetInventoryItem;
 use EBay\ListingManagement\Generated\Inventory\Models\BulkInventoryItem;
 use EBay\ListingManagement\Generated\Inventory\Models\BulkOfferResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\BulkPriceQuantity;
@@ -22,10 +23,10 @@ use EBay\ListingManagement\Generated\Inventory\Models\LocationResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\InventoryItemWithSkuLocaleGroupid;
 use EBay\ListingManagement\Generated\Inventory\Models\InventoryLocationFull;
 use EBay\ListingManagement\Generated\Inventory\Models\InventoryLocationResponse;
-use EBay\ListingManagement\Generated\Inventory\Models\MigrateListing;
+use EBay\ListingManagement\Generated\Inventory\Models\BulkMigrateListing;
+use EBay\ListingManagement\Generated\Inventory\Models\OfferKeysWithId;
 use EBay\ListingManagement\Generated\Inventory\Models\OfferResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\Offers;
-use EBay\ListingManagement\Generated\Inventory\Models\OfferSkusWithId;
 use EBay\ListingManagement\Generated\Inventory\Models\PublishByInventoryItemGroupRequest;
 use EBay\ListingManagement\Generated\Inventory\Models\PublishResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\WithdrawByInventoryItemGroupRequest;
@@ -138,7 +139,7 @@ final class InventoryClient
         )->wait();
     }
 
-    public function bulkGetInventoryItem(BulkInventoryItem $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function bulkGetInventoryItem(BulkGetInventoryItem $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->bulk_get_inventory_item()->post(
@@ -295,7 +296,6 @@ final class InventoryClient
     {
         TokenContext::set($accessToken);
         return $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->disable()->post(
-            null,
             new DisableRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
         )->wait();
     }
@@ -304,7 +304,6 @@ final class InventoryClient
     {
         TokenContext::set($accessToken);
         return $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->enable()->post(
-            null,
             new EnableRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
         )->wait();
     }
@@ -373,7 +372,6 @@ final class InventoryClient
     {
         TokenContext::set($accessToken);
         return $this->kiota->offer()->byOfferId($offerId)->publish()->post(
-            null,
             new PublishRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
         )->wait();
     }
@@ -382,12 +380,11 @@ final class InventoryClient
     {
         TokenContext::set($accessToken);
         return $this->kiota->offer()->byOfferId($offerId)->withdraw()->post(
-            null,
             new WithdrawRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
         )->wait();
     }
 
-    public function getListingFees(OfferSkusWithId $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?FeesSummaryResponse
+    public function getListingFees(OfferKeysWithId $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?FeesSummaryResponse
     {
         TokenContext::set($accessToken);
         return $this->kiota->offer()->get_listing_fees()->post(
@@ -434,7 +431,7 @@ final class InventoryClient
 
     // ── Bulk Operations ──────────────────────────────────────────────────────
 
-    public function bulkMigrateListing(MigrateListing $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function bulkMigrateListing(BulkMigrateListing $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->bulk_migrate_listing()->post(
