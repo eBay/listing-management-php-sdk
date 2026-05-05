@@ -6,10 +6,10 @@ namespace EBay\ListingManagement\Configuration;
 
 final class ListingManagementConfiguration
 {
-    public string $inventoryBaseUrl = 'https://api.ebay.com';
-    public string $feedBaseUrl      = 'https://api.ebay.com';
-    public string $mediaBaseUrl     = 'https://api.ebay.com';
-    public string $storesBaseUrl    = 'https://api.ebay.com';
+    public string $inventoryBaseUrl = 'https://api.ebay.com/sell/inventory/v1';
+    public string $feedBaseUrl      = 'https://api.ebay.com/sell/feed/v1';
+    public string $mediaBaseUrl     = 'https://api.ebay.com/commerce/media/v1_beta';
+    public string $storesBaseUrl    = 'https://api.ebay.com/sell/stores/v1';
     public string $graphQLBaseUrl   = 'https://api.ebay.com/graphql';
 
     /** Static fallback access token; per-call token takes precedence. */

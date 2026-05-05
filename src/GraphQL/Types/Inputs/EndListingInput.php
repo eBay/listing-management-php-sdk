@@ -15,7 +15,7 @@ readonly class EndListingInput
     {
         return [
             'endListingReason'       => $this->endListingReason,
-            'listingIdentifierInput' => $this->listingIdentifierInput->toArray(),
+            'listingIdentifier' => $this->listingIdentifierInput->toArray(),
         ];
     }
 }
