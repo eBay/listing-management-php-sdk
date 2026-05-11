@@ -1,5 +1,22 @@
 {
-  "input": {
-    "itemId": "mock-id"
-  }
+  "cases": [
+    {
+      "label": "with itemId",
+      "input": {
+        "itemId": "mock-id"
+      },
+      "expected": {
+        "itemId": "mock-id"
+      }
+    },
+    {
+      "label": "with real-looking itemId",
+      "input": {
+        "itemId": "v1|123456789012|0"
+      },
+      "expected": {
+        "itemId": "v1|123456789012|0"
+      }
+    }
+  ]
 }

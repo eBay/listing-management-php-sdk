@@ -1,6 +1,45 @@
 {
-  "input": {
-    "endListingReason": "END_AUCTION_AND_SELL",
-    "listingIdentifier": {}
-  }
+  "cases": [
+    {
+      "label": "empty listingIdentifier (both fields null)",
+      "input": {
+        "endListingReason": "END_AUCTION_AND_SELL",
+        "listingIdentifier": {}
+      },
+      "expected": {
+        "endListingReason": "END_AUCTION_AND_SELL",
+        "listingIdentifier": {}
+      }
+    },
+    {
+      "label": "listingIdentifier with listingId only",
+      "input": {
+        "endListingReason": "NOT_AVAILABLE",
+        "listingIdentifier": {
+          "listingId": "123456"
+        }
+      },
+      "expected": {
+        "endListingReason": "NOT_AVAILABLE",
+        "listingIdentifier": {
+          "listingId": "123456"
+        }
+      }
+    },
+    {
+      "label": "listingIdentifier with sku only",
+      "input": {
+        "endListingReason": "INCORRECT_PRICE",
+        "listingIdentifier": {
+          "sku": "MY-SKU-001"
+        }
+      },
+      "expected": {
+        "endListingReason": "INCORRECT_PRICE",
+        "listingIdentifier": {
+          "sku": "MY-SKU-001"
+        }
+      }
+    }
+  ]
 }

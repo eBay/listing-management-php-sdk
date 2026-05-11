@@ -14,8 +14,8 @@ readonly class EndListingInput
     public function toArray(): array
     {
         return [
-            'endListingReason'       => $this->endListingReason,
-            'listingIdentifier' => $this->listingIdentifierInput->toArray(),
+            'endListingReason'  => $this->endListingReason,
+            'listingIdentifier' => (object)$this->listingIdentifierInput->toArray(),
         ];
     }
 

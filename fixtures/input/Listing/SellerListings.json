@@ -1,9 +1,53 @@
 {
-  "input": {
-    "listings": [
-      {
-        "listingId": "mock-id"
+  "cases": [
+    {
+      "label": "empty listings array",
+      "input": {
+        "listings": []
+      },
+      "expected": {
+        "listings": []
       }
-    ]
-  }
+    },
+    {
+      "label": "single listing",
+      "input": {
+        "listings": [
+          {
+            "listingId": "mock-id"
+          }
+        ]
+      },
+      "expected": {
+        "listings": [
+          {
+            "listingId": "mock-id"
+          }
+        ]
+      }
+    },
+    {
+      "label": "multiple listings",
+      "input": {
+        "listings": [
+          {
+            "listingId": "111111"
+          },
+          {
+            "listingId": "222222"
+          }
+        ]
+      },
+      "expected": {
+        "listings": [
+          {
+            "listingId": "111111"
+          },
+          {
+            "listingId": "222222"
+          }
+        ]
+      }
+    }
+  ]
 }

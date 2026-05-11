@@ -43,7 +43,7 @@ final class ListingGraphQLClient
     {
         $data = $this->dynamic->execute(
             ListingOperations::ITEM_BIDDING_ACTIVITY(),
-            ['input' => $input->toArray()],
+            ['input' => (object)$input->toArray()],
             $accessToken,
             $requestOptions
         );
@@ -57,7 +57,7 @@ final class ListingGraphQLClient
     {
         $data = $this->dynamic->execute(
             ListingOperations::SELLER_LISTINGS(),
-            ['input' => $input->toArray()],
+            ['input' => (object)$input->toArray()],
             $accessToken,
             $requestOptions
         );
@@ -87,7 +87,7 @@ final class ListingGraphQLClient
     {
         $data = $this->dynamic->execute(
             ListingOperations::BULK_UPDATE_INVENTORY(),
-            ['input' => $input->toArray()],
+            ['input' => (object)$input->toArray()],
             $accessToken,
             $requestOptions
         );
@@ -101,7 +101,7 @@ final class ListingGraphQLClient
     {
         $data = $this->dynamic->execute(
             ListingOperations::CREATE_LISTING(),
-            ['input' => $input->toArray()],
+            ['input' => (object)$input->toArray()],
             $accessToken,
             $requestOptions
         );
@@ -115,7 +115,7 @@ final class ListingGraphQLClient
     {
         $data = $this->dynamic->execute(
             ListingOperations::CREATE_SECOND_CHANCE_LISTING(),
-            ['input' => $input->toArray()],
+            ['input' => (object)$input->toArray()],
             $accessToken,
             $requestOptions
         );
@@ -129,7 +129,7 @@ final class ListingGraphQLClient
     {
         $data = $this->dynamic->execute(
             ListingOperations::END_LISTING(),
-            ['input' => $input->toArray()],
+            ['input' => (object)$input->toArray()],
             $accessToken,
             $requestOptions
         );
@@ -143,7 +143,7 @@ final class ListingGraphQLClient
     {
         $data = $this->dynamic->execute(
             ListingOperations::RELIST_LISTING(),
-            ['input' => $input->toArray()],
+            ['input' => (object)$input->toArray()],
             $accessToken,
             $requestOptions
         );
@@ -157,7 +157,7 @@ final class ListingGraphQLClient
     {
         $data = $this->dynamic->execute(
             ListingOperations::UPDATE_LISTING(),
-            ['input' => $input->toArray()],
+            ['input' => (object)$input->toArray()],
             $accessToken,
             $requestOptions
         );

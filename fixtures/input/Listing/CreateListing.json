@@ -1,28 +1,93 @@
 {
-  "input": {
-    "idempotencyKey": "mock-idempotency-key",
-    "listingItems": {
-      "items": [
-        {
-          "itemTerms": {
-            "availability": {
-              "quantityAvailable": 0
-            },
-            "pricingTerms": {}
-          }
+  "cases": [
+    {
+      "label": "empty input",
+      "input": {},
+      "expected": {}
+    },
+    {
+      "label": "minimal required fields",
+      "input": {
+        "marketplace": "EBAY_US",
+        "listingTerms": {
+          "listingFormat": "FIXED_PRICE"
         }
-      ]
-    },
-    "listingTerms": {
-      "itemLocation": {
-        "country": "AD"
       },
-      "lifecycleTerms": {
-        "listingDurationInDays": "DAYS_1"
-      },
-      "listingFormat": "AUCTION"
+      "expected": {
+        "marketplace": "EBAY_US",
+        "listingTerms": {
+          "listingFormat": "FIXED_PRICE"
+        }
+      }
     },
-    "marketplace": "EBAY_AT",
-    "product": {}
-  }
+    {
+      "label": "full payload with non-empty nested objects",
+      "input": {
+        "idempotencyKey": "mock-idempotency-key",
+        "listingItems": {
+          "items": [
+            {
+              "itemTerms": {
+                "availability": {
+                  "quantityAvailable": 0
+                },
+                "pricingTerms": {
+                  "fixedPrice": {
+                    "value": "9.99",
+                    "currency": "USD"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "listingTerms": {
+          "itemLocation": {
+            "country": "AD"
+          },
+          "lifecycleTerms": {
+            "listingDurationInDays": "DAYS_1"
+          },
+          "listingFormat": "AUCTION"
+        },
+        "marketplace": "EBAY_AT",
+        "product": {
+          "title": "Mock Product"
+        }
+      },
+      "expected": {
+        "idempotencyKey": "mock-idempotency-key",
+        "listingItems": {
+          "items": [
+            {
+              "itemTerms": {
+                "availability": {
+                  "quantityAvailable": 0
+                },
+                "pricingTerms": {
+                  "fixedPrice": {
+                    "value": "9.99",
+                    "currency": "USD"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "listingTerms": {
+          "itemLocation": {
+            "country": "AD"
+          },
+          "lifecycleTerms": {
+            "listingDurationInDays": "DAYS_1"
+          },
+          "listingFormat": "AUCTION"
+        },
+        "marketplace": "EBAY_AT",
+        "product": {
+          "title": "Mock Product"
+        }
+      }
+    }
+  ]
 }
