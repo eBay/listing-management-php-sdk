@@ -2,9 +2,9 @@
   "createSecondChanceListing": {
     "__typename": "CreateSecondChanceListingSuccess",
     "listing": {
-      "listingId": "aab72df1-e417-4511-95d5-2623f66bbc96",
+      "listingId": "1da4e764-cb92-40c7-999e-d4c5dc8d6381",
       "sku": "Hello World",
-      "marketplace": "EBAY_AT",
+      "marketplace": "EBAY_NL",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "30c39582-23d9-425b-9023-1e412d41928c"
+            "id": "3f9ac556-75ca-4c0f-adf3-8e41e7e84fb2"
           }
         },
         "itemCondition": {
-          "itemConditionId": "f7bcf57e-fbc0-4956-ac9a-86821d9803ca"
+          "itemConditionId": "2f9603a4-5952-4964-8bb3-665551e93649"
         }
       },
       "items": [
@@ -46,26 +46,26 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -56
+              "quantityAvailable": -31
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "PGK"
+                  "currency": "CLP"
                 }
               },
               "auctionPrice": {
                 "startingBidPrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "RWF"
+                    "currency": "INR"
                   }
                 },
                 "reservePrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "AWG"
+                    "currency": "DZD"
                   }
                 }
               }
@@ -76,26 +76,26 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -72
+              "quantityAvailable": -80
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "AOA"
+                  "currency": "VND"
                 }
               },
               "auctionPrice": {
                 "startingBidPrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "LKR"
+                    "currency": "DKK"
                   }
                 },
                 "reservePrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "KGS"
+                    "currency": "AOA"
                   }
                 }
               }
@@ -110,11 +110,11 @@
         },
         "listingFormat": "AUCTION",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_90",
+          "listingDurationInDays": "DAYS_60",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "itemLocation": {
-          "country": "CL",
+          "country": "ME",
           "postalCode": "Hello World",
           "location": "Hello World"
         }

@@ -2,34 +2,57 @@
   "sellerListings": {
     "listings": [
       {
-        "listingId": "61ca770a-cd40-4b42-85f5-4d2350ff637b",
+        "listingId": "0df84d13-225e-46e8-930c-46866d36fabd",
         "listing": {
-          "listingId": "e0a2b944-9faf-4de3-bee3-817601ef0872",
-          "marketplace": "EBAY_PH",
+          "listingId": "a3f6ee52-4af6-4247-8f73-463cf9e0e2a9",
+          "marketplace": "EBAY_SG",
           "sellerProduct": {
             "title": "Hello World"
           },
           "listingTerms": {
-            "listingFormat": "AUCTION",
+            "listingFormat": "FIXED_PRICE",
             "lifecycleTerms": {
-              "listingDurationInDays": "DAYS_3",
+              "listingDurationInDays": "DAYS_21",
               "actualEndAt": "2024-01-01T00:00:00.000Z",
-              "endListingReason": "END_AUCTION_AND_SELL",
+              "endListingReason": "ERROR_IN_PRICE",
               "createdAt": "2024-01-01T00:00:00.000Z",
               "listingStatus": "SCHEDULED",
               "scheduledEndAt": "2024-01-01T00:00:00.000Z",
               "startAt": "2024-01-01T00:00:00.000Z"
             },
             "fulfillmentTerms": {
-              "businessPolicyId": "93a0a524-6659-4791-ac04-420bcf8d61eb"
+              "inStorePickupSupported": true,
+              "globalShippingSupported": true,
+              "freeShippingAvailable": true,
+              "packageSpecifications": {
+                "irregularPackage": true,
+                "listingPackageType": "LETTER",
+                "listingUnitOfMeasure": "ENGLISH",
+                "packageDimensions": {
+                  "length": -80.66094742478462,
+                  "width": -48.9942427898382,
+                  "height": 39.821193687435084
+                },
+                "packageWeight": {
+                  "majorUnit": -74,
+                  "minorUnit": 88
+                }
+              },
+              "shippingTerms": {
+                "buyerResponsibleForShipping": false,
+                "handlingTimeDuration": "DAYS_3",
+                "includedShipToLocations": [
+                  {
+                    "country": "IL"
+                  },
+                  {
+                    "country": "BS"
+                  }
+                ]
+              }
             },
             "returnTerms": {
-              "domesticReturnTerms": {
-                "returnAccepted": false,
-                "listingRefundMethod": "MONEY_BACK",
-                "returnDuration": "DAYS_5",
-                "returnShipmentInvoicee": "mock-invoicee"
-              }
+              "businessPolicyId": "9e6be57b-774c-4aab-af5a-b5d31f706f7c"
             },
             "paymentTerms": {
               "immediatePay": true
@@ -40,106 +63,16 @@
               "galleryPlus": true
             },
             "bestOfferTerms": {
-              "acceptBestOffer": true,
-              "autoAcceptThresholdAmount": {
-                "original": {
-                  "currency": "UAH",
-                  "value": "1.00"
-                }
-              },
-              "autoDeclineThresholdAmount": {
-                "original": {
-                  "currency": "JMD",
-                  "value": "1.00"
-                }
-              }
-            },
-            "taxTerms": {
-              "salesTaxApplicableToShipping": true,
-              "vatRecognizedBusinessSeller": false,
-              "salesTaxTableUsed": false
-            },
-            "itemLocation": {
-              "location": "Hello World",
-              "country": "TF",
-              "postalCode": "Hello World"
-            },
-            "totalQuantityAvailable": 38
-          }
-        }
-      },
-      {
-        "listingId": "2cd05c35-6bec-4ef3-bc89-48c875ca8e92",
-        "listing": {
-          "listingId": "2fc11d2c-33f7-441a-a2ac-188101b959d7",
-          "marketplace": "EBAY_US",
-          "sellerProduct": {
-            "title": "Hello World"
-          },
-          "listingTerms": {
-            "listingFormat": "FIXED_PRICE",
-            "lifecycleTerms": {
-              "listingDurationInDays": "GTC",
-              "actualEndAt": "2024-01-01T00:00:00.000Z",
-              "endListingReason": "END_ITEM_ON_ZERO_QUANTITY",
-              "createdAt": "2024-01-01T00:00:00.000Z",
-              "listingStatus": "ACTIVE",
-              "scheduledEndAt": "2024-01-01T00:00:00.000Z",
-              "startAt": "2024-01-01T00:00:00.000Z"
-            },
-            "fulfillmentTerms": {
-              "inStorePickupSupported": false,
-              "globalShippingSupported": true,
-              "freeShippingAvailable": false,
-              "packageSpecifications": {
-                "irregularPackage": true,
-                "listingPackageType": "USPS_LARGE_PACK",
-                "listingUnitOfMeasure": "ENGLISH",
-                "packageDimensions": {
-                  "length": -70.0970792709386,
-                  "width": 15.56962919578612,
-                  "height": 49.4165669121756
-                },
-                "packageWeight": {
-                  "majorUnit": -66,
-                  "minorUnit": -42
-                }
-              },
-              "shippingTerms": {
-                "buyerResponsibleForShipping": true,
-                "handlingTimeDuration": "DAYS_30",
-                "includedShipToLocations": [
-                  {
-                    "country": "KR"
-                  },
-                  {
-                    "country": "GN"
-                  }
-                ]
-              }
-            },
-            "returnTerms": {
-              "businessPolicyId": "a8df96be-6184-46e9-9966-7d254e39dfcf"
-            },
-            "paymentTerms": {
-              "businessPolicyId": "e5b0f6b2-5815-4d79-85cc-3b89881f14be"
-            },
-            "hideParticipation": false,
-            "visualEnhancements": {
-              "boldTitle": true,
-              "galleryPlus": true
-            },
-            "bestOfferTerms": {
               "acceptBestOffer": false,
               "autoAcceptThresholdAmount": {
                 "original": {
-                  "currency": "GIP",
+                  "currency": "MOP",
                   "value": "1.00"
                 }
               },
               "autoDeclineThresholdAmount": {
                 "original": {
-                  "currency": "EGP",
+                  "currency": "XOF",
                   "value": "1.00"
                 }
               }
@@ -147,67 +80,109 @@
             "taxTerms": {
               "salesTaxApplicableToShipping": false,
               "vatRecognizedBusinessSeller": false,
-              "salesTaxTableUsed": true
+              "salesTaxTableUsed": false
             },
             "itemLocation": {
               "location": "Hello World",
-              "country": "BL",
+              "country": "DE",
               "postalCode": "Hello World"
             },
-            "totalQuantityAvailable": -95
+            "totalQuantityAvailable": 95
+          }
+        }
+      },
+      {
+        "listingId": "96eedb2e-602b-4bbe-9e84-c40cc28b8c08",
+        "listing": {
+          "listingId": "67e46e81-b578-47ee-89b7-2df86b93cb26",
+          "marketplace": "EBAY_NL",
+          "sellerProduct": {
+            "title": "Hello World"
           },
-          "listingVariations": {
-            "imagesVaryByTrait": {
-              "traitName": "Hello World",
-              "traitValueImages": [
-                {
-                  "traitValue": "Hello World",
-                  "traitImages": [
-                    {
-                      "ebayImageUrl": "https://example.com",
-                      "externalImageUrl": "https://example.com",
-                      "order": -54
-                    },
-                    {
-                      "ebayImageUrl": "https://example.com",
-                      "externalImageUrl": "https://example.com",
-                      "order": 17
-                    }
-                  ]
-                },
-                {
-                  "traitValue": "Hello World",
-                  "traitImages": [
-                    {
-                      "ebayImageUrl": "https://example.com",
-                      "externalImageUrl": "https://example.com",
-                      "order": 47
-                    },
-                    {
-                      "ebayImageUrl": "https://example.com",
-                      "externalImageUrl": "https://example.com",
-                      "order": -82
-                    }
-                  ]
-                }
-              ]
+          "listingTerms": {
+            "listingFormat": "AUCTION",
+            "lifecycleTerms": {
+              "listingDurationInDays": "DAYS_3",
+              "actualEndAt": "2024-01-01T00:00:00.000Z",
+              "endListingReason": "LOST",
+              "createdAt": "2024-01-01T00:00:00.000Z",
+              "listingStatus": "ACTIVE",
+              "scheduledEndAt": "2024-01-01T00:00:00.000Z",
+              "startAt": "2024-01-01T00:00:00.000Z"
             },
-            "variationTraits": [
-              {
-                "name": "Hello World",
-                "values": [
-                  "Hello World",
-                  "Hello World"
-                ]
+            "fulfillmentTerms": {
+              "inStorePickupSupported": false,
+              "globalShippingSupported": false,
+              "freeShippingAvailable": false,
+              "packageSpecifications": {
+                "irregularPackage": false,
+                "listingPackageType": "VERY_LARGE_PACK",
+                "listingUnitOfMeasure": "ENGLISH",
+                "packageDimensions": {
+                  "length": -4.646102593903834,
+                  "width": -32.69030463085268,
+                  "height": 92.79796731917344
+                },
+                "packageWeight": {
+                  "majorUnit": 35,
+                  "minorUnit": -4
+                }
               },
-              {
-                "name": "Hello World",
-                "values": [
-                  "Hello World",
-                  "Hello World"
+              "shippingTerms": {
+                "buyerResponsibleForShipping": true,
+                "handlingTimeDuration": "DAYS_40",
+                "includedShipToLocations": [
+                  {
+                    "country": "PM"
+                  },
+                  {
+                    "country": "KR"
+                  }
                 ]
               }
-            ]
+            },
+            "returnTerms": {
+              "domesticReturnTerms": {
+                "returnAccepted": false,
+                "listingRefundMethod": "MONEY_BACK",
+                "returnDuration": "DAYS_3",
+                "returnShipmentInvoicee": "mock-invoicee"
+              }
+            },
+            "paymentTerms": {
+              "immediatePay": false
+            },
+            "hideParticipation": true,
+            "visualEnhancements": {
+              "boldTitle": false,
+              "galleryPlus": false
+            },
+            "bestOfferTerms": {
+              "acceptBestOffer": true,
+              "autoAcceptThresholdAmount": {
+                "original": {
+                  "currency": "SZL",
+                  "value": "1.00"
+                }
+              },
+              "autoDeclineThresholdAmount": {
+                "original": {
+                  "currency": "MUR",
+                  "value": "1.00"
+                }
+              }
+            },
+            "taxTerms": {
+              "salesTaxApplicableToShipping": false,
+              "vatRecognizedBusinessSeller": true,
+              "salesTaxTableUsed": false
+            },
+            "itemLocation": {
+              "location": "Hello World",
+              "country": "PW",
+              "postalCode": "Hello World"
+            },
+            "totalQuantityAvailable": -55
           }
         }
       }

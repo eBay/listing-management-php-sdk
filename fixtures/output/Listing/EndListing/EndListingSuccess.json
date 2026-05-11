@@ -2,9 +2,9 @@
   "endListing": {
     "__typename": "EndListingSuccess",
     "listing": {
-      "listingId": "29306191-0443-4207-bbfe-1de8e59d9a7c",
+      "listingId": "e613aa4e-5b9c-4a84-88bf-36d9d98f17ea",
       "sku": "Hello World",
-      "marketplace": "EBAY_PH",
+      "marketplace": "EBAY_AT",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "30fe5d6f-e6c9-4f67-b64f-9d98eecc0658"
+            "id": "1253fe93-f248-4951-8bc9-8788d58f78a9"
           }
         },
         "itemCondition": {
-          "itemConditionId": "6e3a7c4b-37c3-4092-bd41-3b7a8e12fe4f"
+          "itemConditionId": "211e3b5b-96f6-420b-8d7a-f3bc5d7f8859"
         }
       },
       "items": [
@@ -46,13 +46,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 5
+              "quantityAvailable": 51
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "PAB"
+                  "currency": "MYR"
                 }
               }
             }
@@ -62,13 +62,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -93
+              "quantityAvailable": -52
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "VUV"
+                  "currency": "BDT"
                 }
               }
             }
@@ -80,7 +80,7 @@
         "paymentTerms": {},
         "listingFormat": "FIXED_PRICE",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_21",
+          "listingDurationInDays": "DAYS_10",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "bestOfferTerms": {
@@ -88,13 +88,13 @@
           "autoAcceptThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "SZL"
+              "currency": "MWK"
             }
           },
           "autoDeclineThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "ETB"
+              "currency": "RON"
             }
           }
         },

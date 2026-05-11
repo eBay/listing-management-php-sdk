@@ -2,9 +2,9 @@
   "relistListing": {
     "__typename": "RelistListingSuccess",
     "listing": {
-      "listingId": "d1eeb4f8-a89d-45ca-bafc-f2400f7aee64",
+      "listingId": "b1bae8a9-e339-49be-b346-2a939079afa6",
       "sku": "Hello World",
-      "marketplace": "EBAY_GB",
+      "marketplace": "EBAY_CA",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "15fbd3d2-10d0-4a1b-894d-94d04312c562"
+            "id": "ee839ce9-e88c-4ef8-b3d8-8d325f524eaa"
           }
         },
         "itemCondition": {
-          "itemConditionId": "1115c6cb-06d2-411c-a29b-01b64f359afb"
+          "itemConditionId": "1fb82941-f99b-4237-8d03-4e1ac296a117"
         }
       },
       "items": [
@@ -46,13 +46,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -34
+              "quantityAvailable": 45
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "CAD"
+                  "currency": "JMD"
                 }
               }
             }
@@ -62,13 +62,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 60
+              "quantityAvailable": -52
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "ARS"
+                  "currency": "NIO"
                 }
               }
             }
@@ -79,32 +79,32 @@
         "fulfillmentTerms": {
           "packageSpecifications": {
             "packageDimensions": {
-              "length": -46.24564901530535,
-              "width": -64.07149831019831,
-              "height": -94.7610035976273
+              "length": -66.66996128262521,
+              "width": -2.3471199850003046,
+              "height": 76.81118734404512
             },
             "packageWeight": {
-              "majorUnit": 10,
-              "minorUnit": 11
+              "majorUnit": -86,
+              "minorUnit": -12
             },
-            "listingUnitOfMeasure": "ENGLISH"
+            "listingUnitOfMeasure": "METRIC"
           },
           "shippingTerms": {
-            "handlingTimeDuration": "DAYS_7",
+            "handlingTimeDuration": "DAYS_30",
             "shippingServices": [
               {
-                "rank": 28
+                "rank": -84
               },
               {
-                "rank": -56
+                "rank": 75
               }
             ]
           }
         },
         "paymentTerms": {},
-        "listingFormat": "FIXED_PRICE",
+        "listingFormat": "AUCTION",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_120",
+          "listingDurationInDays": "DAYS_10",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "bestOfferTerms": {
@@ -112,18 +112,18 @@
           "autoAcceptThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "ALL"
+              "currency": "CAD"
             }
           },
           "autoDeclineThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "CZK"
+              "currency": "SYP"
             }
           }
         },
         "itemLocation": {
-          "country": "LS",
+          "country": "TH",
           "postalCode": "Hello World",
           "location": "Hello World"
         }
@@ -131,25 +131,25 @@
     },
     "listingFees": [
       {
-        "listingFeeType": "EXTENDED_DURATION_LISTING",
+        "listingFeeType": "SCHEDULED",
         "feeAmount": {
           "value": "1.00",
-          "currency": "SDG"
+          "currency": "KMF"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "MZN"
+          "currency": "SDG"
         }
       },
       {
         "listingFeeType": "RESERVE",
         "feeAmount": {
           "value": "1.00",
-          "currency": "MYR"
+          "currency": "MXN"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "AFN"
+          "currency": "SGD"
         }
       }
     ],

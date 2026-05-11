@@ -1,25 +1,31 @@
 {
   "sellerListingSearch": {
     "activeListings": {
-      "__typename": "SellerListingSearchInvalidInput",
-      "errorCode": "Hello World",
-      "errorMessage": "Hello World"
-    },
-    "endedListings": {
-      "__typename": "SellerListingSearchInvalidInput",
-      "errorCode": "Hello World",
-      "errorMessage": "Hello World"
-    },
-    "scheduledListings": {
       "__typename": "SellerListings",
       "listings": [
         {
-          "listingId": "5e3fa763-5bdb-4ce2-909c-30e2710651c9"
+          "listingId": "954f81ad-039c-4cf9-8d20-17f631c924b8"
         },
         {
-          "listingId": "14089ded-42f3-46c3-a470-d690c3e4aadb"
+          "listingId": "2e69148f-f2e2-44dd-adf3-512ca23c67b8"
         }
       ]
+    },
+    "endedListings": {
+      "__typename": "SellerListings",
+      "listings": [
+        {
+          "listingId": "61bbd29c-f386-4f4d-9c32-496fbad996b9"
+        },
+        {
+          "listingId": "fd108a6a-2294-4e33-a6aa-9be967495cfd"
+        }
+      ]
+    },
+    "scheduledListings": {
+      "__typename": "SellerListingSearchInvalidInput",
+      "errorCode": "Hello World",
+      "errorMessage": "Hello World"
     }
   }
 }

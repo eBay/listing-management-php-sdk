@@ -2,9 +2,9 @@
   "updateListing": {
     "__typename": "UpdateListingValidationSuccess",
     "listing": {
-      "listingId": "aad5a89a-cf40-4cd3-906b-2fc7b5ffe441",
+      "listingId": "b7ad2e23-fb41-43a4-8887-59bc50d8c8bb",
       "sku": "Hello World",
-      "marketplace": "EBAY_PH",
+      "marketplace": "EBAY_CA",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "ef124242-3e69-44d3-93f3-0fbd847b1fb6"
+            "id": "7b627d23-3a86-47fd-8d51-a0e191160d62"
           }
         },
         "itemCondition": {
-          "itemConditionId": "62a80b5b-a3eb-4ee9-84f5-0f4d4a406df7"
+          "itemConditionId": "47c37bdb-5b40-433f-a683-97fd084921ed"
         }
       },
       "items": [
@@ -46,13 +46,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -46
+              "quantityAvailable": 72
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "SAR"
+                  "currency": "PEN"
                 }
               }
             }
@@ -62,13 +62,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 76
+              "quantityAvailable": 31
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "IDR"
+                  "currency": "HTG"
                 }
               }
             }
@@ -77,35 +77,33 @@
       ],
       "listingTerms": {
         "fulfillmentTerms": {},
-        "paymentTerms": {
-          "immediatePay": true
-        },
-        "listingFormat": "CLASSIFIED_AD",
+        "paymentTerms": {},
+        "listingFormat": "FIXED_PRICE",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_5",
+          "listingDurationInDays": "DAYS_30",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "bestOfferTerms": {
-          "acceptBestOffer": true,
+          "acceptBestOffer": false,
           "autoAcceptThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "CHF"
+              "currency": "LAK"
             }
           },
           "autoDeclineThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "BGN"
+              "currency": "COP"
             }
           }
         },
         "buyerRestrictions": {
-          "disableBuyerRestrictions": false,
-          "quantityLimitPerBuyer": -46
+          "disableBuyerRestrictions": true,
+          "quantityLimitPerBuyer": -56
         },
         "itemLocation": {
-          "country": "CH",
+          "country": "GA",
           "postalCode": "Hello World",
           "location": "Hello World"
         }
@@ -113,25 +111,25 @@
     },
     "listingFees": [
       {
-        "listingFeeType": "INSERTION",
+        "listingFeeType": "BUYITNOW",
         "feeAmount": {
           "value": "1.00",
-          "currency": "THB"
+          "currency": "JOD"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "CUP"
+          "currency": "DJF"
         }
       },
       {
-        "listingFeeType": "BOLD",
+        "listingFeeType": "INTERNATIONAL_LISTING",
         "feeAmount": {
           "value": "1.00",
-          "currency": "SEK"
+          "currency": "DKK"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "KMF"
+          "currency": "SOS"
         }
       }
     ],

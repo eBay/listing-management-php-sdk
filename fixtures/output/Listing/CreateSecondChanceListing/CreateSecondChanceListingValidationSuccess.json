@@ -2,9 +2,9 @@
   "createSecondChanceListing": {
     "__typename": "CreateSecondChanceListingValidationSuccess",
     "listing": {
-      "listingId": "3acff0da-6006-40fd-82f8-6a31c23f0c01",
+      "listingId": "a78d37a9-3ea1-426f-9608-e3ba58228baf",
       "sku": "Hello World",
-      "marketplace": "EBAY_SG",
+      "marketplace": "EBAY_AU",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "e064188a-bbd9-4ffe-9206-3dcd1d7886a8"
+            "id": "67197f1d-13ef-4a75-aa77-9413d2eb0d72"
           }
         },
         "itemCondition": {
-          "itemConditionId": "a09c9b8d-c13c-4ffd-a3f4-c4dd4ba2dfc5"
+          "itemConditionId": "9b10c642-48af-4030-a7b7-2a235b72190f"
         }
       },
       "items": [
@@ -46,26 +46,26 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -34
+              "quantityAvailable": -73
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "ARS"
+                  "currency": "CHF"
                 }
               },
               "auctionPrice": {
                 "startingBidPrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "KGS"
+                    "currency": "UGX"
                   }
                 },
                 "reservePrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "VUV"
+                    "currency": "BHD"
                   }
                 }
               }
@@ -76,26 +76,26 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -19
+              "quantityAvailable": 45
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "TOP"
+                  "currency": "MAD"
                 }
               },
               "auctionPrice": {
                 "startingBidPrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "MZN"
+                    "currency": "OMR"
                   }
                 },
                 "reservePrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "CAD"
+                    "currency": "SRD"
                   }
                 }
               }
@@ -107,38 +107,36 @@
         "fulfillmentTerms": {
           "packageSpecifications": {
             "packageDimensions": {
-              "length": -6.372027489908305,
-              "width": 98.04517640000515,
-              "height": 23.003341987548723
+              "length": 55.257099204902886,
+              "width": -51.048490636185775,
+              "height": 97.87213851960993
             },
             "packageWeight": {
-              "majorUnit": 62,
-              "minorUnit": 77
+              "majorUnit": 11,
+              "minorUnit": -66
             },
             "listingUnitOfMeasure": "ENGLISH"
           },
           "shippingTerms": {
-            "handlingTimeDuration": "DAYS_0",
+            "handlingTimeDuration": "DAYS_10",
             "shippingServices": [
               {
-                "rank": 67
+                "rank": -5
               },
               {
-                "rank": -65
+                "rank": 50
               }
             ]
           }
         },
-        "paymentTerms": {
-          "immediatePay": true
-        },
-        "listingFormat": "AUCTION",
+        "paymentTerms": {},
+        "listingFormat": "FIXED_PRICE",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_120",
+          "listingDurationInDays": "DAYS_14",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "itemLocation": {
-          "country": "MX",
+          "country": "AX",
           "postalCode": "Hello World",
           "location": "Hello World"
         }

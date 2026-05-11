@@ -2,7 +2,7 @@
   "updateListing": {
     "__typename": "UpdateListingSuccess",
     "listing": {
-      "listingId": "892e4ae3-0a34-4aec-a54c-5e187a29c5a7",
+      "listingId": "24ed9d56-7cfc-4202-9025-f18cac16ad22",
       "sku": "Hello World",
       "marketplace": "EBAY_GB",
       "sellerProduct": {
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "46c16751-c709-4d62-9294-55028bfb2c35"
+            "id": "bb690182-05b0-4ee5-8c80-07439dbd2f29"
           }
         },
         "itemCondition": {
-          "itemConditionId": "56a305b6-b4e8-4cf7-af18-e4505b681519"
+          "itemConditionId": "1e990f05-dd66-42ab-b491-c01e2d788f91"
         }
       },
       "items": [
@@ -46,13 +46,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -44
+              "quantityAvailable": -80
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "SDG"
+                  "currency": "BND"
                 }
               }
             }
@@ -62,13 +62,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -77
+              "quantityAvailable": 52
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "AOA"
+                  "currency": "MAD"
                 }
               }
             }
@@ -77,12 +77,10 @@
       ],
       "listingTerms": {
         "fulfillmentTerms": {},
-        "paymentTerms": {
-          "immediatePay": true
-        },
-        "listingFormat": "FIXED_PRICE",
+        "paymentTerms": {},
+        "listingFormat": "AUCTION",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_5",
+          "listingDurationInDays": "DAYS_7",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "bestOfferTerms": {
@@ -90,22 +88,22 @@
           "autoAcceptThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "LSL"
+              "currency": "MWK"
             }
           },
           "autoDeclineThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "SSP"
+              "currency": "SHP"
             }
           }
         },
         "buyerRestrictions": {
           "disableBuyerRestrictions": true,
-          "quantityLimitPerBuyer": 63
+          "quantityLimitPerBuyer": 18
         },
         "itemLocation": {
-          "country": "BW",
+          "country": "NG",
           "postalCode": "Hello World",
           "location": "Hello World"
         }
@@ -116,22 +114,22 @@
         "listingFeeType": "RESERVE",
         "feeAmount": {
           "value": "1.00",
-          "currency": "WST"
+          "currency": "BDT"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "KZT"
+          "currency": "GBP"
         }
       },
       {
-        "listingFeeType": "GALLERY",
+        "listingFeeType": "DESIGNER",
         "feeAmount": {
           "value": "1.00",
-          "currency": "ISK"
+          "currency": "LAK"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "CNY"
+          "currency": "PYG"
         }
       }
     ],

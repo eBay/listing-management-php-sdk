@@ -2,9 +2,9 @@
   "relistListing": {
     "__typename": "RelistListingValidationSuccess",
     "listing": {
-      "listingId": "069ec489-5f52-4e36-a084-4f43a457b933",
+      "listingId": "b880ca14-e556-4c2c-acb1-2edf52c31f98",
       "sku": "Hello World",
-      "marketplace": "EBAY_PL",
+      "marketplace": "EBAY_DE",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "7a8d9695-1af2-4b4c-b3f9-d439e648427d"
+            "id": "af49f947-15dd-4c23-93e3-f11fae815bde"
           }
         },
         "itemCondition": {
-          "itemConditionId": "9fdb7673-5abc-4b8d-9ce3-00b0d55c359d"
+          "itemConditionId": "59063c72-2ee8-4a3f-ba4c-f83db6addb8f"
         }
       },
       "items": [
@@ -46,13 +46,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 46
+              "quantityAvailable": -82
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "ERN"
+                  "currency": "DOP"
                 }
               }
             }
@@ -62,13 +62,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -55
+              "quantityAvailable": -59
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "QAR"
+                  "currency": "DJF"
                 }
               }
             }
@@ -76,30 +76,54 @@
         }
       ],
       "listingTerms": {
-        "fulfillmentTerms": {},
+        "fulfillmentTerms": {
+          "packageSpecifications": {
+            "packageDimensions": {
+              "length": -27.95450867664877,
+              "width": -81.99851451965662,
+              "height": -65.37453164953533
+            },
+            "packageWeight": {
+              "majorUnit": -29,
+              "minorUnit": -78
+            },
+            "listingUnitOfMeasure": "ENGLISH"
+          },
+          "shippingTerms": {
+            "handlingTimeDuration": "DAYS_3",
+            "shippingServices": [
+              {
+                "rank": -88
+              },
+              {
+                "rank": -59
+              }
+            ]
+          }
+        },
         "paymentTerms": {},
-        "listingFormat": "FIXED_PRICE",
+        "listingFormat": "AUCTION",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_30",
+          "listingDurationInDays": "DAYS_90",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "bestOfferTerms": {
-          "acceptBestOffer": false,
+          "acceptBestOffer": true,
           "autoAcceptThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "AZN"
+              "currency": "RON"
             }
           },
           "autoDeclineThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "KHR"
+              "currency": "IRR"
             }
           }
         },
         "itemLocation": {
-          "country": "MN",
+          "country": "MV",
           "postalCode": "Hello World",
           "location": "Hello World"
         }
@@ -107,25 +131,25 @@
     },
     "listingFees": [
       {
-        "listingFeeType": "EXTENDED_DURATION_LISTING",
+        "listingFeeType": "BOLD",
         "feeAmount": {
           "value": "1.00",
-          "currency": "MVR"
+          "currency": "AMD"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "FJD"
+          "currency": "TMT"
         }
       },
       {
-        "listingFeeType": "INTERNATIONAL_LISTING",
+        "listingFeeType": "INSERTION",
         "feeAmount": {
           "value": "1.00",
-          "currency": "CDF"
+          "currency": "UZS"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "NGN"
+          "currency": "TND"
         }
       }
     ],

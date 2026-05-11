@@ -11,24 +11,24 @@
             "bidAmount": {
               "original": {
                 "value": "1.00",
-                "currency": "CVE"
+                "currency": "MYR"
               }
             },
             "bidder": {
               "username": "Hello World",
-              "userId": "3c57134d-bef9-47cd-ac7e-a8ccad17fdc0"
+              "userId": "861bdc9f-e0c1-4acf-8b40-902cc8f9ea01"
             }
           },
           {
             "bidAmount": {
               "original": {
                 "value": "1.00",
-                "currency": "DOP"
+                "currency": "KRW"
               }
             },
             "bidder": {
               "username": "Hello World",
-              "userId": "b366b2f6-f07d-4d9d-a3e8-af7e9751047a"
+              "userId": "1b33332a-5310-4b36-9564-177bbeb87000"
             }
           }
         ]
@@ -43,24 +43,24 @@
             "bidAmount": {
               "original": {
                 "value": "1.00",
-                "currency": "CRC"
+                "currency": "SHP"
               }
             },
             "bidder": {
               "username": "Hello World",
-              "userId": "718be796-c279-4f12-a28a-a8cb97917ad6"
+              "userId": "b100a370-4b26-482a-96b5-aa9858d2490f"
             }
           },
           {
             "bidAmount": {
               "original": {
                 "value": "1.00",
-                "currency": "RWF"
+                "currency": "AFN"
               }
             },
             "bidder": {
               "username": "Hello World",
-              "userId": "07aec842-72ae-4c62-9021-45f6f24b7a06"
+              "userId": "bdeec32c-dc55-47a8-8d7f-6ef352c31d62"
             }
           }
         ]
@@ -75,7 +75,7 @@
             "bidAmount": {
               "original": {
                 "value": "1.00",
-                "currency": "TMT"
+                "currency": "BMD"
               }
             }
           },
@@ -83,7 +83,7 @@
             "bidAmount": {
               "original": {
                 "value": "1.00",
-                "currency": "BMD"
+                "currency": "MKD"
               }
             }
           }
@@ -92,33 +92,33 @@
       "leadingBid": {
         "buyerBiddingSummary": {
           "bidsWithSellerPercentage": "10.00",
-          "retractedBidCount": -56,
-          "totalBidCount": 7,
-          "uniqueListingCategoryBidCount": 56,
-          "uniqueSellerBidCount": -24,
+          "retractedBidCount": -54,
+          "totalBidCount": -93,
+          "uniqueListingCategoryBidCount": 40,
+          "uniqueSellerBidCount": 83,
           "itemBids": [
             {
-              "bidCount": 96,
+              "bidCount": 50,
               "mostRecentBidAt": "2024-01-01T00:00:00.000Z"
             },
             {
-              "bidCount": -67,
+              "bidCount": -29,
               "mostRecentBidAt": "2024-01-01T00:00:00.000Z"
             }
           ]
         },
         "bidder": {
           "username": "Hello World",
-          "userId": "7a11d486-4a24-43e3-9aad-fa57c8d87339"
+          "userId": "bb5b4fc1-ae37-446f-9428-98c8c7a1aee6"
         },
         "bidAmount": {
           "original": {
             "value": "1.00",
-            "currency": "BGN"
+            "currency": "NIO"
           },
           "converted": {
             "value": "1.00",
-            "currency": "FKP"
+            "currency": "RWF"
           }
         },
         "bidMetadata": {}

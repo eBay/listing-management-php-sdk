@@ -6,8 +6,8 @@
     "successes": [
       {
         "listingItemIdentifier": {
-          "listingId": "5a732a71-7943-4cf2-8174-504635d49891",
-          "sku": "992d7e27-2f38-4671-92c2-7f08e9a3d1c0"
+          "listingId": "b26e748f-56ae-45dd-89ca-75d99e92040d",
+          "sku": "1a4e06ea-4837-4e91-985a-db24f5b83bd9"
         },
         "warnings": [
           {
@@ -42,8 +42,8 @@
       },
       {
         "listingItemIdentifier": {
-          "listingId": "90f05d62-4eea-4430-945c-55a33aeb05b7",
-          "sku": "cf8a275e-11ed-4916-9416-e68a82205ced"
+          "listingId": "2f92b4f5-14ab-4e5d-9aee-7a279ef5564c",
+          "sku": "879c37d7-2285-42e6-ac1d-0b2c6b543c74"
         },
         "warnings": [
           {
@@ -80,8 +80,8 @@
     "failures": [
       {
         "listingItemIdentifier": {
-          "listingId": "c786fb80-d1ef-419f-94e2-61e0ddedbab1",
-          "sku": "f86910b2-f42e-4cae-a56f-99f6bc1c7869"
+          "listingId": "c1eba833-a865-40ee-b5fa-c3c23f453c95",
+          "sku": "41aa79e3-c019-4a2c-a107-a66aadfd7771"
         },
         "violations": [
           {
@@ -154,8 +154,8 @@
       },
       {
         "listingItemIdentifier": {
-          "listingId": "7046a0e2-4379-451d-9975-b92cf8d8281d",
-          "sku": "f46fb3b5-519d-417e-8590-fe6380aef747"
+          "listingId": "dde8c416-88cf-42f0-9ca9-3c5d307075d5",
+          "sku": "6fc1f8c5-33ce-4ad8-b49d-681e7f8195b0"
         },
         "violations": [
           {

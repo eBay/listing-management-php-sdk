@@ -2,9 +2,9 @@
   "createListing": {
     "__typename": "CreateListingValidationSuccess",
     "listing": {
-      "listingId": "6beda064-14a7-4e3d-b165-5d0a8047bc92",
+      "listingId": "ee988d2d-826b-4761-8bfc-004bec5f526e",
       "sku": "Hello World",
-      "marketplace": "EBAY_FR",
+      "marketplace": "EBAY_GB",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "1af2afbe-ec62-43c8-a53f-17604e223628"
+            "id": "aa3d12a5-eac6-4bd2-8484-d406bc5828ad"
           }
         },
         "itemCondition": {
-          "itemConditionId": "1c38def0-3348-4770-a54c-ff7a0fe57f27"
+          "itemConditionId": "934c07b6-1ce9-43af-8dec-87a7deb7b414"
         }
       },
       "items": [
@@ -46,13 +46,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 98
+              "quantityAvailable": -14
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "VES"
+                  "currency": "KHR"
                 }
               }
             }
@@ -62,13 +62,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -66
+              "quantityAvailable": -56
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "BHD"
+                  "currency": "KHR"
                 }
               }
             }
@@ -79,32 +79,34 @@
         "fulfillmentTerms": {
           "packageSpecifications": {
             "packageDimensions": {
-              "length": -87.1812884669761,
-              "width": -45.320941889986365,
-              "height": -15.256280272416191
+              "length": -40.28446940992454,
+              "width": -19.96304651366259,
+              "height": -36.12507620144581
             },
             "packageWeight": {
-              "majorUnit": -2,
-              "minorUnit": 67
+              "majorUnit": 81,
+              "minorUnit": 39
             },
-            "listingUnitOfMeasure": "ENGLISH"
+            "listingUnitOfMeasure": "METRIC"
           },
           "shippingTerms": {
-            "handlingTimeDuration": "DAYS_5",
+            "handlingTimeDuration": "DAYS_0",
             "shippingServices": [
               {
-                "rank": 87
+                "rank": 1
               },
               {
-                "rank": 61
+                "rank": -22
               }
             ]
           }
         },
-        "paymentTerms": {},
-        "listingFormat": "CLASSIFIED_AD",
+        "paymentTerms": {
+          "immediatePay": false
+        },
+        "listingFormat": "AUCTION",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_60",
+          "listingDurationInDays": "DAYS_21",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "bestOfferTerms": {
@@ -112,18 +114,18 @@
           "autoAcceptThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "CAD"
+              "currency": "STN"
             }
           },
           "autoDeclineThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "BDT"
+              "currency": "MZN"
             }
           }
         },
         "itemLocation": {
-          "country": "CN",
+          "country": "KN",
           "postalCode": "Hello World",
           "location": "Hello World"
         }
@@ -131,25 +133,25 @@
     },
     "listingFees": [
       {
-        "listingFeeType": "DESIGNER",
+        "listingFeeType": "INTERNATIONAL_LISTING",
         "feeAmount": {
           "value": "1.00",
-          "currency": "TND"
+          "currency": "VUV"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "MYR"
+          "currency": "AFN"
         }
       },
       {
-        "listingFeeType": "PHOTO_COUNT",
+        "listingFeeType": "GALLERY_PLUS",
         "feeAmount": {
           "value": "1.00",
-          "currency": "WST"
+          "currency": "TJS"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "VES"
+          "currency": "SYP"
         }
       }
     ],
