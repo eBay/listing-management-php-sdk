@@ -1,0 +1,139 @@
+{
+  "endListing": {
+    "__typename": "EndListingSuccess",
+    "listing": {
+      "listingId": "29306191-0443-4207-bbfe-1de8e59d9a7c",
+      "sku": "Hello World",
+      "marketplace": "EBAY_PH",
+      "sellerProduct": {
+        "title": "Hello World",
+        "description": "Hello World",
+        "aspects": [
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          },
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          }
+        ],
+        "images": [
+          {
+            "ebayImageUrl": "https://example.com"
+          },
+          {
+            "ebayImageUrl": "https://example.com"
+          }
+        ],
+        "categories": {
+          "primaryCategory": {
+            "id": "30fe5d6f-e6c9-4f67-b64f-9d98eecc0658"
+          }
+        },
+        "itemCondition": {
+          "itemConditionId": "6e3a7c4b-37c3-4092-bd41-3b7a8e12fe4f"
+        }
+      },
+      "items": [
+        {
+          "sku": "Hello World",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": 5
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "PAB"
+                }
+              }
+            }
+          }
+        },
+        {
+          "sku": "Hello World",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": -93
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "VUV"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "listingTerms": {
+        "fulfillmentTerms": {},
+        "paymentTerms": {},
+        "listingFormat": "FIXED_PRICE",
+        "lifecycleTerms": {
+          "listingDurationInDays": "DAYS_21",
+          "startAt": "2024-01-01T00:00:00.000Z"
+        },
+        "bestOfferTerms": {
+          "acceptBestOffer": true,
+          "autoAcceptThresholdAmount": {
+            "original": {
+              "value": "1.00",
+              "currency": "SZL"
+            }
+          },
+          "autoDeclineThresholdAmount": {
+            "original": {
+              "value": "1.00",
+              "currency": "ETB"
+            }
+          }
+        },
+        "itemLocation": {
+          "country": "BR",
+          "postalCode": "Hello World",
+          "location": "Hello World"
+        }
+      }
+    },
+    "warnings": [
+      {
+        "warningCode": "Hello World",
+        "warningMessage": "Hello World",
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ]
+      },
+      {
+        "warningCode": "Hello World",
+        "warningMessage": "Hello World",
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ]
+      }
+    ]
+  }
+}

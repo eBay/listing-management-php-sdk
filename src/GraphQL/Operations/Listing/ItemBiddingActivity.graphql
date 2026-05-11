@@ -1,0 +1,47 @@
+query ItemBiddingActivity($input: ItemBiddingActivityInput!) {
+    itemBiddingActivity(input: $input) {
+        itemBiddingActivity {
+            activeBidHistoryRecords {
+                paginationOutput { previousCursor nextCursor }
+                bidHistoryRecords {
+                    bidAmount { original { value currency } }
+                    bidder { username userId }
+                }
+            }
+            cancelledBidHistoryRecords {
+                paginationOutput { previousCursor nextCursor }
+                bidHistoryRecords {
+                    bidAmount { original { value currency } }
+                    bidder { username userId }
+                }
+            }
+            retractedBidHistoryRecords {
+                paginationOutput { previousCursor nextCursor }
+                bidHistoryRecords {
+                    bidAmount { original { value currency } }
+                }
+            }
+            leadingBid {
+                buyerBiddingSummary {
+                    bidsWithSellerPercentage
+                    retractedBidCount
+                    totalBidCount
+                    uniqueListingCategoryBidCount
+                    uniqueSellerBidCount
+                    itemBids { bidCount mostRecentBidAt }
+                }
+                bidder { username userId }
+                bidAmount {
+                    original { value currency }
+                    converted { value currency }
+                }
+                bidMetadata {
+                    ... on ActiveBidMetadata {
+                        placedAt
+                        isHighestBid
+                    }
+                }
+            }
+        }
+    }
+}

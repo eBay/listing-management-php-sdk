@@ -21,4 +21,11 @@ readonly class BulkUpdateInventoryInput
     {
         return ['inventory' => $this->inventory];
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            inventory: $data['inventory'] ?? [],
+        );
+    }
 }

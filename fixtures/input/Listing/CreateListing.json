@@ -1,0 +1,28 @@
+{
+  "input": {
+    "idempotencyKey": "mock-idempotency-key",
+    "listingItems": {
+      "items": [
+        {
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": 0
+            },
+            "pricingTerms": {}
+          }
+        }
+      ]
+    },
+    "listingTerms": {
+      "itemLocation": {
+        "country": "AD"
+      },
+      "lifecycleTerms": {
+        "listingDurationInDays": "DAYS_1"
+      },
+      "listingFormat": "AUCTION"
+    },
+    "marketplace": "EBAY_AT",
+    "product": {}
+  }
+}

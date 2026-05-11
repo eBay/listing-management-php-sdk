@@ -17,4 +17,11 @@ readonly class SellerListingsInput
             'listings' => array_map(fn(SellerListingInput $l) => $l->toArray(), $this->listings),
         ];
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            listings: array_map(fn($i) => SellerListingInput::fromArray($i), $data['listings'] ?? []),
+        );
+    }
 }

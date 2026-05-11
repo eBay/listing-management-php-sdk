@@ -14,4 +14,11 @@ readonly class ItemBiddingActivityInput
     {
         return ['itemId' => $this->itemId];
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            itemId: $data['itemId'],
+        );
+    }
 }

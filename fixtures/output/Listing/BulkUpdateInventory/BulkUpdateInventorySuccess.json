@@ -1,0 +1,79 @@
+{
+  "bulkUpdateInventory": {
+    "__typename": "BulkUpdateInventorySuccess",
+    "successes": [
+      {
+        "listingItemIdentifier": {
+          "listingId": "872f302b-8346-487e-95be-8f5a211a90f2",
+          "sku": "86eeb4e6-ed55-4ae7-b328-53a58bcc3e8c"
+        },
+        "warnings": [
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          },
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "listingItemIdentifier": {
+          "listingId": "e31c3106-a869-4b19-bb6b-fbf279748a55",
+          "sku": "454d2529-de57-4818-9066-089ef9fa491f"
+        },
+        "warnings": [
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          },
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -42,7 +42,7 @@ final class ListingGraphQLClient
     public function itemBiddingActivity(ItemBiddingActivityInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ItemBiddingActivityResult
     {
         $data = $this->dynamic->execute(
-            ListingOperations::ITEM_BIDDING_ACTIVITY,
+            ListingOperations::ITEM_BIDDING_ACTIVITY(),
             ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
@@ -56,7 +56,7 @@ final class ListingGraphQLClient
     public function sellerListings(SellerListingsInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): SellerListingsResult
     {
         $data = $this->dynamic->execute(
-            ListingOperations::SELLER_LISTINGS,
+            ListingOperations::SELLER_LISTINGS(),
             ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
@@ -70,7 +70,7 @@ final class ListingGraphQLClient
     public function sellerListingSearch(?string $accessToken = null, ?RequestOptions $requestOptions = null): SellerListingSearchResult
     {
         $data = $this->dynamic->execute(
-            ListingOperations::SELLER_LISTING_SEARCH,
+            ListingOperations::SELLER_LISTING_SEARCH(),
             [],
             $accessToken,
             $requestOptions
@@ -86,7 +86,7 @@ final class ListingGraphQLClient
     public function bulkUpdateInventory(BulkUpdateInventoryInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): BulkUpdateInventoryOutput
     {
         $data = $this->dynamic->execute(
-            ListingOperations::BULK_UPDATE_INVENTORY,
+            ListingOperations::BULK_UPDATE_INVENTORY(),
             ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
@@ -100,7 +100,7 @@ final class ListingGraphQLClient
     public function createListing(CreateListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): CreateListingOutput
     {
         $data = $this->dynamic->execute(
-            ListingOperations::CREATE_LISTING,
+            ListingOperations::CREATE_LISTING(),
             ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
@@ -114,7 +114,7 @@ final class ListingGraphQLClient
     public function createSecondChanceListing(CreateSecondChanceListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): CreateSecondChanceListingOutput
     {
         $data = $this->dynamic->execute(
-            ListingOperations::CREATE_SECOND_CHANCE_LISTING,
+            ListingOperations::CREATE_SECOND_CHANCE_LISTING(),
             ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
@@ -128,7 +128,7 @@ final class ListingGraphQLClient
     public function endListing(EndListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): EndListingOutput
     {
         $data = $this->dynamic->execute(
-            ListingOperations::END_LISTING,
+            ListingOperations::END_LISTING(),
             ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
@@ -142,7 +142,7 @@ final class ListingGraphQLClient
     public function relistListing(RelistListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): RelistListingOutput
     {
         $data = $this->dynamic->execute(
-            ListingOperations::RELIST_LISTING,
+            ListingOperations::RELIST_LISTING(),
             ['input' => $input->toArray()],
             $accessToken,
             $requestOptions
@@ -156,7 +156,7 @@ final class ListingGraphQLClient
     public function updateListing(UpdateListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): UpdateListingOutput
     {
         $data = $this->dynamic->execute(
-            ListingOperations::UPDATE_LISTING,
+            ListingOperations::UPDATE_LISTING(),
             ['input' => $input->toArray()],
             $accessToken,
             $requestOptions

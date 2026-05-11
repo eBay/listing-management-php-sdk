@@ -1,0 +1,116 @@
+mutation UpdateListing($input: UpdateListingInput!) {
+    updateListing(input: $input) {
+        __typename
+        ... on UpdateListingSuccess {
+            listing {
+                listingId sku marketplace
+                sellerProduct {
+                    title description
+                    aspects { name values }
+                    images { ebayImageUrl }
+                    categories { primaryCategory { id } }
+                    itemCondition { itemConditionId }
+                }
+                items {
+                    sku
+                    itemTerms {
+                        availability { quantityAvailable }
+                        pricingTerms { fixedPrice { original { value currency } } }
+                    }
+                }
+                listingTerms {
+                    fulfillmentTerms {
+                        ... on FulfillmentTerms {
+                            packageSpecifications {
+                                packageDimensions { length width height }
+                                packageWeight { majorUnit minorUnit }
+                                listingUnitOfMeasure
+                            }
+                            shippingTerms {
+                                handlingTimeDuration
+                                shippingServices { rank }
+                            }
+                        }
+                    }
+                    paymentTerms { ... on PaymentTerms { immediatePay } }
+                    listingFormat
+                    lifecycleTerms { listingDurationInDays startAt }
+                    bestOfferTerms {
+                        acceptBestOffer
+                        autoAcceptThresholdAmount { original { value currency } }
+                        autoDeclineThresholdAmount { original { value currency } }
+                    }
+                    buyerRestrictions {
+                        disableBuyerRestrictions
+                        quantityLimitPerBuyer
+                    }
+                    itemLocation { country postalCode location }
+                }
+            }
+            listingFees {
+                listingFeeType
+                feeAmount { value currency }
+                promotionalDiscount { value currency }
+            }
+            warnings { warningCode warningMessage additionalInformation { name value } }
+        }
+        ... on UpdateListingValidationError {
+            errorCode errorMessage
+            violations { violationCode violationDescription inputPath additionalInformation { name value } }
+            warnings { warningCode warningMessage additionalInformation { name value } }
+        }
+        ... on UpdateListingValidationSuccess {
+            listing {
+                listingId sku marketplace
+                sellerProduct {
+                    title description
+                    aspects { name values }
+                    images { ebayImageUrl }
+                    categories { primaryCategory { id } }
+                    itemCondition { itemConditionId }
+                }
+                items {
+                    sku
+                    itemTerms {
+                        availability { quantityAvailable }
+                        pricingTerms { fixedPrice { original { value currency } } }
+                    }
+                }
+                listingTerms {
+                    fulfillmentTerms {
+                        ... on FulfillmentTerms {
+                            packageSpecifications {
+                                packageDimensions { length width height }
+                                packageWeight { majorUnit minorUnit }
+                                listingUnitOfMeasure
+                            }
+                            shippingTerms {
+                                handlingTimeDuration
+                                shippingServices { rank }
+                            }
+                        }
+                    }
+                    paymentTerms { ... on PaymentTerms { immediatePay } }
+                    listingFormat
+                    lifecycleTerms { listingDurationInDays startAt }
+                    bestOfferTerms {
+                        acceptBestOffer
+                        autoAcceptThresholdAmount { original { value currency } }
+                        autoDeclineThresholdAmount { original { value currency } }
+                    }
+                    buyerRestrictions {
+                        disableBuyerRestrictions
+                        quantityLimitPerBuyer
+                    }
+                    itemLocation { country postalCode location }
+                }
+            }
+            listingFees {
+                listingFeeType
+                feeAmount { value currency }
+                promotionalDiscount { value currency }
+            }
+            warnings { warningCode warningMessage additionalInformation { name value } }
+        }
+    }
+}

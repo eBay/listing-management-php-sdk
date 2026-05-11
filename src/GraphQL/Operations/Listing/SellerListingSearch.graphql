@@ -1,0 +1,31 @@
+query SellerListingSearch {
+    sellerListingSearch {
+        activeListings {
+            __typename
+            ... on SellerListings {
+                listings { listingId }
+            }
+            ... on SellerListingSearchInvalidInput {
+                errorCode errorMessage
+            }
+        }
+        endedListings {
+            __typename
+            ... on SellerListings {
+                listings { listingId }
+            }
+            ... on SellerListingSearchInvalidInput {
+                errorCode errorMessage
+            }
+        }
+        scheduledListings {
+            __typename
+            ... on SellerListings {
+                listings { listingId }
+            }
+            ... on SellerListingSearchInvalidInput {
+                errorCode errorMessage
+            }
+        }
+    }
+}

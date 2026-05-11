@@ -18,4 +18,14 @@ readonly class EndListingInput
             'listingIdentifier' => $this->listingIdentifierInput->toArray(),
         ];
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            endListingReason: $data['endListingReason'],
+            listingIdentifierInput: isset($data['listingIdentifier'])
+                ? ListingIdentifierInput::fromArray($data['listingIdentifier'])
+                : new ListingIdentifierInput(),
+        );
+    }
 }

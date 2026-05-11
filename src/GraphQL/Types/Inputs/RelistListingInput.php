@@ -21,4 +21,9 @@ readonly class RelistListingInput
     {
         return $this->data;
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(data: $data);
+    }
 }

@@ -14,4 +14,11 @@ readonly class SellerListingInput
     {
         return ['listingId' => $this->listingId];
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            listingId: $data['listingId'],
+        );
+    }
 }

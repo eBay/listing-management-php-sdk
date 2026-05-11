@@ -12,10 +12,11 @@ abstract readonly class ActiveListingsOutput
 {
     abstract public function getTypename(): string;
 
-    public static function fromArray(array $data): ActiveListingsSellerListings
+    public static function fromArray(array $data): self
     {
         return match ($data['__typename'] ?? null) {
             'SellerListings' => ActiveListingsSellerListings::fromArray($data),
+            'SellerListingSearchInvalidInput' => SellerListingSearchInvalidInput::fromArray($data),
             default => throw new \UnexpectedValueException(
                 'Unknown __typename for activeListings: ' . ($data['__typename'] ?? 'null')
             ),

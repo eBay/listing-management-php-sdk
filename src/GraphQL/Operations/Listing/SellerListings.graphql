@@ -1,0 +1,86 @@
+query SellerListings($input: SellerListingsInput!) {
+    sellerListings(input: $input) {
+        listings {
+            ... on ListingSuccess {
+                listingId
+                listing {
+                    listingId marketplace
+                    sellerProduct { title }
+                    listingTerms {
+                        listingFormat
+                        lifecycleTerms {
+                            listingDurationInDays
+                            actualEndAt
+                            endListingReason
+                            createdAt
+                            listingStatus
+                            scheduledEndAt
+                            startAt
+                        }
+                        fulfillmentTerms {
+                            ... on FulfillmentTerms {
+                                inStorePickupSupported
+                                globalShippingSupported
+                                freeShippingAvailable
+                                packageSpecifications {
+                                    irregularPackage
+                                    listingPackageType
+                                    listingUnitOfMeasure
+                                    packageDimensions { length width height }
+                                    packageWeight { majorUnit minorUnit }
+                                }
+                                shippingTerms {
+                                    buyerResponsibleForShipping
+                                    handlingTimeDuration
+                                    includedShipToLocations { country }
+                                }
+                            }
+                            ... on BusinessPolicy { businessPolicyId }
+                        }
+                        returnTerms {
+                            ... on ReturnTerms {
+                                domesticReturnTerms {
+                                    returnAccepted
+                                    listingRefundMethod
+                                    returnDuration
+                                    returnShipmentInvoicee
+                                }
+                            }
+                            ... on BusinessPolicy { businessPolicyId }
+                        }
+                        paymentTerms {
+                            ... on PaymentTerms { immediatePay }
+                            ... on BusinessPolicy { businessPolicyId }
+                        }
+                        hideParticipation
+                        visualEnhancements { boldTitle galleryPlus }
+                        bestOfferTerms {
+                            acceptBestOffer
+                            autoAcceptThresholdAmount { original { currency value } }
+                            autoDeclineThresholdAmount { original { currency value } }
+                        }
+                        taxTerms {
+                            salesTaxApplicableToShipping
+                            vatRecognizedBusinessSeller
+                            salesTaxTableUsed
+                        }
+                        itemLocation { location country postalCode }
+                        totalQuantityAvailable
+                    }
+                    ... on VariationListing {
+                        listingVariations {
+                            imagesVaryByTrait {
+                                traitName
+                                traitValueImages {
+                                    traitValue
+                                    traitImages { ebayImageUrl externalImageUrl order }
+                                }
+                            }
+                            variationTraits { name values }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

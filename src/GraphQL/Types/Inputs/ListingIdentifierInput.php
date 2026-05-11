@@ -22,4 +22,12 @@ readonly class ListingIdentifierInput
         }
         return $data;
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            listingId: $data['listingId'] ?? null,
+            sku: $data['sku'] ?? null,
+        );
+    }
 }

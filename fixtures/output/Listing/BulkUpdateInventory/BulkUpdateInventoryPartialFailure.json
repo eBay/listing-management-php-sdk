@@ -1,0 +1,231 @@
+{
+  "bulkUpdateInventory": {
+    "__typename": "BulkUpdateInventoryPartialFailure",
+    "errorCode": "Hello World",
+    "errorMessage": "Hello World",
+    "successes": [
+      {
+        "listingItemIdentifier": {
+          "listingId": "5a732a71-7943-4cf2-8174-504635d49891",
+          "sku": "992d7e27-2f38-4671-92c2-7f08e9a3d1c0"
+        },
+        "warnings": [
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          },
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "listingItemIdentifier": {
+          "listingId": "90f05d62-4eea-4430-945c-55a33aeb05b7",
+          "sku": "cf8a275e-11ed-4916-9416-e68a82205ced"
+        },
+        "warnings": [
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          },
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "failures": [
+      {
+        "listingItemIdentifier": {
+          "listingId": "c786fb80-d1ef-419f-94e2-61e0ddedbab1",
+          "sku": "f86910b2-f42e-4cae-a56f-99f6bc1c7869"
+        },
+        "violations": [
+          {
+            "violationCode": "Hello World",
+            "violationDescription": "Hello World",
+            "inputPath": [
+              "Hello World",
+              "Hello World"
+            ],
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          },
+          {
+            "violationCode": "Hello World",
+            "violationDescription": "Hello World",
+            "inputPath": [
+              "Hello World",
+              "Hello World"
+            ],
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          },
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "listingItemIdentifier": {
+          "listingId": "7046a0e2-4379-451d-9975-b92cf8d8281d",
+          "sku": "f46fb3b5-519d-417e-8590-fe6380aef747"
+        },
+        "violations": [
+          {
+            "violationCode": "Hello World",
+            "violationDescription": "Hello World",
+            "inputPath": [
+              "Hello World",
+              "Hello World"
+            ],
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          },
+          {
+            "violationCode": "Hello World",
+            "violationDescription": "Hello World",
+            "inputPath": [
+              "Hello World",
+              "Hello World"
+            ],
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          },
+          {
+            "warningCode": "Hello World",
+            "warningMessage": "Hello World",
+            "additionalInformation": [
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              },
+              {
+                "name": "Hello World",
+                "value": "Hello World"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

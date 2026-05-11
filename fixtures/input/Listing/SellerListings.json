@@ -1,0 +1,9 @@
+{
+  "input": {
+    "listings": [
+      {
+        "listingId": "mock-id"
+      }
+    ]
+  }
+}

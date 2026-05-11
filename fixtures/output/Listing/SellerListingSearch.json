@@ -1,0 +1,25 @@
+{
+  "sellerListingSearch": {
+    "activeListings": {
+      "__typename": "SellerListingSearchInvalidInput",
+      "errorCode": "Hello World",
+      "errorMessage": "Hello World"
+    },
+    "endedListings": {
+      "__typename": "SellerListingSearchInvalidInput",
+      "errorCode": "Hello World",
+      "errorMessage": "Hello World"
+    },
+    "scheduledListings": {
+      "__typename": "SellerListings",
+      "listings": [
+        {
+          "listingId": "5e3fa763-5bdb-4ce2-909c-30e2710651c9"
+        },
+        {
+          "listingId": "14089ded-42f3-46c3-a470-d690c3e4aadb"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "itemBiddingActivity": {
+    "itemBiddingActivity": {
+      "activeBidHistoryRecords": {
+        "paginationOutput": {
+          "previousCursor": "Hello World",
+          "nextCursor": "Hello World"
+        },
+        "bidHistoryRecords": [
+          {
+            "bidAmount": {
+              "original": {
+                "value": "1.00",
+                "currency": "CVE"
+              }
+            },
+            "bidder": {
+              "username": "Hello World",
+              "userId": "3c57134d-bef9-47cd-ac7e-a8ccad17fdc0"
+            }
+          },
+          {
+            "bidAmount": {
+              "original": {
+                "value": "1.00",
+                "currency": "DOP"
+              }
+            },
+            "bidder": {
+              "username": "Hello World",
+              "userId": "b366b2f6-f07d-4d9d-a3e8-af7e9751047a"
+            }
+          }
+        ]
+      },
+      "cancelledBidHistoryRecords": {
+        "paginationOutput": {
+          "previousCursor": "Hello World",
+          "nextCursor": "Hello World"
+        },
+        "bidHistoryRecords": [
+          {
+            "bidAmount": {
+              "original": {
+                "value": "1.00",
+                "currency": "CRC"
+              }
+            },
+            "bidder": {
+              "username": "Hello World",
+              "userId": "718be796-c279-4f12-a28a-a8cb97917ad6"
+            }
+          },
+          {
+            "bidAmount": {
+              "original": {
+                "value": "1.00",
+                "currency": "RWF"
+              }
+            },
+            "bidder": {
+              "username": "Hello World",
+              "userId": "07aec842-72ae-4c62-9021-45f6f24b7a06"
+            }
+          }
+        ]
+      },
+      "retractedBidHistoryRecords": {
+        "paginationOutput": {
+          "previousCursor": "Hello World",
+          "nextCursor": "Hello World"
+        },
+        "bidHistoryRecords": [
+          {
+            "bidAmount": {
+              "original": {
+                "value": "1.00",
+                "currency": "TMT"
+              }
+            }
+          },
+          {
+            "bidAmount": {
+              "original": {
+                "value": "1.00",
+                "currency": "BMD"
+              }
+            }
+          }
+        ]
+      },
+      "leadingBid": {
+        "buyerBiddingSummary": {
+          "bidsWithSellerPercentage": "10.00",
+          "retractedBidCount": -56,
+          "totalBidCount": 7,
+          "uniqueListingCategoryBidCount": 56,
+          "uniqueSellerBidCount": -24,
+          "itemBids": [
+            {
+              "bidCount": 96,
+              "mostRecentBidAt": "2024-01-01T00:00:00.000Z"
+            },
+            {
+              "bidCount": -67,
+              "mostRecentBidAt": "2024-01-01T00:00:00.000Z"
+            }
+          ]
+        },
+        "bidder": {
+          "username": "Hello World",
+          "userId": "7a11d486-4a24-43e3-9aad-fa57c8d87339"
+        },
+        "bidAmount": {
+          "original": {
+            "value": "1.00",
+            "currency": "BGN"
+          },
+          "converted": {
+            "value": "1.00",
+            "currency": "FKP"
+          }
+        },
+        "bidMetadata": {}
+      }
+    }
+  }
+}

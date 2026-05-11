@@ -1,0 +1,10 @@
+{
+  "input": {
+    "listingIdentifier": {},
+    "listingTerms": {
+      "listingDuration": "DAYS_1"
+    },
+    "marketplace": "EBAY_AT",
+    "recipientUserId": "mock-id"
+  }
+}
