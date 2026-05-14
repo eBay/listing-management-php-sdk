@@ -1,9 +1,9 @@
 {
   "listingPreviewsCreationTaskById": {
     "listingPreviewsCreationTask": {
-      "id": "abb0d2d3-aa79-4482-ae67-c6f34d3ea739",
+      "id": "5d74d194-14d8-4074-b6a7-9eeeedc495f2",
       "result": {
-        "completionStatus": "COMPLETED",
+        "completionStatus": "COMPLETED_WITH_ERROR",
         "invalidProducts": [
           {
             "description": "Hello World",
@@ -11,7 +11,7 @@
               "category": "Hello World",
               "externalProductIdentifier": {
                 "productId": "Hello World",
-                "productType": "UPC"
+                "productType": "ISBN"
               },
               "images": [
                 "https://example.com",
@@ -81,11 +81,11 @@
                 "name": "Hello World",
                 "values": [
                   {
-                    "confidence": "HINT",
+                    "confidence": "PREFILL",
                     "value": "Hello World"
                   },
                   {
-                    "confidence": "PREFILL",
+                    "confidence": "HINT",
                     "value": "Hello World"
                   }
                 ]
@@ -109,114 +109,7 @@
               }
             ],
             "category": {
-              "categoryId": "8341f62f-5390-4612-91ac-8d757bf8df50"
-            },
-            "clientProvidedProductDetails": {
-              "aspects": [
-                {
-                  "name": "Hello World",
-                  "values": [
-                    "Hello World",
-                    "Hello World"
-                  ]
-                },
-                {
-                  "name": "Hello World",
-                  "values": [
-                    "Hello World",
-                    "Hello World"
-                  ]
-                }
-              ],
-              "category": "Hello World",
-              "externalProductIdentifier": {
-                "productId": "Hello World",
-                "productType": "EAN"
-              },
-              "images": [
-                "https://example.com",
-                "https://example.com"
-              ],
-              "sku": "Hello World",
-              "title": "Hello World"
-            },
-            "description": "Hello World",
-            "images": [
-              "https://example.com",
-              "https://example.com"
-            ],
-            "mappingReferenceId": "Hello World",
-            "product": {
-              "id": "49963a22-6b49-4a7b-8107-b82066ac56ef",
-              "imageUrls": [
-                "Hello World",
-                "Hello World"
-              ],
-              "productId": "74a23b60-8944-4ddd-ad40-f500bcf6645b",
-              "title": "Hello World",
-              "category": {
-                "id": "c6950f07-f760-43ff-8079-b0e6b74f02e8"
-              },
-              "aspects": [
-                {
-                  "aspectValues": [
-                    "Hello World",
-                    "Hello World"
-                  ],
-                  "displayName": "Hello World"
-                },
-                {
-                  "aspectValues": [
-                    "Hello World",
-                    "Hello World"
-                  ],
-                  "displayName": "Hello World"
-                }
-              ],
-              "epid": "mock-epid"
-            },
-            "sku": "Hello World",
-            "title": "Hello World"
-          },
-          {
-            "aspects": [
-              {
-                "aspectValues": [
-                  "Hello World",
-                  "Hello World"
-                ],
-                "name": "Hello World",
-                "values": [
-                  {
-                    "confidence": "HINT",
-                    "value": "Hello World"
-                  },
-                  {
-                    "confidence": "PREFILL",
-                    "value": "Hello World"
-                  }
-                ]
-              },
-              {
-                "aspectValues": [
-                  "Hello World",
-                  "Hello World"
-                ],
-                "name": "Hello World",
-                "values": [
-                  {
-                    "confidence": "PREFILL",
-                    "value": "Hello World"
-                  },
-                  {
-                    "confidence": "PREFILL",
-                    "value": "Hello World"
-                  }
-                ]
-              }
-            ],
-            "category": {
-              "categoryId": "c5dccfdc-2dfe-418b-8384-54c275c403a0"
+              "categoryId": "509e009b-2616-449f-8231-29a98cc8ff77"
             },
             "clientProvidedProductDetails": {
               "aspects": [
@@ -254,15 +147,122 @@
             ],
             "mappingReferenceId": "Hello World",
             "product": {
-              "id": "1e0435da-aa6c-4ebc-87c3-9a31c35a9bc0",
+              "id": "f06aa86d-7db2-4443-9ecc-db283d459d6e",
               "imageUrls": [
                 "Hello World",
                 "Hello World"
               ],
-              "productId": "a157f04b-1650-49ff-8bcd-ad3a7be92767",
+              "productId": "15604e63-43d1-4cb5-9c41-4076268d0ed2",
               "title": "Hello World",
               "category": {
-                "id": "e541a980-1c2f-4b5b-9f6d-811e15940d44"
+                "id": "13516448-577f-427a-897d-ccc512e367b0"
+              },
+              "aspects": [
+                {
+                  "aspectValues": [
+                    "Hello World",
+                    "Hello World"
+                  ],
+                  "displayName": "Hello World"
+                },
+                {
+                  "aspectValues": [
+                    "Hello World",
+                    "Hello World"
+                  ],
+                  "displayName": "Hello World"
+                }
+              ],
+              "epid": "mock-epid"
+            },
+            "sku": "Hello World",
+            "title": "Hello World"
+          },
+          {
+            "aspects": [
+              {
+                "aspectValues": [
+                  "Hello World",
+                  "Hello World"
+                ],
+                "name": "Hello World",
+                "values": [
+                  {
+                    "confidence": "HINT",
+                    "value": "Hello World"
+                  },
+                  {
+                    "confidence": "HINT",
+                    "value": "Hello World"
+                  }
+                ]
+              },
+              {
+                "aspectValues": [
+                  "Hello World",
+                  "Hello World"
+                ],
+                "name": "Hello World",
+                "values": [
+                  {
+                    "confidence": "HINT",
+                    "value": "Hello World"
+                  },
+                  {
+                    "confidence": "HINT",
+                    "value": "Hello World"
+                  }
+                ]
+              }
+            ],
+            "category": {
+              "categoryId": "56055847-5524-47bc-8263-7aa9749ec0e8"
+            },
+            "clientProvidedProductDetails": {
+              "aspects": [
+                {
+                  "name": "Hello World",
+                  "values": [
+                    "Hello World",
+                    "Hello World"
+                  ]
+                },
+                {
+                  "name": "Hello World",
+                  "values": [
+                    "Hello World",
+                    "Hello World"
+                  ]
+                }
+              ],
+              "category": "Hello World",
+              "externalProductIdentifier": {
+                "productId": "Hello World",
+                "productType": "EAN"
+              },
+              "images": [
+                "https://example.com",
+                "https://example.com"
+              ],
+              "sku": "Hello World",
+              "title": "Hello World"
+            },
+            "description": "Hello World",
+            "images": [
+              "https://example.com",
+              "https://example.com"
+            ],
+            "mappingReferenceId": "Hello World",
+            "product": {
+              "id": "92772b31-7136-45ff-98b2-f468fe41099f",
+              "imageUrls": [
+                "Hello World",
+                "Hello World"
+              ],
+              "productId": "44f20a91-6f82-4a35-b0c5-e0a57d5f129f",
+              "title": "Hello World",
+              "category": {
+                "id": "cb3a0e59-cc05-4528-9d72-c3b3e3fb278b"
               },
               "aspects": [
                 {
@@ -307,7 +307,7 @@
             ],
             "externalProductIdentifier": {
               "productId": "Hello World",
-              "productType": "EAN"
+              "productType": "MPN"
             },
             "images": [
               "https://example.com",
@@ -336,7 +336,7 @@
             ],
             "externalProductIdentifier": {
               "productId": "Hello World",
-              "productType": "ISBN"
+              "productType": "UPC"
             },
             "images": [
               "https://example.com",
@@ -367,7 +367,7 @@
             ],
             "externalProductIdentifier": {
               "productId": "Hello World",
-              "productType": "UPC"
+              "productType": "MPN"
             },
             "images": [
               "https://example.com",
@@ -408,6 +408,6 @@
         ]
       }
     },
-    "requestedId": "ac4a7051-78a2-4d2c-bbf3-e293238f9366"
+    "requestedId": "384f723f-26e9-483b-97b4-246162b39d1d"
   }
 }

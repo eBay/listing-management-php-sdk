@@ -2,9 +2,9 @@
   "createListing": {
     "__typename": "CreateListingValidationSuccess",
     "listing": {
-      "listingId": "0b4b24b3-c6aa-49f3-8ebb-fee2d0e12521",
+      "listingId": "79f7cd93-a32f-44ed-8c9c-73f9e715081e",
       "sku": "Hello World",
-      "marketplace": "EBAY_CH",
+      "marketplace": "EBAY_AU",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "5ff114fd-0b4d-41db-88d1-8436b7ce49bb"
+            "id": "8a34d8e8-7470-49de-b89a-80e9e7f05ff3"
           }
         },
         "itemCondition": {
-          "itemConditionId": "3c3de77a-f0da-4145-b129-bb5631310a02"
+          "itemConditionId": "3d4c3cfb-5eb0-462b-872b-a48c1bd628ea"
         }
       },
       "items": [
@@ -46,13 +46,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -26
+              "quantityAvailable": -7
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "TTD"
+                  "currency": "XPF"
                 }
               }
             }
@@ -62,13 +62,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 4
+              "quantityAvailable": -23
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "ILS"
+                  "currency": "NAD"
                 }
               }
             }
@@ -77,56 +77,33 @@
       ],
       "listingTerms": {
         "fulfillmentTerms": {
-          "__typename": "FulfillmentTerms",
-          "packageSpecifications": {
-            "packageDimensions": {
-              "length": 64.22073955484788,
-              "width": -5.03115319825946,
-              "height": 38.941069938637185
-            },
-            "packageWeight": {
-              "majorUnit": 38,
-              "minorUnit": 15
-            },
-            "listingUnitOfMeasure": "METRIC"
-          },
-          "shippingTerms": {
-            "handlingTimeDuration": "NOT_SPECIFIED",
-            "shippingServices": [
-              {
-                "rank": 97
-              },
-              {
-                "rank": -82
-              }
-            ]
-          }
+          "__typename": "BusinessPolicy"
         },
         "paymentTerms": {
           "__typename": "BusinessPolicy"
         },
-        "listingFormat": "FIXED_PRICE",
+        "listingFormat": "CLASSIFIED_AD",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_30",
+          "listingDurationInDays": "DAYS_7",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "bestOfferTerms": {
-          "acceptBestOffer": true,
+          "acceptBestOffer": false,
           "autoAcceptThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "ILS"
+              "currency": "KES"
             }
           },
           "autoDeclineThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "NAD"
+              "currency": "MWK"
             }
           }
         },
         "itemLocation": {
-          "country": "VG",
+          "country": "DE",
           "postalCode": "Hello World",
           "location": "Hello World"
         }
@@ -137,22 +114,22 @@
         "listingFeeType": "BUYITNOW",
         "feeAmount": {
           "value": "1.00",
-          "currency": "SOS"
+          "currency": "TOP"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "BBD"
+          "currency": "MAD"
         }
       },
       {
-        "listingFeeType": "BOLD",
+        "listingFeeType": "DESIGNER",
         "feeAmount": {
           "value": "1.00",
-          "currency": "MZN"
+          "currency": "NOK"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "NOK"
+          "currency": "THB"
         }
       }
     ],

@@ -1,15 +1,6 @@
 {
-  "cases": [
-    {
-      "label": "end by listing ID",
-      "input": {
-        "endListingReason": "END_AUCTION_AND_SELL",
-        "listingIdentifier": {"listingId": "listing-123"}
-      },
-      "expected": {
-        "endListingReason": "END_AUCTION_AND_SELL",
-        "listingIdentifier": {"listingId": "listing-123"}
-      }
-    }
-  ]
+  "input": {
+    "endListingReason": "END_AUCTION_AND_SELL",
+    "listingIdentifier": {}
+  }
 }

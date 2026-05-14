@@ -8,23 +8,23 @@
     "listingFees": [
       {
         "feeAmount": {
-          "currency": "BND",
+          "currency": "PEN",
           "value": "1.00"
         },
-        "listingFeeType": "PHOTO_COUNT",
+        "listingFeeType": "GALLERY_PLUS",
         "promotionalDiscount": {
-          "currency": "GHS",
+          "currency": "NIO",
           "value": "1.00"
         }
       },
       {
         "feeAmount": {
-          "currency": "GMD",
+          "currency": "PGK",
           "value": "1.00"
         },
-        "listingFeeType": "RESERVE",
+        "listingFeeType": "BOLD",
         "promotionalDiscount": {
-          "currency": "DOP",
+          "currency": "GIP",
           "value": "1.00"
         }
       }
@@ -60,9 +60,9 @@
       }
     ],
     "listing": {
-      "listingId": "565681c6-89a6-46c4-9cfe-750fa14e9d01",
+      "listingId": "b4d97a10-edc6-4491-92c3-c817b889f295",
       "sku": "Hello World",
-      "marketplace": "EBAY_AU",
+      "marketplace": "EBAY_MY",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -86,39 +86,39 @@
           {
             "ebayImageUrl": "https://example.com",
             "externalImageUrl": "https://example.com",
-            "order": -63
+            "order": -13
           },
           {
             "ebayImageUrl": "https://example.com",
             "externalImageUrl": "https://example.com",
-            "order": -45
+            "order": -36
           }
         ],
         "categories": {
           "primaryCategory": {
-            "id": "d676d47a-e83a-4fdd-9986-99362f81a833"
+            "id": "967e7fee-c51d-43a7-877a-e99c397aa9bd"
           },
           "secondaryCategory": {
-            "id": "2f660534-75b5-4e50-8fe9-42ef987c9793"
+            "id": "849a4504-8e42-4fb5-acae-4710670bbbc8"
           }
         },
         "itemCondition": {
-          "itemConditionId": "310400c4-fd44-4e62-8590-ed5bf41d4cdb"
+          "itemConditionId": "2a67eff8-a8e8-4967-b2b5-90e2bf2d4b48"
         }
       },
       "items": [
         {
           "sku": "Hello World",
-          "itemId": "04fefa76-9ef7-4f78-afa0-91ffe0287c6c",
+          "itemId": "731abd3d-f207-4342-8d5d-a4bb09f05798",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 49
+              "quantityAvailable": -71
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "RON"
+                  "currency": "SCR"
                 }
               }
             }
@@ -126,16 +126,16 @@
         },
         {
           "sku": "Hello World",
-          "itemId": "1f9d8e48-bdfd-441d-8ef9-84ede87464ff",
+          "itemId": "b42658bc-941f-4f5e-9faf-50c6752fafec",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -95
+              "quantityAvailable": 16
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "TTD"
+                  "currency": "GMD"
                 }
               }
             }
@@ -144,48 +144,24 @@
       ],
       "listingTerms": {
         "fulfillmentTerms": {
-          "__typename": "FulfillmentTerms",
-          "digitalDeliverySupported": false,
-          "freeShippingAvailable": true,
-          "globalShippingSupported": true,
-          "inStorePickupSupported": false,
-          "packageSpecifications": {
-            "irregularPackage": true,
-            "listingPackageType": "FURNITURE",
-            "listingUnitOfMeasure": "METRIC",
-            "packageWeight": {
-              "minorUnit": -76,
-              "majorUnit": -52
-            },
-            "packageDimensions": {
-              "height": 93.0609401983724,
-              "length": -29.663156426865783,
-              "width": 63.42817509202666
-            }
-          },
-          "shippingTerms": {
-            "handlingTimeDuration": "DAYS_7",
-            "shippingServices": [
-              {
-                "rank": 12,
-                "shippingService": {
-                  "shippingServiceCode": "Hello World",
-                  "displayName": "Hello World"
-                }
-              },
-              {
-                "rank": 17,
-                "shippingService": {
-                  "shippingServiceCode": "Hello World",
-                  "displayName": "Hello World"
-                }
-              }
-            ]
-          }
+          "__typename": "BusinessPolicy",
+          "businessPolicyId": "040b4fb5-e4c9-48b6-82da-8ee952e88a3a"
         },
         "paymentTerms": {
-          "__typename": "BusinessPolicy",
-          "businessPolicyId": "0b60e0ba-8e8e-4f18-93ee-e62d31ff6739"
+          "__typename": "PaymentTerms",
+          "businessPolicy": {
+            "businessPolicyId": "7996c656-57d5-46ee-bb39-282fc7e8aa94"
+          },
+          "immediatePay": false,
+          "listingPaymentMethods": [
+            "CASH_ON_PICKUP",
+            "CASH_ON_PICKUP"
+          ],
+          "motorVehicleDeposit": {
+            "daysToMakeFullPayment": "DAYS_2",
+            "depositRequired": false
+          },
+          "paymentInstructions": "Hello World"
         }
       }
     }

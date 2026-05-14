@@ -2,9 +2,9 @@
   "createListing": {
     "__typename": "CreateListingSuccess",
     "listing": {
-      "listingId": "4aa15d92-d5e0-4719-9ac8-34b556fa1844",
+      "listingId": "8717b915-5551-419c-a5e9-b5758c5a4015",
       "sku": "Hello World",
-      "marketplace": "EBAY_ES",
+      "marketplace": "EBAY_IE",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "787571e7-b943-4644-bf93-d0e81d657680"
+            "id": "c60fbd50-868c-4b83-a088-17c8b5e1773b"
           }
         },
         "itemCondition": {
-          "itemConditionId": "ba6733d4-2d4d-4615-86f9-8df0d66ddc1a"
+          "itemConditionId": "9dba5a6f-aa50-4634-8a7c-99d61c845eaa"
         }
       },
       "items": [
@@ -46,13 +46,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 91
+              "quantityAvailable": 4
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "COP"
+                  "currency": "CZK"
                 }
               }
             }
@@ -62,13 +62,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 61
+              "quantityAvailable": 33
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "ETB"
+                  "currency": "PYG"
                 }
               }
             }
@@ -78,18 +78,18 @@
       "listingTerms": {
         "fulfillmentTerms": {
           "__typename": "BusinessPolicy",
-          "businessPolicyId": "24ef50f8-f0b3-4f64-bd1d-18b3249d3a9f",
+          "businessPolicyId": "b51c9e1e-5ea1-49df-baca-7e79a677cf7b",
           "description": "Hello World",
-          "marketplace": "EBAY_ES",
+          "marketplace": "EBAY_IT",
           "name": "Hello World"
         },
         "paymentTerms": {
-          "__typename": "PaymentTerms",
-          "immediatePay": true
+          "__typename": "BusinessPolicy",
+          "businessPolicyId": "bb501e35-00e4-4d2d-942d-83a4f232f47d"
         },
-        "listingFormat": "FIXED_PRICE",
+        "listingFormat": "CLASSIFIED_AD",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_10",
+          "listingDurationInDays": "DAYS_14",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "bestOfferTerms": {
@@ -97,18 +97,18 @@
           "autoAcceptThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "XCD"
+              "currency": "HKD"
             }
           },
           "autoDeclineThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "CZK"
+              "currency": "ERN"
             }
           }
         },
         "itemLocation": {
-          "country": "SM",
+          "country": "JO",
           "postalCode": "Hello World",
           "location": "Hello World"
         }
@@ -116,25 +116,25 @@
     },
     "listingFees": [
       {
-        "listingFeeType": "INSERTION",
+        "listingFeeType": "BOLD",
         "feeAmount": {
           "value": "1.00",
-          "currency": "CLP"
+          "currency": "DKK"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "SLE"
+          "currency": "UAH"
         }
       },
       {
-        "listingFeeType": "INTERNATIONAL_LISTING",
+        "listingFeeType": "PRIVATE_LISTING",
         "feeAmount": {
           "value": "1.00",
-          "currency": "CNY"
+          "currency": "BDT"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "JPY"
+          "currency": "TND"
         }
       }
     ],

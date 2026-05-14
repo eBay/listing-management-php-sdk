@@ -2,9 +2,9 @@
   "relistListing": {
     "__typename": "RelistListingValidationSuccess",
     "listing": {
-      "listingId": "56072ddd-de5c-489f-ab00-56b0f128df00",
+      "listingId": "a2083be5-11cf-4a5f-a148-7bba99b3167b",
       "sku": "Hello World",
-      "marketplace": "EBAY_IE",
+      "marketplace": "EBAY_BE",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "f6a66363-2ca1-4516-be50-543c4069d6eb"
+            "id": "bb7553d7-dc2c-4fa1-8775-069dcf7d73a8"
           }
         },
         "itemCondition": {
-          "itemConditionId": "22aa98a3-79fa-4ca3-ae2d-d45372d39e37"
+          "itemConditionId": "a6dd85df-22ae-4768-bf21-46b4906ce799"
         }
       },
       "items": [
@@ -46,13 +46,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -6
+              "quantityAvailable": 75
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "AOA"
+                  "currency": "KES"
                 }
               }
             }
@@ -62,13 +62,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 36
+              "quantityAvailable": 2
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "PAB"
+                  "currency": "TZS"
                 }
               }
             }
@@ -78,34 +78,34 @@
       "listingTerms": {
         "fulfillmentTerms": {
           "__typename": "BusinessPolicy",
-          "businessPolicyId": "97fe13ab-21d6-4d6a-a3f2-4a7dea38d380"
+          "businessPolicyId": "9a9dc928-e03c-4090-8b41-46b091e15eac"
         },
         "paymentTerms": {
-          "__typename": "PaymentTerms",
-          "immediatePay": true
+          "__typename": "BusinessPolicy",
+          "businessPolicyId": "7f9f2324-eef3-435d-99bb-90837d872105"
         },
         "listingFormat": "AUCTION",
         "lifecycleTerms": {
-          "listingDurationInDays": "GTC",
+          "listingDurationInDays": "DAYS_90",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "bestOfferTerms": {
-          "acceptBestOffer": false,
+          "acceptBestOffer": true,
           "autoAcceptThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "KWD"
+              "currency": "TOP"
             }
           },
           "autoDeclineThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "BMD"
+              "currency": "MMK"
             }
           }
         },
         "itemLocation": {
-          "country": "CC",
+          "country": "NE",
           "postalCode": "Hello World",
           "location": "Hello World"
         }
@@ -116,22 +116,22 @@
         "listingFeeType": "RESERVE",
         "feeAmount": {
           "value": "1.00",
-          "currency": "MGA"
+          "currency": "DJF"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "BGN"
+          "currency": "MKD"
         }
       },
       {
         "listingFeeType": "EXTENDED_DURATION_LISTING",
         "feeAmount": {
           "value": "1.00",
-          "currency": "LSL"
+          "currency": "HTG"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "USD"
+          "currency": "LKR"
         }
       }
     ],

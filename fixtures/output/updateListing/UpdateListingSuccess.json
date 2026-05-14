@@ -8,23 +8,23 @@
     "listingFees": [
       {
         "feeAmount": {
-          "currency": "GEL",
+          "currency": "CNY",
           "value": "1.00"
         },
-        "listingFeeType": "INTERNATIONAL_LISTING",
+        "listingFeeType": "EXTENDED_DURATION_LISTING",
         "promotionalDiscount": {
-          "currency": "SAR",
+          "currency": "BGN",
           "value": "1.00"
         }
       },
       {
         "feeAmount": {
-          "currency": "GNF",
+          "currency": "ALL",
           "value": "1.00"
         },
-        "listingFeeType": "BUYITNOW",
+        "listingFeeType": "PHOTO_COUNT",
         "promotionalDiscount": {
-          "currency": "BND",
+          "currency": "AOA",
           "value": "1.00"
         }
       }
@@ -60,9 +60,9 @@
       }
     ],
     "listing": {
-      "listingId": "9a68005b-3c85-4daa-9ceb-a7f20d376ff6",
+      "listingId": "f0c81146-df7a-41f0-a342-a7c375198846",
       "sku": "Hello World",
-      "marketplace": "EBAY_CA",
+      "marketplace": "EBAY_SG",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -86,39 +86,39 @@
           {
             "ebayImageUrl": "https://example.com",
             "externalImageUrl": "https://example.com",
-            "order": 82
+            "order": 36
           },
           {
             "ebayImageUrl": "https://example.com",
             "externalImageUrl": "https://example.com",
-            "order": -61
+            "order": -51
           }
         ],
         "categories": {
           "primaryCategory": {
-            "id": "001ea794-66cc-47fb-b89a-3760a6d11486"
+            "id": "37932d9c-d251-417e-ba11-84204c856858"
           },
           "secondaryCategory": {
-            "id": "149b9d99-0abf-4d95-985f-1f182b9c17c8"
+            "id": "990d9054-62b3-4149-ad6f-d37ff4a08acc"
           }
         },
         "itemCondition": {
-          "itemConditionId": "af91dfeb-0b85-473b-95dd-fc45248e8fef"
+          "itemConditionId": "9b29a53d-fc84-4ad7-9890-c82550a556f9"
         }
       },
       "items": [
         {
           "sku": "Hello World",
-          "itemId": "f79282c9-1a7f-4e2c-91c1-105be60b6840",
+          "itemId": "82d2d174-9361-4644-aba4-7d42b97d9a28",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -24
+              "quantityAvailable": -17
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "CNY"
+                  "currency": "MKD"
                 }
               }
             }
@@ -126,16 +126,16 @@
         },
         {
           "sku": "Hello World",
-          "itemId": "5fc36b34-3824-48c9-b6a9-ec1f3ce0ef94",
+          "itemId": "e84f338f-43f7-41c0-9e14-d1b16211e707",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -36
+              "quantityAvailable": 43
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "CNY"
+                  "currency": "BAM"
                 }
               }
             }
@@ -145,21 +145,21 @@
       "listingTerms": {
         "fulfillmentTerms": {
           "__typename": "BusinessPolicy",
-          "businessPolicyId": "09c8b12e-6aba-4cf3-928a-9f0e963ba8f4"
+          "businessPolicyId": "0668f333-1d7f-49df-811c-12a3a12b33bf"
         },
         "paymentTerms": {
           "__typename": "PaymentTerms",
           "businessPolicy": {
-            "businessPolicyId": "e05f8022-ac9c-417e-a635-ff7868ba68f9"
+            "businessPolicyId": "337156d0-94e0-4635-875c-a85af30aab43"
           },
-          "immediatePay": false,
+          "immediatePay": true,
           "listingPaymentMethods": [
-            "PAYMENT_SEE_DESCRIPTION",
-            "CASH_ON_PICKUP"
+            "CASH_ON_DELIVERY",
+            "MONEY_ORDER_CASHIERS_CHECK"
           ],
           "motorVehicleDeposit": {
-            "daysToMakeFullPayment": "NOT_SPECIFIED",
-            "depositRequired": false
+            "daysToMakeFullPayment": "MONTHS_1",
+            "depositRequired": true
           },
           "paymentInstructions": "Hello World"
         }

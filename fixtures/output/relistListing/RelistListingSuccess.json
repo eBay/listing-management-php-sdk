@@ -2,9 +2,9 @@
   "relistListing": {
     "__typename": "RelistListingSuccess",
     "listing": {
-      "listingId": "5864395b-e783-4190-b6d9-69c79b838df7",
+      "listingId": "73c03725-9508-44b9-8e1c-1384ac50c681",
       "sku": "Hello World",
-      "marketplace": "EBAY_IE",
+      "marketplace": "EBAY_GB",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "8ac53beb-ca81-4f93-b512-6e6092b3191c"
+            "id": "1e1a02af-8f67-42af-b822-dde0f77ac7cc"
           }
         },
         "itemCondition": {
-          "itemConditionId": "8c5de73c-8172-48bc-a4d4-236e828d42ac"
+          "itemConditionId": "a72311d4-ce15-4658-bb3a-3dd301c7b942"
         }
       },
       "items": [
@@ -46,13 +46,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -73
+              "quantityAvailable": -31
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "NOK"
+                  "currency": "AMD"
                 }
               }
             }
@@ -62,13 +62,13 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -84
+              "quantityAvailable": 91
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "MVR"
+                  "currency": "ARS"
                 }
               }
             }
@@ -77,40 +77,129 @@
       ],
       "listingTerms": {
         "fulfillmentTerms": {
-          "__typename": "BusinessPolicy",
-          "businessPolicyId": "549b48eb-4d28-4f90-9188-88b8549e22b9"
+          "__typename": "FulfillmentTerms",
+          "packageSpecifications": {
+            "packageDimensions": {
+              "length": 31.212037672175853,
+              "width": -56.01883150007409,
+              "height": 68.51981357210366
+            },
+            "packageWeight": {
+              "majorUnit": 40,
+              "minorUnit": -24
+            },
+            "listingUnitOfMeasure": "METRIC"
+          },
+          "shippingTerms": {
+            "handlingTimeDuration": "DAYS_40",
+            "shippingServices": [
+              {
+                "rank": 31,
+                "additionalUnitShippingCostAmount": {
+                  "original": {
+                    "currency": "FKP",
+                    "value": "1.00"
+                  }
+                },
+                "includedShipToLocations": [
+                  {
+                    "continent": "NORTH_AMERICA",
+                    "country": "CG",
+                    "sellerShippingRegion": "QLD_FAR_NORTH"
+                  },
+                  {
+                    "continent": "SOUTH_AMERICA",
+                    "country": "CD",
+                    "sellerShippingRegion": "SYDNEY_METRO"
+                  }
+                ],
+                "shippingCostAmount": {
+                  "original": {
+                    "currency": "LAK",
+                    "value": "1.00"
+                  }
+                },
+                "shippingService": {
+                  "shippingServiceCode": "Hello World",
+                  "displayName": "Hello World",
+                  "expeditedService": false,
+                  "maxEstimatedDeliveryTimeHours": -60,
+                  "minEstimatedDeliveryTimeHours": 81
+                }
+              },
+              {
+                "rank": -47,
+                "additionalUnitShippingCostAmount": {
+                  "original": {
+                    "currency": "WST",
+                    "value": "1.00"
+                  }
+                },
+                "includedShipToLocations": [
+                  {
+                    "continent": "NORTH_AMERICA",
+                    "country": "JE",
+                    "sellerShippingRegion": "BRISBANE_METRO"
+                  },
+                  {
+                    "continent": "SOUTH_AMERICA",
+                    "country": "MP",
+                    "sellerShippingRegion": "SCOTTISH_HIGHLANDS"
+                  }
+                ],
+                "shippingCostAmount": {
+                  "original": {
+                    "currency": "RWF",
+                    "value": "1.00"
+                  }
+                },
+                "shippingService": {
+                  "shippingServiceCode": "Hello World",
+                  "displayName": "Hello World",
+                  "expeditedService": true,
+                  "maxEstimatedDeliveryTimeHours": 39,
+                  "minEstimatedDeliveryTimeHours": -59
+                }
+              }
+            ],
+            "buyerResponsibleForShipping": false
+          },
+          "digitalDeliverySupported": true,
+          "freeShippingAvailable": true,
+          "globalShippingSupported": false,
+          "inStorePickupSupported": true
         },
         "paymentTerms": {
-          "__typename": "BusinessPolicy",
-          "businessPolicyId": "b1775684-d340-43d0-941f-1d8a325e8605"
+          "__typename": "PaymentTerms",
+          "immediatePay": true
         },
-        "listingFormat": "FIXED_PRICE",
+        "listingFormat": "CLASSIFIED_AD",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_7",
+          "listingDurationInDays": "GTC",
           "startAt": "2024-01-01T00:00:00.000Z",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "actualEndAt": "2024-01-01T00:00:00.000Z",
-          "endListingReason": "ERROR_IN_LISTING",
+          "endListingReason": "END_ITEM_ON_ZERO_QUANTITY",
           "scheduledEndAt": "2024-01-01T00:00:00.000Z",
-          "listingStatus": "SCHEDULED"
+          "listingStatus": "ACTIVE"
         },
         "bestOfferTerms": {
-          "acceptBestOffer": false,
+          "acceptBestOffer": true,
           "autoAcceptThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "LSL"
+              "currency": "LKR"
             }
           },
           "autoDeclineThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "PYG"
+              "currency": "SGD"
             }
           }
         },
         "itemLocation": {
-          "country": "CA",
+          "country": "CI",
           "postalCode": "Hello World",
           "location": "Hello World"
         }
@@ -118,25 +207,25 @@
     },
     "listingFees": [
       {
-        "listingFeeType": "SUBTITLE",
+        "listingFeeType": "SCHEDULED",
         "feeAmount": {
           "value": "1.00",
-          "currency": "BTN"
+          "currency": "CDF"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "BRL"
+          "currency": "GYD"
         }
       },
       {
-        "listingFeeType": "INSERTION",
+        "listingFeeType": "BOLD",
         "feeAmount": {
           "value": "1.00",
-          "currency": "ETB"
+          "currency": "LAK"
         },
         "promotionalDiscount": {
           "value": "1.00",
-          "currency": "KWD"
+          "currency": "UZS"
         }
       }
     ],

@@ -2,9 +2,9 @@
   "endListing": {
     "__typename": "EndListingSuccess",
     "listing": {
-      "listingId": "25bfd7ac-3ad9-4de2-b04b-ee765b5984c2",
+      "listingId": "1cb68229-6d66-4182-b4e3-473c56749ecb",
       "sku": "Hello World",
-      "marketplace": "EBAY_PH",
+      "marketplace": "EBAY_DE",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "53c113bc-6809-436f-859b-8475984e2e68"
+            "id": "63be2131-1cdc-4352-891f-1066c1d5eb7c"
           }
         },
         "itemCondition": {
-          "itemConditionId": "a24044cb-e112-4119-aaf0-5d0b0b75acdf"
+          "itemConditionId": "bc7c1323-41d0-41da-a986-77c8532ae83b"
         }
       },
       "items": [
@@ -46,94 +46,68 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -42
+              "quantityAvailable": 2
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "QAR"
+                  "currency": "BAM"
                 }
               }
             }
           },
-          "itemId": "af80339b-1f8d-4a41-acb6-07be7959bcb4"
+          "itemId": "c0e06c8f-904f-42be-9707-2b80e96b923c"
         },
         {
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": -46
+              "quantityAvailable": 87
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "SYP"
+                  "currency": "PLN"
                 }
               }
             }
           },
-          "itemId": "49754641-6c08-4205-9f21-a4b0ddc97cf7"
+          "itemId": "96d7ddf3-44ef-4a1a-97b9-07f0a8129e4c"
         }
       ],
       "listingTerms": {
         "fulfillmentTerms": {
-          "__typename": "FulfillmentTerms",
-          "packageSpecifications": {
-            "packageDimensions": {
-              "length": -73.05480006410966,
-              "width": -54.16085150520116,
-              "height": -28.275459714024493
-            },
-            "packageWeight": {
-              "majorUnit": -83,
-              "minorUnit": -82
-            },
-            "listingUnitOfMeasure": "ENGLISH"
-          },
-          "shippingTerms": {
-            "handlingTimeDuration": "DAYS_6",
-            "shippingServices": [
-              {
-                "rank": -41
-              },
-              {
-                "rank": -8
-              }
-            ]
-          },
-          "digitalDeliverySupported": true,
-          "freeShippingAvailable": true,
-          "globalShippingSupported": true,
-          "inStorePickupSupported": true
+          "__typename": "BusinessPolicy",
+          "businessPolicyId": "b121208f-ca29-4076-b60c-d79aa12d80ee"
         },
         "paymentTerms": {
           "__typename": "PaymentTerms",
-          "immediatePay": true
+          "immediatePay": false
         },
         "listingFormat": "CLASSIFIED_AD",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_120",
+          "listingDurationInDays": "DAYS_5",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "bestOfferTerms": {
-          "acceptBestOffer": false,
+          "acceptBestOffer": true,
           "autoAcceptThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "JPY"
+              "currency": "SSP"
             }
           },
           "autoDeclineThresholdAmount": {
             "original": {
               "value": "1.00",
-              "currency": "BMD"
+              "currency": "SAR"
             }
           }
         },
         "itemLocation": {
-          "country": "MC",
+          "country": "AT",
           "postalCode": "Hello World",
           "location": "Hello World"
         }

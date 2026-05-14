@@ -1,13 +1,9 @@
 {
-  "cases": [
-    {
-      "label": "single listing",
-      "input": {
-        "listings": [{"listingId": "listing-123"}]
-      },
-      "expected": {
-        "listings": [{"listingId": "listing-123"}]
+  "input": {
+    "listings": [
+      {
+        "listingId": "mock-id"
       }
-    }
-  ]
+    ]
+  }
 }

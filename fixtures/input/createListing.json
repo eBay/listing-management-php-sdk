@@ -1,47 +1,28 @@
 {
-  "cases": [
-    {
-      "label": "basic fixed-price listing",
-      "input": {
-        "idempotencyKey": "mock-idempotency-key",
-        "listingItems": {
-          "items": [
-            {
-              "itemTerms": {
-                "availability": {"quantityAvailable": 1},
-                "pricingTerms": {"fixedPrice": {"value": "9.99", "currency": "USD"}}
-              }
-            }
-          ]
-        },
-        "listingTerms": {
-          "itemLocation": {"country": "US"},
-          "lifecycleTerms": {"listingDurationInDays": "DAYS_7"},
-          "listingFormat": "FIXED_PRICE"
-        },
-        "marketplace": "EBAY_US",
-        "product": {"title": "Test Product"}
+  "input": {
+    "idempotencyKey": "mock-idempotency-key",
+    "listingItems": {
+      "items": [
+        {
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": 0
+            },
+            "pricingTerms": {}
+          }
+        }
+      ]
+    },
+    "listingTerms": {
+      "itemLocation": {
+        "country": "AD"
       },
-      "expected": {
-        "idempotencyKey": "mock-idempotency-key",
-        "listingItems": {
-          "items": [
-            {
-              "itemTerms": {
-                "availability": {"quantityAvailable": 1},
-                "pricingTerms": {"fixedPrice": {"value": "9.99", "currency": "USD"}}
-              }
-            }
-          ]
-        },
-        "listingTerms": {
-          "itemLocation": {"country": "US"},
-          "lifecycleTerms": {"listingDurationInDays": "DAYS_7"},
-          "listingFormat": "FIXED_PRICE"
-        },
-        "marketplace": "EBAY_US",
-        "product": {"title": "Test Product"}
-      }
-    }
-  ]
+      "lifecycleTerms": {
+        "listingDurationInDays": "DAYS_1"
+      },
+      "listingFormat": "AUCTION"
+    },
+    "marketplace": "EBAY_AT",
+    "product": {}
+  }
 }

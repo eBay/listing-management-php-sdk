@@ -2,9 +2,9 @@
   "createSecondChanceListing": {
     "__typename": "CreateSecondChanceListingValidationSuccess",
     "listing": {
-      "listingId": "b2756cde-da05-49d5-af0c-8418a63aa45f",
+      "listingId": "03a7aadd-7386-4a3b-91df-2c7343e91c43",
       "sku": "Hello World",
-      "marketplace": "EBAY_ES",
+      "marketplace": "EBAY_SG",
       "sellerProduct": {
         "title": "Hello World",
         "description": "Hello World",
@@ -34,11 +34,11 @@
         ],
         "categories": {
           "primaryCategory": {
-            "id": "84deef14-1e55-462f-8dc0-ed50cb47326a"
+            "id": "69e7adb4-e30d-4f52-b716-025b02a029bc"
           }
         },
         "itemCondition": {
-          "itemConditionId": "f4abd0fc-5f01-404b-9f17-cb099913a94a"
+          "itemConditionId": "8ccd64cd-2aac-4eba-bffd-134df7998cc6"
         }
       },
       "items": [
@@ -46,26 +46,26 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 83
+              "quantityAvailable": 59
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "CNY"
+                  "currency": "TZS"
                 }
               },
               "auctionPrice": {
                 "startingBidPrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "SAR"
+                    "currency": "ZMW"
                   }
                 },
                 "reservePrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "NZD"
+                    "currency": "MDL"
                   }
                 }
               }
@@ -76,26 +76,26 @@
           "sku": "Hello World",
           "itemTerms": {
             "availability": {
-              "quantityAvailable": 70
+              "quantityAvailable": 51
             },
             "pricingTerms": {
               "fixedPrice": {
                 "original": {
                   "value": "1.00",
-                  "currency": "XAF"
+                  "currency": "PLN"
                 }
               },
               "auctionPrice": {
                 "startingBidPrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "HNL"
+                    "currency": "XCD"
                   }
                 },
                 "reservePrice": {
                   "original": {
                     "value": "1.00",
-                    "currency": "SAR"
+                    "currency": "PHP"
                   }
                 }
               }
@@ -111,13 +111,13 @@
           "__typename": "PaymentTerms",
           "immediatePay": true
         },
-        "listingFormat": "AUCTION",
+        "listingFormat": "CLASSIFIED_AD",
         "lifecycleTerms": {
-          "listingDurationInDays": "DAYS_1",
+          "listingDurationInDays": "DAYS_3",
           "startAt": "2024-01-01T00:00:00.000Z"
         },
         "itemLocation": {
-          "country": "ZM",
+          "country": "AW",
           "postalCode": "Hello World",
           "location": "Hello World"
         }

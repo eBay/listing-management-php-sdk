@@ -1,20 +1,21 @@
 {
   "sellerListingSearch": {
     "activeListings": {
-      "__typename": "SellerListingSearchInvalidInput",
-      "displayableErrorMessage": "Hello World",
-      "errorCode": "Hello World",
-      "errorMessage": "Hello World",
-      "validationErrors": [
+      "__typename": "SellerListings",
+      "listings": [
         {
-          "errorDescription": "Hello World",
-          "remedy": "Hello World"
+          "listingId": "061e24f3-a532-4c2d-93fb-6db0bc06bd02"
         },
         {
-          "errorDescription": "Hello World",
-          "remedy": "Hello World"
+          "listingId": "11866f9e-551b-4632-bfe7-f70d64140da3"
         }
-      ]
+      ],
+      "pagination": {
+        "nextCursor": "Hello World",
+        "previousCursor": "Hello World",
+        "totalElements": -69,
+        "totalPages": 62
+      }
     },
     "scheduledListings": {
       "__typename": "SellerListingSearchInvalidInput",
@@ -33,21 +34,20 @@
       "errorMessage": "Hello World"
     },
     "endedListings": {
-      "__typename": "SellerListings",
-      "listings": [
+      "__typename": "SellerListingSearchInvalidInput",
+      "displayableErrorMessage": "Hello World",
+      "errorCode": "Hello World",
+      "errorMessage": "Hello World",
+      "validationErrors": [
         {
-          "listingId": "1f610870-2a33-4dfe-901b-cbe2211af842"
+          "errorDescription": "Hello World",
+          "remedy": "Hello World"
         },
         {
-          "listingId": "5e252a9b-abe4-486b-9761-6390ef104b55"
+          "errorDescription": "Hello World",
+          "remedy": "Hello World"
         }
-      ],
-      "pagination": {
-        "nextCursor": "Hello World",
-        "previousCursor": "Hello World",
-        "totalElements": 49,
-        "totalPages": 93
-      }
+      ]
     }
   }
 }
