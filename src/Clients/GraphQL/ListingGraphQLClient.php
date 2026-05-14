@@ -10,18 +10,20 @@ use EBay\ListingManagement\GraphQL\Types\Inputs\BulkUpdateInventoryInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\CreateListingInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\CreateSecondChanceListingInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\EndListingInput;
-use EBay\ListingManagement\GraphQL\Types\Inputs\ItemBiddingActivityInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\ListingPreviewsCreationTaskByIdInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\RelistListingInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\SellerListingsInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\StartListingPreviewsCreationInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\UpdateListingInput;
 use EBay\ListingManagement\GraphQL\Types\Results\BulkUpdateInventoryOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\CreateListingOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\CreateSecondChanceListingOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\EndListingOutput;
-use EBay\ListingManagement\GraphQL\Types\Results\ItemBiddingActivityResult;
+use EBay\ListingManagement\GraphQL\Types\Results\ListingPreviewsCreationTaskByIdOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\RelistListingOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\SellerListingSearchResult;
 use EBay\ListingManagement\GraphQL\Types\Results\SellerListingsResult;
+use EBay\ListingManagement\GraphQL\Types\Results\StartListingPreviewsCreationOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\UpdateListingOutput;
 
 /**
@@ -35,20 +37,6 @@ final class ListingGraphQLClient
     public function __construct(private readonly DynamicGraphQLClient $dynamic) {}
 
     // ── Queries ──────────────────────────────────────────────────────────────
-
-    /**
-     * Returns auction and bid information for a specified listing.
-     */
-    public function itemBiddingActivity(ItemBiddingActivityInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ItemBiddingActivityResult
-    {
-        $data = $this->dynamic->execute(
-            ListingOperations::ITEM_BIDDING_ACTIVITY(),
-            ['input' => (object)$input->toArray()],
-            $accessToken,
-            $requestOptions
-        );
-        return ItemBiddingActivityResult::fromArray($data['itemBiddingActivity'] ?? []);
-    }
 
     /**
      * Retrieve details of one or more seller listings by listing ID.
@@ -76,6 +64,20 @@ final class ListingGraphQLClient
             $requestOptions
         );
         return SellerListingSearchResult::fromArray($data['sellerListingSearch'] ?? []);
+    }
+
+    /**
+     * Retrieve a listing previews creation task by its ID.
+     */
+    public function listingPreviewsCreationTaskById(ListingPreviewsCreationTaskByIdInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ListingPreviewsCreationTaskByIdOutput
+    {
+        $data = $this->dynamic->execute(
+            ListingOperations::LISTING_PREVIEWS_CREATION_TASK_BY_ID(),
+            ['input' => (object)$input->toArray()],
+            $accessToken,
+            $requestOptions
+        );
+        return ListingPreviewsCreationTaskByIdOutput::fromArray($data['listingPreviewsCreationTaskById'] ?? []);
     }
 
     // ── Mutations ────────────────────────────────────────────────────────────
@@ -148,6 +150,20 @@ final class ListingGraphQLClient
             $requestOptions
         );
         return RelistListingOutput::fromArray($data['relistListing'] ?? []);
+    }
+
+    /**
+     * Start a listing previews creation task for a set of products.
+     */
+    public function startListingPreviewsCreation(StartListingPreviewsCreationInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): StartListingPreviewsCreationOutput
+    {
+        $data = $this->dynamic->execute(
+            ListingOperations::START_LISTING_PREVIEWS_CREATION(),
+            ['input' => (object)$input->toArray()],
+            $accessToken,
+            $requestOptions
+        );
+        return StartListingPreviewsCreationOutput::fromArray($data['startListingPreviewsCreation'] ?? []);
     }
 
     /**

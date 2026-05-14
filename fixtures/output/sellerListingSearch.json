@@ -1,0 +1,53 @@
+{
+  "sellerListingSearch": {
+    "activeListings": {
+      "__typename": "SellerListingSearchInvalidInput",
+      "displayableErrorMessage": "Hello World",
+      "errorCode": "Hello World",
+      "errorMessage": "Hello World",
+      "validationErrors": [
+        {
+          "errorDescription": "Hello World",
+          "remedy": "Hello World"
+        },
+        {
+          "errorDescription": "Hello World",
+          "remedy": "Hello World"
+        }
+      ]
+    },
+    "scheduledListings": {
+      "__typename": "SellerListingSearchInvalidInput",
+      "displayableErrorMessage": "Hello World",
+      "errorCode": "Hello World",
+      "validationErrors": [
+        {
+          "errorDescription": "Hello World",
+          "remedy": "Hello World"
+        },
+        {
+          "errorDescription": "Hello World",
+          "remedy": "Hello World"
+        }
+      ],
+      "errorMessage": "Hello World"
+    },
+    "endedListings": {
+      "__typename": "SellerListings",
+      "listings": [
+        {
+          "listingId": "1f610870-2a33-4dfe-901b-cbe2211af842"
+        },
+        {
+          "listingId": "5e252a9b-abe4-486b-9761-6390ef104b55"
+        }
+      ],
+      "pagination": {
+        "nextCursor": "Hello World",
+        "previousCursor": "Hello World",
+        "totalElements": 49,
+        "totalPages": 93
+      }
+    }
+  }
+}

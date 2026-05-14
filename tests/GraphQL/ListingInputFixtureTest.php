@@ -8,27 +8,29 @@ use EBay\ListingManagement\GraphQL\Types\Inputs\BulkUpdateInventoryInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\CreateListingInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\CreateSecondChanceListingInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\EndListingInput;
-use EBay\ListingManagement\GraphQL\Types\Inputs\ItemBiddingActivityInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\ListingPreviewsCreationTaskByIdInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\RelistListingInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\SellerListingsInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\StartListingPreviewsCreationInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\UpdateListingInput;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ListingInputFixtureTest extends TestCase
 {
-    private static string $fixturesDir = __DIR__ . '/../../fixtures/input/Listing';
+    private static string $fixturesDir = __DIR__ . '/../../fixtures/input';
 
     public static function fixtures(): iterable
     {
-        yield 'ItemBiddingActivity'       => ['ItemBiddingActivity', ItemBiddingActivityInput::class];
-        yield 'BulkUpdateInventory'       => ['BulkUpdateInventory', BulkUpdateInventoryInput::class];
-        yield 'CreateListing'             => ['CreateListing', CreateListingInput::class];
-        yield 'CreateSecondChanceListing' => ['CreateSecondChanceListing', CreateSecondChanceListingInput::class];
-        yield 'EndListing'                => ['EndListing', EndListingInput::class];
-        yield 'RelistListing'             => ['RelistListing', RelistListingInput::class];
-        yield 'SellerListings'            => ['SellerListings', SellerListingsInput::class];
-        yield 'UpdateListing'             => ['UpdateListing', UpdateListingInput::class];
+        yield 'BulkUpdateInventory'             => ['bulkUpdateInventory', BulkUpdateInventoryInput::class];
+        yield 'CreateListing'                   => ['createListing', CreateListingInput::class];
+        yield 'CreateSecondChanceListing'       => ['createSecondChanceListing', CreateSecondChanceListingInput::class];
+        yield 'EndListing'                      => ['endListing', EndListingInput::class];
+        yield 'ListingPreviewsCreationTaskById' => ['listingPreviewsCreationTaskById', ListingPreviewsCreationTaskByIdInput::class];
+        yield 'RelistListing'                   => ['relistListing', RelistListingInput::class];
+        yield 'SellerListings'                  => ['sellerListings', SellerListingsInput::class];
+        yield 'StartListingPreviewsCreation'    => ['startListingPreviewsCreation', StartListingPreviewsCreationInput::class];
+        yield 'UpdateListing'                   => ['updateListing', UpdateListingInput::class];
     }
 
     #[DataProvider('fixtures')]

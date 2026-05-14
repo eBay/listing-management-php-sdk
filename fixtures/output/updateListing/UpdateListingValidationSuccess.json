@@ -1,0 +1,193 @@
+{
+  "updateListing": {
+    "__typename": "UpdateListingValidationSuccess",
+    "listingDiscount": [
+      "SPECIAL_OFFER",
+      "SPECIAL_OFFER"
+    ],
+    "listingFees": [
+      {
+        "feeAmount": {
+          "currency": "BND",
+          "value": "1.00"
+        },
+        "listingFeeType": "PHOTO_COUNT",
+        "promotionalDiscount": {
+          "currency": "GHS",
+          "value": "1.00"
+        }
+      },
+      {
+        "feeAmount": {
+          "currency": "GMD",
+          "value": "1.00"
+        },
+        "listingFeeType": "RESERVE",
+        "promotionalDiscount": {
+          "currency": "DOP",
+          "value": "1.00"
+        }
+      }
+    ],
+    "warnings": [
+      {
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ],
+        "warningMessage": "Hello World",
+        "warningCode": "Hello World"
+      },
+      {
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ],
+        "warningMessage": "Hello World",
+        "warningCode": "Hello World"
+      }
+    ],
+    "listing": {
+      "listingId": "565681c6-89a6-46c4-9cfe-750fa14e9d01",
+      "sku": "Hello World",
+      "marketplace": "EBAY_AU",
+      "sellerProduct": {
+        "title": "Hello World",
+        "description": "Hello World",
+        "aspects": [
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          },
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          }
+        ],
+        "images": [
+          {
+            "ebayImageUrl": "https://example.com",
+            "externalImageUrl": "https://example.com",
+            "order": -63
+          },
+          {
+            "ebayImageUrl": "https://example.com",
+            "externalImageUrl": "https://example.com",
+            "order": -45
+          }
+        ],
+        "categories": {
+          "primaryCategory": {
+            "id": "d676d47a-e83a-4fdd-9986-99362f81a833"
+          },
+          "secondaryCategory": {
+            "id": "2f660534-75b5-4e50-8fe9-42ef987c9793"
+          }
+        },
+        "itemCondition": {
+          "itemConditionId": "310400c4-fd44-4e62-8590-ed5bf41d4cdb"
+        }
+      },
+      "items": [
+        {
+          "sku": "Hello World",
+          "itemId": "04fefa76-9ef7-4f78-afa0-91ffe0287c6c",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": 49
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "RON"
+                }
+              }
+            }
+          }
+        },
+        {
+          "sku": "Hello World",
+          "itemId": "1f9d8e48-bdfd-441d-8ef9-84ede87464ff",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": -95
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "TTD"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "listingTerms": {
+        "fulfillmentTerms": {
+          "__typename": "FulfillmentTerms",
+          "digitalDeliverySupported": false,
+          "freeShippingAvailable": true,
+          "globalShippingSupported": true,
+          "inStorePickupSupported": false,
+          "packageSpecifications": {
+            "irregularPackage": true,
+            "listingPackageType": "FURNITURE",
+            "listingUnitOfMeasure": "METRIC",
+            "packageWeight": {
+              "minorUnit": -76,
+              "majorUnit": -52
+            },
+            "packageDimensions": {
+              "height": 93.0609401983724,
+              "length": -29.663156426865783,
+              "width": 63.42817509202666
+            }
+          },
+          "shippingTerms": {
+            "handlingTimeDuration": "DAYS_7",
+            "shippingServices": [
+              {
+                "rank": 12,
+                "shippingService": {
+                  "shippingServiceCode": "Hello World",
+                  "displayName": "Hello World"
+                }
+              },
+              {
+                "rank": 17,
+                "shippingService": {
+                  "shippingServiceCode": "Hello World",
+                  "displayName": "Hello World"
+                }
+              }
+            ]
+          }
+        },
+        "paymentTerms": {
+          "__typename": "BusinessPolicy",
+          "businessPolicyId": "0b60e0ba-8e8e-4f18-93ee-e62d31ff6739"
+        }
+      }
+    }
+  }
+}

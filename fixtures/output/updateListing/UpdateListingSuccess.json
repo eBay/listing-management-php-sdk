@@ -1,0 +1,169 @@
+{
+  "updateListing": {
+    "__typename": "UpdateListingSuccess",
+    "listingDiscount": [
+      "PROMOTION",
+      "PROMOTION"
+    ],
+    "listingFees": [
+      {
+        "feeAmount": {
+          "currency": "GEL",
+          "value": "1.00"
+        },
+        "listingFeeType": "INTERNATIONAL_LISTING",
+        "promotionalDiscount": {
+          "currency": "SAR",
+          "value": "1.00"
+        }
+      },
+      {
+        "feeAmount": {
+          "currency": "GNF",
+          "value": "1.00"
+        },
+        "listingFeeType": "BUYITNOW",
+        "promotionalDiscount": {
+          "currency": "BND",
+          "value": "1.00"
+        }
+      }
+    ],
+    "warnings": [
+      {
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ],
+        "warningMessage": "Hello World",
+        "warningCode": "Hello World"
+      },
+      {
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ],
+        "warningMessage": "Hello World",
+        "warningCode": "Hello World"
+      }
+    ],
+    "listing": {
+      "listingId": "9a68005b-3c85-4daa-9ceb-a7f20d376ff6",
+      "sku": "Hello World",
+      "marketplace": "EBAY_CA",
+      "sellerProduct": {
+        "title": "Hello World",
+        "description": "Hello World",
+        "aspects": [
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          },
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          }
+        ],
+        "images": [
+          {
+            "ebayImageUrl": "https://example.com",
+            "externalImageUrl": "https://example.com",
+            "order": 82
+          },
+          {
+            "ebayImageUrl": "https://example.com",
+            "externalImageUrl": "https://example.com",
+            "order": -61
+          }
+        ],
+        "categories": {
+          "primaryCategory": {
+            "id": "001ea794-66cc-47fb-b89a-3760a6d11486"
+          },
+          "secondaryCategory": {
+            "id": "149b9d99-0abf-4d95-985f-1f182b9c17c8"
+          }
+        },
+        "itemCondition": {
+          "itemConditionId": "af91dfeb-0b85-473b-95dd-fc45248e8fef"
+        }
+      },
+      "items": [
+        {
+          "sku": "Hello World",
+          "itemId": "f79282c9-1a7f-4e2c-91c1-105be60b6840",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": -24
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "CNY"
+                }
+              }
+            }
+          }
+        },
+        {
+          "sku": "Hello World",
+          "itemId": "5fc36b34-3824-48c9-b6a9-ec1f3ce0ef94",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": -36
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "CNY"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "listingTerms": {
+        "fulfillmentTerms": {
+          "__typename": "BusinessPolicy",
+          "businessPolicyId": "09c8b12e-6aba-4cf3-928a-9f0e963ba8f4"
+        },
+        "paymentTerms": {
+          "__typename": "PaymentTerms",
+          "businessPolicy": {
+            "businessPolicyId": "e05f8022-ac9c-417e-a635-ff7868ba68f9"
+          },
+          "immediatePay": false,
+          "listingPaymentMethods": [
+            "PAYMENT_SEE_DESCRIPTION",
+            "CASH_ON_PICKUP"
+          ],
+          "motorVehicleDeposit": {
+            "daysToMakeFullPayment": "NOT_SPECIFIED",
+            "depositRequired": false
+          },
+          "paymentInstructions": "Hello World"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "createSecondChanceListing": {
+    "__typename": "CreateSecondChanceListingValidationSuccess",
+    "listing": {
+      "listingId": "b2756cde-da05-49d5-af0c-8418a63aa45f",
+      "sku": "Hello World",
+      "marketplace": "EBAY_ES",
+      "sellerProduct": {
+        "title": "Hello World",
+        "description": "Hello World",
+        "aspects": [
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          },
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          }
+        ],
+        "images": [
+          {
+            "ebayImageUrl": "https://example.com"
+          },
+          {
+            "ebayImageUrl": "https://example.com"
+          }
+        ],
+        "categories": {
+          "primaryCategory": {
+            "id": "84deef14-1e55-462f-8dc0-ed50cb47326a"
+          }
+        },
+        "itemCondition": {
+          "itemConditionId": "f4abd0fc-5f01-404b-9f17-cb099913a94a"
+        }
+      },
+      "items": [
+        {
+          "sku": "Hello World",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": 83
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "CNY"
+                }
+              },
+              "auctionPrice": {
+                "startingBidPrice": {
+                  "original": {
+                    "value": "1.00",
+                    "currency": "SAR"
+                  }
+                },
+                "reservePrice": {
+                  "original": {
+                    "value": "1.00",
+                    "currency": "NZD"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "sku": "Hello World",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": 70
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "XAF"
+                }
+              },
+              "auctionPrice": {
+                "startingBidPrice": {
+                  "original": {
+                    "value": "1.00",
+                    "currency": "HNL"
+                  }
+                },
+                "reservePrice": {
+                  "original": {
+                    "value": "1.00",
+                    "currency": "SAR"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "listingTerms": {
+        "fulfillmentTerms": {
+          "__typename": "BusinessPolicy"
+        },
+        "paymentTerms": {
+          "__typename": "PaymentTerms",
+          "immediatePay": true
+        },
+        "listingFormat": "AUCTION",
+        "lifecycleTerms": {
+          "listingDurationInDays": "DAYS_1",
+          "startAt": "2024-01-01T00:00:00.000Z"
+        },
+        "itemLocation": {
+          "country": "ZM",
+          "postalCode": "Hello World",
+          "location": "Hello World"
+        }
+      }
+    },
+    "warnings": [
+      {
+        "warningCode": "Hello World",
+        "warningMessage": "Hello World",
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ]
+      },
+      {
+        "warningCode": "Hello World",
+        "warningMessage": "Hello World",
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ]
+      }
+    ]
+  }
+}

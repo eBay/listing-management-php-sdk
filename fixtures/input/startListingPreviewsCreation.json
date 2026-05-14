@@ -1,0 +1,32 @@
+{
+  "cases": [
+    {
+      "label": "empty products list",
+      "input": {"externalProducts": []},
+      "expected": {"externalProducts": []}
+    },
+    {
+      "label": "with one product",
+      "input": {
+        "externalProducts": [
+          {
+            "aspects": [{"name": "Color", "values": ["Red"]}],
+            "images": ["https://example.com/img.jpg"],
+            "sku": "SKU-001",
+            "title": "Test Product"
+          }
+        ]
+      },
+      "expected": {
+        "externalProducts": [
+          {
+            "aspects": [{"name": "Color", "values": ["Red"]}],
+            "images": ["https://example.com/img.jpg"],
+            "sku": "SKU-001",
+            "title": "Test Product"
+          }
+        ]
+      }
+    }
+  ]
+}

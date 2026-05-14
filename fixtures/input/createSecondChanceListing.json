@@ -1,0 +1,19 @@
+{
+  "cases": [
+    {
+      "label": "basic second chance listing",
+      "input": {
+        "listingIdentifier": {"listingId": "listing-123"},
+        "listingTerms": {"listingDuration": "DAYS_1"},
+        "marketplace": "EBAY_AT",
+        "recipientUserId": "user-123"
+      },
+      "expected": {
+        "listingIdentifier": {"listingId": "listing-123"},
+        "listingTerms": {"listingDuration": "DAYS_1"},
+        "marketplace": "EBAY_AT",
+        "recipientUserId": "user-123"
+      }
+    }
+  ]
+}

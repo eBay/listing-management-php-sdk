@@ -1,0 +1,169 @@
+{
+  "relistListing": {
+    "__typename": "RelistListingValidationSuccess",
+    "listing": {
+      "listingId": "56072ddd-de5c-489f-ab00-56b0f128df00",
+      "sku": "Hello World",
+      "marketplace": "EBAY_IE",
+      "sellerProduct": {
+        "title": "Hello World",
+        "description": "Hello World",
+        "aspects": [
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          },
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          }
+        ],
+        "images": [
+          {
+            "ebayImageUrl": "https://example.com"
+          },
+          {
+            "ebayImageUrl": "https://example.com"
+          }
+        ],
+        "categories": {
+          "primaryCategory": {
+            "id": "f6a66363-2ca1-4516-be50-543c4069d6eb"
+          }
+        },
+        "itemCondition": {
+          "itemConditionId": "22aa98a3-79fa-4ca3-ae2d-d45372d39e37"
+        }
+      },
+      "items": [
+        {
+          "sku": "Hello World",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": -6
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "AOA"
+                }
+              }
+            }
+          }
+        },
+        {
+          "sku": "Hello World",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": 36
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "PAB"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "listingTerms": {
+        "fulfillmentTerms": {
+          "__typename": "BusinessPolicy",
+          "businessPolicyId": "97fe13ab-21d6-4d6a-a3f2-4a7dea38d380"
+        },
+        "paymentTerms": {
+          "__typename": "PaymentTerms",
+          "immediatePay": true
+        },
+        "listingFormat": "AUCTION",
+        "lifecycleTerms": {
+          "listingDurationInDays": "GTC",
+          "startAt": "2024-01-01T00:00:00.000Z"
+        },
+        "bestOfferTerms": {
+          "acceptBestOffer": false,
+          "autoAcceptThresholdAmount": {
+            "original": {
+              "value": "1.00",
+              "currency": "KWD"
+            }
+          },
+          "autoDeclineThresholdAmount": {
+            "original": {
+              "value": "1.00",
+              "currency": "BMD"
+            }
+          }
+        },
+        "itemLocation": {
+          "country": "CC",
+          "postalCode": "Hello World",
+          "location": "Hello World"
+        }
+      }
+    },
+    "listingFees": [
+      {
+        "listingFeeType": "RESERVE",
+        "feeAmount": {
+          "value": "1.00",
+          "currency": "MGA"
+        },
+        "promotionalDiscount": {
+          "value": "1.00",
+          "currency": "BGN"
+        }
+      },
+      {
+        "listingFeeType": "EXTENDED_DURATION_LISTING",
+        "feeAmount": {
+          "value": "1.00",
+          "currency": "LSL"
+        },
+        "promotionalDiscount": {
+          "value": "1.00",
+          "currency": "USD"
+        }
+      }
+    ],
+    "warnings": [
+      {
+        "warningCode": "Hello World",
+        "warningMessage": "Hello World",
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ]
+      },
+      {
+        "warningCode": "Hello World",
+        "warningMessage": "Hello World",
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ]
+      }
+    ]
+  }
+}

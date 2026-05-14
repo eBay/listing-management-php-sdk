@@ -1,0 +1,197 @@
+{
+  "createSecondChanceListing": {
+    "__typename": "CreateSecondChanceListingSuccess",
+    "listing": {
+      "listingId": "5e16228c-8f72-4fa7-9eb7-c153c460d929",
+      "sku": "Hello World",
+      "marketplace": "EBAY_ES",
+      "sellerProduct": {
+        "title": "Hello World",
+        "description": "Hello World",
+        "aspects": [
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          },
+          {
+            "name": "Hello World",
+            "values": [
+              "Hello World",
+              "Hello World"
+            ]
+          }
+        ],
+        "images": [
+          {
+            "ebayImageUrl": "https://example.com"
+          },
+          {
+            "ebayImageUrl": "https://example.com"
+          }
+        ],
+        "categories": {
+          "primaryCategory": {
+            "id": "3014ce8f-7f5a-48a4-871f-3748a514e7d9"
+          }
+        },
+        "itemCondition": {
+          "itemConditionId": "c29b6488-bee3-4cfd-bd72-88fee0527e58"
+        }
+      },
+      "items": [
+        {
+          "sku": "Hello World",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": -51
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "NAD"
+                }
+              },
+              "auctionPrice": {
+                "startingBidPrice": {
+                  "original": {
+                    "value": "1.00",
+                    "currency": "SYP"
+                  }
+                },
+                "reservePrice": {
+                  "original": {
+                    "value": "1.00",
+                    "currency": "AFN"
+                  }
+                }
+              }
+            },
+            "extendedProducerResponsibility": {
+              "listingEcoParticipationFee": {
+                "original": {
+                  "currency": "ARS",
+                  "value": "1.00"
+                }
+              }
+            }
+          },
+          "itemId": "2beb3f5b-2325-42f6-9929-ee1278e386bd"
+        },
+        {
+          "sku": "Hello World",
+          "itemTerms": {
+            "availability": {
+              "quantityAvailable": -76
+            },
+            "pricingTerms": {
+              "fixedPrice": {
+                "original": {
+                  "value": "1.00",
+                  "currency": "KGS"
+                }
+              },
+              "auctionPrice": {
+                "startingBidPrice": {
+                  "original": {
+                    "value": "1.00",
+                    "currency": "PKR"
+                  }
+                },
+                "reservePrice": {
+                  "original": {
+                    "value": "1.00",
+                    "currency": "NZD"
+                  }
+                }
+              }
+            },
+            "extendedProducerResponsibility": {
+              "listingEcoParticipationFee": {
+                "original": {
+                  "currency": "VND",
+                  "value": "1.00"
+                }
+              }
+            }
+          },
+          "itemId": "49239573-5785-4c90-88a9-d3779e664f53"
+        }
+      ],
+      "listingTerms": {
+        "fulfillmentTerms": {
+          "__typename": "FulfillmentTerms",
+          "packageSpecifications": {
+            "packageDimensions": {
+              "length": 81.37169179738316,
+              "width": 26.7124797431359,
+              "height": -24.268027118076702
+            },
+            "packageWeight": {
+              "majorUnit": 89,
+              "minorUnit": 23
+            },
+            "listingUnitOfMeasure": "ENGLISH"
+          },
+          "shippingTerms": {
+            "handlingTimeDuration": "DAYS_2",
+            "shippingServices": [
+              {
+                "rank": 67
+              },
+              {
+                "rank": 90
+              }
+            ]
+          }
+        },
+        "paymentTerms": {
+          "__typename": "BusinessPolicy"
+        },
+        "listingFormat": "AUCTION",
+        "lifecycleTerms": {
+          "listingDurationInDays": "DAYS_21",
+          "startAt": "2024-01-01T00:00:00.000Z"
+        },
+        "itemLocation": {
+          "country": "RE",
+          "postalCode": "Hello World",
+          "location": "Hello World"
+        }
+      }
+    },
+    "warnings": [
+      {
+        "warningCode": "Hello World",
+        "warningMessage": "Hello World",
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ]
+      },
+      {
+        "warningCode": "Hello World",
+        "warningMessage": "Hello World",
+        "additionalInformation": [
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          },
+          {
+            "name": "Hello World",
+            "value": "Hello World"
+          }
+        ]
+      }
+    ]
+  }
+}

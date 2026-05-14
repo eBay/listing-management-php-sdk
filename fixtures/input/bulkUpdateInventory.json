@@ -1,0 +1,25 @@
+{
+  "cases": [
+    {
+      "label": "single item with price and quantity",
+      "input": {
+        "inventory": [
+          {
+            "listingItemIdentifier": {"listingId": "item-123"},
+            "fixedPrice": {"value": "9.99", "currency": "USD"},
+            "availableQuantity": 5
+          }
+        ]
+      },
+      "expected": {
+        "inventory": [
+          {
+            "listingItemIdentifier": {"listingId": "item-123"},
+            "fixedPrice": {"value": "9.99", "currency": "USD"},
+            "availableQuantity": 5
+          }
+        ]
+      }
+    }
+  ]
+}

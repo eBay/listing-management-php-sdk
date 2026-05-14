@@ -8,25 +8,27 @@ use EBay\ListingManagement\GraphQL\Types\Results\BulkUpdateInventoryOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\CreateListingOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\CreateSecondChanceListingOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\EndListingOutput;
-use EBay\ListingManagement\GraphQL\Types\Results\ItemBiddingActivityResult;
+use EBay\ListingManagement\GraphQL\Types\Results\ListingPreviewsCreationTaskByIdOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\RelistListingOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\SellerListingSearchResult;
 use EBay\ListingManagement\GraphQL\Types\Results\SellerListingsResult;
+use EBay\ListingManagement\GraphQL\Types\Results\StartListingPreviewsCreationOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\UpdateListingOutput;
 use PHPUnit\Framework\TestCase;
 
 class ListingFixtureTest extends TestCase
 {
     private static array $operationMap = [
-        'ItemBiddingActivity'         => ItemBiddingActivityResult::class,
-        'SellerListings'              => SellerListingsResult::class,
-        'SellerListingSearch'         => SellerListingSearchResult::class,
-        'BulkUpdateInventory'         => BulkUpdateInventoryOutput::class,
-        'CreateListing'               => CreateListingOutput::class,
-        'CreateSecondChanceListing'   => CreateSecondChanceListingOutput::class,
-        'EndListing'                  => EndListingOutput::class,
-        'RelistListing'               => RelistListingOutput::class,
-        'UpdateListing'               => UpdateListingOutput::class,
+        'sellerListings'                  => SellerListingsResult::class,
+        'sellerListingSearch'             => SellerListingSearchResult::class,
+        'bulkUpdateInventory'             => BulkUpdateInventoryOutput::class,
+        'createListing'                   => CreateListingOutput::class,
+        'createSecondChanceListing'       => CreateSecondChanceListingOutput::class,
+        'endListing'                      => EndListingOutput::class,
+        'relistListing'                   => RelistListingOutput::class,
+        'updateListing'                   => UpdateListingOutput::class,
+        'startListingPreviewsCreation'    => StartListingPreviewsCreationOutput::class,
+        'listingPreviewsCreationTaskById' => ListingPreviewsCreationTaskByIdOutput::class,
     ];
 
     #[\PHPUnit\Framework\Attributes\DataProvider('fixtures')]
@@ -41,7 +43,7 @@ class ListingFixtureTest extends TestCase
 
     public static function fixtures(): iterable
     {
-        $fixturesDir = __DIR__ . '/../../fixtures/output/Listing';
+        $fixturesDir = __DIR__ . '/../../fixtures/output';
 
         foreach (scandir($fixturesDir) as $entry) {
             if ($entry === '.' || $entry === '..') {

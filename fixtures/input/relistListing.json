@@ -1,0 +1,15 @@
+{
+  "cases": [
+    {
+      "label": "basic relist",
+      "input": {
+        "listingIdentifier": {"listingId": "listing-123"},
+        "marketplace": "EBAY_AT"
+      },
+      "expected": {
+        "listingIdentifier": {"listingId": "listing-123"},
+        "marketplace": "EBAY_AT"
+      }
+    }
+  ]
+}

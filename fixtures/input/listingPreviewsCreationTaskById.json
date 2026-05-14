@@ -1,0 +1,9 @@
+{
+  "cases": [
+    {
+      "label": "by task ID",
+      "input": {"id": "task-abc-123"},
+      "expected": {"id": "task-abc-123"}
+    }
+  ]
+}

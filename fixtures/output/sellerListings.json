@@ -1,0 +1,210 @@
+{
+  "sellerListings": {
+    "listings": [
+      {
+        "__typename": "ListingSuccess",
+        "listing": {
+          "sellerProduct": {
+            "title": "Hello World",
+            "ebayGeneratedTitle": "Hello World",
+            "description": "Hello World",
+            "images": [
+              {
+                "ebayImageUrl": "https://example.com",
+                "externalImageUrl": "https://example.com",
+                "order": -82
+              },
+              {
+                "ebayImageUrl": "https://example.com",
+                "externalImageUrl": "https://example.com",
+                "order": 88
+              }
+            ]
+          },
+          "listingId": "1ac97b45-d66b-4e30-b8f6-9fb0b0857cc5",
+          "marketplace": "EBAY_ES",
+          "listingTerms": {
+            "listingFormat": "CLASSIFIED_AD",
+            "lifecycleTerms": {
+              "listingDurationInDays": "DAYS_3",
+              "createdAt": "2024-01-01T00:00:00.000Z",
+              "actualEndAt": "2024-01-01T00:00:00.000Z",
+              "endListingReason": "NOT_AVAILABLE",
+              "listingStatus": "ENDED",
+              "scheduledEndAt": "2024-01-01T00:00:00.000Z",
+              "startAt": "2024-01-01T00:00:00.000Z"
+            },
+            "fulfillmentTerms": {
+              "__typename": "BusinessPolicy",
+              "businessPolicyId": "cf68d9ef-a4d5-43e2-a7cb-a8319f736a87",
+              "description": "Hello World",
+              "marketplace": "EBAY_SG",
+              "name": "Hello World"
+            },
+            "returnTerms": {
+              "__typename": "ReturnTerms",
+              "domesticReturnTerms": {
+                "listingRefundMethod": "MONEY_BACK",
+                "returnAccepted": false,
+                "returnDuration": "DAYS_4",
+                "returnShipmentInvoicee": "mock-invoicee"
+              },
+              "returnInstructions": "Hello World",
+              "internationalReturnTerms": {
+                "listingRefundMethod": "MONEY_BACK",
+                "returnAccepted": true,
+                "returnDuration": "DAYS_15",
+                "returnShipmentInvoicee": "mock-invoicee"
+              },
+              "businessPolicy": {
+                "businessPolicyId": "e65937d7-4283-4828-87cb-ba16455641ef"
+              }
+            },
+            "paymentTerms": {
+              "__typename": "BusinessPolicy",
+              "businessPolicyId": "a103d7fe-6f63-4a92-88f8-bbc9ffaae96d"
+            },
+            "internationalSiteVisibility": [
+              "NORTH_AMERICA",
+              "UNITED_KINGDOM"
+            ],
+            "hideParticipation": true,
+            "visualEnhancements": {
+              "boldTitle": false,
+              "galleryPlus": false,
+              "subtitle": "Hello World"
+            },
+            "bestOfferTerms": {
+              "acceptBestOffer": true,
+              "autoAcceptThresholdAmount": {
+                "original": {
+                  "currency": "ETB",
+                  "value": "1.00"
+                }
+              },
+              "autoDeclineThresholdAmount": {
+                "original": {
+                  "currency": "GHS",
+                  "value": "1.00"
+                }
+              }
+            },
+            "taxTerms": {
+              "salesTaxApplicableToShipping": true,
+              "salesTaxJurisdictionId": "Hello World",
+              "salesTaxPercentage": "1.00",
+              "salesTaxTableUsed": false,
+              "thirdPartyTaxCategoryCode": "Hello World",
+              "vatPercentage": "1.00",
+              "vatRecognizedBusinessSeller": true,
+              "vatRestrictedToBusinessUser": false
+            },
+            "itemLocation": {
+              "country": "BW",
+              "location": "Hello World",
+              "postalCode": "Hello World"
+            },
+            "totalQuantityAvailable": -25
+          }
+        },
+        "listingId": "7bceeae0-2bba-4eab-be37-bf2e67bc82f9"
+      },
+      {
+        "__typename": "ListingSuccess",
+        "listing": {
+          "sellerProduct": {
+            "title": "Hello World",
+            "ebayGeneratedTitle": "Hello World",
+            "description": "Hello World",
+            "images": [
+              {
+                "ebayImageUrl": "https://example.com",
+                "externalImageUrl": "https://example.com",
+                "order": -62
+              },
+              {
+                "ebayImageUrl": "https://example.com",
+                "externalImageUrl": "https://example.com",
+                "order": 7
+              }
+            ]
+          },
+          "listingId": "fe887543-639e-4e95-b18c-e8fece72c2c3",
+          "marketplace": "EBAY_AT",
+          "listingTerms": {
+            "listingFormat": "FIXED_PRICE",
+            "lifecycleTerms": {
+              "listingDurationInDays": "DAYS_30",
+              "createdAt": "2024-01-01T00:00:00.000Z",
+              "actualEndAt": "2024-01-01T00:00:00.000Z",
+              "endListingReason": "SOLD_VEHICLE",
+              "listingStatus": "ACTIVE",
+              "scheduledEndAt": "2024-01-01T00:00:00.000Z",
+              "startAt": "2024-01-01T00:00:00.000Z"
+            },
+            "fulfillmentTerms": {
+              "__typename": "BusinessPolicy",
+              "businessPolicyId": "24901068-0194-47ba-8690-e41a71e9313d",
+              "description": "Hello World",
+              "marketplace": "EBAY_PH",
+              "name": "Hello World"
+            },
+            "returnTerms": {
+              "__typename": "BusinessPolicy",
+              "businessPolicyId": "d8b991cb-d8b6-465e-9c25-eea7f2613256",
+              "description": "Hello World",
+              "marketplace": "EBAY_SG",
+              "name": "Hello World"
+            },
+            "paymentTerms": {
+              "__typename": "BusinessPolicy",
+              "businessPolicyId": "8f7faf8b-73f6-419f-93af-65dbf7d77f40"
+            },
+            "internationalSiteVisibility": [
+              "UNITED_KINGDOM",
+              "NORTH_AMERICA"
+            ],
+            "hideParticipation": true,
+            "visualEnhancements": {
+              "boldTitle": true,
+              "galleryPlus": false,
+              "subtitle": "Hello World"
+            },
+            "bestOfferTerms": {
+              "acceptBestOffer": true,
+              "autoAcceptThresholdAmount": {
+                "original": {
+                  "currency": "VND",
+                  "value": "1.00"
+                }
+              },
+              "autoDeclineThresholdAmount": {
+                "original": {
+                  "currency": "CUP",
+                  "value": "1.00"
+                }
+              }
+            },
+            "taxTerms": {
+              "salesTaxApplicableToShipping": false,
+              "salesTaxJurisdictionId": "Hello World",
+              "salesTaxPercentage": "1.00",
+              "salesTaxTableUsed": true,
+              "thirdPartyTaxCategoryCode": "Hello World",
+              "vatPercentage": "1.00",
+              "vatRecognizedBusinessSeller": false,
+              "vatRestrictedToBusinessUser": true
+            },
+            "itemLocation": {
+              "country": "YE",
+              "location": "Hello World",
+              "postalCode": "Hello World"
+            },
+            "totalQuantityAvailable": -46
+          }
+        },
+        "listingId": "75582afe-0a1b-4d23-930e-b374ff31ac74"
+      }
+    ]
+  }
+}
