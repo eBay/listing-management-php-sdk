@@ -44,7 +44,7 @@ use EBay\ListingManagement\GraphQL\Types\Results\UpdateListingOutput;
  * Typed wrapper around the eBay GraphQL listing operations.
  *
  * Each method maps one-to-one to a pre-defined operation in ListingOperations.
- * For anything not covered here, use executeRaw() to send an arbitrary query.
+ * For anything not covered here, use executeRawUnsafe() to send an arbitrary query.
  */
 final class ListingGraphQLClient
 {
@@ -197,12 +197,17 @@ final class ListingGraphQLClient
     // ── Escape hatch ─────────────────────────────────────────────────────────
 
     /**
-     * Send an arbitrary GraphQL query/mutation and return the raw `data` payload.
+     * Execute an arbitrary GraphQL query string and return the raw `data` payload.
+     *
+     * **WARNING — injection risk.** Never interpolate user-supplied input directly into
+     * `$query`. Always pass dynamic values via `$variables` so the server handles
+     * escaping. Treat this like a raw SQL string: safe only with static,
+     * developer-controlled query text.
      *
      * @param array<string, mixed> $variables
      * @return array<string, mixed>
      */
-    public function executeRaw(string $query, array $variables = [], ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
+    public function executeRawUnsafe(string $query, array $variables = [], ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
     {
         return $this->dynamic->execute($query, $variables, $accessToken, $requestOptions);
     }

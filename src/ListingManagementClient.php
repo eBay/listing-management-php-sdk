@@ -52,7 +52,7 @@ use Psr\Http\Message\ResponseInterface;
  *   $result = $sdk->graphQL->createListing([...]);
  *
  *   // GraphQL escape hatch
- *   $raw = $sdk->graphQL->executeRaw('{ sellerListingSearch { ... } }');
+ *   $raw = $sdk->graphQL->executeRawUnsafe('{ sellerListingSearch { ... } }');
  *
  *   // Per-request headers
  *   use EBay\ListingManagement\Configuration\RequestOptions;
