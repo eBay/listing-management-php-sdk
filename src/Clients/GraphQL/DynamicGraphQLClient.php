@@ -45,6 +45,11 @@ final class DynamicGraphQLClient
             ?? throw new \RuntimeException(
                 'No access token. Pass $accessToken per-call or set ListingManagementConfiguration::$accessToken.'
             );
+        if (empty($token)) {
+            throw new \RuntimeException(
+                'No access token. Pass $accessToken per-call or set ListingManagementConfiguration::$accessToken.'
+            );
+        }
 
         $payload = ['query' => $query];
         if (!empty($variables)) {
