@@ -112,27 +112,24 @@ final class InventoryClient
 
     public function getInventoryItem(string $sku, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?InventoryItemWithSkuLocaleGroupid
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->inventory_item()->bySku($sku)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_item()->bySku($sku)->get(
             new WithSkuItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function createOrReplaceInventoryItem(string $sku, InventoryItem $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BaseResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->inventory_item()->bySku($sku)->put(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_item()->bySku($sku)->put(
             $body,
             new WithSkuItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function deleteInventoryItem(string $sku, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->inventory_item()->bySku($sku)->delete(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_item()->bySku($sku)->delete(
             new WithSkuItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getInventoryItems(
@@ -141,8 +138,7 @@ final class InventoryClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?InventoryItems {
-        TokenContext::set($accessToken);
-        return $this->kiota->inventory_item()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_item()->get(
             new Inventory_itemRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: Inventory_itemRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -150,116 +146,104 @@ final class InventoryClient
                     offset: $offset,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function bulkGetInventoryItem(BulkGetInventoryItem $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->bulk_get_inventory_item()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->bulk_get_inventory_item()->post(
             $body,
             new Bulk_get_inventory_itemRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function bulkCreateOrReplaceInventoryItem(BulkInventoryItem $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->bulk_create_or_replace_inventory_item()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->bulk_create_or_replace_inventory_item()->post(
             $body,
             new Bulk_create_or_replace_inventory_itemRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Inventory Item Groups ────────────────────────────────────────────────
 
     public function getInventoryItemGroup(string $inventoryItemGroupKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?InventoryItemGroup
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->get(
             new WithInventoryItemGroupKeyItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function createOrReplaceInventoryItemGroup(string $inventoryItemGroupKey, InventoryItemGroup $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BaseResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->put(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->put(
             $body,
             new WithInventoryItemGroupKeyItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function deleteInventoryItemGroup(string $inventoryItemGroupKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->delete(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->delete(
             new WithInventoryItemGroupKeyItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Product Compatibility ────────────────────────────────────────────────
 
     public function getProductCompatibility(string $sku, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Compatibility
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->inventory_item()->bySku($sku)->product_compatibility()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_item()->bySku($sku)->product_compatibility()->get(
             new Product_compatibilityRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function createOrReplaceProductCompatibility(string $sku, Compatibility $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BaseResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->inventory_item()->bySku($sku)->product_compatibility()->put(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_item()->bySku($sku)->product_compatibility()->put(
             $body,
             new Product_compatibilityRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function deleteProductCompatibility(string $sku, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->inventory_item()->bySku($sku)->product_compatibility()->delete(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_item()->bySku($sku)->product_compatibility()->delete(
             new Product_compatibilityRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── SKU-Location Mapping ─────────────────────────────────────────────────
 
     public function getSkuLocationMapping(string $listingId, string $sku, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->listing()->byListingId($listingId)->sku()->bySku($sku)->locations()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->listing()->byListingId($listingId)->sku()->bySku($sku)->locations()->get(
             new LocationsRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function createOrReplaceSkuLocationMapping(string $listingId, string $sku, mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->listing()->byListingId($listingId)->sku()->bySku($sku)->locations()->put(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->listing()->byListingId($listingId)->sku()->bySku($sku)->locations()->put(
             $body,
             new LocationsRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function deleteSkuLocationMapping(string $listingId, string $sku, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->listing()->byListingId($listingId)->sku()->bySku($sku)->locations()->delete(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->listing()->byListingId($listingId)->sku()->bySku($sku)->locations()->delete(
             new LocationsRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Inventory Locations ──────────────────────────────────────────────────
 
     public function getInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?InventoryLocationResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->get(
             new WithMerchantLocationKeyItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getInventoryLocations(
@@ -268,8 +252,7 @@ final class InventoryClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?LocationResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->location()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->location()->get(
             new LocationRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: LocationRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -277,59 +260,53 @@ final class InventoryClient
                     offset: $offset,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function createInventoryLocation(string $merchantLocationKey, InventoryLocationFull $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->post(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->post(
             $body,
             new WithMerchantLocationKeyItemRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function deleteInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->delete(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->delete(
             new WithMerchantLocationKeyItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function updateInventoryLocation(string $merchantLocationKey, mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->update_location_details()->post(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->update_location_details()->post(
             $body,
             new Update_location_detailsRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function disableInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->disable()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->disable()->post(
             new DisableRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function enableInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->enable()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->location()->byMerchantLocationKey($merchantLocationKey)->enable()->post(
             new EnableRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Offers ───────────────────────────────────────────────────────────────
 
     public function getOffer(string $offerId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->offer()->byOfferId($offerId)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->offer()->byOfferId($offerId)->get(
             new WithOfferItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getOffers(
@@ -341,8 +318,7 @@ final class InventoryClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?Offers {
-        TokenContext::set($accessToken);
-        return $this->kiota->offer()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->offer()->get(
             new OfferRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: OfferRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -353,113 +329,101 @@ final class InventoryClient
                     sku: $sku,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function createOffer(EbayOfferDetailsWithKeys $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?OfferResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->offer()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->offer()->post(
             $body,
             new OfferRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function updateOffer(string $offerId, EbayOfferDetailsWithId $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->offer()->byOfferId($offerId)->put(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->offer()->byOfferId($offerId)->put(
             $body,
             new WithOfferItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function deleteOffer(string $offerId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->offer()->byOfferId($offerId)->delete(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->offer()->byOfferId($offerId)->delete(
             new WithOfferItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function publishOffer(string $offerId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?PublishResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->offer()->byOfferId($offerId)->publish()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->offer()->byOfferId($offerId)->publish()->post(
             new PublishRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function withdrawOffer(string $offerId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?WithdrawResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->offer()->byOfferId($offerId)->withdraw()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->offer()->byOfferId($offerId)->withdraw()->post(
             new WithdrawRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getListingFees(OfferKeysWithId $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?FeesSummaryResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->offer()->get_listing_fees()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->offer()->get_listing_fees()->post(
             $body,
             new Get_listing_feesRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function bulkCreateOffer(mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkOfferResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->bulk_create_offer()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->bulk_create_offer()->post(
             $body,
             new Bulk_create_offerRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function bulkPublishOffer(mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkPublishResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->bulk_publish_offer()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->bulk_publish_offer()->post(
             $body,
             new Bulk_publish_offerRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function publishOfferByInventoryItemGroup(PublishByInventoryItemGroupRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?PublishResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->offer()->publish_by_inventory_item_group()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->offer()->publish_by_inventory_item_group()->post(
             $body,
             new Publish_by_inventory_item_groupRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function withdrawOfferByInventoryItemGroup(WithdrawByInventoryItemGroupRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->offer()->withdraw_by_inventory_item_group()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->offer()->withdraw_by_inventory_item_group()->post(
             $body,
             new Withdraw_by_inventory_item_groupRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Bulk Operations ──────────────────────────────────────────────────────
 
     public function bulkMigrateListing(BulkMigrateListing $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->bulk_migrate_listing()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->bulk_migrate_listing()->post(
             $body,
             new Bulk_migrate_listingRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function bulkUpdatePriceQuantity(BulkPriceQuantity $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->bulk_update_price_quantity()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->bulk_update_price_quantity()->post(
             $body,
             new Bulk_update_price_quantityRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 }

@@ -63,73 +63,65 @@ final class StoresClient
 
     public function getStore(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->store()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->store()->get(
             new StoreRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Store Categories ─────────────────────────────────────────────────────
 
     public function getStoreCategories(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->store()->categories()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->store()->categories()->get(
             new CategoriesRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function addStoreCategory(AddStoreCategoryRequestType $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->store()->categories()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->store()->categories()->post(
             $body,
             new CategoriesRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function deleteStoreCategory(string $categoryId, DeleteStoreCategoryRequestType $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->store()->categories()->byCategory_id($categoryId)->delete(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->store()->categories()->byCategory_id($categoryId)->delete(
             $body,
             new WithCategory_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function renameStoreCategory(string $categoryId, RenameStoreCategoryRequestType $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->store()->categories()->byCategory_id($categoryId)->put(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->store()->categories()->byCategory_id($categoryId)->put(
             $body,
             new WithCategory_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function moveStoreCategory(MoveStoreCategoryRequestType $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->store()->categories()->move_category()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->store()->categories()->move_category()->post(
             $body,
             new Move_categoryRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Store Tasks ──────────────────────────────────────────────────────────
 
     public function getStoreTasks(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->store()->tasks()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->store()->tasks()->get(
             new TasksRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getStoreTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->store()->tasks()->byTask_id($taskId)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->store()->tasks()->byTask_id($taskId)->get(
             new WithTask_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 }

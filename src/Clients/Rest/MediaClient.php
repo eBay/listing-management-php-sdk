@@ -66,90 +66,80 @@ final class MediaClient
 
     public function getDocument(string $documentId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->document()->byDocument_id($documentId)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->document()->byDocument_id($documentId)->get(
             new WithDocument_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function createDocument(CreateDocumentRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->document()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->document()->post(
             $body,
             new DocumentRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function createDocumentFromUrl(CreateDocumentFromUrlRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->document()->create_document_from_url()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->document()->create_document_from_url()->post(
             $body,
             new Create_document_from_urlRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function uploadDocument(string $documentId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->document()->byDocument_id($documentId)->upload()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->document()->byDocument_id($documentId)->upload()->post(
             new DocumentUploadPostConfig(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Images ───────────────────────────────────────────────────────────────
 
     public function getImage(string $imageId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->image()->byImage_id($imageId)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->image()->byImage_id($imageId)->get(
             new WithImage_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function createImageFromFile(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->image()->create_image_from_file()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->image()->create_image_from_file()->post(
             new Create_image_from_fileRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function createImageFromUrl(CreateImageFromUrlRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->image()->create_image_from_url()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->image()->create_image_from_url()->post(
             $body,
             new Create_image_from_urlRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Videos ───────────────────────────────────────────────────────────────
 
     public function getVideo(string $videoId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->video()->byVideo_id($videoId)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->video()->byVideo_id($videoId)->get(
             new WithVideo_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function createVideo(CreateVideoRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->video()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->video()->post(
             $body,
             new VideoRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function uploadVideo(string $videoId, StreamInterface $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->video()->byVideo_id($videoId)->upload()->post(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->video()->byVideo_id($videoId)->upload()->post(
             $body,
             new VideoUploadPostConfig(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 }
