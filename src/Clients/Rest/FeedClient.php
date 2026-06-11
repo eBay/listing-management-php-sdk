@@ -18,9 +18,9 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\Clients\Rest;
 
+use EBay\ListingManagement\Configuration\KiotaAuthProvider;
 use EBay\ListingManagement\Configuration\ListingManagementConfiguration;
 use EBay\ListingManagement\Configuration\RequestOptions;
-use EBay\ListingManagement\Configuration\TokenContext;
 use EBay\ListingManagement\Generated\Feed\FeedApiClient;
 use EBay\ListingManagement\Generated\Feed\Models\CreateInventoryTaskRequest;
 use EBay\ListingManagement\Generated\Feed\Models\CreateOrderTaskRequest;
@@ -51,12 +51,15 @@ use EBay\ListingManagement\Generated\Feed\Task\Item\Upload_file\Upload_fileReque
 use EBay\ListingManagement\Generated\Feed\Task\Item\WithTask_ItemRequestBuilderGetRequestConfiguration as TaskWithTaskGetConfig;
 use EBay\ListingManagement\Generated\Feed\Task\TaskRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Task\TaskRequestBuilderPostRequestConfiguration;
+use GuzzleHttp\Client as GuzzleClient;
+use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
+use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 final class FeedClient
 {
     public function __construct(
-        private readonly FeedApiClient $kiota,
-        private readonly ListingManagementConfiguration $config = new ListingManagementConfiguration(),
+        private readonly GuzzleClient $guzzle,
+        private readonly ListingManagementConfiguration $config,
     ) {}
 
     /**
@@ -85,57 +88,75 @@ final class FeedClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->task()->get(
-            new TaskRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: TaskRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    date_range: $dateRange,
-                    feed_type: $feedType,
-                    limit: $limit,
-                    look_back_days: $lookBackDays,
-                    offset: $offset,
-                    schedule_id: $scheduleId,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->task()->get(
+                new TaskRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: TaskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        date_range: $dateRange,
+                        feed_type: $feedType,
+                        limit: $limit,
+                        look_back_days: $lookBackDays,
+                        offset: $offset,
+                        schedule_id: $scheduleId,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function getTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->task()->byTask_id($taskId)->get(
-            new TaskWithTaskGetConfig(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->task()->byTask_id($taskId)->get(
+                new TaskWithTaskGetConfig(headers: $headers)
+            )->wait()
+        );
     }
 
     public function createTask(CreateTaskRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->task()->post(
-            $body,
-            new TaskRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->task()->post(
+                $body,
+                new TaskRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function getInputFile(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->task()->byTask_id($taskId)->download_input_file()->get(
-            new Download_input_fileRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->task()->byTask_id($taskId)->download_input_file()->get(
+                new Download_input_fileRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function getResultFile(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->task()->byTask_id($taskId)->download_result_file()->get(
-            new TaskDownloadResultConfig(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->task()->byTask_id($taskId)->download_result_file()->get(
+                new TaskDownloadResultConfig(headers: $headers)
+            )->wait()
+        );
     }
 
     public function uploadFile(string $taskId, mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         // Note: Kiota's upload_file builder handles the body internally via form-data;
         // the body param is kept for API compatibility but headers are threaded via config.
-        TokenContext::runWith($accessToken, fn() => $this->kiota->task()->byTask_id($taskId)->upload_file()->post(
-            new Upload_fileRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->task()->byTask_id($taskId)->upload_file()->post(
+                new Upload_fileRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     // ── Customer Service Metric Tasks ────────────────────────────────────────
@@ -149,33 +170,42 @@ final class FeedClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->customer_service_metric_task()->get(
-            new Customer_service_metric_taskRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Customer_service_metric_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    date_range: $dateRange,
-                    feed_type: $feedType,
-                    limit: $limit,
-                    look_back_days: $lookBackDays,
-                    offset: $offset,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->customer_service_metric_task()->get(
+                new Customer_service_metric_taskRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Customer_service_metric_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        date_range: $dateRange,
+                        feed_type: $feedType,
+                        limit: $limit,
+                        look_back_days: $lookBackDays,
+                        offset: $offset,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function getCustomerServiceMetricTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->customer_service_metric_task()->byTask_id($taskId)->get(
-            new CsmWithTaskGetConfig(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->customer_service_metric_task()->byTask_id($taskId)->get(
+                new CsmWithTaskGetConfig(headers: $headers)
+            )->wait()
+        );
     }
 
     public function createCustomerServiceMetricTask(CreateServiceMetricsTaskRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->customer_service_metric_task()->post(
-            $body,
-            new Customer_service_metric_taskRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->customer_service_metric_task()->post(
+                $body,
+                new Customer_service_metric_taskRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     // ── Inventory Tasks ──────────────────────────────────────────────────────
@@ -190,34 +220,43 @@ final class FeedClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_task()->get(
-            new Inventory_taskRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Inventory_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    date_range: $dateRange,
-                    feed_type: $feedType,
-                    limit: $limit,
-                    look_back_days: $lookBackDays,
-                    offset: $offset,
-                    schedule_id: $scheduleId,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->inventory_task()->get(
+                new Inventory_taskRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Inventory_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        date_range: $dateRange,
+                        feed_type: $feedType,
+                        limit: $limit,
+                        look_back_days: $lookBackDays,
+                        offset: $offset,
+                        schedule_id: $scheduleId,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function getInventoryTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_task()->byTask_id($taskId)->get(
-            new InventoryWithTaskGetConfig(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->inventory_task()->byTask_id($taskId)->get(
+                new InventoryWithTaskGetConfig(headers: $headers)
+            )->wait()
+        );
     }
 
     public function createInventoryTask(CreateInventoryTaskRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->inventory_task()->post(
-            $body,
-            new Inventory_taskRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->inventory_task()->post(
+                $body,
+                new Inventory_taskRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     // ── Order Tasks ──────────────────────────────────────────────────────────
@@ -232,34 +271,43 @@ final class FeedClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->order_task()->get(
-            new Order_taskRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Order_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    date_range: $dateRange,
-                    feed_type: $feedType,
-                    limit: $limit,
-                    look_back_days: $lookBackDays,
-                    offset: $offset,
-                    schedule_id: $scheduleId,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->order_task()->get(
+                new Order_taskRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Order_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        date_range: $dateRange,
+                        feed_type: $feedType,
+                        limit: $limit,
+                        look_back_days: $lookBackDays,
+                        offset: $offset,
+                        schedule_id: $scheduleId,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function getOrderTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->order_task()->byTask_id($taskId)->get(
-            new OrderWithTaskGetConfig(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->order_task()->byTask_id($taskId)->get(
+                new OrderWithTaskGetConfig(headers: $headers)
+            )->wait()
+        );
     }
 
     public function createOrderTask(CreateOrderTaskRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->order_task()->post(
-            $body,
-            new Order_taskRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->order_task()->post(
+                $body,
+                new Order_taskRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     // ── Schedules ────────────────────────────────────────────────────────────
@@ -271,53 +319,71 @@ final class FeedClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->schedule()->get(
-            new ScheduleRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: ScheduleRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    feed_type: $feedType,
-                    limit: $limit,
-                    offset: $offset,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->schedule()->get(
+                new ScheduleRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: ScheduleRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        feed_type: $feedType,
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function getSchedule(string $scheduleId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->schedule()->bySchedule_id($scheduleId)->get(
-            new WithSchedule_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->schedule()->bySchedule_id($scheduleId)->get(
+                new WithSchedule_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function createSchedule(CreateUserScheduleRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->schedule()->post(
-            $body,
-            new ScheduleRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->schedule()->post(
+                $body,
+                new ScheduleRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function updateSchedule(string $scheduleId, UpdateUserScheduleRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->schedule()->bySchedule_id($scheduleId)->put(
-            $body,
-            new WithSchedule_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->schedule()->bySchedule_id($scheduleId)->put(
+                $body,
+                new WithSchedule_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function deleteSchedule(string $scheduleId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->schedule()->bySchedule_id($scheduleId)->delete(
-            new WithSchedule_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->schedule()->bySchedule_id($scheduleId)->delete(
+                new WithSchedule_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function getLatestResultFile(string $scheduleId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->schedule()->bySchedule_id($scheduleId)->download_result_file()->get(
-            new ScheduleDownloadResultConfig(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->schedule()->bySchedule_id($scheduleId)->download_result_file()->get(
+                new ScheduleDownloadResultConfig(headers: $headers)
+            )->wait()
+        );
     }
 
     // ── Schedule Templates ───────────────────────────────────────────────────
@@ -329,22 +395,45 @@ final class FeedClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->schedule_template()->get(
-            new Schedule_templateRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Schedule_templateRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    feed_type: $feedType,
-                    limit: $limit,
-                    offset: $offset,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->schedule_template()->get(
+                new Schedule_templateRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Schedule_templateRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        feed_type: $feedType,
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function getScheduleTemplate(string $scheduleTemplateId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->schedule_template()->bySchedule_template_id($scheduleTemplateId)->get(
-            new WithSchedule_template_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->schedule_template()->bySchedule_template_id($scheduleTemplateId)->get(
+                new WithSchedule_template_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    private function call(?string $accessToken, callable $op): mixed
+    {
+        $token = $accessToken ?? $this->config->accessToken
+            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set ListingManagementConfiguration::$accessToken.');
+        return $op($this->buildApiClient($token));
+    }
+
+    private function buildApiClient(string $token): FeedApiClient
+    {
+        $auth = new BaseBearerTokenAuthenticationProvider(
+            new KiotaAuthProvider($token, $this->config->getAllowedHosts())
+        );
+        $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
+        $adapter->setBaseUrl($this->config->feedBaseUrl);
+        return new FeedApiClient($adapter);
     }
 }
