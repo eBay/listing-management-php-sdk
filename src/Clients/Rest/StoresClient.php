@@ -151,8 +151,8 @@ final class StoresClient
 
     private function call(?string $accessToken, callable $op): mixed
     {
-        $token = $accessToken ?? $this->config->accessToken
-            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set ListingManagementConfiguration::$accessToken.');
+        $token = ($accessToken ?? $this->config->accessToken)
+            ?: throw new \RuntimeException('No access token. Pass $accessToken per-call or set ListingManagementConfiguration::$accessToken.');
         return $op($this->buildApiClient($token));
     }
 
