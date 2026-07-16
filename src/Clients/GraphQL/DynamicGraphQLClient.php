@@ -20,7 +20,6 @@ namespace EBay\ListingManagement\Clients\GraphQL;
 
 use EBay\ListingManagement\Configuration\ListingManagementConfiguration;
 use EBay\ListingManagement\Configuration\RequestOptions;
-use EBay\ListingManagement\Configuration\TokenContext;
 use EBay\ListingManagement\Exceptions\GraphQLException;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
@@ -41,15 +40,10 @@ final class DynamicGraphQLClient
      */
     public function execute(string $query, array $variables = [], ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
     {
-        $token = $accessToken ?? TokenContext::get() ?? $this->config->accessToken
-            ?? throw new \RuntimeException(
+        $token = ($accessToken ?? $this->config->accessToken)
+            ?: throw new \RuntimeException(
                 'No access token. Pass $accessToken per-call or set ListingManagementConfiguration::$accessToken.'
             );
-        if (empty($token)) {
-            throw new \RuntimeException(
-                'No access token. Pass $accessToken per-call or set ListingManagementConfiguration::$accessToken.'
-            );
-        }
 
         $payload = ['query' => $query];
         if (!empty($variables)) {
