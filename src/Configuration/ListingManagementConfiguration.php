@@ -20,22 +20,17 @@ namespace EBay\ListingManagement\Configuration;
 
 final class ListingManagementConfiguration
 {
-    public string $inventoryBaseUrl = 'https://api.ebay.com/sell/inventory/v1';
-    public string $feedBaseUrl      = 'https://api.ebay.com/sell/feed/v1';
-    public string $mediaBaseUrl     = 'https://api.ebay.com/commerce/media/v1_beta';
-    public string $storesBaseUrl    = 'https://api.ebay.com/sell/stores/v1';
-    public string $graphQLBaseUrl   = 'https://api.ebay.com/graphql';
+    public readonly RequestOptions $defaultRequestOptions;
 
-    /** Static fallback access token; per-call token takes precedence. */
-    public ?string $accessToken = null;
-
-    /** Default headers applied to every REST and GraphQL request. */
-    public RequestOptions $defaultRequestOptions;
-
-    public bool $diagnosticLogging = false;
-
-    public function __construct()
-    {
+    public function __construct(
+        public readonly string  $inventoryBaseUrl  = 'https://api.ebay.com/sell/inventory/v1',
+        public readonly string  $feedBaseUrl       = 'https://api.ebay.com/sell/feed/v1',
+        public readonly string  $mediaBaseUrl      = 'https://api.ebay.com/commerce/media/v1_beta',
+        public readonly string  $storesBaseUrl     = 'https://api.ebay.com/sell/stores/v1',
+        public readonly string  $graphQLBaseUrl    = 'https://api.ebay.com/graphql',
+        public readonly ?string $accessToken       = null,
+        public readonly bool    $diagnosticLogging = false,
+    ) {
         $this->defaultRequestOptions = new RequestOptions();
     }
 
