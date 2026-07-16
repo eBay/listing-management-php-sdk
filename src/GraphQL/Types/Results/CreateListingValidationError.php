@@ -31,6 +31,7 @@ readonly class CreateListingValidationError extends CreateListingOutput
 
     public function getTypename(): string { return 'CreateListingValidationError'; }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

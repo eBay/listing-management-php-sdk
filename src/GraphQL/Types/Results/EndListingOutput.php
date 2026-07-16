@@ -22,6 +22,7 @@ abstract readonly class EndListingOutput
 {
     abstract public function getTypename(): string;
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): EndListingSuccess|EndListingValidationError
     {
         return match ($data['__typename'] ?? null) {

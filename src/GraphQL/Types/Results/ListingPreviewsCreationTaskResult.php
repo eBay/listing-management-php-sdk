@@ -32,6 +32,7 @@ readonly class ListingPreviewsCreationTaskResult
         public array $unprocessedProducts = [],
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

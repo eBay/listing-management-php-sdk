@@ -22,6 +22,7 @@ abstract readonly class CreateSecondChanceListingOutput
 {
     abstract public function getTypename(): string;
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): CreateSecondChanceListingSuccess|CreateSecondChanceListingValidationError|CreateSecondChanceListingValidationSuccess
     {
         return match ($data['__typename'] ?? null) {

@@ -31,6 +31,7 @@ readonly class RelistListingValidationError extends RelistListingOutput
 
     public function getTypename(): string { return 'RelistListingValidationError'; }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

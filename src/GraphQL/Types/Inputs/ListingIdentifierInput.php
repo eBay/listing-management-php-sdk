@@ -25,6 +25,7 @@ readonly class ListingIdentifierInput
         public ?string $sku = null,
     ) {}
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         $data = [];
@@ -37,6 +38,7 @@ readonly class ListingIdentifierInput
         return $data;
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

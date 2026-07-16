@@ -28,6 +28,7 @@ readonly class CreateSecondChanceListingValidationSuccess extends CreateSecondCh
 
     public function getTypename(): string { return 'CreateSecondChanceListingValidationSuccess'; }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

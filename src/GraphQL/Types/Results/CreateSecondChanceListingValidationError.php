@@ -31,6 +31,7 @@ readonly class CreateSecondChanceListingValidationError extends CreateSecondChan
 
     public function getTypename(): string { return 'CreateSecondChanceListingValidationError'; }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

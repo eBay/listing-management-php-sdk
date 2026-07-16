@@ -30,6 +30,7 @@ readonly class CreateListingSuccess extends CreateListingOutput
 
     public function getTypename(): string { return 'CreateListingSuccess'; }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

@@ -22,6 +22,7 @@ abstract readonly class BulkUpdateInventoryOutput
 {
     abstract public function getTypename(): string;
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): BulkUpdateInventorySuccess|BulkUpdateInventoryPartialFailure|BulkUpdateInventoryFailure
     {
         return match ($data['__typename'] ?? null) {

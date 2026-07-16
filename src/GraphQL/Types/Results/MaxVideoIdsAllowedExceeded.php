@@ -26,6 +26,7 @@ readonly class MaxVideoIdsAllowedExceeded extends VideosByIdsOutput
 
     public function getTypename(): string { return 'MaxVideoIdsAllowedExceeded'; }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

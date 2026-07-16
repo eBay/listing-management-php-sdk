@@ -25,6 +25,7 @@ readonly class EndListingInput
         public ListingIdentifierInput $listingIdentifierInput,
     ) {}
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return [
@@ -33,6 +34,7 @@ readonly class EndListingInput
         ];
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

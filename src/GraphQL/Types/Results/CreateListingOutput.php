@@ -22,6 +22,7 @@ abstract readonly class CreateListingOutput
 {
     abstract public function getTypename(): string;
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): CreateListingSuccess|CreateListingValidationError|CreateListingValidationSuccess
     {
         return match ($data['__typename'] ?? null) {

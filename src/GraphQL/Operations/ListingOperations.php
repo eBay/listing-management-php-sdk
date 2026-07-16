@@ -22,56 +22,67 @@ final class ListingOperations
 {
     public static function BULK_UPDATE_INVENTORY(): string
     {
-        return file_get_contents(__DIR__ . '/bulkUpdateInventory.graphql');
+        return file_get_contents(__DIR__ . '/bulkUpdateInventory.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: bulkUpdateInventory.graphql');
     }
 
     public static function CREATE_LISTING(): string
     {
-        return file_get_contents(__DIR__ . '/createListing.graphql');
+        return file_get_contents(__DIR__ . '/createListing.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: createListing.graphql');
     }
 
     public static function CREATE_SECOND_CHANCE_LISTING(): string
     {
-        return file_get_contents(__DIR__ . '/createSecondChanceListing.graphql');
+        return file_get_contents(__DIR__ . '/createSecondChanceListing.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: createSecondChanceListing.graphql');
     }
 
     public static function END_LISTING(): string
     {
-        return file_get_contents(__DIR__ . '/endListing.graphql');
+        return file_get_contents(__DIR__ . '/endListing.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: endListing.graphql');
     }
 
     public static function LISTING_PREVIEWS_CREATION_TASK_BY_ID(): string
     {
-        return file_get_contents(__DIR__ . '/listingPreviewsCreationTaskById.graphql');
+        return file_get_contents(__DIR__ . '/listingPreviewsCreationTaskById.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: listingPreviewsCreationTaskById.graphql');
     }
 
     public static function RELIST_LISTING(): string
     {
-        return file_get_contents(__DIR__ . '/relistListing.graphql');
+        return file_get_contents(__DIR__ . '/relistListing.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: relistListing.graphql');
     }
 
     public static function SELLER_LISTINGS(): string
     {
-        return file_get_contents(__DIR__ . '/sellerListings.graphql');
+        return file_get_contents(__DIR__ . '/sellerListings.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: sellerListings.graphql');
     }
 
     public static function SELLER_LISTING_SEARCH(): string
     {
-        return file_get_contents(__DIR__ . '/sellerListingSearch.graphql');
+        return file_get_contents(__DIR__ . '/sellerListingSearch.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: sellerListingSearch.graphql');
     }
 
     public static function START_LISTING_PREVIEWS_CREATION(): string
     {
-        return file_get_contents(__DIR__ . '/startListingPreviewsCreation.graphql');
+        return file_get_contents(__DIR__ . '/startListingPreviewsCreation.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: startListingPreviewsCreation.graphql');
     }
 
     public static function UPDATE_LISTING(): string
     {
-        return file_get_contents(__DIR__ . '/updateListing.graphql');
+        return file_get_contents(__DIR__ . '/updateListing.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: updateListing.graphql');
     }
 
     public static function VIDEOS_BY_IDS(): string
     {
-        return file_get_contents(__DIR__ . '/videosByIds.graphql');
+        return file_get_contents(__DIR__ . '/videosByIds.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: videosByIds.graphql');
     }
 }

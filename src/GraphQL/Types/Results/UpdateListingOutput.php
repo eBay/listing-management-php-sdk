@@ -22,6 +22,7 @@ abstract readonly class UpdateListingOutput
 {
     abstract public function getTypename(): string;
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): UpdateListingSuccess|UpdateListingValidationError|UpdateListingValidationSuccess
     {
         return match ($data['__typename'] ?? null) {

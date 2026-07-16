@@ -26,6 +26,7 @@ abstract readonly class ActiveListingsOutput
 {
     abstract public function getTypename(): string;
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return match ($data['__typename'] ?? null) {

@@ -30,6 +30,7 @@ readonly class SellerListingSearchInvalidInput extends ActiveListingsOutput
         return 'SellerListingSearchInvalidInput';
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

@@ -24,16 +24,9 @@ use EBay\ListingManagement\Clients\Rest\FeedClient;
 use EBay\ListingManagement\Clients\Rest\InventoryClient;
 use EBay\ListingManagement\Clients\Rest\MediaClient;
 use EBay\ListingManagement\Clients\Rest\StoresClient;
-use EBay\ListingManagement\Configuration\KiotaAuthProvider;
 use EBay\ListingManagement\Configuration\ListingManagementConfiguration;
-use EBay\ListingManagement\Generated\Feed\FeedApiClient;
-use EBay\ListingManagement\Generated\Inventory\InventoryApiClient;
-use EBay\ListingManagement\Generated\Media\MediaApiClient;
-use EBay\ListingManagement\Generated\Stores\StoresApiClient;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\HandlerStack;
-use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
-use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -78,27 +71,10 @@ final class ListingManagementClient
     ) {
         $guzzle ??= $this->buildGuzzle($config);
 
-        $auth = new BaseBearerTokenAuthenticationProvider(new KiotaAuthProvider($config));
-
-        // Inventory
-        $inventoryAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $inventoryAdapter->setBaseUrl($config->inventoryBaseUrl);
-        $this->inventory = new InventoryClient(new InventoryApiClient($inventoryAdapter), $config);
-
-        // Feed
-        $feedAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $feedAdapter->setBaseUrl($config->feedBaseUrl);
-        $this->feed = new FeedClient(new FeedApiClient($feedAdapter), $config);
-
-        // Media
-        $mediaAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $mediaAdapter->setBaseUrl($config->mediaBaseUrl);
-        $this->media = new MediaClient(new MediaApiClient($mediaAdapter), $config);
-
-        // Stores
-        $storesAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $storesAdapter->setBaseUrl($config->storesBaseUrl);
-        $this->stores = new StoresClient(new StoresApiClient($storesAdapter), $config);
+        $this->inventory = new InventoryClient($guzzle, $config);
+        $this->feed      = new FeedClient($guzzle, $config);
+        $this->media     = new MediaClient($guzzle, $config);
+        $this->stores    = new StoresClient($guzzle, $config);
 
         // GraphQL (Guzzle shared — no Kiota involved)
         $this->graphQL = new ListingGraphQLClient(

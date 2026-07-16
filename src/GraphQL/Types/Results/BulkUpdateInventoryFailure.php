@@ -29,6 +29,7 @@ readonly class BulkUpdateInventoryFailure extends BulkUpdateInventoryOutput
 
     public function getTypename(): string { return 'BulkUpdateInventoryFailure'; }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

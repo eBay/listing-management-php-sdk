@@ -26,6 +26,7 @@ readonly class VideoByIdSuccess extends VideoResult
 
     public function getTypename(): string { return 'VideoByIdSuccess'; }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

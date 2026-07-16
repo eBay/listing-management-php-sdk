@@ -25,6 +25,7 @@ readonly class SellerListingsInput
         public array $listings,
     ) {}
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return [
@@ -32,6 +33,7 @@ readonly class SellerListingsInput
         ];
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

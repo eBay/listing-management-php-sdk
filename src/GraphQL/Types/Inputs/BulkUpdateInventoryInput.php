@@ -31,11 +31,13 @@ readonly class BulkUpdateInventoryInput
         public array $inventory,
     ) {}
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return ['inventory' => $this->inventory];
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

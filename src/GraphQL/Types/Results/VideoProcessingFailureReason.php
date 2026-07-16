@@ -30,6 +30,7 @@ readonly class VideoProcessingFailureReason
 
     public function getTypename(): string { return $this->typename; }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

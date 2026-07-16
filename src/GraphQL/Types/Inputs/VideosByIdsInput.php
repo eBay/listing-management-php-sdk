@@ -25,11 +25,13 @@ readonly class VideosByIdsInput
         public array $videoIds,
     ) {}
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return ['videoIds' => $this->videoIds];
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

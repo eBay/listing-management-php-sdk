@@ -30,6 +30,7 @@ readonly class UpdateListingSuccess extends UpdateListingOutput
 
     public function getTypename(): string { return 'UpdateListingSuccess'; }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

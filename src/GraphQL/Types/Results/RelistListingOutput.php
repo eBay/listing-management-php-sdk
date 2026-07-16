@@ -22,6 +22,7 @@ abstract readonly class RelistListingOutput
 {
     abstract public function getTypename(): string;
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): RelistListingSuccess|RelistListingValidationError|RelistListingValidationSuccess
     {
         return match ($data['__typename'] ?? null) {

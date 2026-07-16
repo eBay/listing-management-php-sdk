@@ -28,6 +28,7 @@ readonly class EndListingSuccess extends EndListingOutput
 
     public function getTypename(): string { return 'EndListingSuccess'; }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
