@@ -29,6 +29,7 @@ use EBay\ListingManagement\GraphQL\Types\Inputs\RelistListingInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\SellerListingsInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\StartListingPreviewsCreationInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\UpdateListingInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\VideosByIdsInput;
 use EBay\ListingManagement\GraphQL\Types\Results\BulkUpdateInventoryOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\CreateListingOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\CreateSecondChanceListingOutput;
@@ -39,6 +40,7 @@ use EBay\ListingManagement\GraphQL\Types\Results\SellerListingSearchResult;
 use EBay\ListingManagement\GraphQL\Types\Results\SellerListingsResult;
 use EBay\ListingManagement\GraphQL\Types\Results\StartListingPreviewsCreationOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\UpdateListingOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\VideosByIdsOutput;
 
 /**
  * Typed wrapper around the eBay GraphQL listing operations.
@@ -192,6 +194,20 @@ final class ListingGraphQLClient
             $requestOptions
         );
         return UpdateListingOutput::fromArray($data['updateListing'] ?? []);
+    }
+
+    /**
+     * Retrieve one or more videos by their IDs.
+     */
+    public function videosByIds(VideosByIdsInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): VideosByIdsOutput
+    {
+        $data = $this->dynamic->execute(
+            ListingOperations::VIDEOS_BY_IDS(),
+            ['input' => (object)$input->toArray()],
+            $accessToken,
+            $requestOptions
+        );
+        return VideosByIdsOutput::fromArray($data['videosByIds'] ?? []);
     }
 
     // ── Escape hatch ─────────────────────────────────────────────────────────

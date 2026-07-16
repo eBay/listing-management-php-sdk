@@ -27,6 +27,7 @@ use EBay\ListingManagement\GraphQL\Types\Inputs\RelistListingInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\SellerListingsInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\StartListingPreviewsCreationInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\UpdateListingInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\VideosByIdsInput;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -45,6 +46,7 @@ class ListingInputFixtureTest extends TestCase
         yield 'SellerListings'                  => ['sellerListings', SellerListingsInput::class];
         yield 'StartListingPreviewsCreation'    => ['startListingPreviewsCreation', StartListingPreviewsCreationInput::class];
         yield 'UpdateListing'                   => ['updateListing', UpdateListingInput::class];
+        yield 'VideosByIds'                     => ['videosByIds', VideosByIdsInput::class];
     }
 
     #[DataProvider('fixtures')]

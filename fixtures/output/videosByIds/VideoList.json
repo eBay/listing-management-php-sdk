@@ -1,0 +1,54 @@
+{
+  "videosByIds": {
+    "__typename": "VideoList",
+    "videoList": [
+      {
+        "__typename": "VideoByIdSuccess",
+        "video": {
+          "videoId": "84bdee03-ab43-47ed-aed4-ca25ae7ce98e",
+          "description": "Hello World",
+          "expiresAt": "2024-01-01T00:00:00.000Z",
+          "height": -91,
+          "moderation": {
+            "rejectReasons": [
+              "MAX_LENGTH_EXCEEDED",
+              "OFFENSIVE_CONTENT"
+            ]
+          },
+          "playlists": [
+            {
+              "playUrl": "https://example.com",
+              "protocol": "DASH"
+            },
+            {
+              "playUrl": "https://example.com",
+              "protocol": "HLS"
+            }
+          ],
+          "processingFailure": {
+            "__typename": "VideoSystemResourceError",
+            "category": "INTERNAL",
+            "message": "Hello World"
+          },
+          "size": -87,
+          "status": "PROCESSING_FAILED",
+          "thumbnail": {
+            "imageUrl": "https://example.com"
+          },
+          "title": "Hello World",
+          "videoDuration": "PT1H",
+          "width": 83
+        }
+      },
+      {
+        "__typename": "ReferenceArgumentsNotFound",
+        "argumentNames": [
+          "Hello World",
+          "Hello World"
+        ],
+        "errorCode": "Hello World",
+        "errorMessage": "Hello World"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "cases": [
+    {
+      "label": "with a single video ID",
+      "input": { "videoIds": ["mock-id"] },
+      "expected": { "videoIds": ["mock-id"] }
+    },
+    {
+      "label": "with multiple video IDs",
+      "input": { "videoIds": ["id-1", "id-2", "id-3"] },
+      "expected": { "videoIds": ["id-1", "id-2", "id-3"] }
+    }
+  ]
+}

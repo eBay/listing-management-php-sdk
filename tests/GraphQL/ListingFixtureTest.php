@@ -28,6 +28,7 @@ use EBay\ListingManagement\GraphQL\Types\Results\SellerListingSearchResult;
 use EBay\ListingManagement\GraphQL\Types\Results\SellerListingsResult;
 use EBay\ListingManagement\GraphQL\Types\Results\StartListingPreviewsCreationOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\UpdateListingOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\VideosByIdsOutput;
 use PHPUnit\Framework\TestCase;
 
 class ListingFixtureTest extends TestCase
@@ -43,6 +44,7 @@ class ListingFixtureTest extends TestCase
         'updateListing'                   => UpdateListingOutput::class,
         'startListingPreviewsCreation'    => StartListingPreviewsCreationOutput::class,
         'listingPreviewsCreationTaskById' => ListingPreviewsCreationTaskByIdOutput::class,
+        'videosByIds'                     => VideosByIdsOutput::class,
     ];
 
     #[\PHPUnit\Framework\Attributes\DataProvider('fixtures')]

@@ -69,4 +69,9 @@ final class ListingOperations
     {
         return file_get_contents(__DIR__ . '/updateListing.graphql');
     }
+
+    public static function VIDEOS_BY_IDS(): string
+    {
+        return file_get_contents(__DIR__ . '/videosByIds.graphql');
+    }
 }

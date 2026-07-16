@@ -1,0 +1,6 @@
+{
+  "videosByIds": {
+    "__typename": "MaxVideoIdsAllowedExceeded",
+    "maxAllowed": 5
+  }
+}
