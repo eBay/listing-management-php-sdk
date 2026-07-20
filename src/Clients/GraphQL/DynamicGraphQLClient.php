@@ -60,7 +60,7 @@ final class DynamicGraphQLClient
                 $headers[$key] = $value;
             }
         }
-        foreach ($requestOptions?->headers ?? [] as $key => $value) {
+        foreach ($requestOptions !== null ? $requestOptions->headers : [] as $key => $value) {
             if (!array_key_exists($key, $headers)) {
                 $headers[$key] = $value;
             }
