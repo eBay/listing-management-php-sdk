@@ -21,9 +21,11 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class ListingPreviewProductAspect
 {
     public function __construct(
-        /** @var string[] */
+        /** @var array<int, mixed> */
         public array $aspectValues = [],
-        public ?string $displayName = null,
+        public ?string $name = null,
+        /** @var ListingPreviewProductAspectValue[] */
+        public array $values = [],
     ) {}
 
     /** @param array<string, mixed> $data */
@@ -31,7 +33,8 @@ readonly class ListingPreviewProductAspect
     {
         return new self(
             aspectValues: $data['aspectValues'] ?? [],
-            displayName:  $data['displayName'] ?? null,
+            name: $data['name'] ?? null,
+            values: array_map(fn($item) => ListingPreviewProductAspectValue::fromArray($item), $data['values'] ?? []),
         );
     }
 }

@@ -28,7 +28,7 @@ readonly class Video
         public ?VideoModeration $moderation = null,
         /** @var VideoPlaylist[] */
         public array $playlists = [],
-        public ?VideoProcessingFailureReason $processingFailure = null,
+        public VideoCorruptedError|VideoInternalProcessingError|VideoInvalidInputValidationError|VideoInvalidMediaStreamError|VideoModerationFailedError|VideoPlaylistGenerationError|VideoProcessingTimeoutError|VideoSystemResourceError|VideoThumbnailGenerationError|null $processingFailure = null,
         public ?int $size = null,
         public ?string $status = null,
         public ?VideoThumbnail $thumbnail = null,
@@ -41,19 +41,19 @@ readonly class Video
     public static function fromArray(array $data): self
     {
         return new self(
-            videoId:           $data['videoId'] ?? null,
-            description:       $data['description'] ?? null,
-            expiresAt:         $data['expiresAt'] ?? null,
-            height:            isset($data['height']) ? (int)$data['height'] : null,
-            moderation:        isset($data['moderation']) ? VideoModeration::fromArray($data['moderation']) : null,
-            playlists:         array_map(static fn(array $p) => VideoPlaylist::fromArray($p), $data['playlists'] ?? []),
+            videoId: $data['videoId'] ?? null,
+            description: $data['description'] ?? null,
+            expiresAt: $data['expiresAt'] ?? null,
+            height: $data['height'] ?? null,
+            moderation: isset($data['moderation']) ? VideoModeration::fromArray($data['moderation']) : null,
+            playlists: array_map(fn($item) => VideoPlaylist::fromArray($item), $data['playlists'] ?? []),
             processingFailure: isset($data['processingFailure']) ? VideoProcessingFailureReason::fromArray($data['processingFailure']) : null,
-            size:              isset($data['size']) ? (int)$data['size'] : null,
-            status:            $data['status'] ?? null,
-            thumbnail:         isset($data['thumbnail']) ? VideoThumbnail::fromArray($data['thumbnail']) : null,
-            title:             $data['title'] ?? null,
-            videoDuration:     $data['videoDuration'] ?? null,
-            width:             isset($data['width']) ? (int)$data['width'] : null,
+            size: $data['size'] ?? null,
+            status: $data['status'] ?? null,
+            thumbnail: isset($data['thumbnail']) ? VideoThumbnail::fromArray($data['thumbnail']) : null,
+            title: $data['title'] ?? null,
+            videoDuration: $data['videoDuration'] ?? null,
+            width: $data['width'] ?? null,
         );
     }
 }

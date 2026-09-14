@@ -23,9 +23,7 @@ readonly class ListingWarning
     public function __construct(
         public ?string $warningCode = null,
         public ?string $warningMessage = null,
-        /** @var string[] */
-        public array $inputPath = [],
-        /** @var array<array{name: ?string, value: ?string}> */
+        /** @var NameValuePair[] */
         public array $additionalInformation = [],
     ) {}
 
@@ -33,10 +31,9 @@ readonly class ListingWarning
     public static function fromArray(array $data): self
     {
         return new self(
-            warningCode:           $data['warningCode'] ?? null,
-            warningMessage:        $data['warningMessage'] ?? null,
-            inputPath:             $data['inputPath'] ?? [],
-            additionalInformation: $data['additionalInformation'] ?? [],
+            warningCode: $data['warningCode'] ?? null,
+            warningMessage: $data['warningMessage'] ?? null,
+            additionalInformation: array_map(fn($item) => NameValuePair::fromArray($item), $data['additionalInformation'] ?? []),
         );
     }
 }

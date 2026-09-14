@@ -21,19 +21,18 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class ListingItem
 {
     public function __construct(
-        public ?string $itemId = null,
         public ?string $sku = null,
-        /** @var array{pricingTerms: array{fixedPrice: array{value: string, currency: string}|null}|null, availability: array{quantityAvailable: ?int}|null}|null */
-        public ?array $itemTerms = null,
+        public ?ItemTerms $itemTerms = null,
+        public ?string $itemId = null,
     ) {}
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            itemId:    $data['itemId'] ?? null,
-            sku:       $data['sku'] ?? null,
-            itemTerms: $data['itemTerms'] ?? null,
+            sku: $data['sku'] ?? null,
+            itemTerms: isset($data['itemTerms']) ? ItemTerms::fromArray($data['itemTerms']) : null,
+            itemId: $data['itemId'] ?? null,
         );
     }
 }

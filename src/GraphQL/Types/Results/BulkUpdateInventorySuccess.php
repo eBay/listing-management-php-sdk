@@ -18,20 +18,18 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-readonly class BulkUpdateInventorySuccess extends BulkUpdateInventoryOutput
+readonly class BulkUpdateInventorySuccess
 {
     public function __construct(
-        /** @var BulkInventorySuccessItem[] */
+        /** @var UpdateInventorySuccess[] */
         public array $successes = [],
     ) {}
-
-    public function getTypename(): string { return 'BulkUpdateInventorySuccess'; }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            successes: array_map(fn($s) => BulkInventorySuccessItem::fromArray($s), $data['successes'] ?? []),
+            successes: array_map(fn($item) => UpdateInventorySuccess::fromArray($item), $data['successes'] ?? []),
         );
     }
 }

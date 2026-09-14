@@ -22,22 +22,33 @@ use EBay\ListingManagement\Configuration\KiotaAuthProvider;
 use EBay\ListingManagement\Configuration\ListingManagementConfiguration;
 use EBay\ListingManagement\Configuration\RequestOptions;
 use EBay\ListingManagement\Generated\Inventory\InventoryApiClient;
+use EBay\ListingManagement\Generated\Inventory\Models\BaseResponse;
+use EBay\ListingManagement\Generated\Inventory\Models\BulkEbayOfferDetailsWithKeys;
 use EBay\ListingManagement\Generated\Inventory\Models\BulkGetInventoryItem;
+use EBay\ListingManagement\Generated\Inventory\Models\BulkGetInventoryItemResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\BulkInventoryItem;
+use EBay\ListingManagement\Generated\Inventory\Models\BulkInventoryItemResponse;
+use EBay\ListingManagement\Generated\Inventory\Models\BulkMigrateListing;
+use EBay\ListingManagement\Generated\Inventory\Models\BulkMigrateListingResponse;
+use EBay\ListingManagement\Generated\Inventory\Models\BulkOffer;
 use EBay\ListingManagement\Generated\Inventory\Models\BulkOfferResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\BulkPriceQuantity;
+use EBay\ListingManagement\Generated\Inventory\Models\BulkPriceQuantityResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\BulkPublishResponse;
-use EBay\ListingManagement\Generated\Inventory\Models\EbayOfferDetailsWithKeys;
+use EBay\ListingManagement\Generated\Inventory\Models\Compatibility;
+use EBay\ListingManagement\Generated\Inventory\Models\EbayOfferDetailsWithAll;
 use EBay\ListingManagement\Generated\Inventory\Models\EbayOfferDetailsWithId;
-use EBay\ListingManagement\Generated\Inventory\Models\InventoryItems;
+use EBay\ListingManagement\Generated\Inventory\Models\EbayOfferDetailsWithKeys;
 use EBay\ListingManagement\Generated\Inventory\Models\FeesSummaryResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\InventoryItem;
 use EBay\ListingManagement\Generated\Inventory\Models\InventoryItemGroup;
-use EBay\ListingManagement\Generated\Inventory\Models\LocationResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\InventoryItemWithSkuLocaleGroupid;
+use EBay\ListingManagement\Generated\Inventory\Models\InventoryItems;
+use EBay\ListingManagement\Generated\Inventory\Models\InventoryLocation;
 use EBay\ListingManagement\Generated\Inventory\Models\InventoryLocationFull;
 use EBay\ListingManagement\Generated\Inventory\Models\InventoryLocationResponse;
-use EBay\ListingManagement\Generated\Inventory\Models\BulkMigrateListing;
+use EBay\ListingManagement\Generated\Inventory\Models\LocationMapping;
+use EBay\ListingManagement\Generated\Inventory\Models\LocationResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\OfferKeysWithId;
 use EBay\ListingManagement\Generated\Inventory\Models\OfferResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\Offers;
@@ -45,24 +56,22 @@ use EBay\ListingManagement\Generated\Inventory\Models\PublishByInventoryItemGrou
 use EBay\ListingManagement\Generated\Inventory\Models\PublishResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\WithdrawByInventoryItemGroupRequest;
 use EBay\ListingManagement\Generated\Inventory\Models\WithdrawResponse;
-use EBay\ListingManagement\Generated\Inventory\Models\Compatibility;
-use EBay\ListingManagement\Generated\Inventory\Models\BaseResponse;
 use EBay\ListingManagement\Generated\Inventory\Bulk_create_offer\Bulk_create_offerRequestBuilderPostRequestConfiguration;
 use EBay\ListingManagement\Generated\Inventory\Bulk_create_or_replace_inventory_item\Bulk_create_or_replace_inventory_itemRequestBuilderPostRequestConfiguration;
 use EBay\ListingManagement\Generated\Inventory\Bulk_get_inventory_item\Bulk_get_inventory_itemRequestBuilderPostRequestConfiguration;
 use EBay\ListingManagement\Generated\Inventory\Bulk_migrate_listing\Bulk_migrate_listingRequestBuilderPostRequestConfiguration;
 use EBay\ListingManagement\Generated\Inventory\Bulk_publish_offer\Bulk_publish_offerRequestBuilderPostRequestConfiguration;
 use EBay\ListingManagement\Generated\Inventory\Bulk_update_price_quantity\Bulk_update_price_quantityRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Inventory_itemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderDeleteRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderPutRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderDeleteRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderPutRequestConfiguration;
 use EBay\ListingManagement\Generated\Inventory\Inventory_item_group\Item\WithInventoryItemGroupKeyItemRequestBuilderDeleteRequestConfiguration;
 use EBay\ListingManagement\Generated\Inventory\Inventory_item_group\Item\WithInventoryItemGroupKeyItemRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Inventory\Inventory_item_group\Item\WithInventoryItemGroupKeyItemRequestBuilderPutRequestConfiguration;
+use EBay\ListingManagement\Generated\Inventory\Inventory_item\Inventory_itemRequestBuilderGetRequestConfiguration;
+use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderDeleteRequestConfiguration;
+use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderGetRequestConfiguration;
+use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderPutRequestConfiguration;
+use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderDeleteRequestConfiguration;
+use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderGetRequestConfiguration;
+use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderPutRequestConfiguration;
 use EBay\ListingManagement\Generated\Inventory\Listing\Item\Sku\Item\Locations\LocationsRequestBuilderDeleteRequestConfiguration;
 use EBay\ListingManagement\Generated\Inventory\Listing\Item\Sku\Item\Locations\LocationsRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Inventory\Listing\Item\Sku\Item\Locations\LocationsRequestBuilderPutRequestConfiguration;
@@ -94,12 +103,7 @@ final class InventoryClient
         private readonly ListingManagementConfiguration $config,
     ) {}
 
-    /**
-     * Merge default headers with per-request headers.
-     * Default headers fill first; per-request headers fill any remaining gaps.
-     *
-     * @return array<string,string>
-     */
+    /** @return array<string, string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
     {
         return array_merge(
@@ -108,7 +112,38 @@ final class InventoryClient
         );
     }
 
-    // ── Inventory Items ──────────────────────────────────────────────────────
+    public function bulkCreateOrReplaceInventoryItem(BulkInventoryItem $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkInventoryItemResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->bulk_create_or_replace_inventory_item()->post(
+                $body,
+                new Bulk_create_or_replace_inventory_itemRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function bulkGetInventoryItem(BulkGetInventoryItem $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkGetInventoryItemResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->bulk_get_inventory_item()->post(
+                $body,
+                new Bulk_get_inventory_itemRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function bulkUpdatePriceQuantity(BulkPriceQuantity $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkPriceQuantityResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->bulk_update_price_quantity()->post(
+                $body,
+                new Bulk_update_price_quantityRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
 
     public function getInventoryItem(string $sku, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?InventoryItemWithSkuLocaleGroupid
     {
@@ -120,7 +155,12 @@ final class InventoryClient
         );
     }
 
-    public function createOrReplaceInventoryItem(string $sku, InventoryItem $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BaseResponse
+    public function createOrReplaceInventoryItem(
+        string $sku,
+        InventoryItem $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?BaseResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
@@ -146,7 +186,8 @@ final class InventoryClient
         ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ?InventoryItems {
+    ): ?InventoryItems
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->inventory_item()->get(
@@ -161,63 +202,6 @@ final class InventoryClient
         );
     }
 
-    public function bulkGetInventoryItem(BulkGetInventoryItem $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->bulk_get_inventory_item()->post(
-                $body,
-                new Bulk_get_inventory_itemRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function bulkCreateOrReplaceInventoryItem(BulkInventoryItem $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->bulk_create_or_replace_inventory_item()->post(
-                $body,
-                new Bulk_create_or_replace_inventory_itemRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    // ── Inventory Item Groups ────────────────────────────────────────────────
-
-    public function getInventoryItemGroup(string $inventoryItemGroupKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?InventoryItemGroup
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->get(
-                new WithInventoryItemGroupKeyItemRequestBuilderGetRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function createOrReplaceInventoryItemGroup(string $inventoryItemGroupKey, InventoryItemGroup $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BaseResponse
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->put(
-                $body,
-                new WithInventoryItemGroupKeyItemRequestBuilderPutRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function deleteInventoryItemGroup(string $inventoryItemGroupKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
-            $api->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->delete(
-                new WithInventoryItemGroupKeyItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    // ── Product Compatibility ────────────────────────────────────────────────
-
     public function getProductCompatibility(string $sku, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Compatibility
     {
         $headers = $this->mergedHeaders($requestOptions);
@@ -228,7 +212,12 @@ final class InventoryClient
         );
     }
 
-    public function createOrReplaceProductCompatibility(string $sku, Compatibility $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BaseResponse
+    public function createOrReplaceProductCompatibility(
+        string $sku,
+        Compatibility $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?BaseResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
@@ -249,9 +238,59 @@ final class InventoryClient
         );
     }
 
-    // ── SKU-Location Mapping ─────────────────────────────────────────────────
+    public function getInventoryItemGroup(string $inventoryItemGroupKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?InventoryItemGroup
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->get(
+                new WithInventoryItemGroupKeyItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
 
-    public function getSkuLocationMapping(string $listingId, string $sku, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function createOrReplaceInventoryItemGroup(
+        string $inventoryItemGroupKey,
+        InventoryItemGroup $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?BaseResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->put(
+                $body,
+                new WithInventoryItemGroupKeyItemRequestBuilderPutRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function deleteInventoryItemGroup(string $inventoryItemGroupKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->delete(
+                new WithInventoryItemGroupKeyItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function bulkMigrateListing(BulkMigrateListing $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkMigrateListingResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->bulk_migrate_listing()->post(
+                $body,
+                new Bulk_migrate_listingRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getSkuLocationMapping(
+        string $listingId,
+        string $sku,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?LocationMapping
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
@@ -261,10 +300,16 @@ final class InventoryClient
         );
     }
 
-    public function createOrReplaceSkuLocationMapping(string $listingId, string $sku, mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function createOrReplaceSkuLocationMapping(
+        string $listingId,
+        string $sku,
+        LocationMapping $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void
     {
         $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
+        $this->call($accessToken, fn($api) =>
             $api->listing()->byListingId($listingId)->sku()->bySku($sku)->locations()->put(
                 $body,
                 new LocationsRequestBuilderPutRequestConfiguration(headers: $headers)
@@ -272,7 +317,12 @@ final class InventoryClient
         );
     }
 
-    public function deleteSkuLocationMapping(string $listingId, string $sku, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    public function deleteSkuLocationMapping(
+        string $listingId,
+        string $sku,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void
     {
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
@@ -282,98 +332,24 @@ final class InventoryClient
         );
     }
 
-    // ── Inventory Locations ──────────────────────────────────────────────────
-
-    public function getInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?InventoryLocationResponse
+    public function bulkCreateOffer(BulkEbayOfferDetailsWithKeys $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkOfferResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
-            $api->location()->byMerchantLocationKey($merchantLocationKey)->get(
-                new WithMerchantLocationKeyItemRequestBuilderGetRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function getInventoryLocations(
-        ?string $limit = null,
-        ?string $offset = null,
-        ?string $accessToken = null,
-        ?RequestOptions $requestOptions = null,
-    ): ?LocationResponse {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->location()->get(
-                new LocationRequestBuilderGetRequestConfiguration(
-                    headers: $headers,
-                    queryParameters: LocationRequestBuilderGetRequestConfiguration::createQueryParameters(
-                        limit: $limit,
-                        offset: $offset,
-                    ),
-                )
-            )->wait()
-        );
-    }
-
-    public function createInventoryLocation(string $merchantLocationKey, InventoryLocationFull $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
-            $api->location()->byMerchantLocationKey($merchantLocationKey)->post(
+            $api->bulk_create_offer()->post(
                 $body,
-                new WithMerchantLocationKeyItemRequestBuilderPostRequestConfiguration(headers: $headers)
+                new Bulk_create_offerRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
-    public function deleteInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    public function bulkPublishOffer(BulkOffer $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkPublishResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
-            $api->location()->byMerchantLocationKey($merchantLocationKey)->delete(
-                new WithMerchantLocationKeyItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function updateInventoryLocation(string $merchantLocationKey, mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
-            $api->location()->byMerchantLocationKey($merchantLocationKey)->update_location_details()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->bulk_publish_offer()->post(
                 $body,
-                new Update_location_detailsRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function disableInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->location()->byMerchantLocationKey($merchantLocationKey)->disable()->post(
-                new DisableRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function enableInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->location()->byMerchantLocationKey($merchantLocationKey)->enable()->post(
-                new EnableRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    // ── Offers ───────────────────────────────────────────────────────────────
-
-    public function getOffer(string $offerId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->offer()->byOfferId($offerId)->get(
-                new WithOfferItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new Bulk_publish_offerRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -386,7 +362,8 @@ final class InventoryClient
         ?string $sku = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ?Offers {
+    ): ?Offers
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->offer()->get(
@@ -415,7 +392,22 @@ final class InventoryClient
         );
     }
 
-    public function updateOffer(string $offerId, EbayOfferDetailsWithId $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getOffer(string $offerId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?EbayOfferDetailsWithAll
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->offer()->byOfferId($offerId)->get(
+                new WithOfferItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function updateOffer(
+        string $offerId,
+        EbayOfferDetailsWithId $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?OfferResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
@@ -436,26 +428,6 @@ final class InventoryClient
         );
     }
 
-    public function publishOffer(string $offerId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?PublishResponse
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->offer()->byOfferId($offerId)->publish()->post(
-                new PublishRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function withdrawOffer(string $offerId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?WithdrawResponse
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->offer()->byOfferId($offerId)->withdraw()->post(
-                new WithdrawRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
     public function getListingFees(OfferKeysWithId $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?FeesSummaryResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
@@ -467,24 +439,12 @@ final class InventoryClient
         );
     }
 
-    public function bulkCreateOffer(mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkOfferResponse
+    public function publishOffer(string $offerId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?PublishResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
-            $api->bulk_create_offer()->post(
-                $body,
-                new Bulk_create_offerRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function bulkPublishOffer(mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkPublishResponse
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->bulk_publish_offer()->post(
-                $body,
-                new Bulk_publish_offerRequestBuilderPostRequestConfiguration(headers: $headers)
+            $api->offer()->byOfferId($offerId)->publish()->post(
+                new PublishRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -500,10 +460,20 @@ final class InventoryClient
         );
     }
 
-    public function withdrawOfferByInventoryItemGroup(WithdrawByInventoryItemGroupRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function withdrawOffer(string $offerId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?WithdrawResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
+            $api->offer()->byOfferId($offerId)->withdraw()->post(
+                new WithdrawRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function withdrawOfferByInventoryItemGroup(WithdrawByInventoryItemGroupRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
             $api->offer()->withdraw_by_inventory_item_group()->post(
                 $body,
                 new Withdraw_by_inventory_item_groupRequestBuilderPostRequestConfiguration(headers: $headers)
@@ -511,26 +481,95 @@ final class InventoryClient
         );
     }
 
-    // ── Bulk Operations ──────────────────────────────────────────────────────
-
-    public function bulkMigrateListing(BulkMigrateListing $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?InventoryLocationResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
-            $api->bulk_migrate_listing()->post(
-                $body,
-                new Bulk_migrate_listingRequestBuilderPostRequestConfiguration(headers: $headers)
+            $api->location()->byMerchantLocationKey($merchantLocationKey)->get(
+                new WithMerchantLocationKeyItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
-    public function bulkUpdatePriceQuantity(BulkPriceQuantity $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function createInventoryLocation(
+        string $merchantLocationKey,
+        InventoryLocationFull $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->location()->byMerchantLocationKey($merchantLocationKey)->post(
+                $body,
+                new WithMerchantLocationKeyItemRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function deleteInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->location()->byMerchantLocationKey($merchantLocationKey)->delete(
+                new WithMerchantLocationKeyItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function disableInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
-            $api->bulk_update_price_quantity()->post(
+            $api->location()->byMerchantLocationKey($merchantLocationKey)->disable()->post(
+                new DisableRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function enableInventoryLocation(string $merchantLocationKey, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->location()->byMerchantLocationKey($merchantLocationKey)->enable()->post(
+                new EnableRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getInventoryLocations(
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?LocationResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->location()->get(
+                new LocationRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: LocationRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
+            )->wait()
+        );
+    }
+
+    public function updateInventoryLocation(
+        string $merchantLocationKey,
+        InventoryLocation $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->location()->byMerchantLocationKey($merchantLocationKey)->update_location_details()->post(
                 $body,
-                new Bulk_update_price_quantityRequestBuilderPostRequestConfiguration(headers: $headers)
+                new Update_location_detailsRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

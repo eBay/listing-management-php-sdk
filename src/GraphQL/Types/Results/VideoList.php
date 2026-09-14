@@ -18,23 +18,18 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-readonly class VideoList extends VideosByIdsOutput
+readonly class VideoList
 {
     public function __construct(
-        /** @var VideoResult[] */
+        /** @var (ReferenceArgumentsNotFound|VideoByIdSuccess)[] */
         public array $videoList = [],
     ) {}
-
-    public function getTypename(): string { return 'VideoList'; }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            videoList: array_map(
-                static fn(array $v) => VideoResult::fromArray($v),
-                $data['videoList'] ?? [],
-            ),
+            videoList: array_map(fn($item) => VideoResult::fromArray($item), $data['videoList'] ?? []),
         );
     }
 }

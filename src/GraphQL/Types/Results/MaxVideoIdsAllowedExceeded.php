@@ -18,19 +18,17 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-readonly class MaxVideoIdsAllowedExceeded extends VideosByIdsOutput
+readonly class MaxVideoIdsAllowedExceeded
 {
     public function __construct(
         public ?int $maxAllowed = null,
     ) {}
 
-    public function getTypename(): string { return 'MaxVideoIdsAllowedExceeded'; }
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            maxAllowed: isset($data['maxAllowed']) ? (int)$data['maxAllowed'] : null,
+            maxAllowed: $data['maxAllowed'] ?? null,
         );
     }
 }

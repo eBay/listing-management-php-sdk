@@ -18,28 +18,43 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Inputs;
 
-/**
- * Input for the createSecondChanceListing mutation.
- * Accepts the full input payload as a raw array due to the deeply nested structure.
- *
- * @param array<string, mixed> $data Full CreateSecondChanceListingInput payload.
- */
 readonly class CreateSecondChanceListingInput
 {
     public function __construct(
-        /** @var array<string, mixed> */
-        private array $data,
+        public ListingIdentifierInput $listingIdentifier,
+        public SecondChanceListingTermsInput $listingTerms,
+        public string $marketplace,
+        public string $recipientUserId,
+        public ?ListingOptionsInput $options = null,
+        public ?string $sellerMessage = null,
     ) {}
-
-    /** @return array<string, mixed> */
-    public function toArray(): array
-    {
-        return $this->data;
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
-        return new self(data: $data);
+        return new self(
+            listingIdentifier: ListingIdentifierInput::fromArray($data['listingIdentifier']),
+            listingTerms: SecondChanceListingTermsInput::fromArray($data['listingTerms']),
+            marketplace: $data['marketplace'],
+            options: isset($data['options']) ? ListingOptionsInput::fromArray($data['options']) : null,
+            recipientUserId: $data['recipientUserId'],
+            sellerMessage: $data['sellerMessage'] ?? null,
+        );
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return array_filter(
+            [
+                'listingIdentifier' => (object)$this->listingIdentifier->toArray(),
+                'listingTerms' => (object)$this->listingTerms->toArray(),
+                'marketplace' => $this->marketplace,
+                'options' => $this->options !== null ? (object)$this->options->toArray() : null,
+                'recipientUserId' => $this->recipientUserId,
+                'sellerMessage' => $this->sellerMessage,
+            ],
+            static fn($value) => $value !== null,
+        );
     }
 }

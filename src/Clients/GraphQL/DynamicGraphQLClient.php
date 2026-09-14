@@ -50,7 +50,6 @@ final class DynamicGraphQLClient
             $payload['variables'] = $variables;
         }
 
-        // Build merged headers: defaults first, then per-request fills gaps.
         $headers = [
             'Authorization' => 'Bearer ' . $token,
             'Content-Type'  => 'application/json',

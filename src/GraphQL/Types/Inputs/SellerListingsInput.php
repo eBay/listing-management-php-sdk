@@ -25,19 +25,19 @@ readonly class SellerListingsInput
         public array $listings,
     ) {}
 
-    /** @return array<string, mixed> */
-    public function toArray(): array
-    {
-        return [
-            'listings' => array_map(fn(SellerListingInput $l) => $l->toArray(), $this->listings),
-        ];
-    }
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            listings: array_map(fn($i) => SellerListingInput::fromArray($i), $data['listings'] ?? []),
+            listings: array_map(fn($item) => SellerListingInput::fromArray($item), $data['listings']),
         );
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return [
+                'listings' => array_map(fn(SellerListingInput $item) => $item->toArray(), $this->listings),
+        ];
     }
 }

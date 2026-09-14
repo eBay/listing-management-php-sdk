@@ -22,8 +22,12 @@ readonly class SellerListing
 {
     public function __construct(
         public ?string $listingId = null,
-        /** @var array<string, mixed>|null Full listing detail including listingTerms, sellerProduct, etc. */
-        public ?array $listing = null,
+        public ?string $sku = null,
+        public ?string $marketplace = null,
+        public ?SellerProduct $sellerProduct = null,
+        /** @var ListingItem[] */
+        public array $items = [],
+        public ?ListingTerms $listingTerms = null,
     ) {}
 
     /** @param array<string, mixed> $data */
@@ -31,7 +35,11 @@ readonly class SellerListing
     {
         return new self(
             listingId: $data['listingId'] ?? null,
-            listing:   $data['listing'] ?? null,
+            sku: $data['sku'] ?? null,
+            marketplace: $data['marketplace'] ?? null,
+            sellerProduct: isset($data['sellerProduct']) ? SellerProduct::fromArray($data['sellerProduct']) : null,
+            items: array_map(fn($item) => ListingItem::fromArray($item), $data['items'] ?? []),
+            listingTerms: isset($data['listingTerms']) ? ListingTerms::fromArray($data['listingTerms']) : null,
         );
     }
 }

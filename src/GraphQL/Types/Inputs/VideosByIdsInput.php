@@ -21,21 +21,23 @@ namespace EBay\ListingManagement\GraphQL\Types\Inputs;
 readonly class VideosByIdsInput
 {
     public function __construct(
-        /** @var string[] */
+        /** @var array<int, mixed> */
         public array $videoIds,
     ) {}
-
-    /** @return array<string, mixed> */
-    public function toArray(): array
-    {
-        return ['videoIds' => $this->videoIds];
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            videoIds: $data['videoIds'] ?? [],
+            videoIds: $data['videoIds'],
         );
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return [
+                'videoIds' => $this->videoIds,
+        ];
     }
 }

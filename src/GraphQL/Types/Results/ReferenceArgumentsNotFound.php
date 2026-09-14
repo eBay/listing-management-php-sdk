@@ -18,24 +18,22 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-readonly class ReferenceArgumentsNotFound extends VideoResult
+readonly class ReferenceArgumentsNotFound
 {
     public function __construct(
-        /** @var string[] */
+        /** @var array<int, mixed> */
         public array $argumentNames = [],
         public ?string $errorCode = null,
         public ?string $errorMessage = null,
     ) {}
-
-    public function getTypename(): string { return 'ReferenceArgumentsNotFound'; }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
             argumentNames: $data['argumentNames'] ?? [],
-            errorCode:     $data['errorCode'] ?? null,
-            errorMessage:  $data['errorMessage'] ?? null,
+            errorCode: $data['errorCode'] ?? null,
+            errorMessage: $data['errorMessage'] ?? null,
         );
     }
 }

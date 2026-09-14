@@ -24,6 +24,10 @@ use EBay\ListingManagement\Configuration\RequestOptions;
 use EBay\ListingManagement\Generated\Stores\StoresApiClient;
 use EBay\ListingManagement\Generated\Stores\Models\AddStoreCategoryRequestType;
 use EBay\ListingManagement\Generated\Stores\Models\DeleteStoreCategoryRequestType;
+use EBay\ListingManagement\Generated\Stores\Models\GetStoreCategoriesResponseType;
+use EBay\ListingManagement\Generated\Stores\Models\GetStoreResponseType;
+use EBay\ListingManagement\Generated\Stores\Models\GetStoreTaskResponseType;
+use EBay\ListingManagement\Generated\Stores\Models\GetStoreTasksResponseType;
 use EBay\ListingManagement\Generated\Stores\Models\MoveStoreCategoryRequestType;
 use EBay\ListingManagement\Generated\Stores\Models\RenameStoreCategoryRequestType;
 use EBay\ListingManagement\Generated\Stores\Store\Categories\CategoriesRequestBuilderGetRequestConfiguration;
@@ -45,12 +49,7 @@ final class StoresClient
         private readonly ListingManagementConfiguration $config,
     ) {}
 
-    /**
-     * Merge default headers with per-request headers.
-     * Default headers fill first; per-request headers fill any remaining gaps.
-     *
-     * @return array<string,string>
-     */
+    /** @return array<string, string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
     {
         return array_merge(
@@ -59,21 +58,7 @@ final class StoresClient
         );
     }
 
-    // ── Store ────────────────────────────────────────────────────────────────
-
-    public function getStore(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->store()->get(
-                new StoreRequestBuilderGetRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    // ── Store Categories ─────────────────────────────────────────────────────
-
-    public function getStoreCategories(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getStoreCategories(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?GetStoreCategoriesResponseType
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
@@ -83,10 +68,10 @@ final class StoresClient
         );
     }
 
-    public function addStoreCategory(AddStoreCategoryRequestType $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function addStoreCategory(AddStoreCategoryRequestType $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
+        $this->call($accessToken, fn($api) =>
             $api->store()->categories()->post(
                 $body,
                 new CategoriesRequestBuilderPostRequestConfiguration(headers: $headers)
@@ -94,7 +79,28 @@ final class StoresClient
         );
     }
 
-    public function deleteStoreCategory(string $categoryId, DeleteStoreCategoryRequestType $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    public function renameStoreCategory(
+        string $categoryId,
+        RenameStoreCategoryRequestType $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->store()->categories()->byCategory_id($categoryId)->put(
+                $body,
+                new WithCategory_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function deleteStoreCategory(
+        string $categoryId,
+        DeleteStoreCategoryRequestType $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void
     {
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
@@ -105,31 +111,27 @@ final class StoresClient
         );
     }
 
-    public function renameStoreCategory(string $categoryId, RenameStoreCategoryRequestType $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getStore(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?GetStoreResponseType
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
-            $api->store()->categories()->byCategory_id($categoryId)->put(
-                $body,
-                new WithCategory_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+            $api->store()->get(
+                new StoreRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
-    public function moveStoreCategory(MoveStoreCategoryRequestType $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getStoreTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?GetStoreTaskResponseType
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
-            $api->store()->categories()->move_category()->post(
-                $body,
-                new Move_categoryRequestBuilderPostRequestConfiguration(headers: $headers)
+            $api->store()->tasks()->byTask_id($taskId)->get(
+                new WithTask_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
-    // ── Store Tasks ──────────────────────────────────────────────────────────
-
-    public function getStoreTasks(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getStoreTasks(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?GetStoreTasksResponseType
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
@@ -139,12 +141,13 @@ final class StoresClient
         );
     }
 
-    public function getStoreTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function moveStoreCategory(MoveStoreCategoryRequestType $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->store()->tasks()->byTask_id($taskId)->get(
-                new WithTask_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+        $this->call($accessToken, fn($api) =>
+            $api->store()->categories()->move_category()->post(
+                $body,
+                new Move_categoryRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

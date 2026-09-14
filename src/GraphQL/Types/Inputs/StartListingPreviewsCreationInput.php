@@ -21,19 +21,26 @@ namespace EBay\ListingManagement\GraphQL\Types\Inputs;
 readonly class StartListingPreviewsCreationInput
 {
     public function __construct(
-        /** @var array<string, mixed> */
-        private array $data,
+        /** @var ExternalProductDetailsInput[] */
+        public ?array $externalProducts = null,
     ) {}
-
-    /** @return array<string, mixed> */
-    public function toArray(): array
-    {
-        return $this->data;
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
-        return new self(data: $data);
+        return new self(
+            externalProducts: array_map(fn($item) => ExternalProductDetailsInput::fromArray($item), $data['externalProducts'] ?? []),
+        );
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return array_filter(
+            [
+                'externalProducts' => $this->externalProducts !== null ? array_map(fn(ExternalProductDetailsInput $item) => $item->toArray(), $this->externalProducts) : null,
+            ],
+            static fn($value) => $value !== null,
+        );
     }
 }

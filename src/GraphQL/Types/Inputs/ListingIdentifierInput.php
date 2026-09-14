@@ -25,25 +25,24 @@ readonly class ListingIdentifierInput
         public ?string $sku = null,
     ) {}
 
-    /** @return array<string, mixed> */
-    public function toArray(): array
-    {
-        $data = [];
-        if ($this->listingId !== null) {
-            $data['listingId'] = $this->listingId;
-        }
-        if ($this->sku !== null) {
-            $data['sku'] = $this->sku;
-        }
-        return $data;
-    }
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
             listingId: $data['listingId'] ?? null,
             sku: $data['sku'] ?? null,
+        );
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return array_filter(
+            [
+                'listingId' => $this->listingId,
+                'sku' => $this->sku,
+            ],
+            static fn($value) => $value !== null,
         );
     }
 }

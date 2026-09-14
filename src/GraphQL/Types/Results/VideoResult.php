@@ -20,14 +20,12 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 
 abstract readonly class VideoResult
 {
-    abstract public function getTypename(): string;
-
     /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): ReferenceArgumentsNotFound|VideoByIdSuccess
     {
         return match ($data['__typename'] ?? null) {
             'ReferenceArgumentsNotFound' => ReferenceArgumentsNotFound::fromArray($data),
-            'VideoByIdSuccess'           => VideoByIdSuccess::fromArray($data),
+            'VideoByIdSuccess' => VideoByIdSuccess::fromArray($data),
             default => throw new \UnexpectedValueException(
                 'Unknown __typename for VideoResult: ' . ($data['__typename'] ?? 'null')
             ),

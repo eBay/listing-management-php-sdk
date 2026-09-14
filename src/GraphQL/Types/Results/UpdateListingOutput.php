@@ -20,14 +20,12 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 
 abstract readonly class UpdateListingOutput
 {
-    abstract public function getTypename(): string;
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): UpdateListingSuccess|UpdateListingValidationError|UpdateListingValidationSuccess
     {
         return match ($data['__typename'] ?? null) {
-            'UpdateListingSuccess'           => UpdateListingSuccess::fromArray($data),
-            'UpdateListingValidationError'   => UpdateListingValidationError::fromArray($data),
+            'UpdateListingSuccess' => UpdateListingSuccess::fromArray($data),
+            'UpdateListingValidationError' => UpdateListingValidationError::fromArray($data),
             'UpdateListingValidationSuccess' => UpdateListingValidationSuccess::fromArray($data),
             default => throw new \UnexpectedValueException(
                 'Unknown __typename for UpdateListingOutput: ' . ($data['__typename'] ?? 'null')

@@ -21,14 +21,14 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class ListingPreviewsCreationTaskResult
 {
     public function __construct(
-        public string $completionStatus = '',
-        /** @var InvalidProduct[] */
+        public ?string $completionStatus = null,
+        /** @var InvalidExternalProductDetails[] */
         public array $invalidProducts = [],
         /** @var ListingPreview[] */
         public array $listingPreviews = [],
-        /** @var UnmappedProduct[] */
+        /** @var ExternalProductDetails[] */
         public array $unmappedProducts = [],
-        /** @var UnmappedProduct[] */
+        /** @var ExternalProductDetails[] */
         public array $unprocessedProducts = [],
     ) {}
 
@@ -36,11 +36,11 @@ readonly class ListingPreviewsCreationTaskResult
     public static function fromArray(array $data): self
     {
         return new self(
-            completionStatus:    $data['completionStatus'] ?? '',
-            invalidProducts:     array_map(fn($p) => InvalidProduct::fromArray($p), $data['invalidProducts'] ?? []),
-            listingPreviews:     array_map(fn($p) => ListingPreview::fromArray($p), $data['listingPreviews'] ?? []),
-            unmappedProducts:    array_map(fn($p) => UnmappedProduct::fromArray($p), $data['unmappedProducts'] ?? []),
-            unprocessedProducts: array_map(fn($p) => UnmappedProduct::fromArray($p), $data['unprocessedProducts'] ?? []),
+            completionStatus: $data['completionStatus'] ?? null,
+            invalidProducts: array_map(fn($item) => InvalidExternalProductDetails::fromArray($item), $data['invalidProducts'] ?? []),
+            listingPreviews: array_map(fn($item) => ListingPreview::fromArray($item), $data['listingPreviews'] ?? []),
+            unmappedProducts: array_map(fn($item) => ExternalProductDetails::fromArray($item), $data['unmappedProducts'] ?? []),
+            unprocessedProducts: array_map(fn($item) => ExternalProductDetails::fromArray($item), $data['unprocessedProducts'] ?? []),
         );
     }
 }

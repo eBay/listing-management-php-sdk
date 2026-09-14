@@ -18,13 +18,11 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-readonly class VideoByIdSuccess extends VideoResult
+readonly class VideoByIdSuccess
 {
     public function __construct(
         public ?Video $video = null,
     ) {}
-
-    public function getTypename(): string { return 'VideoByIdSuccess'; }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self

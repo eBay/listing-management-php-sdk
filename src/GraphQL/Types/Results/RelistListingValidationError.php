@@ -18,27 +18,25 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-readonly class RelistListingValidationError extends RelistListingOutput
+readonly class RelistListingValidationError
 {
     public function __construct(
         public ?string $errorCode = null,
         public ?string $errorMessage = null,
-        /** @var ListingViolation[] */
+        /** @var ListingValidationRuleViolation[] */
         public array $violations = [],
         /** @var ListingWarning[] */
         public array $warnings = [],
     ) {}
 
-    public function getTypename(): string { return 'RelistListingValidationError'; }
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            errorCode:    $data['errorCode'] ?? null,
+            errorCode: $data['errorCode'] ?? null,
             errorMessage: $data['errorMessage'] ?? null,
-            violations:   array_map(fn($v) => ListingViolation::fromArray($v), $data['violations'] ?? []),
-            warnings:     array_map(fn($w) => ListingWarning::fromArray($w), $data['warnings'] ?? []),
+            violations: array_map(fn($item) => ListingValidationRuleViolation::fromArray($item), $data['violations'] ?? []),
+            warnings: array_map(fn($item) => ListingWarning::fromArray($item), $data['warnings'] ?? []),
         );
     }
 }
