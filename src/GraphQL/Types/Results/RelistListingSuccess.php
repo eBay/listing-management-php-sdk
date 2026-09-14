@@ -18,25 +18,23 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-readonly class RelistListingSuccess extends RelistListingOutput
+readonly class RelistListingSuccess
 {
     public function __construct(
-        public ?ListingRef $listing = null,
-        /** @var ListingFee[] */
+        public ?SellerListing $listing = null,
+        /** @var SellerListingFee[] */
         public array $listingFees = [],
         /** @var ListingWarning[] */
         public array $warnings = [],
     ) {}
 
-    public function getTypename(): string { return 'RelistListingSuccess'; }
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            listing:     isset($data['listing']) ? ListingRef::fromArray($data['listing']) : null,
-            listingFees: array_map(fn($f) => ListingFee::fromArray($f), $data['listingFees'] ?? []),
-            warnings:    array_map(fn($w) => ListingWarning::fromArray($w), $data['warnings'] ?? []),
+            listing: isset($data['listing']) ? SellerListing::fromArray($data['listing']) : null,
+            listingFees: array_map(fn($item) => SellerListingFee::fromArray($item), $data['listingFees'] ?? []),
+            warnings: array_map(fn($item) => ListingWarning::fromArray($item), $data['warnings'] ?? []),
         );
     }
 }

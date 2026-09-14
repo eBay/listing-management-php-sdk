@@ -21,24 +21,18 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class SellerListingSearchResult
 {
     public function __construct(
-        public ?ActiveListingsOutput $activeListings = null,
-        public ?ActiveListingsOutput $endedListings = null,
-        public ?ActiveListingsOutput $scheduledListings = null,
+        public SellerListingSearchInvalidInput|SellerListings|null $activeListings = null,
+        public SellerListingSearchInvalidInput|SellerListings|null $scheduledListings = null,
+        public SellerListingSearchInvalidInput|SellerListings|null $endedListings = null,
     ) {}
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            activeListings: isset($data['activeListings'])
-                ? ActiveListingsOutput::fromArray($data['activeListings'])
-                : null,
-            endedListings: isset($data['endedListings'])
-                ? ActiveListingsOutput::fromArray($data['endedListings'])
-                : null,
-            scheduledListings: isset($data['scheduledListings'])
-                ? ActiveListingsOutput::fromArray($data['scheduledListings'])
-                : null,
+            activeListings: isset($data['activeListings']) ? SellerListingSearchResultUnion::fromArray($data['activeListings']) : null,
+            scheduledListings: isset($data['scheduledListings']) ? SellerListingSearchResultUnion::fromArray($data['scheduledListings']) : null,
+            endedListings: isset($data['endedListings']) ? SellerListingSearchResultUnion::fromArray($data['endedListings']) : null,
         );
     }
 }

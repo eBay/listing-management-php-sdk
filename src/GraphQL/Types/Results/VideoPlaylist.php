@@ -29,7 +29,7 @@ readonly class VideoPlaylist
     public static function fromArray(array $data): self
     {
         return new self(
-            playUrl:  $data['playUrl'] ?? null,
+            playUrl: $data['playUrl'] ?? null,
             protocol: $data['protocol'] ?? null,
         );
     }

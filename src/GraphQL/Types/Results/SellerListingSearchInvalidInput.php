@@ -18,24 +18,24 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-readonly class SellerListingSearchInvalidInput extends ActiveListingsOutput
+readonly class SellerListingSearchInvalidInput
 {
     public function __construct(
+        public ?string $displayableErrorMessage = null,
         public ?string $errorCode = null,
         public ?string $errorMessage = null,
+        /** @var SellerListingSearchInputError[] */
+        public array $validationErrors = [],
     ) {}
-
-    public function getTypename(): string
-    {
-        return 'SellerListingSearchInvalidInput';
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
+            displayableErrorMessage: $data['displayableErrorMessage'] ?? null,
             errorCode: $data['errorCode'] ?? null,
             errorMessage: $data['errorMessage'] ?? null,
+            validationErrors: array_map(fn($item) => SellerListingSearchInputError::fromArray($item), $data['validationErrors'] ?? []),
         );
     }
 }

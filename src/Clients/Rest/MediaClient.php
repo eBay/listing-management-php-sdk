@@ -22,24 +22,26 @@ use EBay\ListingManagement\Configuration\KiotaAuthProvider;
 use EBay\ListingManagement\Configuration\ListingManagementConfiguration;
 use EBay\ListingManagement\Configuration\RequestOptions;
 use EBay\ListingManagement\Generated\Media\MediaApiClient;
-use EBay\ListingManagement\Generated\Media\Models\CreateDocumentRequest;
 use EBay\ListingManagement\Generated\Media\Models\CreateDocumentFromUrlRequest;
+use EBay\ListingManagement\Generated\Media\Models\CreateDocumentRequest;
+use EBay\ListingManagement\Generated\Media\Models\CreateDocumentResponse;
 use EBay\ListingManagement\Generated\Media\Models\CreateImageFromUrlRequest;
 use EBay\ListingManagement\Generated\Media\Models\CreateVideoRequest;
+use EBay\ListingManagement\Generated\Media\Models\DocumentResponse;
+use EBay\ListingManagement\Generated\Media\Models\ImageResponse;
+use EBay\ListingManagement\Generated\Media\Models\Video;
 use EBay\ListingManagement\Generated\Media\Document\Create_document_from_url\Create_document_from_urlRequestBuilderPostRequestConfiguration;
 use EBay\ListingManagement\Generated\Media\Document\DocumentRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Media\Document\Item\Upload\UploadRequestBuilderPostRequestConfiguration as DocumentUploadPostConfig;
+use EBay\ListingManagement\Generated\Media\Document\Item\Upload\UploadRequestBuilderPostRequestConfiguration;
 use EBay\ListingManagement\Generated\Media\Document\Item\WithDocument_ItemRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Media\Image\Create_image_from_file\Create_image_from_fileRequestBuilderPostRequestConfiguration;
 use EBay\ListingManagement\Generated\Media\Image\Create_image_from_url\Create_image_from_urlRequestBuilderPostRequestConfiguration;
 use EBay\ListingManagement\Generated\Media\Image\Item\WithImage_ItemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Media\Video\Item\Upload\UploadRequestBuilderPostRequestConfiguration as VideoUploadPostConfig;
 use EBay\ListingManagement\Generated\Media\Video\Item\WithVideo_ItemRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Media\Video\VideoRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
-use Psr\Http\Message\StreamInterface;
 
 final class MediaClient
 {
@@ -48,12 +50,7 @@ final class MediaClient
         private readonly ListingManagementConfiguration $config,
     ) {}
 
-    /**
-     * Merge default headers with per-request headers.
-     * Default headers fill first; per-request headers fill any remaining gaps.
-     *
-     * @return array<string,string>
-     */
+    /** @return array<string, string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
     {
         return array_merge(
@@ -62,73 +59,18 @@ final class MediaClient
         );
     }
 
-    // ── Documents ────────────────────────────────────────────────────────────
-
-    public function getDocument(string $documentId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->document()->byDocument_id($documentId)->get(
-                new WithDocument_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function createDocument(CreateDocumentRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->document()->post(
-                $body,
-                new DocumentRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function createDocumentFromUrl(CreateDocumentFromUrlRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->document()->create_document_from_url()->post(
-                $body,
-                new Create_document_from_urlRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function uploadDocument(string $documentId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->document()->byDocument_id($documentId)->upload()->post(
-                new DocumentUploadPostConfig(headers: $headers)
-            )->wait()
-        );
-    }
-
-    // ── Images ───────────────────────────────────────────────────────────────
-
-    public function getImage(string $imageId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->image()->byImage_id($imageId)->get(
-                new WithImage_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function createImageFromFile(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function createImageFromFile(mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?ImageResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->image()->create_image_from_file()->post(
+                $body,
                 new Create_image_from_fileRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
-    public function createImageFromUrl(CreateImageFromUrlRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function createImageFromUrl(CreateImageFromUrlRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?ImageResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
@@ -139,9 +81,28 @@ final class MediaClient
         );
     }
 
-    // ── Videos ───────────────────────────────────────────────────────────────
+    public function getImage(string $imageId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?ImageResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->image()->byImage_id($imageId)->get(
+                new WithImage_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
 
-    public function getVideo(string $videoId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function createVideo(CreateVideoRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->video()->post(
+                $body,
+                new VideoRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getVideo(string $videoId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Video
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
@@ -151,24 +112,74 @@ final class MediaClient
         );
     }
 
-    public function createVideo(CreateVideoRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function uploadVideo(
+        string $videoId,
+        mixed $body,
+        ?string $contentLength = null,
+        ?string $contentRange = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): mixed
     {
         $headers = $this->mergedHeaders($requestOptions);
+        if ($contentLength !== null) {
+            $headers["Content-Length"] = $contentLength;
+        }
+        if ($contentRange !== null) {
+            $headers["Content-Range"] = $contentRange;
+        }
         return $this->call($accessToken, fn($api) =>
-            $api->video()->post(
+            $api->video()->byVideo_id($videoId)->upload()->post(
                 $body,
-                new VideoRequestBuilderPostRequestConfiguration(headers: $headers)
+                new UploadRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
-    public function uploadVideo(string $videoId, StreamInterface $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    public function createDocument(CreateDocumentRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?CreateDocumentResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
-            $api->video()->byVideo_id($videoId)->upload()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->document()->post(
                 $body,
-                new VideoUploadPostConfig(headers: $headers)
+                new DocumentRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function createDocumentFromUrl(CreateDocumentFromUrlRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?CreateDocumentResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->document()->create_document_from_url()->post(
+                $body,
+                new Create_document_from_urlRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getDocument(string $documentId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?DocumentResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->document()->byDocument_id($documentId)->get(
+                new WithDocument_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function uploadDocument(
+        string $documentId,
+        mixed $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?DocumentResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->document()->byDocument_id($documentId)->upload()->post(
+                $body,
+                new UploadRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

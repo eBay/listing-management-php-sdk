@@ -18,25 +18,24 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-// All nine VideoProcessingFailureReason union variants select the same fields (category + message),
-// so they are merged into a single class that preserves the concrete __typename.
-readonly class VideoProcessingFailureReason
+abstract readonly class VideoProcessingFailureReason
 {
-    public function __construct(
-        private string $typename,
-        public ?string $category = null,
-        public ?string $message = null,
-    ) {}
-
-    public function getTypename(): string { return $this->typename; }
-
     /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): VideoCorruptedError|VideoInternalProcessingError|VideoInvalidInputValidationError|VideoInvalidMediaStreamError|VideoModerationFailedError|VideoPlaylistGenerationError|VideoProcessingTimeoutError|VideoSystemResourceError|VideoThumbnailGenerationError
     {
-        return new self(
-            typename: $data['__typename'] ?? 'Unknown',
-            category: $data['category'] ?? null,
-            message:  $data['message'] ?? null,
-        );
+        return match ($data['__typename'] ?? null) {
+            'VideoCorruptedError' => VideoCorruptedError::fromArray($data),
+            'VideoInternalProcessingError' => VideoInternalProcessingError::fromArray($data),
+            'VideoInvalidInputValidationError' => VideoInvalidInputValidationError::fromArray($data),
+            'VideoInvalidMediaStreamError' => VideoInvalidMediaStreamError::fromArray($data),
+            'VideoModerationFailedError' => VideoModerationFailedError::fromArray($data),
+            'VideoPlaylistGenerationError' => VideoPlaylistGenerationError::fromArray($data),
+            'VideoProcessingTimeoutError' => VideoProcessingTimeoutError::fromArray($data),
+            'VideoSystemResourceError' => VideoSystemResourceError::fromArray($data),
+            'VideoThumbnailGenerationError' => VideoThumbnailGenerationError::fromArray($data),
+            default => throw new \UnexpectedValueException(
+                'Unknown __typename for VideoProcessingFailureReason: ' . ($data['__typename'] ?? 'null')
+            ),
+        };
     }
 }

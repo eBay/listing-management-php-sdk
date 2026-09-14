@@ -18,28 +18,46 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Inputs;
 
-/**
- * Input for the updateListing mutation.
- * Accepts the full input payload as a raw array due to the deeply nested structure.
- *
- * @param array<string, mixed> $data Full UpdateListingInput payload.
- */
 readonly class UpdateListingInput
 {
     public function __construct(
-        /** @var array<string, mixed> */
-        private array $data,
+        public ListingIdentifierInput $listingIdentifier,
+        public string $marketplace,
+        public ?UpdateListingItemsInput $listingItems = null,
+        public ?UpdateListingTermsInput $listingTerms = null,
+        public ?UpdateListingVariationsInput $listingVariations = null,
+        public ?ListingOptionsInput $options = null,
+        public ?UpdateListingProductInput $product = null,
     ) {}
-
-    /** @return array<string, mixed> */
-    public function toArray(): array
-    {
-        return $this->data;
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
-        return new self(data: $data);
+        return new self(
+            listingIdentifier: ListingIdentifierInput::fromArray($data['listingIdentifier']),
+            listingItems: isset($data['listingItems']) ? UpdateListingItemsInput::fromArray($data['listingItems']) : null,
+            listingTerms: isset($data['listingTerms']) ? UpdateListingTermsInput::fromArray($data['listingTerms']) : null,
+            listingVariations: isset($data['listingVariations']) ? UpdateListingVariationsInput::fromArray($data['listingVariations']) : null,
+            marketplace: $data['marketplace'],
+            options: isset($data['options']) ? ListingOptionsInput::fromArray($data['options']) : null,
+            product: isset($data['product']) ? UpdateListingProductInput::fromArray($data['product']) : null,
+        );
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return array_filter(
+            [
+                'listingIdentifier' => (object)$this->listingIdentifier->toArray(),
+                'listingItems' => $this->listingItems !== null ? (object)$this->listingItems->toArray() : null,
+                'listingTerms' => $this->listingTerms !== null ? (object)$this->listingTerms->toArray() : null,
+                'listingVariations' => $this->listingVariations !== null ? (object)$this->listingVariations->toArray() : null,
+                'marketplace' => $this->marketplace,
+                'options' => $this->options !== null ? (object)$this->options->toArray() : null,
+                'product' => $this->product !== null ? (object)$this->product->toArray() : null,
+            ],
+            static fn($value) => $value !== null,
+        );
     }
 }

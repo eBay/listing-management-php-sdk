@@ -18,24 +18,22 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-readonly class BulkUpdateInventoryFailure extends BulkUpdateInventoryOutput
+readonly class BulkUpdateInventoryFailure
 {
     public function __construct(
         public ?string $errorCode = null,
         public ?string $errorMessage = null,
-        /** @var BulkInventoryFailureItem[] */
+        /** @var UpdateInventoryFailure[] */
         public array $failures = [],
     ) {}
-
-    public function getTypename(): string { return 'BulkUpdateInventoryFailure'; }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            errorCode:    $data['errorCode'] ?? null,
+            errorCode: $data['errorCode'] ?? null,
             errorMessage: $data['errorMessage'] ?? null,
-            failures:     array_map(fn($f) => BulkInventoryFailureItem::fromArray($f), $data['failures'] ?? []),
+            failures: array_map(fn($item) => UpdateInventoryFailure::fromArray($item), $data['failures'] ?? []),
         );
     }
 }

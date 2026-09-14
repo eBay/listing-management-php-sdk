@@ -24,17 +24,19 @@ readonly class SellerListingInput
         public string $listingId,
     ) {}
 
-    /** @return array<string, mixed> */
-    public function toArray(): array
-    {
-        return ['listingId' => $this->listingId];
-    }
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
             listingId: $data['listingId'],
         );
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return [
+                'listingId' => $this->listingId,
+        ];
     }
 }

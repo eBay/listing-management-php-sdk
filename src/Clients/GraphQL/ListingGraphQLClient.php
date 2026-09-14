@@ -29,62 +29,88 @@ use EBay\ListingManagement\GraphQL\Types\Inputs\RelistListingInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\SellerListingsInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\StartListingPreviewsCreationInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\UpdateListingInput;
+use EBay\ListingManagement\GraphQL\Types\Inputs\UserSavedSearchesInput;
 use EBay\ListingManagement\GraphQL\Types\Inputs\VideosByIdsInput;
+use EBay\ListingManagement\GraphQL\Types\Results\BulkUpdateInventoryFailure;
 use EBay\ListingManagement\GraphQL\Types\Results\BulkUpdateInventoryOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\BulkUpdateInventoryPartialFailure;
+use EBay\ListingManagement\GraphQL\Types\Results\BulkUpdateInventorySuccess;
 use EBay\ListingManagement\GraphQL\Types\Results\CreateListingOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\CreateListingSuccess;
+use EBay\ListingManagement\GraphQL\Types\Results\CreateListingValidationError;
+use EBay\ListingManagement\GraphQL\Types\Results\CreateListingValidationSuccess;
 use EBay\ListingManagement\GraphQL\Types\Results\CreateSecondChanceListingOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\CreateSecondChanceListingSuccess;
+use EBay\ListingManagement\GraphQL\Types\Results\CreateSecondChanceListingValidationError;
+use EBay\ListingManagement\GraphQL\Types\Results\CreateSecondChanceListingValidationSuccess;
 use EBay\ListingManagement\GraphQL\Types\Results\EndListingOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\EndListingSuccess;
+use EBay\ListingManagement\GraphQL\Types\Results\EndListingValidationError;
 use EBay\ListingManagement\GraphQL\Types\Results\ListingPreviewsCreationTaskByIdOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\MaxVideoIdsAllowedExceeded;
 use EBay\ListingManagement\GraphQL\Types\Results\RelistListingOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\RelistListingSuccess;
+use EBay\ListingManagement\GraphQL\Types\Results\RelistListingValidationError;
+use EBay\ListingManagement\GraphQL\Types\Results\RelistListingValidationSuccess;
 use EBay\ListingManagement\GraphQL\Types\Results\SellerListingSearchResult;
 use EBay\ListingManagement\GraphQL\Types\Results\SellerListingsResult;
 use EBay\ListingManagement\GraphQL\Types\Results\StartListingPreviewsCreationOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\UpdateListingOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\UpdateListingSuccess;
+use EBay\ListingManagement\GraphQL\Types\Results\UpdateListingValidationError;
+use EBay\ListingManagement\GraphQL\Types\Results\UpdateListingValidationSuccess;
+use EBay\ListingManagement\GraphQL\Types\Results\UserSavedSearchesResult;
+use EBay\ListingManagement\GraphQL\Types\Results\VideoList;
 use EBay\ListingManagement\GraphQL\Types\Results\VideosByIdsOutput;
 
-/**
- * Typed wrapper around the eBay GraphQL listing operations.
- *
- * Each method maps one-to-one to a pre-defined operation in ListingOperations.
- * For anything not covered here, use executeRawUnsafe() to send an arbitrary query.
- */
 final class ListingGraphQLClient
 {
     public function __construct(private readonly DynamicGraphQLClient $dynamic) {}
 
-    // ── Queries ──────────────────────────────────────────────────────────────
-
-    /**
-     * Retrieve details of one or more seller listings by listing ID.
-     */
-    public function sellerListings(SellerListingsInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): SellerListingsResult
+    public function bulkUpdateInventory(BulkUpdateInventoryInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): BulkUpdateInventoryFailure|BulkUpdateInventoryPartialFailure|BulkUpdateInventorySuccess
     {
         $data = $this->dynamic->execute(
-            ListingOperations::SELLER_LISTINGS(),
+            ListingOperations::BULK_UPDATE_INVENTORY(),
             ['input' => (object)$input->toArray()],
             $accessToken,
             $requestOptions
         );
-        return SellerListingsResult::fromArray($data['sellerListings'] ?? []);
+        return BulkUpdateInventoryOutput::fromArray($data['bulkUpdateInventory'] ?? []);
     }
 
-    /**
-     * Search seller's active, ended, and scheduled listings.
-     */
-    public function sellerListingSearch(?string $accessToken = null, ?RequestOptions $requestOptions = null): SellerListingSearchResult
+    public function createListing(CreateListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): CreateListingSuccess|CreateListingValidationError|CreateListingValidationSuccess
     {
         $data = $this->dynamic->execute(
-            ListingOperations::SELLER_LISTING_SEARCH(),
-            [],
+            ListingOperations::CREATE_LISTING(),
+            ['input' => (object)$input->toArray()],
             $accessToken,
             $requestOptions
         );
-        return SellerListingSearchResult::fromArray($data['sellerListingSearch'] ?? []);
+        return CreateListingOutput::fromArray($data['createListing'] ?? []);
     }
 
-    /**
-     * Retrieve a listing previews creation task by its ID.
-     */
+    public function createSecondChanceListing(CreateSecondChanceListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): CreateSecondChanceListingSuccess|CreateSecondChanceListingValidationError|CreateSecondChanceListingValidationSuccess
+    {
+        $data = $this->dynamic->execute(
+            ListingOperations::CREATE_SECOND_CHANCE_LISTING(),
+            ['input' => (object)$input->toArray()],
+            $accessToken,
+            $requestOptions
+        );
+        return CreateSecondChanceListingOutput::fromArray($data['createSecondChanceListing'] ?? []);
+    }
+
+    public function endListing(EndListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): EndListingSuccess|EndListingValidationError
+    {
+        $data = $this->dynamic->execute(
+            ListingOperations::END_LISTING(),
+            ['input' => (object)$input->toArray()],
+            $accessToken,
+            $requestOptions
+        );
+        return EndListingOutput::fromArray($data['endListing'] ?? []);
+    }
+
     public function listingPreviewsCreationTaskById(ListingPreviewsCreationTaskByIdInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ListingPreviewsCreationTaskByIdOutput
     {
         $data = $this->dynamic->execute(
@@ -96,68 +122,7 @@ final class ListingGraphQLClient
         return ListingPreviewsCreationTaskByIdOutput::fromArray($data['listingPreviewsCreationTaskById'] ?? []);
     }
 
-    // ── Mutations ────────────────────────────────────────────────────────────
-
-    /**
-     * Bulk update price and/or quantity for fixed-price listing items.
-     */
-    public function bulkUpdateInventory(BulkUpdateInventoryInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): BulkUpdateInventoryOutput
-    {
-        $data = $this->dynamic->execute(
-            ListingOperations::BULK_UPDATE_INVENTORY(),
-            ['input' => (object)$input->toArray()],
-            $accessToken,
-            $requestOptions
-        );
-        return BulkUpdateInventoryOutput::fromArray($data['bulkUpdateInventory'] ?? []);
-    }
-
-    /**
-     * Create a new eBay listing.
-     */
-    public function createListing(CreateListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): CreateListingOutput
-    {
-        $data = $this->dynamic->execute(
-            ListingOperations::CREATE_LISTING(),
-            ['input' => (object)$input->toArray()],
-            $accessToken,
-            $requestOptions
-        );
-        return CreateListingOutput::fromArray($data['createListing'] ?? []);
-    }
-
-    /**
-     * Create a Second Chance Offer listing from a recently ended auction.
-     */
-    public function createSecondChanceListing(CreateSecondChanceListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): CreateSecondChanceListingOutput
-    {
-        $data = $this->dynamic->execute(
-            ListingOperations::CREATE_SECOND_CHANCE_LISTING(),
-            ['input' => (object)$input->toArray()],
-            $accessToken,
-            $requestOptions
-        );
-        return CreateSecondChanceListingOutput::fromArray($data['createSecondChanceListing'] ?? []);
-    }
-
-    /**
-     * End an active listing before its scheduled end time.
-     */
-    public function endListing(EndListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): EndListingOutput
-    {
-        $data = $this->dynamic->execute(
-            ListingOperations::END_LISTING(),
-            ['input' => (object)$input->toArray()],
-            $accessToken,
-            $requestOptions
-        );
-        return EndListingOutput::fromArray($data['endListing'] ?? []);
-    }
-
-    /**
-     * Relist an ended eBay listing.
-     */
-    public function relistListing(RelistListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): RelistListingOutput
+    public function relistListing(RelistListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): RelistListingSuccess|RelistListingValidationError|RelistListingValidationSuccess
     {
         $data = $this->dynamic->execute(
             ListingOperations::RELIST_LISTING(),
@@ -168,9 +133,28 @@ final class ListingGraphQLClient
         return RelistListingOutput::fromArray($data['relistListing'] ?? []);
     }
 
-    /**
-     * Start a listing previews creation task for a set of products.
-     */
+    public function sellerListings(SellerListingsInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): SellerListingsResult
+    {
+        $data = $this->dynamic->execute(
+            ListingOperations::SELLER_LISTINGS(),
+            ['input' => (object)$input->toArray()],
+            $accessToken,
+            $requestOptions
+        );
+        return SellerListingsResult::fromArray($data['sellerListings'] ?? []);
+    }
+
+    public function sellerListingSearch(?string $accessToken = null, ?RequestOptions $requestOptions = null): SellerListingSearchResult
+    {
+        $data = $this->dynamic->execute(
+            ListingOperations::SELLER_LISTING_SEARCH(),
+            [],
+            $accessToken,
+            $requestOptions
+        );
+        return SellerListingSearchResult::fromArray($data['sellerListingSearch'] ?? []);
+    }
+
     public function startListingPreviewsCreation(StartListingPreviewsCreationInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): StartListingPreviewsCreationOutput
     {
         $data = $this->dynamic->execute(
@@ -182,10 +166,7 @@ final class ListingGraphQLClient
         return StartListingPreviewsCreationOutput::fromArray($data['startListingPreviewsCreation'] ?? []);
     }
 
-    /**
-     * Update one or more fields of an active or scheduled listing.
-     */
-    public function updateListing(UpdateListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): UpdateListingOutput
+    public function updateListing(UpdateListingInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): UpdateListingSuccess|UpdateListingValidationError|UpdateListingValidationSuccess
     {
         $data = $this->dynamic->execute(
             ListingOperations::UPDATE_LISTING(),
@@ -196,29 +177,34 @@ final class ListingGraphQLClient
         return UpdateListingOutput::fromArray($data['updateListing'] ?? []);
     }
 
-    /**
-     * Retrieve one or more videos by their IDs.
-     */
-    public function videosByIds(VideosByIdsInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): VideosByIdsOutput
+    public function userSavedSearches(?UserSavedSearchesInput $input = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): UserSavedSearchesResult
+    {
+        $data = $this->dynamic->execute(
+            ListingOperations::USER_SAVED_SEARCHES(),
+            $input !== null ? ['input' => (object)$input->toArray()] : [],
+            $accessToken,
+            $requestOptions
+        );
+        return UserSavedSearchesResult::fromArray($data['userSavedSearches'] ?? []);
+    }
+
+    public function videosByIds(?VideosByIdsInput $input = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): MaxVideoIdsAllowedExceeded|VideoList
     {
         $data = $this->dynamic->execute(
             ListingOperations::VIDEOS_BY_IDS(),
-            ['input' => (object)$input->toArray()],
+            $input !== null ? ['input' => (object)$input->toArray()] : [],
             $accessToken,
             $requestOptions
         );
         return VideosByIdsOutput::fromArray($data['videosByIds'] ?? []);
     }
 
-    // ── Escape hatch ─────────────────────────────────────────────────────────
-
     /**
      * Execute an arbitrary GraphQL query string and return the raw `data` payload.
      *
      * **WARNING — injection risk.** Never interpolate user-supplied input directly into
      * `$query`. Always pass dynamic values via `$variables` so the server handles
-     * escaping. Treat this like a raw SQL string: safe only with static,
-     * developer-controlled query text.
+     * escaping.
      *
      * @param array<string, mixed> $variables
      * @return array<string, mixed>

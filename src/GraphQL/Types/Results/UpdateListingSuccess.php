@@ -18,25 +18,26 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-readonly class UpdateListingSuccess extends UpdateListingOutput
+readonly class UpdateListingSuccess
 {
     public function __construct(
-        public ?ListingRef $listing = null,
-        /** @var ListingFee[] */
+        /** @var array<int, mixed> */
+        public array $listingDiscount = [],
+        /** @var SellerListingFee[] */
         public array $listingFees = [],
         /** @var ListingWarning[] */
         public array $warnings = [],
+        public ?SellerListing $listing = null,
     ) {}
-
-    public function getTypename(): string { return 'UpdateListingSuccess'; }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            listing:     isset($data['listing']) ? ListingRef::fromArray($data['listing']) : null,
-            listingFees: array_map(fn($f) => ListingFee::fromArray($f), $data['listingFees'] ?? []),
-            warnings:    array_map(fn($w) => ListingWarning::fromArray($w), $data['warnings'] ?? []),
+            listingDiscount: $data['listingDiscount'] ?? [],
+            listingFees: array_map(fn($item) => SellerListingFee::fromArray($item), $data['listingFees'] ?? []),
+            warnings: array_map(fn($item) => ListingWarning::fromArray($item), $data['warnings'] ?? []),
+            listing: isset($data['listing']) ? SellerListing::fromArray($data['listing']) : null,
         );
     }
 }

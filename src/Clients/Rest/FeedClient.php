@@ -27,28 +27,36 @@ use EBay\ListingManagement\Generated\Feed\Models\CreateOrderTaskRequest;
 use EBay\ListingManagement\Generated\Feed\Models\CreateServiceMetricsTaskRequest;
 use EBay\ListingManagement\Generated\Feed\Models\CreateTaskRequest;
 use EBay\ListingManagement\Generated\Feed\Models\CreateUserScheduleRequest;
+use EBay\ListingManagement\Generated\Feed\Models\CustomerServiceMetricTaskCollection;
+use EBay\ListingManagement\Generated\Feed\Models\InventoryTask;
+use EBay\ListingManagement\Generated\Feed\Models\InventoryTaskCollection;
+use EBay\ListingManagement\Generated\Feed\Models\OrderTask;
+use EBay\ListingManagement\Generated\Feed\Models\OrderTaskCollection;
+use EBay\ListingManagement\Generated\Feed\Models\ScheduleTemplateCollection;
+use EBay\ListingManagement\Generated\Feed\Models\ScheduleTemplateResponse;
+use EBay\ListingManagement\Generated\Feed\Models\ServiceMetricsTask;
+use EBay\ListingManagement\Generated\Feed\Models\Task;
+use EBay\ListingManagement\Generated\Feed\Models\TaskCollection;
 use EBay\ListingManagement\Generated\Feed\Models\UpdateUserScheduleRequest;
+use EBay\ListingManagement\Generated\Feed\Models\UserScheduleCollection;
+use EBay\ListingManagement\Generated\Feed\Models\UserScheduleResponse;
 use EBay\ListingManagement\Generated\Feed\Customer_service_metric_task\Customer_service_metric_taskRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Customer_service_metric_task\Customer_service_metric_taskRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Feed\Customer_service_metric_task\Item\WithTask_ItemRequestBuilderGetRequestConfiguration as CsmWithTaskGetConfig;
+use EBay\ListingManagement\Generated\Feed\Customer_service_metric_task\Item\WithTask_ItemRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Inventory_task\Inventory_taskRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Inventory_task\Inventory_taskRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Feed\Inventory_task\Item\WithTask_ItemRequestBuilderGetRequestConfiguration as InventoryWithTaskGetConfig;
-use EBay\ListingManagement\Generated\Feed\Order_task\Item\WithTask_ItemRequestBuilderGetRequestConfiguration as OrderWithTaskGetConfig;
 use EBay\ListingManagement\Generated\Feed\Order_task\Order_taskRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Order_task\Order_taskRequestBuilderPostRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Schedule_template\Item\WithSchedule_template_ItemRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Schedule_template\Schedule_templateRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Feed\Schedule\Item\Download_result_file\Download_result_fileRequestBuilderGetRequestConfiguration as ScheduleDownloadResultConfig;
 use EBay\ListingManagement\Generated\Feed\Schedule\Item\WithSchedule_ItemRequestBuilderDeleteRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Schedule\Item\WithSchedule_ItemRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Schedule\Item\WithSchedule_ItemRequestBuilderPutRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Schedule\ScheduleRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Schedule\ScheduleRequestBuilderPostRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Task\Item\Download_input_file\Download_input_fileRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Feed\Task\Item\Download_result_file\Download_result_fileRequestBuilderGetRequestConfiguration as TaskDownloadResultConfig;
+use EBay\ListingManagement\Generated\Feed\Task\Item\Download_result_file\Download_result_fileRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Task\Item\Upload_file\Upload_fileRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Feed\Task\Item\WithTask_ItemRequestBuilderGetRequestConfiguration as TaskWithTaskGetConfig;
 use EBay\ListingManagement\Generated\Feed\Task\TaskRequestBuilderGetRequestConfiguration;
 use EBay\ListingManagement\Generated\Feed\Task\TaskRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
@@ -62,12 +70,7 @@ final class FeedClient
         private readonly ListingManagementConfiguration $config,
     ) {}
 
-    /**
-     * Merge default headers with per-request headers.
-     * Default headers fill first; per-request headers fill any remaining gaps.
-     *
-     * @return array<string,string>
-     */
+    /** @return array<string, string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
     {
         return array_merge(
@@ -75,191 +78,6 @@ final class FeedClient
             $requestOptions !== null ? $requestOptions->headers : []
         );
     }
-
-    // ── Generic Tasks ────────────────────────────────────────────────────────
-
-    public function getTasks(
-        ?string $dateRange = null,
-        ?string $feedType = null,
-        ?string $limit = null,
-        ?string $lookBackDays = null,
-        ?string $offset = null,
-        ?string $scheduleId = null,
-        ?string $accessToken = null,
-        ?RequestOptions $requestOptions = null,
-    ): mixed {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->task()->get(
-                new TaskRequestBuilderGetRequestConfiguration(
-                    headers: $headers,
-                    queryParameters: TaskRequestBuilderGetRequestConfiguration::createQueryParameters(
-                        date_range: $dateRange,
-                        feed_type: $feedType,
-                        limit: $limit,
-                        look_back_days: $lookBackDays,
-                        offset: $offset,
-                        schedule_id: $scheduleId,
-                    ),
-                )
-            )->wait()
-        );
-    }
-
-    public function getTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->task()->byTask_id($taskId)->get(
-                new TaskWithTaskGetConfig(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function createTask(CreateTaskRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
-            $api->task()->post(
-                $body,
-                new TaskRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function getInputFile(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->task()->byTask_id($taskId)->download_input_file()->get(
-                new Download_input_fileRequestBuilderGetRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function getResultFile(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->task()->byTask_id($taskId)->download_result_file()->get(
-                new TaskDownloadResultConfig(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function uploadFile(string $taskId, mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
-    {
-        // Note: Kiota's upload_file builder handles the body internally via form-data;
-        // the body param is kept for API compatibility but headers are threaded via config.
-        $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
-            $api->task()->byTask_id($taskId)->upload_file()->post(
-                new Upload_fileRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    // ── Customer Service Metric Tasks ────────────────────────────────────────
-
-    public function getCustomerServiceMetricTasks(
-        ?string $dateRange = null,
-        ?string $feedType = null,
-        ?string $limit = null,
-        ?string $lookBackDays = null,
-        ?string $offset = null,
-        ?string $accessToken = null,
-        ?RequestOptions $requestOptions = null,
-    ): mixed {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->customer_service_metric_task()->get(
-                new Customer_service_metric_taskRequestBuilderGetRequestConfiguration(
-                    headers: $headers,
-                    queryParameters: Customer_service_metric_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
-                        date_range: $dateRange,
-                        feed_type: $feedType,
-                        limit: $limit,
-                        look_back_days: $lookBackDays,
-                        offset: $offset,
-                    ),
-                )
-            )->wait()
-        );
-    }
-
-    public function getCustomerServiceMetricTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->customer_service_metric_task()->byTask_id($taskId)->get(
-                new CsmWithTaskGetConfig(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function createCustomerServiceMetricTask(CreateServiceMetricsTaskRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
-            $api->customer_service_metric_task()->post(
-                $body,
-                new Customer_service_metric_taskRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    // ── Inventory Tasks ──────────────────────────────────────────────────────
-
-    public function getInventoryTasks(
-        ?string $dateRange = null,
-        ?string $feedType = null,
-        ?string $limit = null,
-        ?string $lookBackDays = null,
-        ?string $offset = null,
-        ?string $scheduleId = null,
-        ?string $accessToken = null,
-        ?RequestOptions $requestOptions = null,
-    ): mixed {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->inventory_task()->get(
-                new Inventory_taskRequestBuilderGetRequestConfiguration(
-                    headers: $headers,
-                    queryParameters: Inventory_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
-                        date_range: $dateRange,
-                        feed_type: $feedType,
-                        limit: $limit,
-                        look_back_days: $lookBackDays,
-                        offset: $offset,
-                        schedule_id: $scheduleId,
-                    ),
-                )
-            )->wait()
-        );
-    }
-
-    public function getInventoryTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->inventory_task()->byTask_id($taskId)->get(
-                new InventoryWithTaskGetConfig(headers: $headers)
-            )->wait()
-        );
-    }
-
-    public function createInventoryTask(CreateInventoryTaskRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
-            $api->inventory_task()->post(
-                $body,
-                new Inventory_taskRequestBuilderPostRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    // ── Order Tasks ──────────────────────────────────────────────────────────
 
     public function getOrderTasks(
         ?string $dateRange = null,
@@ -270,7 +88,8 @@ final class FeedClient
         ?string $scheduleId = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): ?OrderTaskCollection
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->order_task()->get(
@@ -289,16 +108,6 @@ final class FeedClient
         );
     }
 
-    public function getOrderTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->order_task()->byTask_id($taskId)->get(
-                new OrderWithTaskGetConfig(headers: $headers)
-            )->wait()
-        );
-    }
-
     public function createOrderTask(CreateOrderTaskRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         $headers = $this->mergedHeaders($requestOptions);
@@ -310,7 +119,65 @@ final class FeedClient
         );
     }
 
-    // ── Schedules ────────────────────────────────────────────────────────────
+    public function getOrderTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?OrderTask
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->order_task()->byTask_id($taskId)->get(
+                new WithTask_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getInventoryTasks(
+        ?string $feedType = null,
+        ?string $scheduleId = null,
+        ?string $lookBackDays = null,
+        ?string $dateRange = null,
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?InventoryTaskCollection
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->inventory_task()->get(
+                new Inventory_taskRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Inventory_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        feed_type: $feedType,
+                        schedule_id: $scheduleId,
+                        look_back_days: $lookBackDays,
+                        date_range: $dateRange,
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
+            )->wait()
+        );
+    }
+
+    public function createInventoryTask(CreateInventoryTaskRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->inventory_task()->post(
+                $body,
+                new Inventory_taskRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getInventoryTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?InventoryTask
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->inventory_task()->byTask_id($taskId)->get(
+                new WithTask_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
 
     public function getSchedules(
         ?string $feedType = null,
@@ -318,7 +185,8 @@ final class FeedClient
         ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): ?UserScheduleCollection
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->schedule()->get(
@@ -334,16 +202,6 @@ final class FeedClient
         );
     }
 
-    public function getSchedule(string $scheduleId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
-    {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->schedule()->bySchedule_id($scheduleId)->get(
-                new WithSchedule_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
     public function createSchedule(CreateUserScheduleRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         $headers = $this->mergedHeaders($requestOptions);
@@ -355,7 +213,22 @@ final class FeedClient
         );
     }
 
-    public function updateSchedule(string $scheduleId, UpdateUserScheduleRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    public function getSchedule(string $scheduleId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?UserScheduleResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->schedule()->bySchedule_id($scheduleId)->get(
+                new WithSchedule_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function updateSchedule(
+        string $scheduleId,
+        UpdateUserScheduleRequest $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void
     {
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
@@ -376,17 +249,25 @@ final class FeedClient
         );
     }
 
-    public function getLatestResultFile(string $scheduleId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getLatestResultFile(string $scheduleId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
+        $this->call($accessToken, fn($api) =>
             $api->schedule()->bySchedule_id($scheduleId)->download_result_file()->get(
-                new ScheduleDownloadResultConfig(headers: $headers)
+                new Download_result_fileRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
-    // ── Schedule Templates ───────────────────────────────────────────────────
+    public function getScheduleTemplate(string $scheduleTemplateId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?ScheduleTemplateResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->schedule_template()->bySchedule_template_id($scheduleTemplateId)->get(
+                new WithSchedule_template_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
 
     public function getScheduleTemplates(
         ?string $feedType = null,
@@ -394,7 +275,8 @@ final class FeedClient
         ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): ?ScheduleTemplateCollection
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->schedule_template()->get(
@@ -410,12 +292,156 @@ final class FeedClient
         );
     }
 
-    public function getScheduleTemplate(string $scheduleTemplateId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getTasks(
+        ?string $dateRange = null,
+        ?string $feedType = null,
+        ?string $limit = null,
+        ?string $lookBackDays = null,
+        ?string $offset = null,
+        ?string $scheduleId = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?TaskCollection
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
-            $api->schedule_template()->bySchedule_template_id($scheduleTemplateId)->get(
-                new WithSchedule_template_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            $api->task()->get(
+                new TaskRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: TaskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        date_range: $dateRange,
+                        feed_type: $feedType,
+                        limit: $limit,
+                        look_back_days: $lookBackDays,
+                        offset: $offset,
+                        schedule_id: $scheduleId,
+                    ),
+                )
+            )->wait()
+        );
+    }
+
+    public function createTask(
+        CreateTaskRequest $body,
+        ?string $xEBAYCMARKETPLACEID = null,
+        ?string $acceptLanguage = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        if ($xEBAYCMARKETPLACEID !== null) {
+            $headers["X-EBAY-C-MARKETPLACE-ID"] = $xEBAYCMARKETPLACEID;
+        }
+        if ($acceptLanguage !== null) {
+            $headers["Accept-Language"] = $acceptLanguage;
+        }
+        $this->call($accessToken, fn($api) =>
+            $api->task()->post(
+                $body,
+                new TaskRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getInputFile(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->task()->byTask_id($taskId)->download_input_file()->get(
+                new Download_input_fileRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getResultFile(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->task()->byTask_id($taskId)->download_result_file()->get(
+                new Download_result_fileRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Task
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->task()->byTask_id($taskId)->get(
+                new WithTask_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function uploadFile(
+        string $taskId,
+        mixed $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): mixed
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->task()->byTask_id($taskId)->upload_file()->post(
+                $body,
+                new Upload_fileRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getCustomerServiceMetricTasks(
+        ?string $dateRange = null,
+        ?string $feedType = null,
+        ?string $limit = null,
+        ?string $lookBackDays = null,
+        ?string $offset = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?CustomerServiceMetricTaskCollection
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->customer_service_metric_task()->get(
+                new Customer_service_metric_taskRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Customer_service_metric_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        date_range: $dateRange,
+                        feed_type: $feedType,
+                        limit: $limit,
+                        look_back_days: $lookBackDays,
+                        offset: $offset,
+                    ),
+                )
+            )->wait()
+        );
+    }
+
+    public function createCustomerServiceMetricTask(
+        CreateServiceMetricsTaskRequest $body,
+        ?string $acceptLanguage = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        if ($acceptLanguage !== null) {
+            $headers["Accept-Language"] = $acceptLanguage;
+        }
+        $this->call($accessToken, fn($api) =>
+            $api->customer_service_metric_task()->post(
+                $body,
+                new Customer_service_metric_taskRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getCustomerServiceMetricTask(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?ServiceMetricsTask
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->customer_service_metric_task()->byTask_id($taskId)->get(
+                new WithTask_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

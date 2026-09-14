@@ -32,35 +32,11 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * Main entry point for the eBay Listing Management PHP SDK.
- *
- * Usage:
- *   $config = new ListingManagementConfiguration();
- *   $config->accessToken = 'your-token';
- *   $sdk = new ListingManagementClient($config);
- *
- *   // REST
- *   $item = $sdk->inventory->getInventoryItem('MY-SKU');
- *
- *   // GraphQL
- *   $result = $sdk->graphQL->createListing([...]);
- *
- *   // GraphQL escape hatch
- *   $raw = $sdk->graphQL->executeRawUnsafe('{ sellerListingSearch { ... } }');
- *
- *   // Per-request headers
- *   use EBay\ListingManagement\Configuration\RequestOptions;
- *   $item = $sdk->inventory->getInventoryItem('MY-SKU', requestOptions: new RequestOptions(['X-Request-Id' => 'abc']));
- *
- *   // Default headers on all requests
- *   $config->defaultRequestOptions->headers['X-Ebay-Marketplace-Id'] = 'EBAY_US';
- *
- *   // Diagnostic logging (non-2xx logged to STDERR)
- *   $config->diagnosticLogging = true;
  */
 final class ListingManagementClient
 {
-    public readonly InventoryClient $inventory;
     public readonly FeedClient $feed;
+    public readonly InventoryClient $inventory;
     public readonly MediaClient $media;
     public readonly StoresClient $stores;
     public readonly ListingGraphQLClient $graphQL;
@@ -71,12 +47,11 @@ final class ListingManagementClient
     ) {
         $guzzle ??= $this->buildGuzzle($config);
 
+        $this->feed = new FeedClient($guzzle, $config);
         $this->inventory = new InventoryClient($guzzle, $config);
-        $this->feed      = new FeedClient($guzzle, $config);
-        $this->media     = new MediaClient($guzzle, $config);
-        $this->stores    = new StoresClient($guzzle, $config);
+        $this->media = new MediaClient($guzzle, $config);
+        $this->stores = new StoresClient($guzzle, $config);
 
-        // GraphQL (Guzzle shared — no Kiota involved)
         $this->graphQL = new ListingGraphQLClient(
             new DynamicGraphQLClient($guzzle, $config)
         );

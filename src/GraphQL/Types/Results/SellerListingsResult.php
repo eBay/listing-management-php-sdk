@@ -21,7 +21,7 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class SellerListingsResult
 {
     public function __construct(
-        /** @var SellerListing[] */
+        /** @var (ListingSuccess)[] */
         public array $listings = [],
     ) {}
 
@@ -29,7 +29,7 @@ readonly class SellerListingsResult
     public static function fromArray(array $data): self
     {
         return new self(
-            listings: array_map(fn($l) => SellerListing::fromArray($l), $data['listings'] ?? []),
+            listings: array_map(fn($item) => SellerListingOutput::fromArray($item), $data['listings'] ?? []),
         );
     }
 }

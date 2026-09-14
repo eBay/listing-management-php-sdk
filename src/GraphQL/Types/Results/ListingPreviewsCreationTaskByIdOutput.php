@@ -29,9 +29,7 @@ readonly class ListingPreviewsCreationTaskByIdOutput
     public static function fromArray(array $data): self
     {
         return new self(
-            listingPreviewsCreationTask: isset($data['listingPreviewsCreationTask'])
-                ? ListingPreviewsCreationTask::fromArray($data['listingPreviewsCreationTask'])
-                : null,
+            listingPreviewsCreationTask: isset($data['listingPreviewsCreationTask']) ? ListingPreviewsCreationTask::fromArray($data['listingPreviewsCreationTask']) : null,
             requestedId: $data['requestedId'] ?? null,
         );
     }

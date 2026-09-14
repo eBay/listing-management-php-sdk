@@ -21,16 +21,16 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class ExternalProductIdentifier
 {
     public function __construct(
-        public string $productType = '',
-        public string $productId = '',
+        public ?string $productId = null,
+        public ?string $productType = null,
     ) {}
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            productType: $data['productType'] ?? '',
-            productId:   $data['productId'] ?? '',
+            productId: $data['productId'] ?? null,
+            productType: $data['productType'] ?? null,
         );
     }
 }

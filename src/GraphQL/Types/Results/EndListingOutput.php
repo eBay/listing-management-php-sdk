@@ -20,13 +20,11 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 
 abstract readonly class EndListingOutput
 {
-    abstract public function getTypename(): string;
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): EndListingSuccess|EndListingValidationError
     {
         return match ($data['__typename'] ?? null) {
-            'EndListingSuccess'         => EndListingSuccess::fromArray($data),
+            'EndListingSuccess' => EndListingSuccess::fromArray($data),
             'EndListingValidationError' => EndListingValidationError::fromArray($data),
             default => throw new \UnexpectedValueException(
                 'Unknown __typename for EndListingOutput: ' . ($data['__typename'] ?? 'null')

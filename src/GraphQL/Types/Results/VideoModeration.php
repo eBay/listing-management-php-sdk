@@ -21,7 +21,7 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class VideoModeration
 {
     public function __construct(
-        /** @var string[] */
+        /** @var array<int, mixed> */
         public array $rejectReasons = [],
     ) {}
 

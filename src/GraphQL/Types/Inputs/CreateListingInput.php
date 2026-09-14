@@ -18,29 +18,49 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Inputs;
 
-/**
- * Input for the createListing mutation.
- * Accepts the full input payload as a raw array due to the deeply nested
- * structure of this type (listingItems, listingTerms, product, marketplace, etc.).
- *
- * @param array<string, mixed> $data Full CreateListingInput payload.
- */
 readonly class CreateListingInput
 {
     public function __construct(
-        /** @var array<string, mixed> */
-        private array $data,
+        public string $idempotencyKey,
+        public CreateListingItemsInput $listingItems,
+        public CreateListingTermsInput $listingTerms,
+        public string $marketplace,
+        public CreateListingProductInput $product,
+        public ?CreateListingVariationsInput $listingVariations = null,
+        public ?ListingOptionsInput $options = null,
+        public ?string $sku = null,
     ) {}
-
-    /** @return array<string, mixed> */
-    public function toArray(): array
-    {
-        return $this->data;
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
-        return new self(data: $data);
+        return new self(
+            idempotencyKey: $data['idempotencyKey'],
+            listingItems: CreateListingItemsInput::fromArray($data['listingItems']),
+            listingTerms: CreateListingTermsInput::fromArray($data['listingTerms']),
+            listingVariations: isset($data['listingVariations']) ? CreateListingVariationsInput::fromArray($data['listingVariations']) : null,
+            marketplace: $data['marketplace'],
+            options: isset($data['options']) ? ListingOptionsInput::fromArray($data['options']) : null,
+            product: CreateListingProductInput::fromArray($data['product']),
+            sku: $data['sku'] ?? null,
+        );
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return array_filter(
+            [
+                'idempotencyKey' => $this->idempotencyKey,
+                'listingItems' => (object)$this->listingItems->toArray(),
+                'listingTerms' => (object)$this->listingTerms->toArray(),
+                'listingVariations' => $this->listingVariations !== null ? (object)$this->listingVariations->toArray() : null,
+                'marketplace' => $this->marketplace,
+                'options' => $this->options !== null ? (object)$this->options->toArray() : null,
+                'product' => (object)$this->product->toArray(),
+                'sku' => $this->sku,
+            ],
+            static fn($value) => $value !== null,
+        );
     }
 }

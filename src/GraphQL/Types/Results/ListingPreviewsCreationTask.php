@@ -21,7 +21,7 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 readonly class ListingPreviewsCreationTask
 {
     public function __construct(
-        public string $id = '',
+        public ?string $id = null,
         public ?ListingPreviewsCreationTaskResult $result = null,
     ) {}
 
@@ -29,10 +29,8 @@ readonly class ListingPreviewsCreationTask
     public static function fromArray(array $data): self
     {
         return new self(
-            id:     $data['id'] ?? '',
-            result: isset($data['result'])
-                ? ListingPreviewsCreationTaskResult::fromArray($data['result'])
-                : null,
+            id: $data['id'] ?? null,
+            result: isset($data['result']) ? ListingPreviewsCreationTaskResult::fromArray($data['result']) : null,
         );
     }
 }

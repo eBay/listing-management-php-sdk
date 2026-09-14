@@ -23,13 +23,13 @@ final class ListingManagementConfiguration
     public readonly RequestOptions $defaultRequestOptions;
 
     public function __construct(
-        public readonly string  $inventoryBaseUrl  = 'https://api.ebay.com/sell/inventory/v1',
-        public readonly string  $feedBaseUrl       = 'https://api.ebay.com/sell/feed/v1',
-        public readonly string  $mediaBaseUrl      = 'https://api.ebay.com/commerce/media/v1_beta',
-        public readonly string  $storesBaseUrl     = 'https://api.ebay.com/sell/stores/v1',
-        public readonly string  $graphQLBaseUrl    = 'https://api.ebay.com/graphql',
-        public readonly ?string $accessToken       = null,
-        public readonly bool    $diagnosticLogging = false,
+        public readonly string $feedBaseUrl = 'https://api.ebay.com/sell/feed/v1',
+        public readonly string $inventoryBaseUrl = 'https://api.ebay.com/sell/inventory/v1',
+        public readonly string $mediaBaseUrl = 'https://apim.ebay.com/commerce/media/v1_beta',
+        public readonly string $storesBaseUrl = 'https://api.ebay.com/sell/stores/v1',
+        public readonly string $graphQLBaseUrl = 'https://api.ebay.com/graphql',
+        public readonly ?string $accessToken = null,
+        public readonly bool $diagnosticLogging = false,
     ) {
         $this->defaultRequestOptions = new RequestOptions();
     }
@@ -42,7 +42,7 @@ final class ListingManagementConfiguration
     }
 
     /**
-     * Hostnames tokens may be sent to — passed to AllowedHostsValidator.
+     * Hostnames tokens may be sent to. Passed to AllowedHostsValidator.
      *
      * @return string[]
      */
@@ -51,8 +51,8 @@ final class ListingManagementConfiguration
         return array_values(array_unique(array_filter(array_map(
             fn(string $url) => parse_url($url, PHP_URL_HOST),
             [
-                $this->inventoryBaseUrl,
                 $this->feedBaseUrl,
+                $this->inventoryBaseUrl,
                 $this->mediaBaseUrl,
                 $this->storesBaseUrl,
                 $this->graphQLBaseUrl,

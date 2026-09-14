@@ -18,30 +18,26 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Inputs;
 
-/**
- * Input for the bulkUpdateInventory mutation.
- * The inventory array contains UpdateInventoryInput objects (listingItemIdentifier, fixedPrice, availableQuantity).
- *
- * @see https://developer.ebay.com/api-docs/buy/browse/types/gct:BulkUpdateInventoryInput
- */
 readonly class BulkUpdateInventoryInput
 {
     public function __construct(
-        /** @var array<array<string, mixed>> */
+        /** @var UpdateInventoryInput[] */
         public array $inventory,
     ) {}
-
-    /** @return array<string, mixed> */
-    public function toArray(): array
-    {
-        return ['inventory' => $this->inventory];
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            inventory: $data['inventory'] ?? [],
+            inventory: array_map(fn($item) => UpdateInventoryInput::fromArray($item), $data['inventory']),
         );
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return [
+                'inventory' => array_map(fn(UpdateInventoryInput $item) => $item->toArray(), $this->inventory),
+        ];
     }
 }

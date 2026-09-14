@@ -20,15 +20,13 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 
 abstract readonly class BulkUpdateInventoryOutput
 {
-    abstract public function getTypename(): string;
-
     /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): BulkUpdateInventorySuccess|BulkUpdateInventoryPartialFailure|BulkUpdateInventoryFailure
+    public static function fromArray(array $data): BulkUpdateInventoryFailure|BulkUpdateInventoryPartialFailure|BulkUpdateInventorySuccess
     {
         return match ($data['__typename'] ?? null) {
-            'BulkUpdateInventorySuccess'        => BulkUpdateInventorySuccess::fromArray($data),
+            'BulkUpdateInventoryFailure' => BulkUpdateInventoryFailure::fromArray($data),
             'BulkUpdateInventoryPartialFailure' => BulkUpdateInventoryPartialFailure::fromArray($data),
-            'BulkUpdateInventoryFailure'        => BulkUpdateInventoryFailure::fromArray($data),
+            'BulkUpdateInventorySuccess' => BulkUpdateInventorySuccess::fromArray($data),
             default => throw new \UnexpectedValueException(
                 'Unknown __typename for BulkUpdateInventoryOutput: ' . ($data['__typename'] ?? 'null')
             ),

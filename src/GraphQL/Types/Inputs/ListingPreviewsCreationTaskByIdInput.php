@@ -24,15 +24,19 @@ readonly class ListingPreviewsCreationTaskByIdInput
         public string $id,
     ) {}
 
-    /** @return array<string, mixed> */
-    public function toArray(): array
-    {
-        return ['id' => $this->id];
-    }
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
-        return new self(id: $data['id']);
+        return new self(
+            id: $data['id'],
+        );
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return [
+                'id' => $this->id,
+        ];
     }
 }

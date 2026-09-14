@@ -20,14 +20,12 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 
 abstract readonly class CreateSecondChanceListingOutput
 {
-    abstract public function getTypename(): string;
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): CreateSecondChanceListingSuccess|CreateSecondChanceListingValidationError|CreateSecondChanceListingValidationSuccess
     {
         return match ($data['__typename'] ?? null) {
-            'CreateSecondChanceListingSuccess'           => CreateSecondChanceListingSuccess::fromArray($data),
-            'CreateSecondChanceListingValidationError'   => CreateSecondChanceListingValidationError::fromArray($data),
+            'CreateSecondChanceListingSuccess' => CreateSecondChanceListingSuccess::fromArray($data),
+            'CreateSecondChanceListingValidationError' => CreateSecondChanceListingValidationError::fromArray($data),
             'CreateSecondChanceListingValidationSuccess' => CreateSecondChanceListingValidationSuccess::fromArray($data),
             default => throw new \UnexpectedValueException(
                 'Unknown __typename for CreateSecondChanceListingOutput: ' . ($data['__typename'] ?? 'null')

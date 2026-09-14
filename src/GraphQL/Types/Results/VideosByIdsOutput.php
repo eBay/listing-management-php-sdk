@@ -20,14 +20,12 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 
 abstract readonly class VideosByIdsOutput
 {
-    abstract public function getTypename(): string;
-
     /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): MaxVideoIdsAllowedExceeded|VideoList
     {
         return match ($data['__typename'] ?? null) {
             'MaxVideoIdsAllowedExceeded' => MaxVideoIdsAllowedExceeded::fromArray($data),
-            'VideoList'                  => VideoList::fromArray($data),
+            'VideoList' => VideoList::fromArray($data),
             default => throw new \UnexpectedValueException(
                 'Unknown __typename for VideosByIdsOutput: ' . ($data['__typename'] ?? 'null')
             ),

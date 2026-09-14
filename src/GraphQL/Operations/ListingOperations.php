@@ -80,6 +80,12 @@ final class ListingOperations
             ?: throw new \RuntimeException('Failed to read bundled GraphQL file: updateListing.graphql');
     }
 
+    public static function USER_SAVED_SEARCHES(): string
+    {
+        return file_get_contents(__DIR__ . '/userSavedSearches.graphql')
+            ?: throw new \RuntimeException('Failed to read bundled GraphQL file: userSavedSearches.graphql');
+    }
+
     public static function VIDEOS_BY_IDS(): string
     {
         return file_get_contents(__DIR__ . '/videosByIds.graphql')
