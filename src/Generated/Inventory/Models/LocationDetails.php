@@ -32,12 +32,12 @@ class LocationDetails implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Address|null $address This type is used to define the physical address of an inventory location.
+     * @var Address|null $address This required container sets the physical address of an inventory location. Except in the case store or fulfillment center location, a full address is not a requirement when setting up a location. For warehouse locations, the fields required in this container are either of the following sets:<ul><li><b>city</b>, <b>stateOrProvince</b>, and <b>country</b></li><li><b>postalCode</b> and <b>country</b></li></ul>
     */
     private ?Address $address = null;
     
     /**
-     * @var GeoCoordinates|null $geoCoordinates This type is used to express the Global Positioning System (GPS) latitude and longitude coordinates of an inventory location.
+     * @var GeoCoordinates|null $geoCoordinates This container is used to set the Global Positioning System (GPS) latitude and longitude coordinates for the inventory location.<br><br>Geographical coordinates are required for the location of In-Store Pickup inventory. 
     */
     private ?GeoCoordinates $geoCoordinates = null;
     
@@ -66,7 +66,7 @@ class LocationDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the address property value. This type is used to define the physical address of an inventory location.
+     * Gets the address property value. This required container sets the physical address of an inventory location. Except in the case store or fulfillment center location, a full address is not a requirement when setting up a location. For warehouse locations, the fields required in this container are either of the following sets:<ul><li><b>city</b>, <b>stateOrProvince</b>, and <b>country</b></li><li><b>postalCode</b> and <b>country</b></li></ul>
      * @return Address|null
     */
     public function getAddress(): ?Address {
@@ -86,7 +86,7 @@ class LocationDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the geoCoordinates property value. This type is used to express the Global Positioning System (GPS) latitude and longitude coordinates of an inventory location.
+     * Gets the geoCoordinates property value. This container is used to set the Global Positioning System (GPS) latitude and longitude coordinates for the inventory location.<br><br>Geographical coordinates are required for the location of In-Store Pickup inventory. 
      * @return GeoCoordinates|null
     */
     public function getGeoCoordinates(): ?GeoCoordinates {
@@ -112,7 +112,7 @@ class LocationDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the address property value. This type is used to define the physical address of an inventory location.
+     * Sets the address property value. This required container sets the physical address of an inventory location. Except in the case store or fulfillment center location, a full address is not a requirement when setting up a location. For warehouse locations, the fields required in this container are either of the following sets:<ul><li><b>city</b>, <b>stateOrProvince</b>, and <b>country</b></li><li><b>postalCode</b> and <b>country</b></li></ul>
      * @param Address|null $value Value to set for the address property.
     */
     public function setAddress(?Address $value): void {
@@ -120,7 +120,7 @@ class LocationDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the geoCoordinates property value. This type is used to express the Global Positioning System (GPS) latitude and longitude coordinates of an inventory location.
+     * Sets the geoCoordinates property value. This container is used to set the Global Positioning System (GPS) latitude and longitude coordinates for the inventory location.<br><br>Geographical coordinates are required for the location of In-Store Pickup inventory. 
      * @param GeoCoordinates|null $value Value to set for the geoCoordinates property.
     */
     public function setGeoCoordinates(?GeoCoordinates $value): void {

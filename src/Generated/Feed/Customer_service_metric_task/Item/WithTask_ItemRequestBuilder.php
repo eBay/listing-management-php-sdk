@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Feed\Customer_service_metric_task\Item;
 
+use EBay\ListingManagement\Generated\Feed\Models\ErrorResponse;
 use EBay\ListingManagement\Generated\Feed\Models\ServiceMetricsTask;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,13 @@ class WithTask_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?WithTask_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [ServiceMetricsTask::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '401' => [ErrorResponse::class, 'createFromDiscriminatorValue'],
+                '403' => [ErrorResponse::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorResponse::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorResponse::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [ServiceMetricsTask::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

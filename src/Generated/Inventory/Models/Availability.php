@@ -37,7 +37,7 @@ class Availability implements AdditionalDataHolder, Parsable
     private ?array $pickupAtLocationAvailability = null;
     
     /**
-     * @var ShipToLocationAvailability|null $shipToLocationAvailability This type is used to specify the total 'ship-to-home' quantity of the inventory item that will be available for purchase through one or more published offers.
+     * @var ShipToLocationAvailability|null $shipToLocationAvailability This container specifies the quantity of the inventory item that are available for purchase across one or more eBay marketplaces.
     */
     private ?ShipToLocationAvailability $shipToLocationAvailability = null;
     
@@ -86,7 +86,7 @@ class Availability implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shipToLocationAvailability property value. This type is used to specify the total 'ship-to-home' quantity of the inventory item that will be available for purchase through one or more published offers.
+     * Gets the shipToLocationAvailability property value. This container specifies the quantity of the inventory item that are available for purchase across one or more eBay marketplaces.
      * @return ShipToLocationAvailability|null
     */
     public function getShipToLocationAvailability(): ?ShipToLocationAvailability {
@@ -120,7 +120,7 @@ class Availability implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shipToLocationAvailability property value. This type is used to specify the total 'ship-to-home' quantity of the inventory item that will be available for purchase through one or more published offers.
+     * Sets the shipToLocationAvailability property value. This container specifies the quantity of the inventory item that are available for purchase across one or more eBay marketplaces.
      * @param ShipToLocationAvailability|null $value Value to set for the shipToLocationAvailability property.
     */
     public function setShipToLocationAvailability(?ShipToLocationAvailability $value): void {

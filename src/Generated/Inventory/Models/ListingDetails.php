@@ -37,14 +37,14 @@ class ListingDetails implements AdditionalDataHolder, Parsable
     private ?string $listingId = null;
     
     /**
-     * @var bool|null $listingOnHold Indicates if a listing is on hold due to an eBay policy violation.<br><p>If a listing is put on hold, users are unable to view the listing details, the listing is hidden from search, and all attempted purchases, offers, and bids for the listing are blocked. eBay, however, gives sellers the opportunity to address violations and get listings fully reinstated. A listing will be ended if a seller does not address a violation, or if the violation can not be rectified.</p><br><p>If a listing is fixable, the seller should be able to view the listing details and this boolean will be returned as true.</p><br><p>Once a listing is fixed, this boolean will no longer be returned.</p>
+     * @var bool|null $listingOnHold Indicates if a listing is on hold due to an eBay policy violation.<br><br>If a listing is put on hold, users are unable to view the listing details, the listing is hidden from search, and all attempted purchases, offers, and bids for the listing are blocked. eBay, however, gives sellers the opportunity to address violations and get listings fully reinstated. A listing will be ended if a seller does not address a violation, or if the violation can not be rectified.<br><br>If a listing is fixable, the seller should be able to view the listing details and this boolean will be returned as true.<br><br>Once a listing is fixed, this boolean will no longer be returned.
     */
     private ?bool $listingOnHold = null;
     
     /**
-     * @var string|null $listingStatus The enumeration value returned in this field indicates the status of the listing that is associated with the published offer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:ListingStatusEnum'>eBay API documentation</a>
+     * @var ListingStatusEnum|null $listingStatus The enumeration value returned in this field indicates the status of the listing that is associated with the published offer.
     */
-    private ?string $listingStatus = null;
+    private ?ListingStatusEnum $listingStatus = null;
     
     /**
      * @var int|null $soldQuantity This integer value indicates the quantity of the product that has been sold for the published offer.
@@ -84,7 +84,7 @@ class ListingDetails implements AdditionalDataHolder, Parsable
         return  [
             'listingId' => fn(ParseNode $n) => $o->setListingId($n->getStringValue()),
             'listingOnHold' => fn(ParseNode $n) => $o->setListingOnHold($n->getBooleanValue()),
-            'listingStatus' => fn(ParseNode $n) => $o->setListingStatus($n->getStringValue()),
+            'listingStatus' => fn(ParseNode $n) => $o->setListingStatus($n->getEnumValue(ListingStatusEnum::class)),
             'soldQuantity' => fn(ParseNode $n) => $o->setSoldQuantity($n->getIntegerValue()),
         ];
     }
@@ -98,7 +98,7 @@ class ListingDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the listingOnHold property value. Indicates if a listing is on hold due to an eBay policy violation.<br><p>If a listing is put on hold, users are unable to view the listing details, the listing is hidden from search, and all attempted purchases, offers, and bids for the listing are blocked. eBay, however, gives sellers the opportunity to address violations and get listings fully reinstated. A listing will be ended if a seller does not address a violation, or if the violation can not be rectified.</p><br><p>If a listing is fixable, the seller should be able to view the listing details and this boolean will be returned as true.</p><br><p>Once a listing is fixed, this boolean will no longer be returned.</p>
+     * Gets the listingOnHold property value. Indicates if a listing is on hold due to an eBay policy violation.<br><br>If a listing is put on hold, users are unable to view the listing details, the listing is hidden from search, and all attempted purchases, offers, and bids for the listing are blocked. eBay, however, gives sellers the opportunity to address violations and get listings fully reinstated. A listing will be ended if a seller does not address a violation, or if the violation can not be rectified.<br><br>If a listing is fixable, the seller should be able to view the listing details and this boolean will be returned as true.<br><br>Once a listing is fixed, this boolean will no longer be returned.
      * @return bool|null
     */
     public function getListingOnHold(): ?bool {
@@ -106,10 +106,10 @@ class ListingDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the listingStatus property value. The enumeration value returned in this field indicates the status of the listing that is associated with the published offer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:ListingStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the listingStatus property value. The enumeration value returned in this field indicates the status of the listing that is associated with the published offer.
+     * @return ListingStatusEnum|null
     */
-    public function getListingStatus(): ?string {
+    public function getListingStatus(): ?ListingStatusEnum {
         return $this->listingStatus;
     }
 
@@ -128,7 +128,7 @@ class ListingDetails implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('listingId', $this->getListingId());
         $writer->writeBooleanValue('listingOnHold', $this->getListingOnHold());
-        $writer->writeStringValue('listingStatus', $this->getListingStatus());
+        $writer->writeEnumValue('listingStatus', $this->getListingStatus());
         $writer->writeIntegerValue('soldQuantity', $this->getSoldQuantity());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -150,7 +150,7 @@ class ListingDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingOnHold property value. Indicates if a listing is on hold due to an eBay policy violation.<br><p>If a listing is put on hold, users are unable to view the listing details, the listing is hidden from search, and all attempted purchases, offers, and bids for the listing are blocked. eBay, however, gives sellers the opportunity to address violations and get listings fully reinstated. A listing will be ended if a seller does not address a violation, or if the violation can not be rectified.</p><br><p>If a listing is fixable, the seller should be able to view the listing details and this boolean will be returned as true.</p><br><p>Once a listing is fixed, this boolean will no longer be returned.</p>
+     * Sets the listingOnHold property value. Indicates if a listing is on hold due to an eBay policy violation.<br><br>If a listing is put on hold, users are unable to view the listing details, the listing is hidden from search, and all attempted purchases, offers, and bids for the listing are blocked. eBay, however, gives sellers the opportunity to address violations and get listings fully reinstated. A listing will be ended if a seller does not address a violation, or if the violation can not be rectified.<br><br>If a listing is fixable, the seller should be able to view the listing details and this boolean will be returned as true.<br><br>Once a listing is fixed, this boolean will no longer be returned.
      * @param bool|null $value Value to set for the listingOnHold property.
     */
     public function setListingOnHold(?bool $value): void {
@@ -158,10 +158,10 @@ class ListingDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingStatus property value. The enumeration value returned in this field indicates the status of the listing that is associated with the published offer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:ListingStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the listingStatus property.
+     * Sets the listingStatus property value. The enumeration value returned in this field indicates the status of the listing that is associated with the published offer.
+     * @param ListingStatusEnum|null $value Value to set for the listingStatus property.
     */
-    public function setListingStatus(?string $value): void {
+    public function setListingStatus(?ListingStatusEnum $value): void {
         $this->listingStatus = $value;
     }
 

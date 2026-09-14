@@ -18,6 +18,7 @@ namespace EBay\ListingManagement\Generated\Media;
 
 use EBay\ListingManagement\Generated\Media\Document\DocumentRequestBuilder;
 use EBay\ListingManagement\Generated\Media\Image\ImageRequestBuilder;
+use EBay\ListingManagement\Generated\Media\Post_order\Post_orderRequestBuilder;
 use EBay\ListingManagement\Generated\Media\Video\VideoRequestBuilder;
 use Microsoft\Kiota\Abstractions\ApiClientBuilder;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -50,6 +51,13 @@ class MediaApiClient extends BaseRequestBuilder
     }
     
     /**
+     * The post_order property
+    */
+    public function post_order(): Post_orderRequestBuilder {
+        return new Post_orderRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
+    /**
      * The video property
     */
     public function video(): VideoRequestBuilder {
@@ -70,7 +78,7 @@ class MediaApiClient extends BaseRequestBuilder
         ApiClientBuilder::registerDefaultDeserializer(TextParseNodeFactory::class);
         ApiClientBuilder::registerDefaultDeserializer(FormParseNodeFactory::class);
         if (empty($this->requestAdapter->getBaseUrl())) {
-            $this->requestAdapter->setBaseUrl('https://apim.ebay.com{basePath}');
+            $this->requestAdapter->setBaseUrl('https://apim.ebay.com/commerce/media/v1_beta');
         }
         $this->pathParameters['baseurl'] = $this->requestAdapter->getBaseUrl();
     }

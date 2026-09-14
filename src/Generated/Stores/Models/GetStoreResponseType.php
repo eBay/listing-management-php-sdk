@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The base response type of the <b>getStore</b> method. It is used to describe a seller's eBay store, and includes the eBay Store name, the description of the store, the URL to the eBay Store.
+ * The base response type of the getStore call. This response consists of the data describinga seller's eBay store, and includes the eBay Store name, the description of the store, the URL to the eBay Store.
 */
 class GetStoreResponseType implements AdditionalDataHolder, Parsable 
 {
@@ -42,7 +42,7 @@ class GetStoreResponseType implements AdditionalDataHolder, Parsable
     private ?string $lastOpenedTime = null;
     
     /**
-     * @var StoreLogoType|null $logo This type is used to provide url of the seller's store logo.
+     * @var StoreLogoType|null $logo This container provides information about a Store logo.
     */
     private ?StoreLogoType $logo = null;
     
@@ -52,12 +52,12 @@ class GetStoreResponseType implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var string|null $url The complete URL of the user's store.
+     * @var string|null $url The complete URL of the user's Store. This field is only ever returned, and does not need to be explicitly set.
     */
     private ?string $url = null;
     
     /**
-     * @var string|null $urlPath The relative URL path of the Store.<br><br> <b>Max length: </b>58
+     * @var string|null $urlPath The URL path of the Store (58 characters maximum). Only if you are using Chinese characters in theName property do you need to use this field, such as if you are opening a Store on the Taiwan site.The reason for this is that the URL path is normally derived from the Store name, but it cannot be derivedfrom the name of the Store if it contains Chinese characters because URLs cannot contain Chinese characters.
     */
     private ?string $urlPath = null;
     
@@ -118,7 +118,7 @@ class GetStoreResponseType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the logo property value. This type is used to provide url of the seller's store logo.
+     * Gets the logo property value. This container provides information about a Store logo.
      * @return StoreLogoType|null
     */
     public function getLogo(): ?StoreLogoType {
@@ -134,7 +134,7 @@ class GetStoreResponseType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the url property value. The complete URL of the user's store.
+     * Gets the url property value. The complete URL of the user's Store. This field is only ever returned, and does not need to be explicitly set.
      * @return string|null
     */
     public function getUrl(): ?string {
@@ -142,7 +142,7 @@ class GetStoreResponseType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the urlPath property value. The relative URL path of the Store.<br><br> <b>Max length: </b>58
+     * Gets the urlPath property value. The URL path of the Store (58 characters maximum). Only if you are using Chinese characters in theName property do you need to use this field, such as if you are opening a Store on the Taiwan site.The reason for this is that the URL path is normally derived from the Store name, but it cannot be derivedfrom the name of the Store if it contains Chinese characters because URLs cannot contain Chinese characters.
      * @return string|null
     */
     public function getUrlPath(): ?string {
@@ -188,7 +188,7 @@ class GetStoreResponseType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the logo property value. This type is used to provide url of the seller's store logo.
+     * Sets the logo property value. This container provides information about a Store logo.
      * @param StoreLogoType|null $value Value to set for the logo property.
     */
     public function setLogo(?StoreLogoType $value): void {
@@ -204,7 +204,7 @@ class GetStoreResponseType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the url property value. The complete URL of the user's store.
+     * Sets the url property value. The complete URL of the user's Store. This field is only ever returned, and does not need to be explicitly set.
      * @param string|null $value Value to set for the url property.
     */
     public function setUrl(?string $value): void {
@@ -212,7 +212,7 @@ class GetStoreResponseType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the urlPath property value. The relative URL path of the Store.<br><br> <b>Max length: </b>58
+     * Sets the urlPath property value. The URL path of the Store (58 characters maximum). Only if you are using Chinese characters in theName property do you need to use this field, such as if you are opening a Store on the Taiwan site.The reason for this is that the URL path is normally derived from the Store name, but it cannot be derivedfrom the name of the Store if it contains Chinese characters because URLs cannot contain Chinese characters.
      * @param string|null $value Value to set for the urlPath property.
     */
     public function setUrlPath(?string $value): void {

@@ -32,12 +32,12 @@ class GetInventoryItemResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<Error>|null $errors This container will be returned if there were one or more errors associated with retrieving the inventory item record.
+     * @var array<ErrorDetailV3>|null $errors This container will be returned if there were one or more errors associated with retrieving the inventory item record.
     */
     private ?array $errors = null;
     
     /**
-     * @var InventoryItemWithSkuLocaleGroupKeys|null $inventoryItem This type is used to provide details about each retrieved inventory item record.
+     * @var InventoryItemWithSkuLocaleGroupKeys|null $inventoryItem This container consists of detailed information on the inventory item specified in the <strong>sku</strong> field.
     */
     private ?InventoryItemWithSkuLocaleGroupKeys $inventoryItem = null;
     
@@ -52,7 +52,7 @@ class GetInventoryItemResponse implements AdditionalDataHolder, Parsable
     private ?int $statusCode = null;
     
     /**
-     * @var array<Error>|null $warnings This container will be returned if there were one or more warnings associated with retrieving the inventory item record.
+     * @var array<ErrorDetailV3>|null $warnings This container will be returned if there were one or more warnings associated with retrieving the inventory item record.
     */
     private ?array $warnings = null;
     
@@ -82,7 +82,7 @@ class GetInventoryItemResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the errors property value. This container will be returned if there were one or more errors associated with retrieving the inventory item record.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -95,16 +95,16 @@ class GetInventoryItemResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
             'inventoryItem' => fn(ParseNode $n) => $o->setInventoryItem($n->getObjectValue([InventoryItemWithSkuLocaleGroupKeys::class, 'createFromDiscriminatorValue'])),
             'sku' => fn(ParseNode $n) => $o->setSku($n->getStringValue()),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
-            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the inventoryItem property value. This type is used to provide details about each retrieved inventory item record.
+     * Gets the inventoryItem property value. This container consists of detailed information on the inventory item specified in the <strong>sku</strong> field.
      * @return InventoryItemWithSkuLocaleGroupKeys|null
     */
     public function getInventoryItem(): ?InventoryItemWithSkuLocaleGroupKeys {
@@ -129,7 +129,7 @@ class GetInventoryItemResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the warnings property value. This container will be returned if there were one or more warnings associated with retrieving the inventory item record.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getWarnings(): ?array {
         return $this->warnings;
@@ -158,14 +158,14 @@ class GetInventoryItemResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the errors property value. This container will be returned if there were one or more errors associated with retrieving the inventory item record.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;
     }
 
     /**
-     * Sets the inventoryItem property value. This type is used to provide details about each retrieved inventory item record.
+     * Sets the inventoryItem property value. This container consists of detailed information on the inventory item specified in the <strong>sku</strong> field.
      * @param InventoryItemWithSkuLocaleGroupKeys|null $value Value to set for the inventoryItem property.
     */
     public function setInventoryItem(?InventoryItemWithSkuLocaleGroupKeys $value): void {
@@ -190,7 +190,7 @@ class GetInventoryItemResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the warnings property value. This container will be returned if there were one or more warnings associated with retrieving the inventory item record.
-     * @param array<Error>|null $value Value to set for the warnings property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the warnings property.
     */
     public function setWarnings(?array $value): void {
         $this->warnings = $value;

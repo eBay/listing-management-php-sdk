@@ -27,6 +27,9 @@ readonly class UserSavedSearchesInput
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
+        if (isset($data['input']) && is_array($data['input'])) {
+            $data = array_merge($data['input'], $data);
+        }
         return new self(
             pagination: isset($data['pagination']) ? PageInfoInput::fromArray($data['pagination']) : null,
         );

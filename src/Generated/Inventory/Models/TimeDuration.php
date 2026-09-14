@@ -32,9 +32,9 @@ class TimeDuration implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $unit This enumeration value indicates the time unit used to specify the fulfillment time, such as <code>BUSINESS_DAY</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:TimeDurationUnitEnum'>eBay API documentation</a>
+     * @var TimeDurationUnitEnum|null $unit This enumeration value indicates the time unit used to specify the fulfillment time, such as <code>BUSINESS_DAY</code>.
     */
-    private ?string $unit = null;
+    private ?TimeDurationUnitEnum $unit = null;
     
     /**
      * @var int|null $value The integer value in this field, along with the time unit in the <strong>unit</strong> field, will indicate the fulfillment time.<br><br>For standard orders that will be shipped, this value will indicate the expected fulfillment time if the inventory item is shipped from the inventory location. If the value of this field is <code>4</code>, and the value of the <strong>unit</strong> field is <code>BUSINESS_DAY</code>, then the estimated delivery date after purchase is 4 business days.
@@ -72,16 +72,16 @@ class TimeDuration implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'unit' => fn(ParseNode $n) => $o->setUnit($n->getStringValue()),
+            'unit' => fn(ParseNode $n) => $o->setUnit($n->getEnumValue(TimeDurationUnitEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getIntegerValue()),
         ];
     }
 
     /**
-     * Gets the unit property value. This enumeration value indicates the time unit used to specify the fulfillment time, such as <code>BUSINESS_DAY</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:TimeDurationUnitEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the unit property value. This enumeration value indicates the time unit used to specify the fulfillment time, such as <code>BUSINESS_DAY</code>.
+     * @return TimeDurationUnitEnum|null
     */
-    public function getUnit(): ?string {
+    public function getUnit(): ?TimeDurationUnitEnum {
         return $this->unit;
     }
 
@@ -98,7 +98,7 @@ class TimeDuration implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('unit', $this->getUnit());
+        $writer->writeEnumValue('unit', $this->getUnit());
         $writer->writeIntegerValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class TimeDuration implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the unit property value. This enumeration value indicates the time unit used to specify the fulfillment time, such as <code>BUSINESS_DAY</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:TimeDurationUnitEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the unit property.
+     * Sets the unit property value. This enumeration value indicates the time unit used to specify the fulfillment time, such as <code>BUSINESS_DAY</code>.
+     * @param TimeDurationUnitEnum|null $value Value to set for the unit property.
     */
-    public function setUnit(?string $value): void {
+    public function setUnit(?TimeDurationUnitEnum $value): void {
         $this->unit = $value;
     }
 

@@ -28,6 +28,9 @@ readonly class SellerListingsInput
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
+        if (isset($data['input']) && is_array($data['input'])) {
+            $data = array_merge($data['input'], $data);
+        }
         return new self(
             listings: array_map(fn($item) => SellerListingInput::fromArray($item), $data['listings']),
         );

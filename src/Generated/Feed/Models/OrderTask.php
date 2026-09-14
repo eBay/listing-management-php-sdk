@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The type that defines the fields for the <b> getOrderTask</b> response.
+ * The type that defines the fields for the <strong>getOrderTask</strong> response.
 */
 class OrderTask implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class OrderTask implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $completionDate The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller’s filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
+     * @var string|null $completionDate The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller's filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
     */
     private ?string $completionDate = null;
     
@@ -52,7 +52,7 @@ class OrderTask implements AdditionalDataHolder, Parsable
     private ?string $feedType = null;
     
     /**
-     * @var OrderFilterCriteria|null $filterCriteria The type that defines the fields for the order filters.
+     * @var OrderFilterCriteria|null $filterCriteria A container that returns the filter criteria used.
     */
     private ?OrderFilterCriteria $filterCriteria = null;
     
@@ -62,9 +62,9 @@ class OrderTask implements AdditionalDataHolder, Parsable
     private ?string $schemaVersion = null;
     
     /**
-     * @var string|null $status The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED </code>and<code> COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
+     * @var FeedStatusEnum|null $status The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED</code> and <code>COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p>
     */
-    private ?string $status = null;
+    private ?FeedStatusEnum $status = null;
     
     /**
      * @var string|null $taskId The ID of the task that was submitted in the request.
@@ -101,7 +101,7 @@ class OrderTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the completionDate property value. The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller’s filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
+     * Gets the completionDate property value. The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller's filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
      * @return string|null
     */
     public function getCompletionDate(): ?string {
@@ -145,14 +145,14 @@ class OrderTask implements AdditionalDataHolder, Parsable
             'feedType' => fn(ParseNode $n) => $o->setFeedType($n->getStringValue()),
             'filterCriteria' => fn(ParseNode $n) => $o->setFilterCriteria($n->getObjectValue([OrderFilterCriteria::class, 'createFromDiscriminatorValue'])),
             'schemaVersion' => fn(ParseNode $n) => $o->setSchemaVersion($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(FeedStatusEnum::class)),
             'taskId' => fn(ParseNode $n) => $o->setTaskId($n->getStringValue()),
             'uploadSummary' => fn(ParseNode $n) => $o->setUploadSummary($n->getObjectValue([UploadSummary::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the filterCriteria property value. The type that defines the fields for the order filters.
+     * Gets the filterCriteria property value. A container that returns the filter criteria used.
      * @return OrderFilterCriteria|null
     */
     public function getFilterCriteria(): ?OrderFilterCriteria {
@@ -168,10 +168,10 @@ class OrderTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED </code>and<code> COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED</code> and <code>COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p>
+     * @return FeedStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?FeedStatusEnum {
         return $this->status;
     }
 
@@ -202,7 +202,7 @@ class OrderTask implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('feedType', $this->getFeedType());
         $writer->writeObjectValue('filterCriteria', $this->getFilterCriteria());
         $writer->writeStringValue('schemaVersion', $this->getSchemaVersion());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeStringValue('taskId', $this->getTaskId());
         $writer->writeObjectValue('uploadSummary', $this->getUploadSummary());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -217,7 +217,7 @@ class OrderTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the completionDate property value. The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller’s filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
+     * Sets the completionDate property value. The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller's filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
      * @param string|null $value Value to set for the completionDate property.
     */
     public function setCompletionDate(?string $value): void {
@@ -249,7 +249,7 @@ class OrderTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the filterCriteria property value. The type that defines the fields for the order filters.
+     * Sets the filterCriteria property value. A container that returns the filter criteria used.
      * @param OrderFilterCriteria|null $value Value to set for the filterCriteria property.
     */
     public function setFilterCriteria(?OrderFilterCriteria $value): void {
@@ -265,10 +265,10 @@ class OrderTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED </code>and<code> COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED</code> and <code>COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p>
+     * @param FeedStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?FeedStatusEnum $value): void {
         $this->status = $value;
     }
 

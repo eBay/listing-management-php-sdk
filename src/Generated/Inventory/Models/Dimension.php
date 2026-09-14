@@ -32,22 +32,22 @@ class Dimension implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var float|null $height The actual height (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height, the <strong>dimensions</strong> container would look as follows: <br> <pre><code>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre></code>
+     * @var float|null $height The actual height (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height, the <strong>dimensions</strong> container would look as follows: <br> <pre>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre>
     */
     private ?float $height = null;
     
     /**
-     * @var float|null $length The actual length (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre><code>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre></code>
+     * @var float|null $length The actual length (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre>
     */
     private ?float $length = null;
     
     /**
-     * @var string|null $unit The unit of measurement used to specify the dimensions of a shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. If the English system of measurement is being used, the applicable values for dimension units are <code>FEET</code> and <code>INCH</code>. If the metric system of measurement is being used, the applicable values for weight units are <code>METER</code> and <code>CENTIMETER</code>. The metric system is used by most countries outside of the US. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:LengthUnitOfMeasureEnum'>eBay API documentation</a>
+     * @var LengthUnitOfMeasureEnum|null $unit The unit of measurement used to specify the dimensions of a shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. If the English system of measurement is being used, the applicable values for dimension units are <code>FEET</code> and <code>INCH</code>. If the metric system of measurement is being used, the applicable values for weight units are <code>METER</code> and <code>CENTIMETER</code>. The metric system is used by most countries outside of the US.
     */
-    private ?string $unit = null;
+    private ?LengthUnitOfMeasureEnum $unit = null;
     
     /**
-     * @var float|null $width The actual width (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified.<br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre><code>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre></code>
+     * @var float|null $width The actual width (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified.<br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre>
     */
     private ?float $width = null;
     
@@ -84,13 +84,13 @@ class Dimension implements AdditionalDataHolder, Parsable
         return  [
             'height' => fn(ParseNode $n) => $o->setHeight($n->getFloatValue()),
             'length' => fn(ParseNode $n) => $o->setLength($n->getFloatValue()),
-            'unit' => fn(ParseNode $n) => $o->setUnit($n->getStringValue()),
+            'unit' => fn(ParseNode $n) => $o->setUnit($n->getEnumValue(LengthUnitOfMeasureEnum::class)),
             'width' => fn(ParseNode $n) => $o->setWidth($n->getFloatValue()),
         ];
     }
 
     /**
-     * Gets the height property value. The actual height (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height, the <strong>dimensions</strong> container would look as follows: <br> <pre><code>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre></code>
+     * Gets the height property value. The actual height (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height, the <strong>dimensions</strong> container would look as follows: <br> <pre>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre>
      * @return float|null
     */
     public function getHeight(): ?float {
@@ -98,7 +98,7 @@ class Dimension implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the length property value. The actual length (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre><code>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre></code>
+     * Gets the length property value. The actual length (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre>
      * @return float|null
     */
     public function getLength(): ?float {
@@ -106,15 +106,15 @@ class Dimension implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the unit property value. The unit of measurement used to specify the dimensions of a shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. If the English system of measurement is being used, the applicable values for dimension units are <code>FEET</code> and <code>INCH</code>. If the metric system of measurement is being used, the applicable values for weight units are <code>METER</code> and <code>CENTIMETER</code>. The metric system is used by most countries outside of the US. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:LengthUnitOfMeasureEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the unit property value. The unit of measurement used to specify the dimensions of a shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. If the English system of measurement is being used, the applicable values for dimension units are <code>FEET</code> and <code>INCH</code>. If the metric system of measurement is being used, the applicable values for weight units are <code>METER</code> and <code>CENTIMETER</code>. The metric system is used by most countries outside of the US.
+     * @return LengthUnitOfMeasureEnum|null
     */
-    public function getUnit(): ?string {
+    public function getUnit(): ?LengthUnitOfMeasureEnum {
         return $this->unit;
     }
 
     /**
-     * Gets the width property value. The actual width (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified.<br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre><code>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre></code>
+     * Gets the width property value. The actual width (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified.<br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre>
      * @return float|null
     */
     public function getWidth(): ?float {
@@ -128,7 +128,7 @@ class Dimension implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeFloatValue('height', $this->getHeight());
         $writer->writeFloatValue('length', $this->getLength());
-        $writer->writeStringValue('unit', $this->getUnit());
+        $writer->writeEnumValue('unit', $this->getUnit());
         $writer->writeFloatValue('width', $this->getWidth());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -142,7 +142,7 @@ class Dimension implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the height property value. The actual height (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height, the <strong>dimensions</strong> container would look as follows: <br> <pre><code>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre></code>
+     * Sets the height property value. The actual height (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height, the <strong>dimensions</strong> container would look as follows: <br> <pre>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre>
      * @param float|null $value Value to set for the height property.
     */
     public function setHeight(?float $value): void {
@@ -150,7 +150,7 @@ class Dimension implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the length property value. The actual length (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre><code>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre></code>
+     * Sets the length property value. The actual length (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. <br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre>
      * @param float|null $value Value to set for the length property.
     */
     public function setLength(?float $value): void {
@@ -158,15 +158,15 @@ class Dimension implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the unit property value. The unit of measurement used to specify the dimensions of a shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. If the English system of measurement is being used, the applicable values for dimension units are <code>FEET</code> and <code>INCH</code>. If the metric system of measurement is being used, the applicable values for weight units are <code>METER</code> and <code>CENTIMETER</code>. The metric system is used by most countries outside of the US. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:LengthUnitOfMeasureEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the unit property.
+     * Sets the unit property value. The unit of measurement used to specify the dimensions of a shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified. If the English system of measurement is being used, the applicable values for dimension units are <code>FEET</code> and <code>INCH</code>. If the metric system of measurement is being used, the applicable values for weight units are <code>METER</code> and <code>CENTIMETER</code>. The metric system is used by most countries outside of the US.
+     * @param LengthUnitOfMeasureEnum|null $value Value to set for the unit property.
     */
-    public function setUnit(?string $value): void {
+    public function setUnit(?LengthUnitOfMeasureEnum $value): void {
         $this->unit = $value;
     }
 
     /**
-     * Sets the width property value. The actual width (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified.<br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre><code>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre></code>
+     * Sets the width property value. The actual width (in the measurement unit specified in the <strong>unit</strong> field) of the shipping package. All fields of the <strong>dimensions</strong> container are required if package dimensions are specified.<br><br>If a shipping package measured 21.5 inches in length, 15.0 inches in width, and 12.0 inches in height,  the <strong>dimensions</strong> container would look as follows: <br> <pre>"dimensions": {<br> "length": 21.5,<br> "width": 15.0,<br> "height": 12.0,<br> "unit": "INCH"<br> } </pre>
      * @param float|null $value Value to set for the width property.
     */
     public function setWidth(?float $value): void {

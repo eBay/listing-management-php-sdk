@@ -28,6 +28,9 @@ readonly class StartListingPreviewsCreationInput
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
+        if (isset($data['input']) && is_array($data['input'])) {
+            $data = array_merge($data['input'], $data);
+        }
         return new self(
             externalProducts: array_map(fn($item) => ExternalProductDetailsInput::fromArray($item), $data['externalProducts'] ?? []),
         );

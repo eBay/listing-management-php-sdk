@@ -33,17 +33,17 @@ class ProductSafety implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $component This field is used by the seller to provide product safety component information for the listing. For example, component information can include specific warnings related to product safety, such as 'Tipping hazard'. <br><br><span class="tablenote"><b>Note:</b> Component information can only be specified if used with the <b>pictograms</b> and/or <b>statements</b> field; if the component is provided without one or both of these fields, an error will occur.</span><br><b>Max length:</b> 120 characters
+     * @var string|null $component This field is used by the seller to provide product safety component information for the listing. For example, component information can include specific warnings related to product safety, such as 'Tipping hazard'. <br><br><span class="tablenote"><b>Note:</b> Component information can only be specified if used with the <b>pictograms</b> and/or <b>statements</b> field; if the component is provided without one or both of these fields, an error will occur.</span><br><b>Maximum length:</b> 120 characters
     */
     private ?string $component = null;
     
     /**
-     * @var array<string>|null $pictograms An array of comma-separated string values used to provide product safety pictogram(s) for the listing.<br><br>If your product shows universal product safety or compliance symbols, please select the values corresponding to the product safety pictograms for display in the product safety section of the listing. The seller specifies the identifier of each pictogram in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety pictograms, use the <a href= "/api-docs/sell/metadata/resources/marketplace/methods/getProductSafetyLabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 2 pictograms are allowed for product safety.
+     * @var array<string>|null $pictograms An array of comma-separated string values used to provide product safety pictogram(s) for the listing.<br><br>If your product shows universal product safety or compliance symbols, please select the values corresponding to the product safety pictograms for display in the product safety section of the listing. The seller specifies the identifier of each pictogram in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety pictograms, use the <a href= "/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getproductsafetylabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 2 pictograms are allowed for product safety.
     */
     private ?array $pictograms = null;
     
     /**
-     * @var array<string>|null $statements An array of comma-separated string values used to provide product safety statement(s) for the listing.<br><br>If your product shows universal product safety or compliance warnings, please select the values corresponding to the product safety statements for display in the product safety section of the listing. The seller specifies the identifier of each statement in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety statements, use the <a href= "/api-docs/sell/metadata/resources/marketplace/methods/getProductSafetyLabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 8 statements are allowed for product safety.
+     * @var array<string>|null $statements An array of comma-separated string values used to provide product safety statement(s) for the listing.<br><br>If your product shows universal product safety or compliance warnings, please select the values corresponding to the product safety statements for display in the product safety section of the listing. The seller specifies the identifier of each statement in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety statements, use the <a href= "/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getproductsafetylabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 8 statements are allowed for product safety.
     */
     private ?array $statements = null;
     
@@ -72,7 +72,7 @@ class ProductSafety implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the component property value. This field is used by the seller to provide product safety component information for the listing. For example, component information can include specific warnings related to product safety, such as 'Tipping hazard'. <br><br><span class="tablenote"><b>Note:</b> Component information can only be specified if used with the <b>pictograms</b> and/or <b>statements</b> field; if the component is provided without one or both of these fields, an error will occur.</span><br><b>Max length:</b> 120 characters
+     * Gets the component property value. This field is used by the seller to provide product safety component information for the listing. For example, component information can include specific warnings related to product safety, such as 'Tipping hazard'. <br><br><span class="tablenote"><b>Note:</b> Component information can only be specified if used with the <b>pictograms</b> and/or <b>statements</b> field; if the component is provided without one or both of these fields, an error will occur.</span><br><b>Maximum length:</b> 120 characters
      * @return string|null
     */
     public function getComponent(): ?string {
@@ -107,7 +107,7 @@ class ProductSafety implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the pictograms property value. An array of comma-separated string values used to provide product safety pictogram(s) for the listing.<br><br>If your product shows universal product safety or compliance symbols, please select the values corresponding to the product safety pictograms for display in the product safety section of the listing. The seller specifies the identifier of each pictogram in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety pictograms, use the <a href= "/api-docs/sell/metadata/resources/marketplace/methods/getProductSafetyLabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 2 pictograms are allowed for product safety.
+     * Gets the pictograms property value. An array of comma-separated string values used to provide product safety pictogram(s) for the listing.<br><br>If your product shows universal product safety or compliance symbols, please select the values corresponding to the product safety pictograms for display in the product safety section of the listing. The seller specifies the identifier of each pictogram in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety pictograms, use the <a href= "/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getproductsafetylabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 2 pictograms are allowed for product safety.
      * @return array<string>|null
     */
     public function getPictograms(): ?array {
@@ -115,7 +115,7 @@ class ProductSafety implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the statements property value. An array of comma-separated string values used to provide product safety statement(s) for the listing.<br><br>If your product shows universal product safety or compliance warnings, please select the values corresponding to the product safety statements for display in the product safety section of the listing. The seller specifies the identifier of each statement in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety statements, use the <a href= "/api-docs/sell/metadata/resources/marketplace/methods/getProductSafetyLabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 8 statements are allowed for product safety.
+     * Gets the statements property value. An array of comma-separated string values used to provide product safety statement(s) for the listing.<br><br>If your product shows universal product safety or compliance warnings, please select the values corresponding to the product safety statements for display in the product safety section of the listing. The seller specifies the identifier of each statement in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety statements, use the <a href= "/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getproductsafetylabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 8 statements are allowed for product safety.
      * @return array<string>|null
     */
     public function getStatements(): ?array {
@@ -142,7 +142,7 @@ class ProductSafety implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the component property value. This field is used by the seller to provide product safety component information for the listing. For example, component information can include specific warnings related to product safety, such as 'Tipping hazard'. <br><br><span class="tablenote"><b>Note:</b> Component information can only be specified if used with the <b>pictograms</b> and/or <b>statements</b> field; if the component is provided without one or both of these fields, an error will occur.</span><br><b>Max length:</b> 120 characters
+     * Sets the component property value. This field is used by the seller to provide product safety component information for the listing. For example, component information can include specific warnings related to product safety, such as 'Tipping hazard'. <br><br><span class="tablenote"><b>Note:</b> Component information can only be specified if used with the <b>pictograms</b> and/or <b>statements</b> field; if the component is provided without one or both of these fields, an error will occur.</span><br><b>Maximum length:</b> 120 characters
      * @param string|null $value Value to set for the component property.
     */
     public function setComponent(?string $value): void {
@@ -150,7 +150,7 @@ class ProductSafety implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the pictograms property value. An array of comma-separated string values used to provide product safety pictogram(s) for the listing.<br><br>If your product shows universal product safety or compliance symbols, please select the values corresponding to the product safety pictograms for display in the product safety section of the listing. The seller specifies the identifier of each pictogram in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety pictograms, use the <a href= "/api-docs/sell/metadata/resources/marketplace/methods/getProductSafetyLabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 2 pictograms are allowed for product safety.
+     * Sets the pictograms property value. An array of comma-separated string values used to provide product safety pictogram(s) for the listing.<br><br>If your product shows universal product safety or compliance symbols, please select the values corresponding to the product safety pictograms for display in the product safety section of the listing. The seller specifies the identifier of each pictogram in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety pictograms, use the <a href= "/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getproductsafetylabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 2 pictograms are allowed for product safety.
      * @param array<string>|null $value Value to set for the pictograms property.
     */
     public function setPictograms(?array $value): void {
@@ -158,7 +158,7 @@ class ProductSafety implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the statements property value. An array of comma-separated string values used to provide product safety statement(s) for the listing.<br><br>If your product shows universal product safety or compliance warnings, please select the values corresponding to the product safety statements for display in the product safety section of the listing. The seller specifies the identifier of each statement in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety statements, use the <a href= "/api-docs/sell/metadata/resources/marketplace/methods/getProductSafetyLabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 8 statements are allowed for product safety.
+     * Sets the statements property value. An array of comma-separated string values used to provide product safety statement(s) for the listing.<br><br>If your product shows universal product safety or compliance warnings, please select the values corresponding to the product safety statements for display in the product safety section of the listing. The seller specifies the identifier of each statement in this field.<br><br><span class="tablenote"><b>Note:</b> For product safety statements, use the <a href= "/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getproductsafetylabels" target="_blank">getProductSafetyLabels</a> method of the <b>Metadata API</b> to find supported values for a specific marketplace/site.</span><br>A maximum of 8 statements are allowed for product safety.
      * @param array<string>|null $value Value to set for the statements property.
     */
     public function setStatements(?array $value): void {

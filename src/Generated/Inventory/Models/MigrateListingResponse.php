@@ -32,7 +32,7 @@ class MigrateListingResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<Error>|null $errors If one or more errors occur with the attempt to migrate the listing, this container will be returned with detailed information on each error.
+     * @var array<ErrorDetailV3>|null $errors If one or more errors occur with the attempt to migrate the listing, this container will be returned with detailed information on each error.
     */
     private ?array $errors = null;
     
@@ -52,9 +52,9 @@ class MigrateListingResponse implements AdditionalDataHolder, Parsable
     private ?string $listingId = null;
     
     /**
-     * @var string|null $marketplaceId This is the unique identifier of the eBay Marketplace where the listing resides. The value fo the eBay US site will be <code>EBAY_US</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:MarketplaceEnum'>eBay API documentation</a>
+     * @var MarketplaceEnum|null $marketplaceId This is the unique identifier of the eBay Marketplace where the listing resides. The value fo the eBay US site will be <code>EBAY_US</code>.
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceEnum $marketplaceId = null;
     
     /**
      * @var int|null $statusCode This field is returned for each listing that the seller attempted to migrate. See the <strong>HTTP status codes</strong> table to see which each status code indicates.
@@ -62,7 +62,7 @@ class MigrateListingResponse implements AdditionalDataHolder, Parsable
     private ?int $statusCode = null;
     
     /**
-     * @var array<Error>|null $warnings If one or more warnings occur with the attempt to migrate the listing, this container will be returned with detailed information on each warning. It is possible that a listing can be successfully migrated even if a warning occurs.
+     * @var array<ErrorDetailV3>|null $warnings If one or more warnings occur with the attempt to migrate the listing, this container will be returned with detailed information on each warning. It is possible that a listing can be successfully migrated even if a warning occurs.
     */
     private ?array $warnings = null;
     
@@ -92,7 +92,7 @@ class MigrateListingResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the errors property value. If one or more errors occur with the attempt to migrate the listing, this container will be returned with detailed information on each error.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -105,13 +105,13 @@ class MigrateListingResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
             'inventoryItemGroupKey' => fn(ParseNode $n) => $o->setInventoryItemGroupKey($n->getStringValue()),
             'inventoryItems' => fn(ParseNode $n) => $o->setInventoryItems($n->getCollectionOfObjectValues([InventoryItemListing::class, 'createFromDiscriminatorValue'])),
             'listingId' => fn(ParseNode $n) => $o->setListingId($n->getStringValue()),
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceEnum::class)),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
-            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
@@ -140,10 +140,10 @@ class MigrateListingResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the marketplaceId property value. This is the unique identifier of the eBay Marketplace where the listing resides. The value fo the eBay US site will be <code>EBAY_US</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:MarketplaceEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. This is the unique identifier of the eBay Marketplace where the listing resides. The value fo the eBay US site will be <code>EBAY_US</code>.
+     * @return MarketplaceEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceEnum {
         return $this->marketplaceId;
     }
 
@@ -157,7 +157,7 @@ class MigrateListingResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the warnings property value. If one or more warnings occur with the attempt to migrate the listing, this container will be returned with detailed information on each warning. It is possible that a listing can be successfully migrated even if a warning occurs.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getWarnings(): ?array {
         return $this->warnings;
@@ -172,7 +172,7 @@ class MigrateListingResponse implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('inventoryItemGroupKey', $this->getInventoryItemGroupKey());
         $writer->writeCollectionOfObjectValues('inventoryItems', $this->getInventoryItems());
         $writer->writeStringValue('listingId', $this->getListingId());
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeIntegerValue('statusCode', $this->getStatusCode());
         $writer->writeCollectionOfObjectValues('warnings', $this->getWarnings());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -188,7 +188,7 @@ class MigrateListingResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the errors property value. If one or more errors occur with the attempt to migrate the listing, this container will be returned with detailed information on each error.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;
@@ -219,10 +219,10 @@ class MigrateListingResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. This is the unique identifier of the eBay Marketplace where the listing resides. The value fo the eBay US site will be <code>EBAY_US</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:MarketplaceEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. This is the unique identifier of the eBay Marketplace where the listing resides. The value fo the eBay US site will be <code>EBAY_US</code>.
+     * @param MarketplaceEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceEnum $value): void {
         $this->marketplaceId = $value;
     }
 
@@ -236,7 +236,7 @@ class MigrateListingResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the warnings property value. If one or more warnings occur with the attempt to migrate the listing, this container will be returned with detailed information on each warning. It is possible that a listing can be successfully migrated even if a warning occurs.
-     * @param array<Error>|null $value Value to set for the warnings property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the warnings property.
     */
     public function setWarnings(?array $value): void {
         $this->warnings = $value;

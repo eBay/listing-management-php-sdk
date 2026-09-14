@@ -33,12 +33,12 @@ class CountryPolicy implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $country The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html " target="_blank">ISO 3166-1</a> country code identifying the country to which the policy or policies specified in the corresponding policyIds array will apply. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/ba:CountryCodeEnum'>eBay API documentation</a>
+     * @var CountryCodeEnum|null $country The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html " target="_blank">ISO 3166-1</a> country code identifying the country to which the policy or policies specified in the corresponding policyIds array will apply.
     */
-    private ?string $country = null;
+    private ?CountryCodeEnum $country = null;
     
     /**
-     * @var array<string>|null $policyIds An array of custom policy identifiers that apply to the country specified by <a href="#request.listingPolicies.regionalProductCompliancePolicies.countryPolicies.country">listingPolicies.regionalTakeBackPolicies.countryPolicies.country</a>.<br><br>Product compliance and take-back policy information may be returned using the following methods:<ul><li><a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicies " target="_blank">getCustomPolicies</a><br><br>Set <code>policy_types</code> to:<ul><li><code>PRODUCT_COMPLIANCE</code> for product compliance policies</li><li><code>TAKE_BACK</code> for takeback policies</li></ul><br>This returns the list of specified policies and corresponding <b>customPolicyId</b> values a seller has created.</li><li><a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy " target="_blank">getCustomPolicy</a> with <code>custom_policy_id = customPolicyId</code><br><br>Returns the details of the policy specified by <b>customPolicyId</b></li></ul>For information about creating and managing custom policies, refer to the <a href="/api-docs/sell/account/resources/methods#h2-custom_policy " target="_blank">custom_policy</a> resource in the <b>Sell Account</b> API.
+     * @var array<string>|null $policyIds An array of custom policy identifiers that apply to the country specified by <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-bulkcreateoffer.countrypolicy.country">listingPolicies.regionalTakeBackPolicies.countryPolicies.country</a>.<br><br>Product compliance and take-back policy information may be returned using the following methods:<ul><li><a href="/develop/api/sell/account_api_v1#sell-account_api_v1-get-getcustompolicies" target="_blank">getCustomPolicies</a><br><br>Set <code>policy_types</code> to:<ul><li><code>PRODUCT_COMPLIANCE</code> for product compliance policies</li><li><code>TAKE_BACK</code> for takeback policies</li></ul><br>This returns the list of specified policies and corresponding <b>customPolicyId</b> values a seller has created.</li><li><a href="/develop/api/sell/account_api_v1#sell-account_api_v1-get-getcustompolicy" target="_blank">getCustomPolicy</a> with <code>custom_policy_id = customPolicyId</code><br><br>Returns the details of the policy specified by <b>customPolicyId</b></li></ul>For information about creating and managing custom policies, refer to the <a href="/api-docs/sell/account/resources/methods#h2-custom_policy" target="_blank">custom_policy</a> resource in the <b>Account API v1</b>.
     */
     private ?array $policyIds = null;
     
@@ -67,10 +67,10 @@ class CountryPolicy implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the country property value. The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html " target="_blank">ISO 3166-1</a> country code identifying the country to which the policy or policies specified in the corresponding policyIds array will apply. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/ba:CountryCodeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the country property value. The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html " target="_blank">ISO 3166-1</a> country code identifying the country to which the policy or policies specified in the corresponding policyIds array will apply.
+     * @return CountryCodeEnum|null
     */
-    public function getCountry(): ?string {
+    public function getCountry(): ?CountryCodeEnum {
         return $this->country;
     }
 
@@ -81,7 +81,7 @@ class CountryPolicy implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'country' => fn(ParseNode $n) => $o->setCountry($n->getStringValue()),
+            'country' => fn(ParseNode $n) => $o->setCountry($n->getEnumValue(CountryCodeEnum::class)),
             'policyIds' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
                 if (is_array($val)) {
@@ -94,7 +94,7 @@ class CountryPolicy implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the policyIds property value. An array of custom policy identifiers that apply to the country specified by <a href="#request.listingPolicies.regionalProductCompliancePolicies.countryPolicies.country">listingPolicies.regionalTakeBackPolicies.countryPolicies.country</a>.<br><br>Product compliance and take-back policy information may be returned using the following methods:<ul><li><a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicies " target="_blank">getCustomPolicies</a><br><br>Set <code>policy_types</code> to:<ul><li><code>PRODUCT_COMPLIANCE</code> for product compliance policies</li><li><code>TAKE_BACK</code> for takeback policies</li></ul><br>This returns the list of specified policies and corresponding <b>customPolicyId</b> values a seller has created.</li><li><a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy " target="_blank">getCustomPolicy</a> with <code>custom_policy_id = customPolicyId</code><br><br>Returns the details of the policy specified by <b>customPolicyId</b></li></ul>For information about creating and managing custom policies, refer to the <a href="/api-docs/sell/account/resources/methods#h2-custom_policy " target="_blank">custom_policy</a> resource in the <b>Sell Account</b> API.
+     * Gets the policyIds property value. An array of custom policy identifiers that apply to the country specified by <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-bulkcreateoffer.countrypolicy.country">listingPolicies.regionalTakeBackPolicies.countryPolicies.country</a>.<br><br>Product compliance and take-back policy information may be returned using the following methods:<ul><li><a href="/develop/api/sell/account_api_v1#sell-account_api_v1-get-getcustompolicies" target="_blank">getCustomPolicies</a><br><br>Set <code>policy_types</code> to:<ul><li><code>PRODUCT_COMPLIANCE</code> for product compliance policies</li><li><code>TAKE_BACK</code> for takeback policies</li></ul><br>This returns the list of specified policies and corresponding <b>customPolicyId</b> values a seller has created.</li><li><a href="/develop/api/sell/account_api_v1#sell-account_api_v1-get-getcustompolicy" target="_blank">getCustomPolicy</a> with <code>custom_policy_id = customPolicyId</code><br><br>Returns the details of the policy specified by <b>customPolicyId</b></li></ul>For information about creating and managing custom policies, refer to the <a href="/api-docs/sell/account/resources/methods#h2-custom_policy" target="_blank">custom_policy</a> resource in the <b>Account API v1</b>.
      * @return array<string>|null
     */
     public function getPolicyIds(): ?array {
@@ -106,7 +106,7 @@ class CountryPolicy implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('country', $this->getCountry());
+        $writer->writeEnumValue('country', $this->getCountry());
         $writer->writeCollectionOfPrimitiveValues('policyIds', $this->getPolicyIds());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -120,15 +120,15 @@ class CountryPolicy implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the country property value. The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html " target="_blank">ISO 3166-1</a> country code identifying the country to which the policy or policies specified in the corresponding policyIds array will apply. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/ba:CountryCodeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the country property.
+     * Sets the country property value. The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html " target="_blank">ISO 3166-1</a> country code identifying the country to which the policy or policies specified in the corresponding policyIds array will apply.
+     * @param CountryCodeEnum|null $value Value to set for the country property.
     */
-    public function setCountry(?string $value): void {
+    public function setCountry(?CountryCodeEnum $value): void {
         $this->country = $value;
     }
 
     /**
-     * Sets the policyIds property value. An array of custom policy identifiers that apply to the country specified by <a href="#request.listingPolicies.regionalProductCompliancePolicies.countryPolicies.country">listingPolicies.regionalTakeBackPolicies.countryPolicies.country</a>.<br><br>Product compliance and take-back policy information may be returned using the following methods:<ul><li><a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicies " target="_blank">getCustomPolicies</a><br><br>Set <code>policy_types</code> to:<ul><li><code>PRODUCT_COMPLIANCE</code> for product compliance policies</li><li><code>TAKE_BACK</code> for takeback policies</li></ul><br>This returns the list of specified policies and corresponding <b>customPolicyId</b> values a seller has created.</li><li><a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy " target="_blank">getCustomPolicy</a> with <code>custom_policy_id = customPolicyId</code><br><br>Returns the details of the policy specified by <b>customPolicyId</b></li></ul>For information about creating and managing custom policies, refer to the <a href="/api-docs/sell/account/resources/methods#h2-custom_policy " target="_blank">custom_policy</a> resource in the <b>Sell Account</b> API.
+     * Sets the policyIds property value. An array of custom policy identifiers that apply to the country specified by <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-bulkcreateoffer.countrypolicy.country">listingPolicies.regionalTakeBackPolicies.countryPolicies.country</a>.<br><br>Product compliance and take-back policy information may be returned using the following methods:<ul><li><a href="/develop/api/sell/account_api_v1#sell-account_api_v1-get-getcustompolicies" target="_blank">getCustomPolicies</a><br><br>Set <code>policy_types</code> to:<ul><li><code>PRODUCT_COMPLIANCE</code> for product compliance policies</li><li><code>TAKE_BACK</code> for takeback policies</li></ul><br>This returns the list of specified policies and corresponding <b>customPolicyId</b> values a seller has created.</li><li><a href="/develop/api/sell/account_api_v1#sell-account_api_v1-get-getcustompolicy" target="_blank">getCustomPolicy</a> with <code>custom_policy_id = customPolicyId</code><br><br>Returns the details of the policy specified by <b>customPolicyId</b></li></ul>For information about creating and managing custom policies, refer to the <a href="/api-docs/sell/account/resources/methods#h2-custom_policy" target="_blank">custom_policy</a> resource in the <b>Account API v1</b>.
      * @param array<string>|null $value Value to set for the policyIds property.
     */
     public function setPolicyIds(?array $value): void {

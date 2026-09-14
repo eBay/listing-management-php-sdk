@@ -32,7 +32,7 @@ class UploadSummary implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var int|null $failureCount The number of records, such as the number of listings created or the number of pictures uploaded to a listing, that failed to process during the upload feed. Check the response file and correct any issues mentioned. If the feed fails before processing, no response file is provided. In this case check the REST output response.
+     * @var int|null $failureCount The number of records, such as the number of listings created or the number of pictures uploaded to a listing, that failed to process during the upload feed. Check the response file and correct any issues mentioned. If the feed fails before processing, no response file is provided. In this case, check the REST output response.
     */
     private ?int $failureCount = null;
     
@@ -66,7 +66,7 @@ class UploadSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the failureCount property value. The number of records, such as the number of listings created or the number of pictures uploaded to a listing, that failed to process during the upload feed. Check the response file and correct any issues mentioned. If the feed fails before processing, no response file is provided. In this case check the REST output response.
+     * Gets the failureCount property value. The number of records, such as the number of listings created or the number of pictures uploaded to a listing, that failed to process during the upload feed. Check the response file and correct any issues mentioned. If the feed fails before processing, no response file is provided. In this case, check the REST output response.
      * @return int|null
     */
     public function getFailureCount(): ?int {
@@ -112,7 +112,7 @@ class UploadSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the failureCount property value. The number of records, such as the number of listings created or the number of pictures uploaded to a listing, that failed to process during the upload feed. Check the response file and correct any issues mentioned. If the feed fails before processing, no response file is provided. In this case check the REST output response.
+     * Sets the failureCount property value. The number of records, such as the number of listings created or the number of pictures uploaded to a listing, that failed to process during the upload feed. Check the response file and correct any issues mentioned. If the feed fails before processing, no response file is provided. In this case, check the REST output response.
      * @param int|null $value Value to set for the failureCount property.
     */
     public function setFailureCount(?int $value): void {

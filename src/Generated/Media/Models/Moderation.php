@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * A container that provides video moderation information when calling the <strong>getVideo</strong> method.<br /><br />This container is returned if the specified video has been blocked by moderators.<br /><br /><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> See <a href="https://www.ebay.com/help/selling/listings/creating-managing-listings/add-video-to-listing?id=5272#section2" target="_blank">Video moderation and restrictions</a> in the eBay Seller Center for details about video moderation.</span>
@@ -33,7 +32,7 @@ class Moderation implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<string>|null $rejectReasons The reason(s) why the specified video was blocked by moderators.
+     * @var array<RejectReasonEnum>|null $rejectReasons The reason(s) why the specified video was blocked by moderators.
     */
     private ?array $rejectReasons = null;
     
@@ -68,20 +67,13 @@ class Moderation implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'rejectReasons' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setRejectReasons($val);
-            },
+            'rejectReasons' => fn(ParseNode $n) => $o->setRejectReasons($n->getCollectionOfEnumValues(RejectReasonEnum::class)),
         ];
     }
 
     /**
      * Gets the rejectReasons property value. The reason(s) why the specified video was blocked by moderators.
-     * @return array<string>|null
+     * @return array<RejectReasonEnum>|null
     */
     public function getRejectReasons(): ?array {
         return $this->rejectReasons;
@@ -92,7 +84,7 @@ class Moderation implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeCollectionOfPrimitiveValues('rejectReasons', $this->getRejectReasons());
+        $writer->writeCollectionOfEnumValues('rejectReasons', $this->getRejectReasons());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -106,7 +98,7 @@ class Moderation implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the rejectReasons property value. The reason(s) why the specified video was blocked by moderators.
-     * @param array<string>|null $value Value to set for the rejectReasons property.
+     * @param array<RejectReasonEnum>|null $value Value to set for the rejectReasons property.
     */
     public function setRejectReasons(?array $value): void {
         $this->rejectReasons = $value;

@@ -32,7 +32,7 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $creationDate The creation date of the schedule in hours based on the 24-hour Coordinated Universal Time (UTC) clock.
+     * @var string|null $creationDate The creation date of the schedule in hours based on the 24&#8209;hour Coordinated Universal Time (UTC) clock.
     */
     private ?string $creationDate = null;
     
@@ -52,12 +52,12 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
     private ?int $preferredTriggerDayOfMonth = null;
     
     /**
-     * @var string|null $preferredTriggerDayOfWeek The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:DayOfWeekEnum'>eBay API documentation</a>
+     * @var DayOfWeekEnum|null $preferredTriggerDayOfWeek The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules.
     */
-    private ?string $preferredTriggerDayOfWeek = null;
+    private ?DayOfWeekEnum $preferredTriggerDayOfWeek = null;
     
     /**
-     * @var string|null $preferredTriggerHour The preferred two-digit hour of the day to trigger the schedule. <br /><br /><b>Format:</b> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC:<br /><br /><code>11Z</code><br /><br />
+     * @var string|null $preferredTriggerHour The preferred two-digit hour of the day to trigger the schedule. <br /><br /><strong>Format:</strong> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC: <code>11Z</code>
     */
     private ?string $preferredTriggerHour = null;
     
@@ -87,19 +87,19 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
     private ?string $scheduleTemplateId = null;
     
     /**
-     * @var string|null $schemaVersion The schema version of the feedType for the schedule.
+     * @var string|null $schemaVersion The schema version of the <strong>feedType</strong> for the schedule.
     */
     private ?string $schemaVersion = null;
     
     /**
-     * @var string|null $status The enumeration value that indicates the state of the schedule. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:StatusEnum'>eBay API documentation</a>
+     * @var StatusEnum|null $status The enumeration value that indicates the state of the schedule.
     */
-    private ?string $status = null;
+    private ?StatusEnum $status = null;
     
     /**
-     * @var string|null $statusReason The reason the schedule is inactive. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:StatusReasonEnum'>eBay API documentation</a>
+     * @var StatusReasonEnum|null $statusReason The reason the schedule is inactive.
     */
-    private ?string $statusReason = null;
+    private ?StatusReasonEnum $statusReason = null;
     
     /**
      * Instantiates a new UserScheduleResponse and sets the default values.
@@ -126,7 +126,7 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the creationDate property value. The creation date of the schedule in hours based on the 24-hour Coordinated Universal Time (UTC) clock.
+     * Gets the creationDate property value. The creation date of the schedule in hours based on the 24&#8209;hour Coordinated Universal Time (UTC) clock.
      * @return string|null
     */
     public function getCreationDate(): ?string {
@@ -152,7 +152,7 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
             'feedType' => fn(ParseNode $n) => $o->setFeedType($n->getStringValue()),
             'lastModifiedDate' => fn(ParseNode $n) => $o->setLastModifiedDate($n->getStringValue()),
             'preferredTriggerDayOfMonth' => fn(ParseNode $n) => $o->setPreferredTriggerDayOfMonth($n->getIntegerValue()),
-            'preferredTriggerDayOfWeek' => fn(ParseNode $n) => $o->setPreferredTriggerDayOfWeek($n->getStringValue()),
+            'preferredTriggerDayOfWeek' => fn(ParseNode $n) => $o->setPreferredTriggerDayOfWeek($n->getEnumValue(DayOfWeekEnum::class)),
             'preferredTriggerHour' => fn(ParseNode $n) => $o->setPreferredTriggerHour($n->getStringValue()),
             'scheduleEndDate' => fn(ParseNode $n) => $o->setScheduleEndDate($n->getStringValue()),
             'scheduleId' => fn(ParseNode $n) => $o->setScheduleId($n->getStringValue()),
@@ -160,8 +160,8 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
             'scheduleStartDate' => fn(ParseNode $n) => $o->setScheduleStartDate($n->getStringValue()),
             'scheduleTemplateId' => fn(ParseNode $n) => $o->setScheduleTemplateId($n->getStringValue()),
             'schemaVersion' => fn(ParseNode $n) => $o->setSchemaVersion($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
-            'statusReason' => fn(ParseNode $n) => $o->setStatusReason($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(StatusEnum::class)),
+            'statusReason' => fn(ParseNode $n) => $o->setStatusReason($n->getEnumValue(StatusReasonEnum::class)),
         ];
     }
 
@@ -182,15 +182,15 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the preferredTriggerDayOfWeek property value. The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:DayOfWeekEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the preferredTriggerDayOfWeek property value. The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules.
+     * @return DayOfWeekEnum|null
     */
-    public function getPreferredTriggerDayOfWeek(): ?string {
+    public function getPreferredTriggerDayOfWeek(): ?DayOfWeekEnum {
         return $this->preferredTriggerDayOfWeek;
     }
 
     /**
-     * Gets the preferredTriggerHour property value. The preferred two-digit hour of the day to trigger the schedule. <br /><br /><b>Format:</b> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC:<br /><br /><code>11Z</code><br /><br />
+     * Gets the preferredTriggerHour property value. The preferred two-digit hour of the day to trigger the schedule. <br /><br /><strong>Format:</strong> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC: <code>11Z</code>
      * @return string|null
     */
     public function getPreferredTriggerHour(): ?string {
@@ -238,7 +238,7 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the schemaVersion property value. The schema version of the feedType for the schedule.
+     * Gets the schemaVersion property value. The schema version of the <strong>feedType</strong> for the schedule.
      * @return string|null
     */
     public function getSchemaVersion(): ?string {
@@ -246,18 +246,18 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. The enumeration value that indicates the state of the schedule. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:StatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. The enumeration value that indicates the state of the schedule.
+     * @return StatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?StatusEnum {
         return $this->status;
     }
 
     /**
-     * Gets the statusReason property value. The reason the schedule is inactive. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:StatusReasonEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the statusReason property value. The reason the schedule is inactive.
+     * @return StatusReasonEnum|null
     */
-    public function getStatusReason(): ?string {
+    public function getStatusReason(): ?StatusReasonEnum {
         return $this->statusReason;
     }
 
@@ -270,7 +270,7 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('feedType', $this->getFeedType());
         $writer->writeStringValue('lastModifiedDate', $this->getLastModifiedDate());
         $writer->writeIntegerValue('preferredTriggerDayOfMonth', $this->getPreferredTriggerDayOfMonth());
-        $writer->writeStringValue('preferredTriggerDayOfWeek', $this->getPreferredTriggerDayOfWeek());
+        $writer->writeEnumValue('preferredTriggerDayOfWeek', $this->getPreferredTriggerDayOfWeek());
         $writer->writeStringValue('preferredTriggerHour', $this->getPreferredTriggerHour());
         $writer->writeStringValue('scheduleEndDate', $this->getScheduleEndDate());
         $writer->writeStringValue('scheduleId', $this->getScheduleId());
@@ -278,8 +278,8 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('scheduleStartDate', $this->getScheduleStartDate());
         $writer->writeStringValue('scheduleTemplateId', $this->getScheduleTemplateId());
         $writer->writeStringValue('schemaVersion', $this->getSchemaVersion());
-        $writer->writeStringValue('status', $this->getStatus());
-        $writer->writeStringValue('statusReason', $this->getStatusReason());
+        $writer->writeEnumValue('status', $this->getStatus());
+        $writer->writeEnumValue('statusReason', $this->getStatusReason());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -292,7 +292,7 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the creationDate property value. The creation date of the schedule in hours based on the 24-hour Coordinated Universal Time (UTC) clock.
+     * Sets the creationDate property value. The creation date of the schedule in hours based on the 24&#8209;hour Coordinated Universal Time (UTC) clock.
      * @param string|null $value Value to set for the creationDate property.
     */
     public function setCreationDate(?string $value): void {
@@ -324,15 +324,15 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the preferredTriggerDayOfWeek property value. The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:DayOfWeekEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the preferredTriggerDayOfWeek property.
+     * Sets the preferredTriggerDayOfWeek property value. The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules.
+     * @param DayOfWeekEnum|null $value Value to set for the preferredTriggerDayOfWeek property.
     */
-    public function setPreferredTriggerDayOfWeek(?string $value): void {
+    public function setPreferredTriggerDayOfWeek(?DayOfWeekEnum $value): void {
         $this->preferredTriggerDayOfWeek = $value;
     }
 
     /**
-     * Sets the preferredTriggerHour property value. The preferred two-digit hour of the day to trigger the schedule. <br /><br /><b>Format:</b> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC:<br /><br /><code>11Z</code><br /><br />
+     * Sets the preferredTriggerHour property value. The preferred two-digit hour of the day to trigger the schedule. <br /><br /><strong>Format:</strong> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC: <code>11Z</code>
      * @param string|null $value Value to set for the preferredTriggerHour property.
     */
     public function setPreferredTriggerHour(?string $value): void {
@@ -380,7 +380,7 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the schemaVersion property value. The schema version of the feedType for the schedule.
+     * Sets the schemaVersion property value. The schema version of the <strong>feedType</strong> for the schedule.
      * @param string|null $value Value to set for the schemaVersion property.
     */
     public function setSchemaVersion(?string $value): void {
@@ -388,18 +388,18 @@ class UserScheduleResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. The enumeration value that indicates the state of the schedule. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:StatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. The enumeration value that indicates the state of the schedule.
+     * @param StatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?StatusEnum $value): void {
         $this->status = $value;
     }
 
     /**
-     * Sets the statusReason property value. The reason the schedule is inactive. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:StatusReasonEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the statusReason property.
+     * Sets the statusReason property value. The reason the schedule is inactive.
+     * @param StatusReasonEnum|null $value Value to set for the statusReason property.
     */
-    public function setStatusReason(?string $value): void {
+    public function setStatusReason(?StatusReasonEnum $value): void {
         $this->statusReason = $value;
     }
 

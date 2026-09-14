@@ -32,17 +32,17 @@ class PickupAtLocationAvailability implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $availabilityType The enumeration value in this field indicates the availability status of the inventory item at the merchant's physical store specified by the <strong>pickupAtLocationAvailability.merchantLocationKey</strong> field. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.  <br><br>See <a href="/api-docs/sell/inventory/types/slr:AvailabilityTypeEnum" target="_blank">AvailabilityTypeEnum</a> for more information about how/when you use each enumeration value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:AvailabilityTypeEnum'>eBay API documentation</a>
+     * @var AvailabilityTypeEnum|null $availabilityType The enumeration value in this field indicates the availability status of the inventory item at the merchant's physical store specified by the <strong>pickupAtLocationAvailability.merchantLocationKey</strong> field. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.  <br><br>See <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkcreateorreplaceinventoryitem.availabilitytypeenum" target="_blank">AvailabilityTypeEnum</a> for more information about how/when you use each enumeration value.
     */
-    private ?string $availabilityType = null;
+    private ?AvailabilityTypeEnum $availabilityType = null;
     
     /**
-     * @var TimeDuration|null $fulfillmentTime This type is used to indicate the fulfillment time for an In-Store Pickup order, or for an order than will be shipped to the buyer.
+     * @var TimeDuration|null $fulfillmentTime This container is used to indicate how soon an In-Store Pickup order will be available for pickup by the buyer after the order takes place. This container is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.
     */
     private ?TimeDuration $fulfillmentTime = null;
     
     /**
-     * @var string|null $merchantLocationKey The unique identifier of a merchant's store where the In-Store Pickup inventory item is currently located, or where inventory will be sent to. If the merchant's store is currently awaiting for inventory, the <strong>availabilityType</strong> value should be <code>SHIP_TO_STORE</code>. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.<br><br>Use the <a href="/api-docs/sell/inventory/resources/location/methods/getInventoryLocations" target="_blank">getInventoryLocations</a> method to retrieve merchant location keys.<br><br><b>Max length</b>: 36
+     * @var string|null $merchantLocationKey The unique identifier of a merchant's store where the In-Store Pickup inventory item is currently located, or where inventory will be sent to. If the merchant's store is currently awaiting for inventory, the <strong>availabilityType</strong> value should be <code>SHIP_TO_STORE</code>. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.<br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-location-getinventorylocations" target="_blank">getInventoryLocations</a> method to retrieve merchant location keys.<br><br><b>Maximum length</b>: 36
     */
     private ?string $merchantLocationKey = null;
     
@@ -76,10 +76,10 @@ class PickupAtLocationAvailability implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the availabilityType property value. The enumeration value in this field indicates the availability status of the inventory item at the merchant's physical store specified by the <strong>pickupAtLocationAvailability.merchantLocationKey</strong> field. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.  <br><br>See <a href="/api-docs/sell/inventory/types/slr:AvailabilityTypeEnum" target="_blank">AvailabilityTypeEnum</a> for more information about how/when you use each enumeration value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:AvailabilityTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the availabilityType property value. The enumeration value in this field indicates the availability status of the inventory item at the merchant's physical store specified by the <strong>pickupAtLocationAvailability.merchantLocationKey</strong> field. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.  <br><br>See <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkcreateorreplaceinventoryitem.availabilitytypeenum" target="_blank">AvailabilityTypeEnum</a> for more information about how/when you use each enumeration value.
+     * @return AvailabilityTypeEnum|null
     */
-    public function getAvailabilityType(): ?string {
+    public function getAvailabilityType(): ?AvailabilityTypeEnum {
         return $this->availabilityType;
     }
 
@@ -90,7 +90,7 @@ class PickupAtLocationAvailability implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'availabilityType' => fn(ParseNode $n) => $o->setAvailabilityType($n->getStringValue()),
+            'availabilityType' => fn(ParseNode $n) => $o->setAvailabilityType($n->getEnumValue(AvailabilityTypeEnum::class)),
             'fulfillmentTime' => fn(ParseNode $n) => $o->setFulfillmentTime($n->getObjectValue([TimeDuration::class, 'createFromDiscriminatorValue'])),
             'merchantLocationKey' => fn(ParseNode $n) => $o->setMerchantLocationKey($n->getStringValue()),
             'quantity' => fn(ParseNode $n) => $o->setQuantity($n->getIntegerValue()),
@@ -98,7 +98,7 @@ class PickupAtLocationAvailability implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the fulfillmentTime property value. This type is used to indicate the fulfillment time for an In-Store Pickup order, or for an order than will be shipped to the buyer.
+     * Gets the fulfillmentTime property value. This container is used to indicate how soon an In-Store Pickup order will be available for pickup by the buyer after the order takes place. This container is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.
      * @return TimeDuration|null
     */
     public function getFulfillmentTime(): ?TimeDuration {
@@ -106,7 +106,7 @@ class PickupAtLocationAvailability implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the merchantLocationKey property value. The unique identifier of a merchant's store where the In-Store Pickup inventory item is currently located, or where inventory will be sent to. If the merchant's store is currently awaiting for inventory, the <strong>availabilityType</strong> value should be <code>SHIP_TO_STORE</code>. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.<br><br>Use the <a href="/api-docs/sell/inventory/resources/location/methods/getInventoryLocations" target="_blank">getInventoryLocations</a> method to retrieve merchant location keys.<br><br><b>Max length</b>: 36
+     * Gets the merchantLocationKey property value. The unique identifier of a merchant's store where the In-Store Pickup inventory item is currently located, or where inventory will be sent to. If the merchant's store is currently awaiting for inventory, the <strong>availabilityType</strong> value should be <code>SHIP_TO_STORE</code>. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.<br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-location-getinventorylocations" target="_blank">getInventoryLocations</a> method to retrieve merchant location keys.<br><br><b>Maximum length</b>: 36
      * @return string|null
     */
     public function getMerchantLocationKey(): ?string {
@@ -126,7 +126,7 @@ class PickupAtLocationAvailability implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('availabilityType', $this->getAvailabilityType());
+        $writer->writeEnumValue('availabilityType', $this->getAvailabilityType());
         $writer->writeObjectValue('fulfillmentTime', $this->getFulfillmentTime());
         $writer->writeStringValue('merchantLocationKey', $this->getMerchantLocationKey());
         $writer->writeIntegerValue('quantity', $this->getQuantity());
@@ -142,15 +142,15 @@ class PickupAtLocationAvailability implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the availabilityType property value. The enumeration value in this field indicates the availability status of the inventory item at the merchant's physical store specified by the <strong>pickupAtLocationAvailability.merchantLocationKey</strong> field. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.  <br><br>See <a href="/api-docs/sell/inventory/types/slr:AvailabilityTypeEnum" target="_blank">AvailabilityTypeEnum</a> for more information about how/when you use each enumeration value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:AvailabilityTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the availabilityType property.
+     * Sets the availabilityType property value. The enumeration value in this field indicates the availability status of the inventory item at the merchant's physical store specified by the <strong>pickupAtLocationAvailability.merchantLocationKey</strong> field. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.  <br><br>See <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkcreateorreplaceinventoryitem.availabilitytypeenum" target="_blank">AvailabilityTypeEnum</a> for more information about how/when you use each enumeration value.
+     * @param AvailabilityTypeEnum|null $value Value to set for the availabilityType property.
     */
-    public function setAvailabilityType(?string $value): void {
+    public function setAvailabilityType(?AvailabilityTypeEnum $value): void {
         $this->availabilityType = $value;
     }
 
     /**
-     * Sets the fulfillmentTime property value. This type is used to indicate the fulfillment time for an In-Store Pickup order, or for an order than will be shipped to the buyer.
+     * Sets the fulfillmentTime property value. This container is used to indicate how soon an In-Store Pickup order will be available for pickup by the buyer after the order takes place. This container is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.
      * @param TimeDuration|null $value Value to set for the fulfillmentTime property.
     */
     public function setFulfillmentTime(?TimeDuration $value): void {
@@ -158,7 +158,7 @@ class PickupAtLocationAvailability implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the merchantLocationKey property value. The unique identifier of a merchant's store where the In-Store Pickup inventory item is currently located, or where inventory will be sent to. If the merchant's store is currently awaiting for inventory, the <strong>availabilityType</strong> value should be <code>SHIP_TO_STORE</code>. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.<br><br>Use the <a href="/api-docs/sell/inventory/resources/location/methods/getInventoryLocations" target="_blank">getInventoryLocations</a> method to retrieve merchant location keys.<br><br><b>Max length</b>: 36
+     * Sets the merchantLocationKey property value. The unique identifier of a merchant's store where the In-Store Pickup inventory item is currently located, or where inventory will be sent to. If the merchant's store is currently awaiting for inventory, the <strong>availabilityType</strong> value should be <code>SHIP_TO_STORE</code>. This field is required if the <strong>pickupAtLocationAvailability</strong> container is used, and is always returned with the <strong>pickupAtLocationAvailability</strong> container.<br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-location-getinventorylocations" target="_blank">getInventoryLocations</a> method to retrieve merchant location keys.<br><br><b>Maximum length</b>: 36
      * @param string|null $value Value to set for the merchantLocationKey property.
     */
     public function setMerchantLocationKey(?string $value): void {

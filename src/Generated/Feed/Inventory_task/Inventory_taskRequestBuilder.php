@@ -18,6 +18,7 @@ namespace EBay\ListingManagement\Generated\Feed\Inventory_task;
 
 use EBay\ListingManagement\Generated\Feed\Inventory_task\Item\WithTask_ItemRequestBuilder;
 use EBay\ListingManagement\Generated\Feed\Models\CreateInventoryTaskRequest;
+use EBay\ListingManagement\Generated\Feed\Models\Error;
 use EBay\ListingManagement\Generated\Feed\Models\InventoryTaskCollection;
 use Exception;
 use Http\Promise\Promise;
@@ -33,7 +34,7 @@ class Inventory_taskRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/ListingManagement/Generated/Feed.inventory_task.item collection
-     * @param string $task_id This path parameter is the unique identifier of the inventory task being retrieved.<br><br> Use the <a href="/api-docs/sell/feed/resources/inventory_task/methods/getInventoryTasks">getInventoryTasks</a> method to retrieve inventory task IDs.
+     * @param string $task_id This path parameter is the unique identifier of the inventory task being retrieved.<br><br> Use the <strong>getInventoryTasks</strong> method to retrieve inventory task IDs.
      * @return WithTask_ItemRequestBuilder
     */
     public function byTask_id(string $task_id): WithTask_ItemRequestBuilder {
@@ -48,7 +49,7 @@ class Inventory_taskRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/inventory_task{?date_range*,feed_type*,limit*,look_back_days*,offset*,schedule_id*}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/inventory_task{?date_range*,limit*,look_back_days*,offset*,schedule_id*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {
@@ -57,36 +58,49 @@ class Inventory_taskRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method searches for multiple tasks of a specific feed type, and includes date filters and pagination.
+     * This method searches for multiple tasks of a specific feed type and includes date filters and pagination.
      * @param Inventory_taskRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<InventoryTaskCollection|null>
      * @throws Exception
     */
     public function get(?Inventory_taskRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [InventoryTaskCollection::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [InventoryTaskCollection::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
      * This method creates an inventory-related download task for a specified feed type with optional filter criteria. When using this method, specify the <strong>feedType</strong>. <br/><br/>This method returns the location response header containing the <strong>getInventoryTask</strong> call URI to retrieve the inventory task you just created. The URL includes the eBay-assigned task ID, which you can use to reference the inventory task.<br/><br/>To retrieve the status of the task, use the <strong>getInventoryTask</strong> method to retrieve a single task ID or the <strong>getInventoryTasks</strong> method to retrieve multiple task IDs.<p> <span class="tablenote"><strong>Note:</strong> The scope depends on the feed type. An error message results when an unsupported scope or feed type is specified.</span></p>Presently, this method supports Active Inventory Report. The <strong>ActiveInventoryReport</strong> returns a report that contains price and quantity information for all of the active listings for a specific seller. A seller can use this information to maintain their inventory on eBay.
-     * @param CreateInventoryTaskRequest $body This type defines inventory-related download task request fields.
+     * @param CreateInventoryTaskRequest $body The request payload containing the version, feedType, and optional filterCriteria.
      * @param Inventory_taskRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(CreateInventoryTaskRequest $body, ?Inventory_taskRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
-     * This method searches for multiple tasks of a specific feed type, and includes date filters and pagination.
+     * This method searches for multiple tasks of a specific feed type and includes date filters and pagination.
      * @param Inventory_taskRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
     public function toGetRequestInformation(?Inventory_taskRequestBuilderGetRequestConfiguration $requestConfiguration = null): RequestInformation {
         $requestInfo = new RequestInformation();
-        $requestInfo->urlTemplate = $this->urlTemplate;
+        $requestInfo->urlTemplate = '{+baseurl}/inventory_task?feed_type={feed_type}{&date_range*,limit*,look_back_days*,offset*,schedule_id*}';
         $requestInfo->pathParameters = $this->pathParameters;
         $requestInfo->httpMethod = HttpMethod::GET;
         if ($requestConfiguration !== null) {
@@ -102,7 +116,7 @@ class Inventory_taskRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method creates an inventory-related download task for a specified feed type with optional filter criteria. When using this method, specify the <strong>feedType</strong>. <br/><br/>This method returns the location response header containing the <strong>getInventoryTask</strong> call URI to retrieve the inventory task you just created. The URL includes the eBay-assigned task ID, which you can use to reference the inventory task.<br/><br/>To retrieve the status of the task, use the <strong>getInventoryTask</strong> method to retrieve a single task ID or the <strong>getInventoryTasks</strong> method to retrieve multiple task IDs.<p> <span class="tablenote"><strong>Note:</strong> The scope depends on the feed type. An error message results when an unsupported scope or feed type is specified.</span></p>Presently, this method supports Active Inventory Report. The <strong>ActiveInventoryReport</strong> returns a report that contains price and quantity information for all of the active listings for a specific seller. A seller can use this information to maintain their inventory on eBay.
-     * @param CreateInventoryTaskRequest $body This type defines inventory-related download task request fields.
+     * @param CreateInventoryTaskRequest $body The request payload containing the version, feedType, and optional filterCriteria.
      * @param Inventory_taskRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -115,6 +129,7 @@ class Inventory_taskRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

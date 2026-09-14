@@ -29,6 +29,9 @@ readonly class EndListingInput
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
+        if (isset($data['input']) && is_array($data['input'])) {
+            $data = array_merge($data['input'], $data);
+        }
         return new self(
             endListingReason: $data['endListingReason'],
             listingIdentifier: ListingIdentifierInput::fromArray($data['listingIdentifier']),

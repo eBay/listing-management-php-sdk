@@ -32,22 +32,22 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var int|null $preferredTriggerDayOfMonth The preferred day of the month to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for monthly schedules. The last day of the month is used for numbers larger than the actual number of days in the month. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value. <br /><br /><b>Minimum: </b>1<b><br /><br /><b>Maximum: </b>31
+     * @var int|null $preferredTriggerDayOfMonth The preferred day of the month to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for monthly schedules. The last day of the month is used for numbers larger than the actual number of days in the month. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value. <br /><br /><strong>Minimum: </strong>1<br /><br /><strong>Maximum: </strong>31
     */
     private ?int $preferredTriggerDayOfMonth = null;
     
     /**
-     * @var string|null $preferredTriggerDayOfWeek The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:DayOfWeekEnum'>eBay API documentation</a>
+     * @var DayOfWeekEnum|null $preferredTriggerDayOfWeek The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value.
     */
-    private ?string $preferredTriggerDayOfWeek = null;
+    private ?DayOfWeekEnum $preferredTriggerDayOfWeek = null;
     
     /**
-     * @var string|null $preferredTriggerHour The preferred two-digit hour of the day to trigger the schedule. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value. <br /><br /><b>Format:</b> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC:<code> 11Z</code><br /><br /><b>Minimum: </b><code>00Z</code><br /><br /><b>Maximum:</b> <code>23Z</code>
+     * @var string|null $preferredTriggerHour The preferred two-digit hour of the day to trigger the schedule.<br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value. <br /><br /><strong>Format:</strong> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC: <code>11Z</code><br /><br /><strong>Minimum: </strong><code>00Z</code><br /><br /><strong>Maximum:</strong> <code>23Z</code>
     */
     private ?string $preferredTriggerHour = null;
     
     /**
-     * @var string|null $scheduleEndDate The timestamp on which the schedule (report generation) ends. After this date, the schedule status becomes <code>INACTIVE</code>. <br /><br />Use this field, if available, to end the schedule in the future. This value must be later than <strong>scheduleStartDate</strong> (if supplied). This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value.<br /><br /><b>Format:</b> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents UTC October 10, 2021 at 10:00 AM:<br /><code> 2021-10-10T10Z</code>
+     * @var string|null $scheduleEndDate The timestamp on which the schedule (report generation) ends. After this date, the schedule status becomes <code>INACTIVE</code>. <br /><br />Use this field, if available, to end the schedule in the future. This value must be later than <strong>scheduleStartDate</strong> (if supplied). This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value.<br /><br /><strong>Format:</strong> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents UTC October 10, 2021 at 10:00 AM:<br /><code> 2021-10-10T10Z</code>
     */
     private ?string $scheduleEndDate = null;
     
@@ -57,7 +57,7 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
     private ?string $scheduleName = null;
     
     /**
-     * @var string|null $scheduleStartDate The timestamp to start generating the report. After this timestamp, the schedule status becomes active until either the <strong>scheduleEndDate</strong> occurs or the <strong>scheduleTemplateId</strong> becomes inactive. <br /><br />Use this field, if available, to start the schedule in the future but before the <strong>scheduleEndDate</strong> (if supplied). This field is available as specified by the template <strong>(scheduleTemplateId)</strong>.  The template can specify this field as optional or required, and optionally provides a default value.<br /><br /><b>Format:</b> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents a schedule start date of UTC October 01, 2020 at 12:00 PM:<br /><code> 2020-01-01T12Z</code>
+     * @var string|null $scheduleStartDate The timestamp to start generating the report. After this timestamp, the schedule status becomes active until either the <strong>scheduleEndDate</strong> occurs or the <strong>scheduleTemplateId</strong> becomes inactive. <br /><br />Use this field, if available, to start the schedule in the future but before the <strong>scheduleEndDate</strong> (if supplied). This field is available as specified by the template <strong>(scheduleTemplateId)</strong>.  The template can specify this field as optional or required and optionally provides a default value.<br /><br /><strong>Format:</strong> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents a schedule start date of UTC October 01, 2020 at 12:00 PM:<br /><code> 2020-01-01T12Z</code>
     */
     private ?string $scheduleStartDate = null;
     
@@ -98,7 +98,7 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'preferredTriggerDayOfMonth' => fn(ParseNode $n) => $o->setPreferredTriggerDayOfMonth($n->getIntegerValue()),
-            'preferredTriggerDayOfWeek' => fn(ParseNode $n) => $o->setPreferredTriggerDayOfWeek($n->getStringValue()),
+            'preferredTriggerDayOfWeek' => fn(ParseNode $n) => $o->setPreferredTriggerDayOfWeek($n->getEnumValue(DayOfWeekEnum::class)),
             'preferredTriggerHour' => fn(ParseNode $n) => $o->setPreferredTriggerHour($n->getStringValue()),
             'scheduleEndDate' => fn(ParseNode $n) => $o->setScheduleEndDate($n->getStringValue()),
             'scheduleName' => fn(ParseNode $n) => $o->setScheduleName($n->getStringValue()),
@@ -108,7 +108,7 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the preferredTriggerDayOfMonth property value. The preferred day of the month to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for monthly schedules. The last day of the month is used for numbers larger than the actual number of days in the month. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value. <br /><br /><b>Minimum: </b>1<b><br /><br /><b>Maximum: </b>31
+     * Gets the preferredTriggerDayOfMonth property value. The preferred day of the month to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for monthly schedules. The last day of the month is used for numbers larger than the actual number of days in the month. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value. <br /><br /><strong>Minimum: </strong>1<br /><br /><strong>Maximum: </strong>31
      * @return int|null
     */
     public function getPreferredTriggerDayOfMonth(): ?int {
@@ -116,15 +116,15 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the preferredTriggerDayOfWeek property value. The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:DayOfWeekEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the preferredTriggerDayOfWeek property value. The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value.
+     * @return DayOfWeekEnum|null
     */
-    public function getPreferredTriggerDayOfWeek(): ?string {
+    public function getPreferredTriggerDayOfWeek(): ?DayOfWeekEnum {
         return $this->preferredTriggerDayOfWeek;
     }
 
     /**
-     * Gets the preferredTriggerHour property value. The preferred two-digit hour of the day to trigger the schedule. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value. <br /><br /><b>Format:</b> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC:<code> 11Z</code><br /><br /><b>Minimum: </b><code>00Z</code><br /><br /><b>Maximum:</b> <code>23Z</code>
+     * Gets the preferredTriggerHour property value. The preferred two-digit hour of the day to trigger the schedule.<br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value. <br /><br /><strong>Format:</strong> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC: <code>11Z</code><br /><br /><strong>Minimum: </strong><code>00Z</code><br /><br /><strong>Maximum:</strong> <code>23Z</code>
      * @return string|null
     */
     public function getPreferredTriggerHour(): ?string {
@@ -132,7 +132,7 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the scheduleEndDate property value. The timestamp on which the schedule (report generation) ends. After this date, the schedule status becomes <code>INACTIVE</code>. <br /><br />Use this field, if available, to end the schedule in the future. This value must be later than <strong>scheduleStartDate</strong> (if supplied). This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value.<br /><br /><b>Format:</b> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents UTC October 10, 2021 at 10:00 AM:<br /><code> 2021-10-10T10Z</code>
+     * Gets the scheduleEndDate property value. The timestamp on which the schedule (report generation) ends. After this date, the schedule status becomes <code>INACTIVE</code>. <br /><br />Use this field, if available, to end the schedule in the future. This value must be later than <strong>scheduleStartDate</strong> (if supplied). This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value.<br /><br /><strong>Format:</strong> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents UTC October 10, 2021 at 10:00 AM:<br /><code> 2021-10-10T10Z</code>
      * @return string|null
     */
     public function getScheduleEndDate(): ?string {
@@ -148,7 +148,7 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the scheduleStartDate property value. The timestamp to start generating the report. After this timestamp, the schedule status becomes active until either the <strong>scheduleEndDate</strong> occurs or the <strong>scheduleTemplateId</strong> becomes inactive. <br /><br />Use this field, if available, to start the schedule in the future but before the <strong>scheduleEndDate</strong> (if supplied). This field is available as specified by the template <strong>(scheduleTemplateId)</strong>.  The template can specify this field as optional or required, and optionally provides a default value.<br /><br /><b>Format:</b> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents a schedule start date of UTC October 01, 2020 at 12:00 PM:<br /><code> 2020-01-01T12Z</code>
+     * Gets the scheduleStartDate property value. The timestamp to start generating the report. After this timestamp, the schedule status becomes active until either the <strong>scheduleEndDate</strong> occurs or the <strong>scheduleTemplateId</strong> becomes inactive. <br /><br />Use this field, if available, to start the schedule in the future but before the <strong>scheduleEndDate</strong> (if supplied). This field is available as specified by the template <strong>(scheduleTemplateId)</strong>.  The template can specify this field as optional or required and optionally provides a default value.<br /><br /><strong>Format:</strong> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents a schedule start date of UTC October 01, 2020 at 12:00 PM:<br /><code> 2020-01-01T12Z</code>
      * @return string|null
     */
     public function getScheduleStartDate(): ?string {
@@ -169,7 +169,7 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeIntegerValue('preferredTriggerDayOfMonth', $this->getPreferredTriggerDayOfMonth());
-        $writer->writeStringValue('preferredTriggerDayOfWeek', $this->getPreferredTriggerDayOfWeek());
+        $writer->writeEnumValue('preferredTriggerDayOfWeek', $this->getPreferredTriggerDayOfWeek());
         $writer->writeStringValue('preferredTriggerHour', $this->getPreferredTriggerHour());
         $writer->writeStringValue('scheduleEndDate', $this->getScheduleEndDate());
         $writer->writeStringValue('scheduleName', $this->getScheduleName());
@@ -187,7 +187,7 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the preferredTriggerDayOfMonth property value. The preferred day of the month to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for monthly schedules. The last day of the month is used for numbers larger than the actual number of days in the month. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value. <br /><br /><b>Minimum: </b>1<b><br /><br /><b>Maximum: </b>31
+     * Sets the preferredTriggerDayOfMonth property value. The preferred day of the month to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for monthly schedules. The last day of the month is used for numbers larger than the actual number of days in the month. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value. <br /><br /><strong>Minimum: </strong>1<br /><br /><strong>Maximum: </strong>31
      * @param int|null $value Value to set for the preferredTriggerDayOfMonth property.
     */
     public function setPreferredTriggerDayOfMonth(?int $value): void {
@@ -195,15 +195,15 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the preferredTriggerDayOfWeek property value. The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:DayOfWeekEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the preferredTriggerDayOfWeek property.
+     * Sets the preferredTriggerDayOfWeek property value. The preferred day of the week to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for weekly schedules. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value.
+     * @param DayOfWeekEnum|null $value Value to set for the preferredTriggerDayOfWeek property.
     */
-    public function setPreferredTriggerDayOfWeek(?string $value): void {
+    public function setPreferredTriggerDayOfWeek(?DayOfWeekEnum $value): void {
         $this->preferredTriggerDayOfWeek = $value;
     }
 
     /**
-     * Sets the preferredTriggerHour property value. The preferred two-digit hour of the day to trigger the schedule. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value. <br /><br /><b>Format:</b> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC:<code> 11Z</code><br /><br /><b>Minimum: </b><code>00Z</code><br /><br /><b>Maximum:</b> <code>23Z</code>
+     * Sets the preferredTriggerHour property value. The preferred two-digit hour of the day to trigger the schedule.<br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value. <br /><br /><strong>Format:</strong> UTC <code>hhZ</code><br /><br />For example, the following represents 11:00 am UTC: <code>11Z</code><br /><br /><strong>Minimum: </strong><code>00Z</code><br /><br /><strong>Maximum:</strong> <code>23Z</code>
      * @param string|null $value Value to set for the preferredTriggerHour property.
     */
     public function setPreferredTriggerHour(?string $value): void {
@@ -211,7 +211,7 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the scheduleEndDate property value. The timestamp on which the schedule (report generation) ends. After this date, the schedule status becomes <code>INACTIVE</code>. <br /><br />Use this field, if available, to end the schedule in the future. This value must be later than <strong>scheduleStartDate</strong> (if supplied). This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value.<br /><br /><b>Format:</b> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents UTC October 10, 2021 at 10:00 AM:<br /><code> 2021-10-10T10Z</code>
+     * Sets the scheduleEndDate property value. The timestamp on which the schedule (report generation) ends. After this date, the schedule status becomes <code>INACTIVE</code>. <br /><br />Use this field, if available, to end the schedule in the future. This value must be later than <strong>scheduleStartDate</strong> (if supplied). This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required and optionally provides a default value.<br /><br /><strong>Format:</strong> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents UTC October 10, 2021 at 10:00 AM:<br /><code> 2021-10-10T10Z</code>
      * @param string|null $value Value to set for the scheduleEndDate property.
     */
     public function setScheduleEndDate(?string $value): void {
@@ -227,7 +227,7 @@ class UpdateUserScheduleRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the scheduleStartDate property value. The timestamp to start generating the report. After this timestamp, the schedule status becomes active until either the <strong>scheduleEndDate</strong> occurs or the <strong>scheduleTemplateId</strong> becomes inactive. <br /><br />Use this field, if available, to start the schedule in the future but before the <strong>scheduleEndDate</strong> (if supplied). This field is available as specified by the template <strong>(scheduleTemplateId)</strong>.  The template can specify this field as optional or required, and optionally provides a default value.<br /><br /><b>Format:</b> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents a schedule start date of UTC October 01, 2020 at 12:00 PM:<br /><code> 2020-01-01T12Z</code>
+     * Sets the scheduleStartDate property value. The timestamp to start generating the report. After this timestamp, the schedule status becomes active until either the <strong>scheduleEndDate</strong> occurs or the <strong>scheduleTemplateId</strong> becomes inactive. <br /><br />Use this field, if available, to start the schedule in the future but before the <strong>scheduleEndDate</strong> (if supplied). This field is available as specified by the template <strong>(scheduleTemplateId)</strong>.  The template can specify this field as optional or required and optionally provides a default value.<br /><br /><strong>Format:</strong> UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code><br /><br />For example, the following represents a schedule start date of UTC October 01, 2020 at 12:00 PM:<br /><code> 2020-01-01T12Z</code>
      * @param string|null $value Value to set for the scheduleStartDate property.
     */
     public function setScheduleStartDate(?string $value): void {

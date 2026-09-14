@@ -33,22 +33,22 @@ class CustomerServiceMetricsFilterCriteria implements AdditionalDataHolder, Pars
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $customerServiceMetricType An enumeration value that specifies the customer service metric that eBay tracks to measure seller performance.<br><br>See <a href="/api-docs/sell/feed/types/api:CustomerServiceMetricTypeEnum">CustomerServiceMetricTypeEnum</a> for values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:CustomerServiceMetricTypeEnum'>eBay API documentation</a>
+     * @var CustomerServiceMetricTypeEnum|null $customerServiceMetricType An enumeration value that specifies the customer service metric that eBay tracks to measure seller performance.
     */
-    private ?string $customerServiceMetricType = null;
+    private ?CustomerServiceMetricTypeEnum $customerServiceMetricType = null;
     
     /**
-     * @var string|null $evaluationMarketplaceId An enumeration value that specifies the eBay marketplace where the evaluation occurs.<br><br>See <a href="/api-docs/sell/feed/types/bas:MarketplaceIdEnum">MarketplaceIdEnum</a> for values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/bas:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $evaluationMarketplaceId An enumeration value that specifies the eBay marketplace where the evaluation occurs.
     */
-    private ?string $evaluationMarketplaceId = null;
+    private ?MarketplaceIdEnum $evaluationMarketplaceId = null;
     
     /**
-     * @var array<string>|null $listingCategories A list of listing category IDs on which the service metric is measured. A seller can use one or more L1 (top-level) eBay categories to get metrics specific to those L1 categories. The Category IDs for each L1 category are required. Category ID values for L1 categories can be retrieved using the Taxonomy API.<p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_AS_DESCRIBED</code> customerServiceMetricType.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>
+     * @var array<string>|null $listingCategories A list of listing category IDs on which the service metric is measured. A seller can use one or more L1 (top-level) eBay categories to get metrics specific to those L1 categories. The Category IDs for each L1 category are required. Category ID values for L1 categories can be retrieved using the Taxonomy API.<p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_AS_DESCRIBED</code> <strong>customerServiceMetricType</strong>.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>
     */
     private ?array $listingCategories = null;
     
     /**
-     * @var array<string>|null $shippingRegions A list of shipping region enumeration values on which the service metric is measured. This comma delimited array allows the seller to customize the report to focus on domestic or international shipping. <p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_RECEIVED</code> customerServiceMetricType.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>See <strong>ShippingRegionTypeEnum</strong> for values
+     * @var array<ShippingRegionTypeEnum>|null $shippingRegions A list of shipping region enumeration values on which the service metric is measured. This comma delimited array allows the seller to customize the report to focus on domestic or international shipping. <p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_RECEIVED</code> customerServiceMetricType.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>
     */
     private ?array $shippingRegions = null;
     
@@ -77,18 +77,18 @@ class CustomerServiceMetricsFilterCriteria implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Gets the customerServiceMetricType property value. An enumeration value that specifies the customer service metric that eBay tracks to measure seller performance.<br><br>See <a href="/api-docs/sell/feed/types/api:CustomerServiceMetricTypeEnum">CustomerServiceMetricTypeEnum</a> for values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:CustomerServiceMetricTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the customerServiceMetricType property value. An enumeration value that specifies the customer service metric that eBay tracks to measure seller performance.
+     * @return CustomerServiceMetricTypeEnum|null
     */
-    public function getCustomerServiceMetricType(): ?string {
+    public function getCustomerServiceMetricType(): ?CustomerServiceMetricTypeEnum {
         return $this->customerServiceMetricType;
     }
 
     /**
-     * Gets the evaluationMarketplaceId property value. An enumeration value that specifies the eBay marketplace where the evaluation occurs.<br><br>See <a href="/api-docs/sell/feed/types/bas:MarketplaceIdEnum">MarketplaceIdEnum</a> for values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/bas:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the evaluationMarketplaceId property value. An enumeration value that specifies the eBay marketplace where the evaluation occurs.
+     * @return MarketplaceIdEnum|null
     */
-    public function getEvaluationMarketplaceId(): ?string {
+    public function getEvaluationMarketplaceId(): ?MarketplaceIdEnum {
         return $this->evaluationMarketplaceId;
     }
 
@@ -99,8 +99,8 @@ class CustomerServiceMetricsFilterCriteria implements AdditionalDataHolder, Pars
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'customerServiceMetricType' => fn(ParseNode $n) => $o->setCustomerServiceMetricType($n->getStringValue()),
-            'evaluationMarketplaceId' => fn(ParseNode $n) => $o->setEvaluationMarketplaceId($n->getStringValue()),
+            'customerServiceMetricType' => fn(ParseNode $n) => $o->setCustomerServiceMetricType($n->getEnumValue(CustomerServiceMetricTypeEnum::class)),
+            'evaluationMarketplaceId' => fn(ParseNode $n) => $o->setEvaluationMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
             'listingCategories' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
                 if (is_array($val)) {
@@ -109,19 +109,12 @@ class CustomerServiceMetricsFilterCriteria implements AdditionalDataHolder, Pars
                 /** @var array<string>|null $val */
                 $this->setListingCategories($val);
             },
-            'shippingRegions' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setShippingRegions($val);
-            },
+            'shippingRegions' => fn(ParseNode $n) => $o->setShippingRegions($n->getCollectionOfEnumValues(ShippingRegionTypeEnum::class)),
         ];
     }
 
     /**
-     * Gets the listingCategories property value. A list of listing category IDs on which the service metric is measured. A seller can use one or more L1 (top-level) eBay categories to get metrics specific to those L1 categories. The Category IDs for each L1 category are required. Category ID values for L1 categories can be retrieved using the Taxonomy API.<p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_AS_DESCRIBED</code> customerServiceMetricType.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>
+     * Gets the listingCategories property value. A list of listing category IDs on which the service metric is measured. A seller can use one or more L1 (top-level) eBay categories to get metrics specific to those L1 categories. The Category IDs for each L1 category are required. Category ID values for L1 categories can be retrieved using the Taxonomy API.<p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_AS_DESCRIBED</code> <strong>customerServiceMetricType</strong>.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>
      * @return array<string>|null
     */
     public function getListingCategories(): ?array {
@@ -129,8 +122,8 @@ class CustomerServiceMetricsFilterCriteria implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Gets the shippingRegions property value. A list of shipping region enumeration values on which the service metric is measured. This comma delimited array allows the seller to customize the report to focus on domestic or international shipping. <p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_RECEIVED</code> customerServiceMetricType.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>See <strong>ShippingRegionTypeEnum</strong> for values
-     * @return array<string>|null
+     * Gets the shippingRegions property value. A list of shipping region enumeration values on which the service metric is measured. This comma delimited array allows the seller to customize the report to focus on domestic or international shipping. <p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_RECEIVED</code> customerServiceMetricType.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>
+     * @return array<ShippingRegionTypeEnum>|null
     */
     public function getShippingRegions(): ?array {
         return $this->shippingRegions;
@@ -141,10 +134,10 @@ class CustomerServiceMetricsFilterCriteria implements AdditionalDataHolder, Pars
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('customerServiceMetricType', $this->getCustomerServiceMetricType());
-        $writer->writeStringValue('evaluationMarketplaceId', $this->getEvaluationMarketplaceId());
+        $writer->writeEnumValue('customerServiceMetricType', $this->getCustomerServiceMetricType());
+        $writer->writeEnumValue('evaluationMarketplaceId', $this->getEvaluationMarketplaceId());
         $writer->writeCollectionOfPrimitiveValues('listingCategories', $this->getListingCategories());
-        $writer->writeCollectionOfPrimitiveValues('shippingRegions', $this->getShippingRegions());
+        $writer->writeCollectionOfEnumValues('shippingRegions', $this->getShippingRegions());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -157,23 +150,23 @@ class CustomerServiceMetricsFilterCriteria implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Sets the customerServiceMetricType property value. An enumeration value that specifies the customer service metric that eBay tracks to measure seller performance.<br><br>See <a href="/api-docs/sell/feed/types/api:CustomerServiceMetricTypeEnum">CustomerServiceMetricTypeEnum</a> for values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:CustomerServiceMetricTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the customerServiceMetricType property.
+     * Sets the customerServiceMetricType property value. An enumeration value that specifies the customer service metric that eBay tracks to measure seller performance.
+     * @param CustomerServiceMetricTypeEnum|null $value Value to set for the customerServiceMetricType property.
     */
-    public function setCustomerServiceMetricType(?string $value): void {
+    public function setCustomerServiceMetricType(?CustomerServiceMetricTypeEnum $value): void {
         $this->customerServiceMetricType = $value;
     }
 
     /**
-     * Sets the evaluationMarketplaceId property value. An enumeration value that specifies the eBay marketplace where the evaluation occurs.<br><br>See <a href="/api-docs/sell/feed/types/bas:MarketplaceIdEnum">MarketplaceIdEnum</a> for values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/bas:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the evaluationMarketplaceId property.
+     * Sets the evaluationMarketplaceId property value. An enumeration value that specifies the eBay marketplace where the evaluation occurs.
+     * @param MarketplaceIdEnum|null $value Value to set for the evaluationMarketplaceId property.
     */
-    public function setEvaluationMarketplaceId(?string $value): void {
+    public function setEvaluationMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->evaluationMarketplaceId = $value;
     }
 
     /**
-     * Sets the listingCategories property value. A list of listing category IDs on which the service metric is measured. A seller can use one or more L1 (top-level) eBay categories to get metrics specific to those L1 categories. The Category IDs for each L1 category are required. Category ID values for L1 categories can be retrieved using the Taxonomy API.<p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_AS_DESCRIBED</code> customerServiceMetricType.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>
+     * Sets the listingCategories property value. A list of listing category IDs on which the service metric is measured. A seller can use one or more L1 (top-level) eBay categories to get metrics specific to those L1 categories. The Category IDs for each L1 category are required. Category ID values for L1 categories can be retrieved using the Taxonomy API.<p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_AS_DESCRIBED</code> <strong>customerServiceMetricType</strong>.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>
      * @param array<string>|null $value Value to set for the listingCategories property.
     */
     public function setListingCategories(?array $value): void {
@@ -181,8 +174,8 @@ class CustomerServiceMetricsFilterCriteria implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Sets the shippingRegions property value. A list of shipping region enumeration values on which the service metric is measured. This comma delimited array allows the seller to customize the report to focus on domestic or international shipping. <p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_RECEIVED</code> customerServiceMetricType.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>See <strong>ShippingRegionTypeEnum</strong> for values
-     * @param array<string>|null $value Value to set for the shippingRegions property.
+     * Sets the shippingRegions property value. A list of shipping region enumeration values on which the service metric is measured. This comma delimited array allows the seller to customize the report to focus on domestic or international shipping. <p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_RECEIVED</code> customerServiceMetricType.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>
+     * @param array<ShippingRegionTypeEnum>|null $value Value to set for the shippingRegions property.
     */
     public function setShippingRegions(?array $value): void {
         $this->shippingRegions = $value;

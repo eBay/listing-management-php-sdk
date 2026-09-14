@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type is used to provide details about a customized eBay Store category.
+ * This type is used to express details about a customized eBay Store category.
 */
 class StoreCategoryType implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class StoreCategoryType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $categoryId Unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a seller establishes a custom store category. This category ID should not be confused with an eBay category ID.
+     * @var string|null $categoryId Unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a sellerestablishes a custom store category. This category ID should not be confused with an eBay category ID.
     */
     private ?string $categoryId = null;
     
@@ -81,7 +81,7 @@ class StoreCategoryType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the categoryId property value. Unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a seller establishes a custom store category. This category ID should not be confused with an eBay category ID.
+     * Gets the categoryId property value. Unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a sellerestablishes a custom store category. This category ID should not be confused with an eBay category ID.
      * @return string|null
     */
     public function getCategoryId(): ?string {
@@ -157,7 +157,7 @@ class StoreCategoryType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the categoryId property value. Unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a seller establishes a custom store category. This category ID should not be confused with an eBay category ID.
+     * Sets the categoryId property value. Unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a sellerestablishes a custom store category. This category ID should not be confused with an eBay category ID.
      * @param string|null $value Value to set for the categoryId property.
     */
     public function setCategoryId(?string $value): void {

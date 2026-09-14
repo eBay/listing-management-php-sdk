@@ -37,7 +37,7 @@ class AvailabilityWithAll implements AdditionalDataHolder, Parsable
     private ?array $pickupAtLocationAvailability = null;
     
     /**
-     * @var ShipToLocationAvailabilityWithAll|null $shipToLocationAvailability This type is used to specify the total 'ship-to-home' quantity of the inventory items that will be available for purchase through one or more published offers.
+     * @var ShipToLocationAvailabilityWithAll|null $shipToLocationAvailability This container specifies the quantity of the inventory items that are available for a standard purchase, where the item is shipped to the buyer.
     */
     private ?ShipToLocationAvailabilityWithAll $shipToLocationAvailability = null;
     
@@ -86,7 +86,7 @@ class AvailabilityWithAll implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shipToLocationAvailability property value. This type is used to specify the total 'ship-to-home' quantity of the inventory items that will be available for purchase through one or more published offers.
+     * Gets the shipToLocationAvailability property value. This container specifies the quantity of the inventory items that are available for a standard purchase, where the item is shipped to the buyer.
      * @return ShipToLocationAvailabilityWithAll|null
     */
     public function getShipToLocationAvailability(): ?ShipToLocationAvailabilityWithAll {
@@ -120,7 +120,7 @@ class AvailabilityWithAll implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shipToLocationAvailability property value. This type is used to specify the total 'ship-to-home' quantity of the inventory items that will be available for purchase through one or more published offers.
+     * Sets the shipToLocationAvailability property value. This container specifies the quantity of the inventory items that are available for a standard purchase, where the item is shipped to the buyer.
      * @param ShipToLocationAvailabilityWithAll|null $value Value to set for the shipToLocationAvailability property.
     */
     public function setShipToLocationAvailability(?ShipToLocationAvailabilityWithAll $value): void {

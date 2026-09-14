@@ -32,9 +32,9 @@ class InventoryFilterCriteria implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $listingFormat The listing format for the ActiveInventoryReport being created. Supported types are:<br><ul><li><code>AUCTION</code></li><li><code>FIXED_PRICE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:ListingFormatEnum'>eBay API documentation</a>
+     * @var ListingFormatEnum|null $listingFormat The listing format for the ActiveInventoryReport being created. Supported types are:<br><ul><li><code>AUCTION</code></li><li><code>FIXED_PRICE</code></li></ul>
     */
-    private ?string $listingFormat = null;
+    private ?ListingFormatEnum $listingFormat = null;
     
     /**
      * Instantiates a new InventoryFilterCriteria and sets the default values.
@@ -67,15 +67,15 @@ class InventoryFilterCriteria implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'listingFormat' => fn(ParseNode $n) => $o->setListingFormat($n->getStringValue()),
+            'listingFormat' => fn(ParseNode $n) => $o->setListingFormat($n->getEnumValue(ListingFormatEnum::class)),
         ];
     }
 
     /**
-     * Gets the listingFormat property value. The listing format for the ActiveInventoryReport being created. Supported types are:<br><ul><li><code>AUCTION</code></li><li><code>FIXED_PRICE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:ListingFormatEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the listingFormat property value. The listing format for the ActiveInventoryReport being created. Supported types are:<br><ul><li><code>AUCTION</code></li><li><code>FIXED_PRICE</code></li></ul>
+     * @return ListingFormatEnum|null
     */
-    public function getListingFormat(): ?string {
+    public function getListingFormat(): ?ListingFormatEnum {
         return $this->listingFormat;
     }
 
@@ -84,7 +84,7 @@ class InventoryFilterCriteria implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('listingFormat', $this->getListingFormat());
+        $writer->writeEnumValue('listingFormat', $this->getListingFormat());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -97,10 +97,10 @@ class InventoryFilterCriteria implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingFormat property value. The listing format for the ActiveInventoryReport being created. Supported types are:<br><ul><li><code>AUCTION</code></li><li><code>FIXED_PRICE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:ListingFormatEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the listingFormat property.
+     * Sets the listingFormat property value. The listing format for the ActiveInventoryReport being created. Supported types are:<br><ul><li><code>AUCTION</code></li><li><code>FIXED_PRICE</code></li></ul>
+     * @param ListingFormatEnum|null $value Value to set for the listingFormat property.
     */
-    public function setListingFormat(?string $value): void {
+    public function setListingFormat(?ListingFormatEnum $value): void {
         $this->listingFormat = $value;
     }
 

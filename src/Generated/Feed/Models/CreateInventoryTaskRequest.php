@@ -37,12 +37,12 @@ class CreateInventoryTaskRequest implements AdditionalDataHolder, Parsable
     private ?string $feedType = null;
     
     /**
-     * @var InventoryFilterCriteria|null $filterCriteria This container is used to set the filter criteria for the ActiveInventoryReport. A seller can create an ActiveInventoryReport for a single listing format.
+     * @var InventoryFilterCriteria|null $filterCriteria This container allows a seller to create an ActiveInventoryReport for a single listing format.
     */
     private ?InventoryFilterCriteria $filterCriteria = null;
     
     /**
-     * @var string|null $schemaVersion The version number of the inventory task to use for the <b>feedType</b>.<br><br><span class="tablenote"><b>Note:</b> This field <b>must</b> have a value of <code>1.0</code>.</span>
+     * @var string|null $schemaVersion The version number of the inventory task to use for the <strong>feedType</strong>.<br><br><span class="tablenote"><strong>Note:</strong> This field <strong>must</strong> have a value of <code>1.0</code>.</span>
     */
     private ?string $schemaVersion = null;
     
@@ -92,7 +92,7 @@ class CreateInventoryTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the filterCriteria property value. This container is used to set the filter criteria for the ActiveInventoryReport. A seller can create an ActiveInventoryReport for a single listing format.
+     * Gets the filterCriteria property value. This container allows a seller to create an ActiveInventoryReport for a single listing format.
      * @return InventoryFilterCriteria|null
     */
     public function getFilterCriteria(): ?InventoryFilterCriteria {
@@ -100,7 +100,7 @@ class CreateInventoryTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the schemaVersion property value. The version number of the inventory task to use for the <b>feedType</b>.<br><br><span class="tablenote"><b>Note:</b> This field <b>must</b> have a value of <code>1.0</code>.</span>
+     * Gets the schemaVersion property value. The version number of the inventory task to use for the <strong>feedType</strong>.<br><br><span class="tablenote"><strong>Note:</strong> This field <strong>must</strong> have a value of <code>1.0</code>.</span>
      * @return string|null
     */
     public function getSchemaVersion(): ?string {
@@ -135,7 +135,7 @@ class CreateInventoryTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the filterCriteria property value. This container is used to set the filter criteria for the ActiveInventoryReport. A seller can create an ActiveInventoryReport for a single listing format.
+     * Sets the filterCriteria property value. This container allows a seller to create an ActiveInventoryReport for a single listing format.
      * @param InventoryFilterCriteria|null $value Value to set for the filterCriteria property.
     */
     public function setFilterCriteria(?InventoryFilterCriteria $value): void {
@@ -143,7 +143,7 @@ class CreateInventoryTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the schemaVersion property value. The version number of the inventory task to use for the <b>feedType</b>.<br><br><span class="tablenote"><b>Note:</b> This field <b>must</b> have a value of <code>1.0</code>.</span>
+     * Sets the schemaVersion property value. The version number of the inventory task to use for the <strong>feedType</strong>.<br><br><span class="tablenote"><strong>Note:</strong> This field <strong>must</strong> have a value of <code>1.0</code>.</span>
      * @param string|null $value Value to set for the schemaVersion property.
     */
     public function setSchemaVersion(?string $value): void {

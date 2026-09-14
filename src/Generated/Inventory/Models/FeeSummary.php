@@ -37,12 +37,12 @@ class FeeSummary implements AdditionalDataHolder, Parsable
     private ?array $fees = null;
     
     /**
-     * @var string|null $marketplaceId This is the unique identifier of the eBay site for which  listing fees for the offer are applicable. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:MarketplaceEnum'>eBay API documentation</a>
+     * @var MarketplaceEnum|null $marketplaceId This is the unique identifier of the eBay site for which  listing fees for the offer are applicable.
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceEnum $marketplaceId = null;
     
     /**
-     * @var array<Error>|null $warnings This container will contain an array of errors and/or warnings when a call is made, and errors and/or warnings occur.
+     * @var array<ErrorDetailV3>|null $warnings This container will contain an array of errors and/or warnings when a call is made, and errors and/or warnings occur.
     */
     private ?array $warnings = null;
     
@@ -86,22 +86,22 @@ class FeeSummary implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'fees' => fn(ParseNode $n) => $o->setFees($n->getCollectionOfObjectValues([Fee::class, 'createFromDiscriminatorValue'])),
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
-            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceEnum::class)),
+            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the marketplaceId property value. This is the unique identifier of the eBay site for which  listing fees for the offer are applicable. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:MarketplaceEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. This is the unique identifier of the eBay site for which  listing fees for the offer are applicable.
+     * @return MarketplaceEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceEnum {
         return $this->marketplaceId;
     }
 
     /**
      * Gets the warnings property value. This container will contain an array of errors and/or warnings when a call is made, and errors and/or warnings occur.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getWarnings(): ?array {
         return $this->warnings;
@@ -113,7 +113,7 @@ class FeeSummary implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfObjectValues('fees', $this->getFees());
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeCollectionOfObjectValues('warnings', $this->getWarnings());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -135,16 +135,16 @@ class FeeSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. This is the unique identifier of the eBay site for which  listing fees for the offer are applicable. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:MarketplaceEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. This is the unique identifier of the eBay site for which  listing fees for the offer are applicable.
+     * @param MarketplaceEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceEnum $value): void {
         $this->marketplaceId = $value;
     }
 
     /**
      * Sets the warnings property value. This container will contain an array of errors and/or warnings when a call is made, and errors and/or warnings occur.
-     * @param array<Error>|null $value Value to set for the warnings property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the warnings property.
     */
     public function setWarnings(?array $value): void {
         $this->warnings = $value;

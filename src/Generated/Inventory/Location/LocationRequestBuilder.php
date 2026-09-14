@@ -17,6 +17,7 @@
 namespace EBay\ListingManagement\Generated\Inventory\Location;
 
 use EBay\ListingManagement\Generated\Inventory\Location\Item\WithMerchantLocationKeyItemRequestBuilder;
+use EBay\ListingManagement\Generated\Inventory\Models\Error;
 use EBay\ListingManagement\Generated\Inventory\Models\LocationResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -32,7 +33,7 @@ class LocationRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/ListingManagement/Generated/Inventory.location.item collection
-     * @param string $merchantLocationKey This path parameter specifies the unique merchant-defined key (ID) for an inventory location that is being retrieved. <br><br>Use the <a href="/api-docs/sell/inventory/resources/location/methods/getInventoryLocations">getInventoryLocations</a> method to retrieve merchant location keys. <br><br><b>Max length</b>: 36
+     * @param string $merchantLocationKey This path parameter specifies the unique merchant-defined key (ID) for an inventory location that is being retrieved. <br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-location-getinventorylocations">getInventoryLocations</a> method to retrieve merchant location keys. <br><br><b>Maximum length</b>: 36
      * @return WithMerchantLocationKeyItemRequestBuilder
     */
     public function byMerchantLocationKey(string $merchantLocationKey): WithMerchantLocationKeyItemRequestBuilder {
@@ -56,18 +57,22 @@ class LocationRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This call retrieves all defined details for every inventory location associated with the seller's account. There are no required parameters for this call and no request payload. However, there are two optional query parameters, <strong>limit</strong> and <strong>offset</strong>. The <strong>limit</strong> query parameter sets the maximum number of locations returned on one page of data, and the <strong>offset</strong> query parameter specifies the page of data to return. These query parameters are discussed more in the <strong>URI parameters</strong> table below. <p>The <code>authorization</code> HTTP header is the only required request header for this call. </p><p>A successful call will return an HTTP status value of <i>200 OK</i>.</p>
+     * This call retrieves all defined details for every inventory location associated with the seller's account. There are no required parameters for this call and no request payload. However, there are two optional query parameters, <strong>limit</strong> and <strong>offset</strong>. The <strong>limit</strong> query parameter sets the maximum number of locations returned on one page of data, and the <strong>offset</strong> query parameter specifies the page of data to return. These query parameters are discussed more in the <strong>URI parameters</strong> table below. <p>The <code>authorization</code> HTTP header is the only required request header for this call.<br><br>A successful call will return an HTTP status value of <code>200 OK</code>.
      * @param LocationRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<LocationResponse|null>
      * @throws Exception
     */
     public function get(?LocationRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [LocationResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [LocationResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This call retrieves all defined details for every inventory location associated with the seller's account. There are no required parameters for this call and no request payload. However, there are two optional query parameters, <strong>limit</strong> and <strong>offset</strong>. The <strong>limit</strong> query parameter sets the maximum number of locations returned on one page of data, and the <strong>offset</strong> query parameter specifies the page of data to return. These query parameters are discussed more in the <strong>URI parameters</strong> table below. <p>The <code>authorization</code> HTTP header is the only required request header for this call. </p><p>A successful call will return an HTTP status value of <i>200 OK</i>.</p>
+     * This call retrieves all defined details for every inventory location associated with the seller's account. There are no required parameters for this call and no request payload. However, there are two optional query parameters, <strong>limit</strong> and <strong>offset</strong>. The <strong>limit</strong> query parameter sets the maximum number of locations returned on one page of data, and the <strong>offset</strong> query parameter specifies the page of data to return. These query parameters are discussed more in the <strong>URI parameters</strong> table below. <p>The <code>authorization</code> HTTP header is the only required request header for this call.<br><br>A successful call will return an HTTP status value of <code>200 OK</code>.
      * @param LocationRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

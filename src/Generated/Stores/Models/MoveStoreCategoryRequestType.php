@@ -32,12 +32,12 @@ class MoveStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $categoryId The unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a seller establishes a custom store category. This category ID should not be confused with an eBay category ID. This is the category that is moved.
+     * @var string|null $categoryId Unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a sellerestablishes a custom store category. This category ID should not be confused with an eBay category ID.
     */
     private ?string $categoryId = null;
     
     /**
-     * @var string|null $destinationParentCategoryId The new parent category of the category to be moved is specified in this field. If the category is being moved to level 1 category, set this value to <b>-999</b>.
+     * @var string|null $destinationParentCategoryId When moving store category, specifies the destination category destinationParentCategoryId under which the moved category categoryId will be located. To move to the top level, set the value to -999.
     */
     private ?string $destinationParentCategoryId = null;
     
@@ -71,7 +71,7 @@ class MoveStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the categoryId property value. The unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a seller establishes a custom store category. This category ID should not be confused with an eBay category ID. This is the category that is moved.
+     * Gets the categoryId property value. Unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a sellerestablishes a custom store category. This category ID should not be confused with an eBay category ID.
      * @return string|null
     */
     public function getCategoryId(): ?string {
@@ -79,7 +79,7 @@ class MoveStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the destinationParentCategoryId property value. The new parent category of the category to be moved is specified in this field. If the category is being moved to level 1 category, set this value to <b>-999</b>.
+     * Gets the destinationParentCategoryId property value. When moving store category, specifies the destination category destinationParentCategoryId under which the moved category categoryId will be located. To move to the top level, set the value to -999.
      * @return string|null
     */
     public function getDestinationParentCategoryId(): ?string {
@@ -127,7 +127,7 @@ class MoveStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the categoryId property value. The unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a seller establishes a custom store category. This category ID should not be confused with an eBay category ID. This is the category that is moved.
+     * Sets the categoryId property value. Unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a sellerestablishes a custom store category. This category ID should not be confused with an eBay category ID.
      * @param string|null $value Value to set for the categoryId property.
     */
     public function setCategoryId(?string $value): void {
@@ -135,7 +135,7 @@ class MoveStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the destinationParentCategoryId property value. The new parent category of the category to be moved is specified in this field. If the category is being moved to level 1 category, set this value to <b>-999</b>.
+     * Sets the destinationParentCategoryId property value. When moving store category, specifies the destination category destinationParentCategoryId under which the moved category categoryId will be located. To move to the top level, set the value to -999.
      * @param string|null $value Value to set for the destinationParentCategoryId property.
     */
     public function setDestinationParentCategoryId(?string $value): void {

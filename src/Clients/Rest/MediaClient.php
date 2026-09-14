@@ -30,15 +30,6 @@ use EBay\ListingManagement\Generated\Media\Models\CreateVideoRequest;
 use EBay\ListingManagement\Generated\Media\Models\DocumentResponse;
 use EBay\ListingManagement\Generated\Media\Models\ImageResponse;
 use EBay\ListingManagement\Generated\Media\Models\Video;
-use EBay\ListingManagement\Generated\Media\Document\Create_document_from_url\Create_document_from_urlRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Media\Document\DocumentRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Media\Document\Item\Upload\UploadRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Media\Document\Item\WithDocument_ItemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Media\Image\Create_image_from_file\Create_image_from_fileRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Media\Image\Create_image_from_url\Create_image_from_urlRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Media\Image\Item\WithImage_ItemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Media\Video\Item\WithVideo_ItemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Media\Video\VideoRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -65,7 +56,7 @@ final class MediaClient
         return $this->call($accessToken, fn($api) =>
             $api->image()->create_image_from_file()->post(
                 $body,
-                new Create_image_from_fileRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Media\Image\Create_image_from_file\Create_image_from_fileRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -76,7 +67,7 @@ final class MediaClient
         return $this->call($accessToken, fn($api) =>
             $api->image()->create_image_from_url()->post(
                 $body,
-                new Create_image_from_urlRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Media\Image\Create_image_from_url\Create_image_from_urlRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -86,7 +77,7 @@ final class MediaClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->image()->byImage_id($imageId)->get(
-                new WithImage_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Media\Image\Item\WithImage_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -97,7 +88,7 @@ final class MediaClient
         $this->call($accessToken, fn($api) =>
             $api->video()->post(
                 $body,
-                new VideoRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Media\Video\VideoRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -107,19 +98,18 @@ final class MediaClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->video()->byVideo_id($videoId)->get(
-                new WithVideo_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Media\Video\Item\WithVideo_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
     public function uploadVideo(
         string $videoId,
-        mixed $body,
         ?string $contentLength = null,
         ?string $contentRange = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): mixed
+    ): void
     {
         $headers = $this->mergedHeaders($requestOptions);
         if ($contentLength !== null) {
@@ -128,10 +118,9 @@ final class MediaClient
         if ($contentRange !== null) {
             $headers["Content-Range"] = $contentRange;
         }
-        return $this->call($accessToken, fn($api) =>
+        $this->call($accessToken, fn($api) =>
             $api->video()->byVideo_id($videoId)->upload()->post(
-                $body,
-                new UploadRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Media\Video\Item\Upload\UploadRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -142,7 +131,7 @@ final class MediaClient
         return $this->call($accessToken, fn($api) =>
             $api->document()->post(
                 $body,
-                new DocumentRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Media\Document\DocumentRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -153,7 +142,7 @@ final class MediaClient
         return $this->call($accessToken, fn($api) =>
             $api->document()->create_document_from_url()->post(
                 $body,
-                new Create_document_from_urlRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Media\Document\Create_document_from_url\Create_document_from_urlRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -163,7 +152,7 @@ final class MediaClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->document()->byDocument_id($documentId)->get(
-                new WithDocument_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Media\Document\Item\WithDocument_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -179,7 +168,38 @@ final class MediaClient
         return $this->call($accessToken, fn($api) =>
             $api->document()->byDocument_id($documentId)->upload()->post(
                 $body,
-                new UploadRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Media\Document\Item\Upload\UploadRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function downloadPostOrderDocument(string $documentId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->post_order()->document()->byDocument_id($documentId)->get(
+                new \EBay\ListingManagement\Generated\Media\Post_order\Document\Item\WithDocument_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function removePostOrderDocument(string $documentId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->post_order()->document()->byDocument_id($documentId)->delete(
+                new \EBay\ListingManagement\Generated\Media\Post_order\Document\Item\WithDocument_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function uploadPostOrderDocument(mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->post_order()->document()->post(
+                $body,
+                new \EBay\ListingManagement\Generated\Media\Post_order\Document\DocumentRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

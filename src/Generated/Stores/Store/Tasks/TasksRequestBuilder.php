@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Stores\Store\Tasks;
 
+use EBay\ListingManagement\Generated\Stores\Models\Error;
 use EBay\ListingManagement\Generated\Stores\Models\GetStoreTasksResponseType;
 use EBay\ListingManagement\Generated\Stores\Store\Tasks\Item\WithTask_ItemRequestBuilder;
 use Exception;
@@ -32,7 +33,7 @@ class TasksRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/ListingManagement/Generated/Stores.store.tasks.item collection
-     * @param string $task_id The unique identifier of an eBay Store async task. A taskId value is returned in the response of other successful calls. (e.g.addStoreCategory, moveStoreCategory, deleteStoreCategory).
+     * @param string $task_id The unique identifier of an eBay Store async task. A taskId value is returned in the response of a successful other calls. (e.g.addStoreCategory, moveStoreCategory, deleteStoreCategory).
      * @return WithTask_ItemRequestBuilder
     */
     public function byTask_id(string $task_id): WithTask_ItemRequestBuilder {
@@ -63,7 +64,11 @@ class TasksRequestBuilder extends BaseRequestBuilder
     */
     public function get(?TasksRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetStoreTasksResponseType::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetStoreTasksResponseType::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

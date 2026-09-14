@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Stores\Store\Categories\Move_category;
 
+use EBay\ListingManagement\Generated\Stores\Models\Error;
 use EBay\ListingManagement\Generated\Stores\Models\MoveStoreCategoryRequestType;
 use Exception;
 use Http\Promise\Promise;
@@ -45,19 +46,23 @@ class Move_categoryRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method is used to move an existing user's eBay store custom category through an asynchronous request. A successful call returns the <b>getStoreTask</b> URI in the Location response header. The user calls <b>getStoreTask</b> to retrieve the status of the move category operation.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> If you initiate a category change, you cannot make additional category changes until the previous change request has completed. Use getStoreTask (or getStoreTasks) method to get latest status of your last request.</p></div>
-     * @param MoveStoreCategoryRequestType $body The base request type of the <b>moveStoreCategory</b> method. It is used to provide the name of the category to be moved and its new location.
+     * @param MoveStoreCategoryRequestType $body This method is used to move one category of a user's eBay store. This operation is an asynchronous request. A successful call returns the <b>getStoreTask</b> URI in the Location response header. The user calls <b>getStoreTask</b> to retrieve the status of the add category operation.
      * @param Move_categoryRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(MoveStoreCategoryRequestType $body, ?Move_categoryRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
      * This method is used to move an existing user's eBay store custom category through an asynchronous request. A successful call returns the <b>getStoreTask</b> URI in the Location response header. The user calls <b>getStoreTask</b> to retrieve the status of the move category operation.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> If you initiate a category change, you cannot make additional category changes until the previous change request has completed. Use getStoreTask (or getStoreTasks) method to get latest status of your last request.</p></div>
-     * @param MoveStoreCategoryRequestType $body The base request type of the <b>moveStoreCategory</b> method. It is used to provide the name of the category to be moved and its new location.
+     * @param MoveStoreCategoryRequestType $body This method is used to move one category of a user's eBay store. This operation is an asynchronous request. A successful call returns the <b>getStoreTask</b> URI in the Location response header. The user calls <b>getStoreTask</b> to retrieve the status of the add category operation.
      * @param Move_categoryRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -70,6 +75,7 @@ class Move_categoryRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

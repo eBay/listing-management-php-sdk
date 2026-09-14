@@ -18,6 +18,7 @@ namespace EBay\ListingManagement\Generated\Media\Document\Item;
 
 use EBay\ListingManagement\Generated\Media\Document\Item\Upload\UploadRequestBuilder;
 use EBay\ListingManagement\Generated\Media\Models\DocumentResponse;
+use EBay\ListingManagement\Generated\Media\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -52,18 +53,23 @@ class WithDocument_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method retrieves the current <b>status</b> and metadata of the specified document.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> The document ID value returned in the response payload of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument">createDocument</a> method is a required input path parameter for this method.</p></div><p>See <a href="/api-docs/sell/static/inventory/managing-document-media.html" target="_blank">Managing documents</a> for additional information.</p>
+     * This method retrieves the current <strong>status</strong> and metadata of the specified document.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><strong><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></strong></span></span> The document ID value returned in the response payload of the <a href="/develop/api/sell/media_api#sell-media_api-document-createdocument">createDocument</a> or the <a href="/develop/api/sell/media_api#sell-media_api-document-createdocumentfromurl">createDocumentFromUrl</a> method is a required input path parameter for this method.</p></div><p>See <a href="/api-docs/sell/static/inventory/managing-document-media.html" target="_blank">Managing documents</a> for additional information.</p>
      * @param WithDocument_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<DocumentResponse|null>
      * @throws Exception
     */
     public function get(?WithDocument_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [DocumentResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [DocumentResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method retrieves the current <b>status</b> and metadata of the specified document.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> The document ID value returned in the response payload of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument">createDocument</a> method is a required input path parameter for this method.</p></div><p>See <a href="/api-docs/sell/static/inventory/managing-document-media.html" target="_blank">Managing documents</a> for additional information.</p>
+     * This method retrieves the current <strong>status</strong> and metadata of the specified document.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><strong><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></strong></span></span> The document ID value returned in the response payload of the <a href="/develop/api/sell/media_api#sell-media_api-document-createdocument">createDocument</a> or the <a href="/develop/api/sell/media_api#sell-media_api-document-createdocumentfromurl">createDocumentFromUrl</a> method is a required input path parameter for this method.</p></div><p>See <a href="/api-docs/sell/static/inventory/managing-document-media.html" target="_blank">Managing documents</a> for additional information.</p>
      * @param WithDocument_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

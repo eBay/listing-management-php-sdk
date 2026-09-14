@@ -32,24 +32,24 @@ class StoreTaskType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $id The unique identifier of an eBay Store task.
+     * @var string|null $id The unique identifier of an eBay Store async task.
     */
     private ?string $id = null;
     
     /**
-     * @var string|null $message This field provides a textual description on the status of the task, and could help user troubleshoot any issues if there is an issue with eBay creating the task.
+     * @var string|null $message The value indicates the status description of the async task, especially in case of failures (reason of failure).It follows the Asynchronous Request Pattern in eBay REST Documentation. More detail please see : https://pages.github.corp.ebay.com/vat/ebay-rest-standards/docs/UniformInterface/ResourceManipulation/AsyncRequestPattern
     */
     private ?string $message = null;
     
     /**
-     * @var string|null $status The enumeration value here indicates the processing status of the task. See the <b>StoreTaskStatusEnum</b> type for more information on supported status values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/stores/types/api:StoreTaskStatusEnum'>eBay API documentation</a>
+     * @var StoreTaskStatusEnum|null $status The enumeration value indicates the status of processing for the eBay Store Async Task.It follows the Asynchronous Request Pattern in eBay REST Documentation. More detail please see : 
     */
-    private ?string $status = null;
+    private ?StoreTaskStatusEnum $status = null;
     
     /**
-     * @var string|null $type The enumeration value indicates the task type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/stores/types/api:StoreTaskTypeEnum'>eBay API documentation</a>
+     * @var StoreTaskTypeEnum|null $type The enumeration value indicates the task type.
     */
-    private ?string $type = null;
+    private ?StoreTaskTypeEnum $type = null;
     
     /**
      * Instantiates a new StoreTaskType and sets the default values.
@@ -84,13 +84,13 @@ class StoreTaskType implements AdditionalDataHolder, Parsable
         return  [
             'id' => fn(ParseNode $n) => $o->setId($n->getStringValue()),
             'message' => fn(ParseNode $n) => $o->setMessage($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
-            'type' => fn(ParseNode $n) => $o->setType($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(StoreTaskStatusEnum::class)),
+            'type' => fn(ParseNode $n) => $o->setType($n->getEnumValue(StoreTaskTypeEnum::class)),
         ];
     }
 
     /**
-     * Gets the id property value. The unique identifier of an eBay Store task.
+     * Gets the id property value. The unique identifier of an eBay Store async task.
      * @return string|null
     */
     public function getId(): ?string {
@@ -98,7 +98,7 @@ class StoreTaskType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the message property value. This field provides a textual description on the status of the task, and could help user troubleshoot any issues if there is an issue with eBay creating the task.
+     * Gets the message property value. The value indicates the status description of the async task, especially in case of failures (reason of failure).It follows the Asynchronous Request Pattern in eBay REST Documentation. More detail please see : https://pages.github.corp.ebay.com/vat/ebay-rest-standards/docs/UniformInterface/ResourceManipulation/AsyncRequestPattern
      * @return string|null
     */
     public function getMessage(): ?string {
@@ -106,18 +106,18 @@ class StoreTaskType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. The enumeration value here indicates the processing status of the task. See the <b>StoreTaskStatusEnum</b> type for more information on supported status values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/stores/types/api:StoreTaskStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. The enumeration value indicates the status of processing for the eBay Store Async Task.It follows the Asynchronous Request Pattern in eBay REST Documentation. More detail please see : 
+     * @return StoreTaskStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?StoreTaskStatusEnum {
         return $this->status;
     }
 
     /**
-     * Gets the type property value. The enumeration value indicates the task type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/stores/types/api:StoreTaskTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the type property value. The enumeration value indicates the task type.
+     * @return StoreTaskTypeEnum|null
     */
-    public function getType(): ?string {
+    public function getType(): ?StoreTaskTypeEnum {
         return $this->type;
     }
 
@@ -128,8 +128,8 @@ class StoreTaskType implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('id', $this->getId());
         $writer->writeStringValue('message', $this->getMessage());
-        $writer->writeStringValue('status', $this->getStatus());
-        $writer->writeStringValue('type', $this->getType());
+        $writer->writeEnumValue('status', $this->getStatus());
+        $writer->writeEnumValue('type', $this->getType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -142,7 +142,7 @@ class StoreTaskType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the id property value. The unique identifier of an eBay Store task.
+     * Sets the id property value. The unique identifier of an eBay Store async task.
      * @param string|null $value Value to set for the id property.
     */
     public function setId(?string $value): void {
@@ -150,7 +150,7 @@ class StoreTaskType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the message property value. This field provides a textual description on the status of the task, and could help user troubleshoot any issues if there is an issue with eBay creating the task.
+     * Sets the message property value. The value indicates the status description of the async task, especially in case of failures (reason of failure).It follows the Asynchronous Request Pattern in eBay REST Documentation. More detail please see : https://pages.github.corp.ebay.com/vat/ebay-rest-standards/docs/UniformInterface/ResourceManipulation/AsyncRequestPattern
      * @param string|null $value Value to set for the message property.
     */
     public function setMessage(?string $value): void {
@@ -158,18 +158,18 @@ class StoreTaskType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. The enumeration value here indicates the processing status of the task. See the <b>StoreTaskStatusEnum</b> type for more information on supported status values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/stores/types/api:StoreTaskStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. The enumeration value indicates the status of processing for the eBay Store Async Task.It follows the Asynchronous Request Pattern in eBay REST Documentation. More detail please see : 
+     * @param StoreTaskStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?StoreTaskStatusEnum $value): void {
         $this->status = $value;
     }
 
     /**
-     * Sets the type property value. The enumeration value indicates the task type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/stores/types/api:StoreTaskTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the type property.
+     * Sets the type property value. The enumeration value indicates the task type.
+     * @param StoreTaskTypeEnum|null $value Value to set for the type property.
     */
-    public function setType(?string $value): void {
+    public function setType(?StoreTaskTypeEnum $value): void {
         $this->type = $value;
     }
 

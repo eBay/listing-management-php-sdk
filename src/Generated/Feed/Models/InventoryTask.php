@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * This container is used to return information about a specific inventory task.
+*/
 class InventoryTask implements AdditionalDataHolder, Parsable 
 {
     /**
@@ -49,7 +52,7 @@ class InventoryTask implements AdditionalDataHolder, Parsable
     private ?string $feedType = null;
     
     /**
-     * @var InventoryFilterCriteria|null $filterCriteria This container is used to set the filter criteria for the ActiveInventoryReport. A seller can create an ActiveInventoryReport for a single listing format.
+     * @var InventoryFilterCriteria|null $filterCriteria This container is used to set the filter criteria for the ActiveInventoryReport. A seller can retrieve listings for a specified format.
     */
     private ?InventoryFilterCriteria $filterCriteria = null;
     
@@ -59,9 +62,9 @@ class InventoryTask implements AdditionalDataHolder, Parsable
     private ?string $schemaVersion = null;
     
     /**
-     * @var string|null $status The status of the task. Users must wait until status is complete before moving on to the next step (such as uploading/downloading a file). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
+     * @var FeedStatusEnum|null $status The status of the task. Users must wait until status is complete before moving on to the next step (such as uploading/downloading a file).
     */
-    private ?string $status = null;
+    private ?FeedStatusEnum $status = null;
     
     /**
      * @var string|null $taskId The ID of the task. This ID is generated when the task was created by the <strong>createInventoryTask</strong> method.
@@ -142,14 +145,14 @@ class InventoryTask implements AdditionalDataHolder, Parsable
             'feedType' => fn(ParseNode $n) => $o->setFeedType($n->getStringValue()),
             'filterCriteria' => fn(ParseNode $n) => $o->setFilterCriteria($n->getObjectValue([InventoryFilterCriteria::class, 'createFromDiscriminatorValue'])),
             'schemaVersion' => fn(ParseNode $n) => $o->setSchemaVersion($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(FeedStatusEnum::class)),
             'taskId' => fn(ParseNode $n) => $o->setTaskId($n->getStringValue()),
             'uploadSummary' => fn(ParseNode $n) => $o->setUploadSummary($n->getObjectValue([UploadSummary::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the filterCriteria property value. This container is used to set the filter criteria for the ActiveInventoryReport. A seller can create an ActiveInventoryReport for a single listing format.
+     * Gets the filterCriteria property value. This container is used to set the filter criteria for the ActiveInventoryReport. A seller can retrieve listings for a specified format.
      * @return InventoryFilterCriteria|null
     */
     public function getFilterCriteria(): ?InventoryFilterCriteria {
@@ -165,10 +168,10 @@ class InventoryTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. The status of the task. Users must wait until status is complete before moving on to the next step (such as uploading/downloading a file). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. The status of the task. Users must wait until status is complete before moving on to the next step (such as uploading/downloading a file).
+     * @return FeedStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?FeedStatusEnum {
         return $this->status;
     }
 
@@ -199,7 +202,7 @@ class InventoryTask implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('feedType', $this->getFeedType());
         $writer->writeObjectValue('filterCriteria', $this->getFilterCriteria());
         $writer->writeStringValue('schemaVersion', $this->getSchemaVersion());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeStringValue('taskId', $this->getTaskId());
         $writer->writeObjectValue('uploadSummary', $this->getUploadSummary());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -246,7 +249,7 @@ class InventoryTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the filterCriteria property value. This container is used to set the filter criteria for the ActiveInventoryReport. A seller can create an ActiveInventoryReport for a single listing format.
+     * Sets the filterCriteria property value. This container is used to set the filter criteria for the ActiveInventoryReport. A seller can retrieve listings for a specified format.
      * @param InventoryFilterCriteria|null $value Value to set for the filterCriteria property.
     */
     public function setFilterCriteria(?InventoryFilterCriteria $value): void {
@@ -262,10 +265,10 @@ class InventoryTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. The status of the task. Users must wait until status is complete before moving on to the next step (such as uploading/downloading a file). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. The status of the task. Users must wait until status is complete before moving on to the next step (such as uploading/downloading a file).
+     * @param FeedStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?FeedStatusEnum $value): void {
         $this->status = $value;
     }
 

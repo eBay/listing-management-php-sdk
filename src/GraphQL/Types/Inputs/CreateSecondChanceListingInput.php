@@ -32,6 +32,9 @@ readonly class CreateSecondChanceListingInput
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
+        if (isset($data['input']) && is_array($data['input'])) {
+            $data = array_merge($data['input'], $data);
+        }
         return new self(
             listingIdentifier: ListingIdentifierInput::fromArray($data['listingIdentifier']),
             listingTerms: SecondChanceListingTermsInput::fromArray($data['listingTerms']),

@@ -32,14 +32,14 @@ class InventoryItemResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<Error>|null $errors This container will be returned if there were one or more errors associated with the creation or update to the inventory item record.
+     * @var array<ErrorDetailV3>|null $errors This container will be returned if there were one or more errors associated with the creation or update to the inventory item record.
     */
     private ?array $errors = null;
     
     /**
-     * @var string|null $locale This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:LocaleEnum'>eBay API documentation</a>
+     * @var LocaleEnum|null $locale This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE).
     */
-    private ?string $locale = null;
+    private ?LocaleEnum $locale = null;
     
     /**
      * @var string|null $sku The seller-defined Stock-Keeping Unit (SKU) of the inventory item. The seller should have a unique SKU value for every product that they sell.
@@ -52,7 +52,7 @@ class InventoryItemResponse implements AdditionalDataHolder, Parsable
     private ?int $statusCode = null;
     
     /**
-     * @var array<Error>|null $warnings This container will be returned if there were one or more warnings associated with the creation or update to the inventory item record.
+     * @var array<ErrorDetailV3>|null $warnings This container will be returned if there were one or more warnings associated with the creation or update to the inventory item record.
     */
     private ?array $warnings = null;
     
@@ -82,7 +82,7 @@ class InventoryItemResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the errors property value. This container will be returned if there were one or more errors associated with the creation or update to the inventory item record.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -95,19 +95,19 @@ class InventoryItemResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
-            'locale' => fn(ParseNode $n) => $o->setLocale($n->getStringValue()),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
+            'locale' => fn(ParseNode $n) => $o->setLocale($n->getEnumValue(LocaleEnum::class)),
             'sku' => fn(ParseNode $n) => $o->setSku($n->getStringValue()),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
-            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the locale property value. This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:LocaleEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the locale property value. This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE).
+     * @return LocaleEnum|null
     */
-    public function getLocale(): ?string {
+    public function getLocale(): ?LocaleEnum {
         return $this->locale;
     }
 
@@ -129,7 +129,7 @@ class InventoryItemResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the warnings property value. This container will be returned if there were one or more warnings associated with the creation or update to the inventory item record.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getWarnings(): ?array {
         return $this->warnings;
@@ -141,7 +141,7 @@ class InventoryItemResponse implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfObjectValues('errors', $this->getErrors());
-        $writer->writeStringValue('locale', $this->getLocale());
+        $writer->writeEnumValue('locale', $this->getLocale());
         $writer->writeStringValue('sku', $this->getSku());
         $writer->writeIntegerValue('statusCode', $this->getStatusCode());
         $writer->writeCollectionOfObjectValues('warnings', $this->getWarnings());
@@ -158,17 +158,17 @@ class InventoryItemResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the errors property value. This container will be returned if there were one or more errors associated with the creation or update to the inventory item record.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;
     }
 
     /**
-     * Sets the locale property value. This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:LocaleEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the locale property.
+     * Sets the locale property value. This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE).
+     * @param LocaleEnum|null $value Value to set for the locale property.
     */
-    public function setLocale(?string $value): void {
+    public function setLocale(?LocaleEnum $value): void {
         $this->locale = $value;
     }
 
@@ -190,7 +190,7 @@ class InventoryItemResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the warnings property value. This container will be returned if there were one or more warnings associated with the creation or update to the inventory item record.
-     * @param array<Error>|null $value Value to set for the warnings property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the warnings property.
     */
     public function setWarnings(?array $value): void {
         $this->warnings = $value;

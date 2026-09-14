@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type provides information about the <b>documentId</b>.
+ * This type provides information about the <strong>documentId</strong>.
 */
 class DocumentMetadata implements AdditionalDataHolder, Parsable 
 {

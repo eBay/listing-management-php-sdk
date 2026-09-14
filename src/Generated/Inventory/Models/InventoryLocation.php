@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * This type is used by the <strong>updateInventoryLocation</strong> call to update operating hours, special hours, phone number, and other minor details of an inventory location.
@@ -33,32 +32,32 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var FulfillmentCenterSpecifications|null $fulfillmentCenterSpecifications This type is used to provide shipping specification details, such as the weekly cut-off schedule for order handling and cut-off override(s), for a fulfillment center location. 
+     * @var FulfillmentCenterSpecifications|null $fulfillmentCenterSpecifications This container is used to update information about a fulfillment center's shipping specifications, such as the weekly cut-off time schedule for order handling and any cut-off overrides.
     */
     private ?FulfillmentCenterSpecifications $fulfillmentCenterSpecifications = null;
     
     /**
-     * @var LocationDetails|null $location This type is used by the <b>createInventoryLocation</b> call to provide an full or partial address of an inventory location.
+     * @var LocationDetails|null $location This container is used to add any addition physical address and geographical coordinate information for a warehouse, store, or fulfillment center inventory location.<br><br><span class="tablenote"><b>Note:</b> For warehouse and store inventory locations, address fields can be updated any number of times. For fulfilment center locations, address fields cannot be updated. However, if any address fields were omitted during the <b>createInventoryLocation</b> call, they can be added through this method.</span><br><span class="tablenote"><b>Note:</b> When updating a warehouse location to a fulfillment center, sellers can update any of the address fields a single time during the same call used to make this update. After this, they can no longer be updated.</span> 
     */
     private ?LocationDetails $location = null;
     
     /**
-     * @var string|null $locationAdditionalInformation This text field is used by the merchant to provide/update additional information about an inventory location. Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Max length</b>: 256
+     * @var string|null $locationAdditionalInformation This text field is used by the merchant to provide/update additional information about an inventory location. Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Maximum length</b>: 256
     */
     private ?string $locationAdditionalInformation = null;
     
     /**
-     * @var string|null $locationInstructions This text field is generally used by the merchant to provide/update special pickup instructions for a store inventory location. Although this field is optional, it is recommended that merchants provide this field to create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field is not included in the call request payload, eBay will use the default pickup instructions contained in the merchant's profile (if available). Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Max length</b>: 1000
+     * @var string|null $locationInstructions This text field is generally used by the merchant to provide/update special pickup instructions for a store inventory location. Although this field is optional, it is recommended that merchants provide this field to create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field is not included in the call request payload, eBay will use the default pickup instructions contained in the merchant's profile (if available). Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Maximum length</b>: 1000
     */
     private ?string $locationInstructions = null;
     
     /**
-     * @var array<string>|null $locationTypes This container is used to update the location type(s) associated with an inventory location.
+     * @var array<StoreTypeEnum>|null $locationTypes This container is used to update the location type(s) associated with an inventory location.
     */
     private ?array $locationTypes = null;
     
     /**
-     * @var string|null $locationWebUrl This text field is used by the merchant to provide/update the Website address (URL) associated with the inventory location. The URL that is passed in this field will replace any other URL that may be defined for this field. <br><br><b>Max length</b>: 512
+     * @var string|null $locationWebUrl This text field is used by the merchant to provide/update the Website address (URL) associated with the inventory location. The URL that is passed in this field will replace any other URL that may be defined for this field. <br><br><b>Maximum length</b>: 512
     */
     private ?string $locationWebUrl = null;
     
@@ -73,7 +72,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     private ?array $operatingHours = null;
     
     /**
-     * @var string|null $phone This text field is used by the merchant to provide/update the phone number for the inventory location. The phone number that is passed in this field will replace any other phone number that may be defined for this field. <br><br><b>Max length</b>: 36
+     * @var string|null $phone This text field is used by the merchant to provide/update the phone number for the inventory location. The phone number that is passed in this field will replace any other phone number that may be defined for this field. <br><br><b>Maximum length</b>: 36
     */
     private ?string $phone = null;
     
@@ -122,14 +121,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
             'location' => fn(ParseNode $n) => $o->setLocation($n->getObjectValue([LocationDetails::class, 'createFromDiscriminatorValue'])),
             'locationAdditionalInformation' => fn(ParseNode $n) => $o->setLocationAdditionalInformation($n->getStringValue()),
             'locationInstructions' => fn(ParseNode $n) => $o->setLocationInstructions($n->getStringValue()),
-            'locationTypes' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setLocationTypes($val);
-            },
+            'locationTypes' => fn(ParseNode $n) => $o->setLocationTypes($n->getCollectionOfEnumValues(StoreTypeEnum::class)),
             'locationWebUrl' => fn(ParseNode $n) => $o->setLocationWebUrl($n->getStringValue()),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
             'operatingHours' => fn(ParseNode $n) => $o->setOperatingHours($n->getCollectionOfObjectValues([OperatingHours::class, 'createFromDiscriminatorValue'])),
@@ -140,7 +132,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the fulfillmentCenterSpecifications property value. This type is used to provide shipping specification details, such as the weekly cut-off schedule for order handling and cut-off override(s), for a fulfillment center location. 
+     * Gets the fulfillmentCenterSpecifications property value. This container is used to update information about a fulfillment center's shipping specifications, such as the weekly cut-off time schedule for order handling and any cut-off overrides.
      * @return FulfillmentCenterSpecifications|null
     */
     public function getFulfillmentCenterSpecifications(): ?FulfillmentCenterSpecifications {
@@ -148,7 +140,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the location property value. This type is used by the <b>createInventoryLocation</b> call to provide an full or partial address of an inventory location.
+     * Gets the location property value. This container is used to add any addition physical address and geographical coordinate information for a warehouse, store, or fulfillment center inventory location.<br><br><span class="tablenote"><b>Note:</b> For warehouse and store inventory locations, address fields can be updated any number of times. For fulfilment center locations, address fields cannot be updated. However, if any address fields were omitted during the <b>createInventoryLocation</b> call, they can be added through this method.</span><br><span class="tablenote"><b>Note:</b> When updating a warehouse location to a fulfillment center, sellers can update any of the address fields a single time during the same call used to make this update. After this, they can no longer be updated.</span> 
      * @return LocationDetails|null
     */
     public function getLocation(): ?LocationDetails {
@@ -156,7 +148,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the locationAdditionalInformation property value. This text field is used by the merchant to provide/update additional information about an inventory location. Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Max length</b>: 256
+     * Gets the locationAdditionalInformation property value. This text field is used by the merchant to provide/update additional information about an inventory location. Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Maximum length</b>: 256
      * @return string|null
     */
     public function getLocationAdditionalInformation(): ?string {
@@ -164,7 +156,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the locationInstructions property value. This text field is generally used by the merchant to provide/update special pickup instructions for a store inventory location. Although this field is optional, it is recommended that merchants provide this field to create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field is not included in the call request payload, eBay will use the default pickup instructions contained in the merchant's profile (if available). Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Max length</b>: 1000
+     * Gets the locationInstructions property value. This text field is generally used by the merchant to provide/update special pickup instructions for a store inventory location. Although this field is optional, it is recommended that merchants provide this field to create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field is not included in the call request payload, eBay will use the default pickup instructions contained in the merchant's profile (if available). Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Maximum length</b>: 1000
      * @return string|null
     */
     public function getLocationInstructions(): ?string {
@@ -173,14 +165,14 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the locationTypes property value. This container is used to update the location type(s) associated with an inventory location.
-     * @return array<string>|null
+     * @return array<StoreTypeEnum>|null
     */
     public function getLocationTypes(): ?array {
         return $this->locationTypes;
     }
 
     /**
-     * Gets the locationWebUrl property value. This text field is used by the merchant to provide/update the Website address (URL) associated with the inventory location. The URL that is passed in this field will replace any other URL that may be defined for this field. <br><br><b>Max length</b>: 512
+     * Gets the locationWebUrl property value. This text field is used by the merchant to provide/update the Website address (URL) associated with the inventory location. The URL that is passed in this field will replace any other URL that may be defined for this field. <br><br><b>Maximum length</b>: 512
      * @return string|null
     */
     public function getLocationWebUrl(): ?string {
@@ -204,7 +196,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the phone property value. This text field is used by the merchant to provide/update the phone number for the inventory location. The phone number that is passed in this field will replace any other phone number that may be defined for this field. <br><br><b>Max length</b>: 36
+     * Gets the phone property value. This text field is used by the merchant to provide/update the phone number for the inventory location. The phone number that is passed in this field will replace any other phone number that may be defined for this field. <br><br><b>Maximum length</b>: 36
      * @return string|null
     */
     public function getPhone(): ?string {
@@ -236,7 +228,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('location', $this->getLocation());
         $writer->writeStringValue('locationAdditionalInformation', $this->getLocationAdditionalInformation());
         $writer->writeStringValue('locationInstructions', $this->getLocationInstructions());
-        $writer->writeCollectionOfPrimitiveValues('locationTypes', $this->getLocationTypes());
+        $writer->writeCollectionOfEnumValues('locationTypes', $this->getLocationTypes());
         $writer->writeStringValue('locationWebUrl', $this->getLocationWebUrl());
         $writer->writeStringValue('name', $this->getName());
         $writer->writeCollectionOfObjectValues('operatingHours', $this->getOperatingHours());
@@ -255,7 +247,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the fulfillmentCenterSpecifications property value. This type is used to provide shipping specification details, such as the weekly cut-off schedule for order handling and cut-off override(s), for a fulfillment center location. 
+     * Sets the fulfillmentCenterSpecifications property value. This container is used to update information about a fulfillment center's shipping specifications, such as the weekly cut-off time schedule for order handling and any cut-off overrides.
      * @param FulfillmentCenterSpecifications|null $value Value to set for the fulfillmentCenterSpecifications property.
     */
     public function setFulfillmentCenterSpecifications(?FulfillmentCenterSpecifications $value): void {
@@ -263,7 +255,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the location property value. This type is used by the <b>createInventoryLocation</b> call to provide an full or partial address of an inventory location.
+     * Sets the location property value. This container is used to add any addition physical address and geographical coordinate information for a warehouse, store, or fulfillment center inventory location.<br><br><span class="tablenote"><b>Note:</b> For warehouse and store inventory locations, address fields can be updated any number of times. For fulfilment center locations, address fields cannot be updated. However, if any address fields were omitted during the <b>createInventoryLocation</b> call, they can be added through this method.</span><br><span class="tablenote"><b>Note:</b> When updating a warehouse location to a fulfillment center, sellers can update any of the address fields a single time during the same call used to make this update. After this, they can no longer be updated.</span> 
      * @param LocationDetails|null $value Value to set for the location property.
     */
     public function setLocation(?LocationDetails $value): void {
@@ -271,7 +263,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the locationAdditionalInformation property value. This text field is used by the merchant to provide/update additional information about an inventory location. Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Max length</b>: 256
+     * Sets the locationAdditionalInformation property value. This text field is used by the merchant to provide/update additional information about an inventory location. Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Maximum length</b>: 256
      * @param string|null $value Value to set for the locationAdditionalInformation property.
     */
     public function setLocationAdditionalInformation(?string $value): void {
@@ -279,7 +271,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the locationInstructions property value. This text field is generally used by the merchant to provide/update special pickup instructions for a store inventory location. Although this field is optional, it is recommended that merchants provide this field to create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field is not included in the call request payload, eBay will use the default pickup instructions contained in the merchant's profile (if available). Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Max length</b>: 1000
+     * Sets the locationInstructions property value. This text field is generally used by the merchant to provide/update special pickup instructions for a store inventory location. Although this field is optional, it is recommended that merchants provide this field to create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field is not included in the call request payload, eBay will use the default pickup instructions contained in the merchant's profile (if available). Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Maximum length</b>: 1000
      * @param string|null $value Value to set for the locationInstructions property.
     */
     public function setLocationInstructions(?string $value): void {
@@ -288,14 +280,14 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the locationTypes property value. This container is used to update the location type(s) associated with an inventory location.
-     * @param array<string>|null $value Value to set for the locationTypes property.
+     * @param array<StoreTypeEnum>|null $value Value to set for the locationTypes property.
     */
     public function setLocationTypes(?array $value): void {
         $this->locationTypes = $value;
     }
 
     /**
-     * Sets the locationWebUrl property value. This text field is used by the merchant to provide/update the Website address (URL) associated with the inventory location. The URL that is passed in this field will replace any other URL that may be defined for this field. <br><br><b>Max length</b>: 512
+     * Sets the locationWebUrl property value. This text field is used by the merchant to provide/update the Website address (URL) associated with the inventory location. The URL that is passed in this field will replace any other URL that may be defined for this field. <br><br><b>Maximum length</b>: 512
      * @param string|null $value Value to set for the locationWebUrl property.
     */
     public function setLocationWebUrl(?string $value): void {
@@ -319,7 +311,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the phone property value. This text field is used by the merchant to provide/update the phone number for the inventory location. The phone number that is passed in this field will replace any other phone number that may be defined for this field. <br><br><b>Max length</b>: 36
+     * Sets the phone property value. This text field is used by the merchant to provide/update the phone number for the inventory location. The phone number that is passed in this field will replace any other phone number that may be defined for this field. <br><br><b>Maximum length</b>: 36
      * @param string|null $value Value to set for the phone property.
     */
     public function setPhone(?string $value): void {

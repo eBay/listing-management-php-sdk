@@ -37,14 +37,14 @@ class SupportedConfiguration implements AdditionalDataHolder, Parsable
     private ?string $defaultValue = null;
     
     /**
-     * @var string|null $property Properties supported by the template. Properties can include the following: <ul><li><b>scheduleStartDate:</b> The timestamp that the report generation (subscription) begins. After this timestamp, the schedule status becomes active until either the scheduleEndDate occurs or the scheduleTemplate becomes inactive. Format: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><b>scheduleEndDate:</b> The timestamp that the report generation (subscription) ends. After this date, the schedule status becomes INACTIVE. Format: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><b>schemaVersion:</b> The schema version of the schedule templates feedType. This field is required if the feedType has a schema version.</li><li><b>preferredTriggerDayOfMonth:</b> The preferred day of the month to trigger the schedule. </li><li><b>preferredTriggerDayOfWeek:</b> The preferred day of the week to trigger the schedule. </li><li><b>preferredTriggerHour:</b> The preferred two-digit hour of the day to trigger the schedule. Format: UTC <code>hhZ</code></li><ul>
+     * @var string|null $property Properties supported by the template. Properties can include the following: <ul><li><strong>scheduleStartDate:</strong> The timestamp that the report generation (subscription) begins. After this timestamp, the schedule status becomes active until either the scheduleEndDate occurs or the scheduleTemplate becomes inactive.<br /><strong>Format</strong>: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><strong>scheduleEndDate:</strong> The timestamp that the report generation (subscription) ends. After this date, the schedule status becomes INACTIVE.<br /><strong>Format</strong>: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><strong>schemaVersion:</strong> The schema version of the schedule templates feedType. This field is required if the feedType has a schema version.</li><li><strong>preferredTriggerDayOfMonth:</strong> The preferred day of the month to trigger the schedule. </li><li><strong>preferredTriggerDayOfWeek:</strong> The preferred day of the week to trigger the schedule. </li><li><strong>preferredTriggerHour:</strong> The preferred two-digit hour of the day to trigger the schedule.<br /><strong>Format</strong>: UTC <code>hhZ</code></li></ul>
     */
     private ?string $property = null;
     
     /**
-     * @var string|null $usage Whether the specified property is REQUIRED or OPTIONAL. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:ConfigurationsUsageEnum'>eBay API documentation</a>
+     * @var ConfigurationsUsageEnum|null $usage Whether the specified property is REQUIRED or OPTIONAL.
     */
-    private ?string $usage = null;
+    private ?ConfigurationsUsageEnum $usage = null;
     
     /**
      * Instantiates a new SupportedConfiguration and sets the default values.
@@ -87,12 +87,12 @@ class SupportedConfiguration implements AdditionalDataHolder, Parsable
         return  [
             'defaultValue' => fn(ParseNode $n) => $o->setDefaultValue($n->getStringValue()),
             'property' => fn(ParseNode $n) => $o->setProperty($n->getStringValue()),
-            'usage' => fn(ParseNode $n) => $o->setUsage($n->getStringValue()),
+            'usage' => fn(ParseNode $n) => $o->setUsage($n->getEnumValue(ConfigurationsUsageEnum::class)),
         ];
     }
 
     /**
-     * Gets the property property value. Properties supported by the template. Properties can include the following: <ul><li><b>scheduleStartDate:</b> The timestamp that the report generation (subscription) begins. After this timestamp, the schedule status becomes active until either the scheduleEndDate occurs or the scheduleTemplate becomes inactive. Format: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><b>scheduleEndDate:</b> The timestamp that the report generation (subscription) ends. After this date, the schedule status becomes INACTIVE. Format: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><b>schemaVersion:</b> The schema version of the schedule templates feedType. This field is required if the feedType has a schema version.</li><li><b>preferredTriggerDayOfMonth:</b> The preferred day of the month to trigger the schedule. </li><li><b>preferredTriggerDayOfWeek:</b> The preferred day of the week to trigger the schedule. </li><li><b>preferredTriggerHour:</b> The preferred two-digit hour of the day to trigger the schedule. Format: UTC <code>hhZ</code></li><ul>
+     * Gets the property property value. Properties supported by the template. Properties can include the following: <ul><li><strong>scheduleStartDate:</strong> The timestamp that the report generation (subscription) begins. After this timestamp, the schedule status becomes active until either the scheduleEndDate occurs or the scheduleTemplate becomes inactive.<br /><strong>Format</strong>: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><strong>scheduleEndDate:</strong> The timestamp that the report generation (subscription) ends. After this date, the schedule status becomes INACTIVE.<br /><strong>Format</strong>: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><strong>schemaVersion:</strong> The schema version of the schedule templates feedType. This field is required if the feedType has a schema version.</li><li><strong>preferredTriggerDayOfMonth:</strong> The preferred day of the month to trigger the schedule. </li><li><strong>preferredTriggerDayOfWeek:</strong> The preferred day of the week to trigger the schedule. </li><li><strong>preferredTriggerHour:</strong> The preferred two-digit hour of the day to trigger the schedule.<br /><strong>Format</strong>: UTC <code>hhZ</code></li></ul>
      * @return string|null
     */
     public function getProperty(): ?string {
@@ -100,10 +100,10 @@ class SupportedConfiguration implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the usage property value. Whether the specified property is REQUIRED or OPTIONAL. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:ConfigurationsUsageEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the usage property value. Whether the specified property is REQUIRED or OPTIONAL.
+     * @return ConfigurationsUsageEnum|null
     */
-    public function getUsage(): ?string {
+    public function getUsage(): ?ConfigurationsUsageEnum {
         return $this->usage;
     }
 
@@ -114,7 +114,7 @@ class SupportedConfiguration implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('defaultValue', $this->getDefaultValue());
         $writer->writeStringValue('property', $this->getProperty());
-        $writer->writeStringValue('usage', $this->getUsage());
+        $writer->writeEnumValue('usage', $this->getUsage());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -135,7 +135,7 @@ class SupportedConfiguration implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the property property value. Properties supported by the template. Properties can include the following: <ul><li><b>scheduleStartDate:</b> The timestamp that the report generation (subscription) begins. After this timestamp, the schedule status becomes active until either the scheduleEndDate occurs or the scheduleTemplate becomes inactive. Format: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><b>scheduleEndDate:</b> The timestamp that the report generation (subscription) ends. After this date, the schedule status becomes INACTIVE. Format: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><b>schemaVersion:</b> The schema version of the schedule templates feedType. This field is required if the feedType has a schema version.</li><li><b>preferredTriggerDayOfMonth:</b> The preferred day of the month to trigger the schedule. </li><li><b>preferredTriggerDayOfWeek:</b> The preferred day of the week to trigger the schedule. </li><li><b>preferredTriggerHour:</b> The preferred two-digit hour of the day to trigger the schedule. Format: UTC <code>hhZ</code></li><ul>
+     * Sets the property property value. Properties supported by the template. Properties can include the following: <ul><li><strong>scheduleStartDate:</strong> The timestamp that the report generation (subscription) begins. After this timestamp, the schedule status becomes active until either the scheduleEndDate occurs or the scheduleTemplate becomes inactive.<br /><strong>Format</strong>: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><strong>scheduleEndDate:</strong> The timestamp that the report generation (subscription) ends. After this date, the schedule status becomes INACTIVE.<br /><strong>Format</strong>: UTC <code>yyyy-MM-dd<strong>T</strong>HH<strong>Z</strong></code></li><li><strong>schemaVersion:</strong> The schema version of the schedule templates feedType. This field is required if the feedType has a schema version.</li><li><strong>preferredTriggerDayOfMonth:</strong> The preferred day of the month to trigger the schedule. </li><li><strong>preferredTriggerDayOfWeek:</strong> The preferred day of the week to trigger the schedule. </li><li><strong>preferredTriggerHour:</strong> The preferred two-digit hour of the day to trigger the schedule.<br /><strong>Format</strong>: UTC <code>hhZ</code></li></ul>
      * @param string|null $value Value to set for the property property.
     */
     public function setProperty(?string $value): void {
@@ -143,10 +143,10 @@ class SupportedConfiguration implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the usage property value. Whether the specified property is REQUIRED or OPTIONAL. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:ConfigurationsUsageEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the usage property.
+     * Sets the usage property value. Whether the specified property is REQUIRED or OPTIONAL.
+     * @param ConfigurationsUsageEnum|null $value Value to set for the usage property.
     */
-    public function setUsage(?string $value): void {
+    public function setUsage(?ConfigurationsUsageEnum $value): void {
         $this->usage = $value;
     }
 

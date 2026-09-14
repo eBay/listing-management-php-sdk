@@ -37,7 +37,7 @@ class Compatibility implements AdditionalDataHolder, Parsable
     private ?array $compatibleProducts = null;
     
     /**
-     * @var string|null $sku The seller-defined SKU value of the inventory item that will be associated with the compatible vehicles.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable to the <strong>createOrReplaceProductCompatibility</strong> method, as the SKU value for the inventory item is passed in as part of the call URI and not in the request payload. It is always returned with the <a href="/api-docs/sell/inventory/resources/inventory_item/product_compatibility/methods/getProductCompatibility" target="_blank ">getProductCompatibility</a> method.</span>
+     * @var string|null $sku The seller-defined SKU value of the inventory item that will be associated with the compatible vehicles.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable to the <strong>createOrReplaceProductCompatibility</strong> method, as the SKU value for the inventory item is passed in as part of the call URI and not in the request payload. It is always returned with the <a href="/develop/api/sell/inventory_api#sell-inventory_api-product_compatibility-getproductcompatibility" target="_blank ">getProductCompatibility</a> method.</span>
     */
     private ?string $sku = null;
     
@@ -86,7 +86,7 @@ class Compatibility implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sku property value. The seller-defined SKU value of the inventory item that will be associated with the compatible vehicles.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable to the <strong>createOrReplaceProductCompatibility</strong> method, as the SKU value for the inventory item is passed in as part of the call URI and not in the request payload. It is always returned with the <a href="/api-docs/sell/inventory/resources/inventory_item/product_compatibility/methods/getProductCompatibility" target="_blank ">getProductCompatibility</a> method.</span>
+     * Gets the sku property value. The seller-defined SKU value of the inventory item that will be associated with the compatible vehicles.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable to the <strong>createOrReplaceProductCompatibility</strong> method, as the SKU value for the inventory item is passed in as part of the call URI and not in the request payload. It is always returned with the <a href="/develop/api/sell/inventory_api#sell-inventory_api-product_compatibility-getproductcompatibility" target="_blank ">getProductCompatibility</a> method.</span>
      * @return string|null
     */
     public function getSku(): ?string {
@@ -120,7 +120,7 @@ class Compatibility implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sku property value. The seller-defined SKU value of the inventory item that will be associated with the compatible vehicles.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable to the <strong>createOrReplaceProductCompatibility</strong> method, as the SKU value for the inventory item is passed in as part of the call URI and not in the request payload. It is always returned with the <a href="/api-docs/sell/inventory/resources/inventory_item/product_compatibility/methods/getProductCompatibility" target="_blank ">getProductCompatibility</a> method.</span>
+     * Sets the sku property value. The seller-defined SKU value of the inventory item that will be associated with the compatible vehicles.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable to the <strong>createOrReplaceProductCompatibility</strong> method, as the SKU value for the inventory item is passed in as part of the call URI and not in the request payload. It is always returned with the <a href="/develop/api/sell/inventory_api#sell-inventory_api-product_compatibility-getproductcompatibility" target="_blank ">getProductCompatibility</a> method.</span>
      * @param string|null $value Value to set for the sku property.
     */
     public function setSku(?string $value): void {

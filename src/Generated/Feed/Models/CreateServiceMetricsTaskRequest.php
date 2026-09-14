@@ -37,12 +37,12 @@ class CreateServiceMetricsTaskRequest implements AdditionalDataHolder, Parsable
     private ?string $feedType = null;
     
     /**
-     * @var CustomerServiceMetricsFilterCriteria|null $filterCriteria A complex data type that filters data for report creation. See <strong>CustomerServiceMetricsFilterCriteria</strong> for fields and descriptions.
+     * @var CustomerServiceMetricsFilterCriteria|null $filterCriteria This container is used to customize and set criteria for the Customer Service Metric report that will be associated with the task.
     */
     private ?CustomerServiceMetricsFilterCriteria $filterCriteria = null;
     
     /**
-     * @var string|null $schemaVersion The version number of the customer service metric.<br><br><span class="tablenote"><b>Note:</b> This field <b>must</b> have a value of <code>1.0</code>.</span>
+     * @var string|null $schemaVersion The version number of the customer service metric.<br><br><span class="tablenote"><strong>Note:</strong> This field <strong>must</strong> have a value of <code>1.0</code>.</span>
     */
     private ?string $schemaVersion = null;
     
@@ -92,7 +92,7 @@ class CreateServiceMetricsTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the filterCriteria property value. A complex data type that filters data for report creation. See <strong>CustomerServiceMetricsFilterCriteria</strong> for fields and descriptions.
+     * Gets the filterCriteria property value. This container is used to customize and set criteria for the Customer Service Metric report that will be associated with the task.
      * @return CustomerServiceMetricsFilterCriteria|null
     */
     public function getFilterCriteria(): ?CustomerServiceMetricsFilterCriteria {
@@ -100,7 +100,7 @@ class CreateServiceMetricsTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the schemaVersion property value. The version number of the customer service metric.<br><br><span class="tablenote"><b>Note:</b> This field <b>must</b> have a value of <code>1.0</code>.</span>
+     * Gets the schemaVersion property value. The version number of the customer service metric.<br><br><span class="tablenote"><strong>Note:</strong> This field <strong>must</strong> have a value of <code>1.0</code>.</span>
      * @return string|null
     */
     public function getSchemaVersion(): ?string {
@@ -135,7 +135,7 @@ class CreateServiceMetricsTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the filterCriteria property value. A complex data type that filters data for report creation. See <strong>CustomerServiceMetricsFilterCriteria</strong> for fields and descriptions.
+     * Sets the filterCriteria property value. This container is used to customize and set criteria for the Customer Service Metric report that will be associated with the task.
      * @param CustomerServiceMetricsFilterCriteria|null $value Value to set for the filterCriteria property.
     */
     public function setFilterCriteria(?CustomerServiceMetricsFilterCriteria $value): void {
@@ -143,7 +143,7 @@ class CreateServiceMetricsTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the schemaVersion property value. The version number of the customer service metric.<br><br><span class="tablenote"><b>Note:</b> This field <b>must</b> have a value of <code>1.0</code>.</span>
+     * Sets the schemaVersion property value. The version number of the customer service metric.<br><br><span class="tablenote"><strong>Note:</strong> This field <strong>must</strong> have a value of <code>1.0</code>.</span>
      * @param string|null $value Value to set for the schemaVersion property.
     */
     public function setSchemaVersion(?string $value): void {

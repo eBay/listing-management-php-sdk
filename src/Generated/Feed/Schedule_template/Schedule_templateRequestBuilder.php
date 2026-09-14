@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Feed\Schedule_template;
 
+use EBay\ListingManagement\Generated\Feed\Models\Error;
 use EBay\ListingManagement\Generated\Feed\Models\ScheduleTemplateCollection;
 use EBay\ListingManagement\Generated\Feed\Schedule_template\Item\WithSchedule_template_ItemRequestBuilder;
 use Exception;
@@ -32,7 +33,7 @@ class Schedule_templateRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/ListingManagement/Generated/Feed.schedule_template.item collection
-     * @param string $schedule_template_id This path parameter is the unique identifier of the schedule template being retrieved.<br><br>Use the <a href="/api-docs/sell/feed/resources/schedule/methods/getScheduleTemplates" target="_blank ">getScheduleTemplates</a> method to retrieve schedule template IDs.<br><br><span class="tablenote"><b>Note:</b> Template schedules are currently only available for <code>LMS_ORDER_REPORT</code>.</span>
+     * @param string $schedule_template_id This path parameter is the unique identifier of the schedule template being retrieved.<br><br>Use the <a href="/develop/api/sell/feed_api#sell-feed_api-schedule-getscheduletemplates" target="_blank">getScheduleTemplates</a> method to retrieve schedule template IDs.<br><br><span class="tablenote"><strong>Note:</strong> Template schedules are currently only available for <code>LMS_ORDER_REPORT</code>.</span>
      * @return WithSchedule_template_ItemRequestBuilder
     */
     public function bySchedule_template_id(string $schedule_template_id): WithSchedule_template_ItemRequestBuilder {
@@ -63,7 +64,13 @@ class Schedule_templateRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Schedule_templateRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [ScheduleTemplateCollection::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [ScheduleTemplateCollection::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

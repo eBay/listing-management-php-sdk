@@ -32,9 +32,9 @@ class OperatingHours implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $dayOfWeekEnum A <strong>dayOfWeekEnum</strong> value is required for each day of the week that the store location has regular operating hours. <br><br>This field is returned if operating hours are defined for the store location. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/api:DayOfWeekEnum'>eBay API documentation</a>
+     * @var DayOfWeekEnum|null $dayOfWeekEnum A <strong>dayOfWeekEnum</strong> value is required for each day of the week that the store location has regular operating hours. <br><br>This field is returned if operating hours are defined for the store location.
     */
-    private ?string $dayOfWeekEnum = null;
+    private ?DayOfWeekEnum $dayOfWeekEnum = null;
     
     /**
      * @var array<Interval>|null $intervals This container is used to define the opening and closing times of a store location's working day (defined in the <strong>dayOfWeekEnum</strong> field). An <strong>intervals</strong> container is needed for each day of the week that the store location is open. If a store location closes for lunch (or any other period during the day) and then reopens, multiple <strong>open</strong> and <strong>close</strong> pairs are needed <br><br>This container is returned if operating hours are defined for the store location.
@@ -66,10 +66,10 @@ class OperatingHours implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dayOfWeekEnum property value. A <strong>dayOfWeekEnum</strong> value is required for each day of the week that the store location has regular operating hours. <br><br>This field is returned if operating hours are defined for the store location. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/api:DayOfWeekEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the dayOfWeekEnum property value. A <strong>dayOfWeekEnum</strong> value is required for each day of the week that the store location has regular operating hours. <br><br>This field is returned if operating hours are defined for the store location.
+     * @return DayOfWeekEnum|null
     */
-    public function getDayOfWeekEnum(): ?string {
+    public function getDayOfWeekEnum(): ?DayOfWeekEnum {
         return $this->dayOfWeekEnum;
     }
 
@@ -80,7 +80,7 @@ class OperatingHours implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'dayOfWeekEnum' => fn(ParseNode $n) => $o->setDayOfWeekEnum($n->getStringValue()),
+            'dayOfWeekEnum' => fn(ParseNode $n) => $o->setDayOfWeekEnum($n->getEnumValue(DayOfWeekEnum::class)),
             'intervals' => fn(ParseNode $n) => $o->setIntervals($n->getCollectionOfObjectValues([Interval::class, 'createFromDiscriminatorValue'])),
         ];
     }
@@ -98,7 +98,7 @@ class OperatingHours implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('dayOfWeekEnum', $this->getDayOfWeekEnum());
+        $writer->writeEnumValue('dayOfWeekEnum', $this->getDayOfWeekEnum());
         $writer->writeCollectionOfObjectValues('intervals', $this->getIntervals());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class OperatingHours implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dayOfWeekEnum property value. A <strong>dayOfWeekEnum</strong> value is required for each day of the week that the store location has regular operating hours. <br><br>This field is returned if operating hours are defined for the store location. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/api:DayOfWeekEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the dayOfWeekEnum property.
+     * Sets the dayOfWeekEnum property value. A <strong>dayOfWeekEnum</strong> value is required for each day of the week that the store location has regular operating hours. <br><br>This field is returned if operating hours are defined for the store location.
+     * @param DayOfWeekEnum|null $value Value to set for the dayOfWeekEnum property.
     */
-    public function setDayOfWeekEnum(?string $value): void {
+    public function setDayOfWeekEnum(?DayOfWeekEnum $value): void {
         $this->dayOfWeekEnum = $value;
     }
 

@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Feed\Schedule_template\Item;
 
+use EBay\ListingManagement\Generated\Feed\Models\Error;
 use EBay\ListingManagement\Generated\Feed\Models\ScheduleTemplateResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,13 @@ class WithSchedule_template_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?WithSchedule_template_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [ScheduleTemplateResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [ScheduleTemplateResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

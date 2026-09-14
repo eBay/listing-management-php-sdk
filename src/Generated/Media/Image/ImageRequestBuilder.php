@@ -43,7 +43,7 @@ class ImageRequestBuilder extends BaseRequestBuilder
     
     /**
      * Gets an item from the EBay/ListingManagement/Generated/Media.image.item collection
-     * @param string $image_id This path parameter is the unique identifier of a created image. Use the value returned in the location header of the method used to create the image (<b>createImageFromFile</b> or <b>createImageFromUrl</b>, as applicable).
+     * @param string $image_id This path parameter is the unique identifier of a created image. Use the value returned in the location header of the method used to create the image (<strong>createImageFromFile</strong> or <strong>createImageFromUrl</strong>, as applicable).
      * @return WithImage_ItemRequestBuilder
     */
     public function byImage_id(string $image_id): WithImage_ItemRequestBuilder {

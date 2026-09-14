@@ -32,7 +32,7 @@ class ShippingCostOverride implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $additionalShippingCost This type is used to express a dollar value and the applicable currency.
+     * @var Amount|null $additionalShippingCost The dollar value passed into this field will override the additional shipping cost that is currently set for the applicable shipping service option. The "Additional shipping cost" is the cost to ship each additional identical product to the buyer using the corresponding shipping service. The shipping service option in the fulfillment policy to override is controlled by the <strong>shippingServiceType</strong> and <strong>priority</strong> values.<br><br>If using an <strong>updateOffer</strong> call, and this field is defined for the offer being updated, this field must be supplied again, even if its value is not changing.<br><br>This field is returned in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer" target="_blank">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers" target="_blank">getOffers</a> calls if defined.
     */
     private ?Amount $additionalShippingCost = null;
     
@@ -42,17 +42,17 @@ class ShippingCostOverride implements AdditionalDataHolder, Parsable
     private ?int $priority = null;
     
     /**
-     * @var Amount|null $shippingCost This type is used to express a dollar value and the applicable currency.
+     * @var Amount|null $shippingCost The dollar value passed into this field will override the shipping cost that is currently set for the applicable shipping service option. This value will be the cost to ship one item to the buyer using the corresponding shipping service.  The shipping service option in the fulfillment policy to override is controlled by the <strong>shippingServiceType</strong> and <strong>priority</strong> values.<br><br>If using an <strong>updateOffer</strong> call, and this field is defined for the offer being updated, this field must be supplied again, even if its value is not changing.<br><br>This field is returned in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer" target="_blank">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers" target="_blank">getOffers</a> calls if defined.
     */
     private ?Amount $shippingCost = null;
     
     /**
-     * @var string|null $shippingServiceType This enumerated value indicates whether the shipping service specified in the <strong>priority</strong> field is a domestic or an international shipping service option. To override the shipping costs for a specific domestic shipping service in the fulfillment listing policy, this field should be set to <code>DOMESTIC</code>, and to override the shipping costs for each international shipping service, this field should be set to <code>INTERNATIONAL</code>. This value, along with <strong>priority</strong> value, sets which domestic or international shipping service option in the fulfillment policy that will be modified with updated shipping costs. Specifically, the <strong>shippingCostOverrides.shippingServiceType</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.optionType</strong> value in a fulfillment listing policy, and the <strong>shippingCostOverrides.priority</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.shippingServices.sortOrderId</strong> value in a fulfillment listing policy.<br><br>This field is always required when overriding the shipping costs of a shipping service option, and will be always be returned for each shipping service option whose costs are being overridden. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:ShippingServiceTypeEnum'>eBay API documentation</a>
+     * @var ShippingServiceTypeEnum|null $shippingServiceType This enumerated value indicates whether the shipping service specified in the <strong>priority</strong> field is a domestic or an international shipping service option. To override the shipping costs for a specific domestic shipping service in the fulfillment listing policy, this field should be set to <code>DOMESTIC</code>, and to override the shipping costs for each international shipping service, this field should be set to <code>INTERNATIONAL</code>. This value, along with <strong>priority</strong> value, sets which domestic or international shipping service option in the fulfillment policy that will be modified with updated shipping costs. Specifically, the <strong>shippingCostOverrides.shippingServiceType</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.optionType</strong> value in a fulfillment listing policy, and the <strong>shippingCostOverrides.priority</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.shippingServices.sortOrderId</strong> value in a fulfillment listing policy.<br><br>This field is always required when overriding the shipping costs of a shipping service option, and will be always be returned for each shipping service option whose costs are being overridden.
     */
-    private ?string $shippingServiceType = null;
+    private ?ShippingServiceTypeEnum $shippingServiceType = null;
     
     /**
-     * @var Amount|null $surcharge This type is used to express a dollar value and the applicable currency.
+     * @var Amount|null $surcharge <span class="tablenote"> <strong>Note:</strong> DO NOT USE THIS FIELD. Shipping surcharges for shipping service options can no longer be set with fulfillment business policies. To set a shipping surcharge for a shipping service option, only the <b>Shipping rate tables</b> tool in My eBay can be used. </span><br>The dollar value passed into this field will override the shipping surcharge that is currently set for the applicable shipping service option. The shipping service option in the fulfillment policy to override is controlled by the <strong>shippingServiceType</strong> and <strong>priority</strong> values.<br><br>If using an <strong>updateOffer</strong> call, and this field is defined for the offer being updated, this field must be supplied again, even if its value is not changing.<br><br>This field is returned in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer" target="_blank">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers" target="_blank">getOffers</a> calls if defined.
     */
     private ?Amount $surcharge = null;
     
@@ -81,7 +81,7 @@ class ShippingCostOverride implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the additionalShippingCost property value. This type is used to express a dollar value and the applicable currency.
+     * Gets the additionalShippingCost property value. The dollar value passed into this field will override the additional shipping cost that is currently set for the applicable shipping service option. The "Additional shipping cost" is the cost to ship each additional identical product to the buyer using the corresponding shipping service. The shipping service option in the fulfillment policy to override is controlled by the <strong>shippingServiceType</strong> and <strong>priority</strong> values.<br><br>If using an <strong>updateOffer</strong> call, and this field is defined for the offer being updated, this field must be supplied again, even if its value is not changing.<br><br>This field is returned in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer" target="_blank">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers" target="_blank">getOffers</a> calls if defined.
      * @return Amount|null
     */
     public function getAdditionalShippingCost(): ?Amount {
@@ -98,7 +98,7 @@ class ShippingCostOverride implements AdditionalDataHolder, Parsable
             'additionalShippingCost' => fn(ParseNode $n) => $o->setAdditionalShippingCost($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'priority' => fn(ParseNode $n) => $o->setPriority($n->getIntegerValue()),
             'shippingCost' => fn(ParseNode $n) => $o->setShippingCost($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'shippingServiceType' => fn(ParseNode $n) => $o->setShippingServiceType($n->getStringValue()),
+            'shippingServiceType' => fn(ParseNode $n) => $o->setShippingServiceType($n->getEnumValue(ShippingServiceTypeEnum::class)),
             'surcharge' => fn(ParseNode $n) => $o->setSurcharge($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
         ];
     }
@@ -112,7 +112,7 @@ class ShippingCostOverride implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingCost property value. This type is used to express a dollar value and the applicable currency.
+     * Gets the shippingCost property value. The dollar value passed into this field will override the shipping cost that is currently set for the applicable shipping service option. This value will be the cost to ship one item to the buyer using the corresponding shipping service.  The shipping service option in the fulfillment policy to override is controlled by the <strong>shippingServiceType</strong> and <strong>priority</strong> values.<br><br>If using an <strong>updateOffer</strong> call, and this field is defined for the offer being updated, this field must be supplied again, even if its value is not changing.<br><br>This field is returned in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer" target="_blank">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers" target="_blank">getOffers</a> calls if defined.
      * @return Amount|null
     */
     public function getShippingCost(): ?Amount {
@@ -120,15 +120,15 @@ class ShippingCostOverride implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingServiceType property value. This enumerated value indicates whether the shipping service specified in the <strong>priority</strong> field is a domestic or an international shipping service option. To override the shipping costs for a specific domestic shipping service in the fulfillment listing policy, this field should be set to <code>DOMESTIC</code>, and to override the shipping costs for each international shipping service, this field should be set to <code>INTERNATIONAL</code>. This value, along with <strong>priority</strong> value, sets which domestic or international shipping service option in the fulfillment policy that will be modified with updated shipping costs. Specifically, the <strong>shippingCostOverrides.shippingServiceType</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.optionType</strong> value in a fulfillment listing policy, and the <strong>shippingCostOverrides.priority</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.shippingServices.sortOrderId</strong> value in a fulfillment listing policy.<br><br>This field is always required when overriding the shipping costs of a shipping service option, and will be always be returned for each shipping service option whose costs are being overridden. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:ShippingServiceTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the shippingServiceType property value. This enumerated value indicates whether the shipping service specified in the <strong>priority</strong> field is a domestic or an international shipping service option. To override the shipping costs for a specific domestic shipping service in the fulfillment listing policy, this field should be set to <code>DOMESTIC</code>, and to override the shipping costs for each international shipping service, this field should be set to <code>INTERNATIONAL</code>. This value, along with <strong>priority</strong> value, sets which domestic or international shipping service option in the fulfillment policy that will be modified with updated shipping costs. Specifically, the <strong>shippingCostOverrides.shippingServiceType</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.optionType</strong> value in a fulfillment listing policy, and the <strong>shippingCostOverrides.priority</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.shippingServices.sortOrderId</strong> value in a fulfillment listing policy.<br><br>This field is always required when overriding the shipping costs of a shipping service option, and will be always be returned for each shipping service option whose costs are being overridden.
+     * @return ShippingServiceTypeEnum|null
     */
-    public function getShippingServiceType(): ?string {
+    public function getShippingServiceType(): ?ShippingServiceTypeEnum {
         return $this->shippingServiceType;
     }
 
     /**
-     * Gets the surcharge property value. This type is used to express a dollar value and the applicable currency.
+     * Gets the surcharge property value. <span class="tablenote"> <strong>Note:</strong> DO NOT USE THIS FIELD. Shipping surcharges for shipping service options can no longer be set with fulfillment business policies. To set a shipping surcharge for a shipping service option, only the <b>Shipping rate tables</b> tool in My eBay can be used. </span><br>The dollar value passed into this field will override the shipping surcharge that is currently set for the applicable shipping service option. The shipping service option in the fulfillment policy to override is controlled by the <strong>shippingServiceType</strong> and <strong>priority</strong> values.<br><br>If using an <strong>updateOffer</strong> call, and this field is defined for the offer being updated, this field must be supplied again, even if its value is not changing.<br><br>This field is returned in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer" target="_blank">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers" target="_blank">getOffers</a> calls if defined.
      * @return Amount|null
     */
     public function getSurcharge(): ?Amount {
@@ -143,7 +143,7 @@ class ShippingCostOverride implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('additionalShippingCost', $this->getAdditionalShippingCost());
         $writer->writeIntegerValue('priority', $this->getPriority());
         $writer->writeObjectValue('shippingCost', $this->getShippingCost());
-        $writer->writeStringValue('shippingServiceType', $this->getShippingServiceType());
+        $writer->writeEnumValue('shippingServiceType', $this->getShippingServiceType());
         $writer->writeObjectValue('surcharge', $this->getSurcharge());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -157,7 +157,7 @@ class ShippingCostOverride implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the additionalShippingCost property value. This type is used to express a dollar value and the applicable currency.
+     * Sets the additionalShippingCost property value. The dollar value passed into this field will override the additional shipping cost that is currently set for the applicable shipping service option. The "Additional shipping cost" is the cost to ship each additional identical product to the buyer using the corresponding shipping service. The shipping service option in the fulfillment policy to override is controlled by the <strong>shippingServiceType</strong> and <strong>priority</strong> values.<br><br>If using an <strong>updateOffer</strong> call, and this field is defined for the offer being updated, this field must be supplied again, even if its value is not changing.<br><br>This field is returned in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer" target="_blank">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers" target="_blank">getOffers</a> calls if defined.
      * @param Amount|null $value Value to set for the additionalShippingCost property.
     */
     public function setAdditionalShippingCost(?Amount $value): void {
@@ -173,7 +173,7 @@ class ShippingCostOverride implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingCost property value. This type is used to express a dollar value and the applicable currency.
+     * Sets the shippingCost property value. The dollar value passed into this field will override the shipping cost that is currently set for the applicable shipping service option. This value will be the cost to ship one item to the buyer using the corresponding shipping service.  The shipping service option in the fulfillment policy to override is controlled by the <strong>shippingServiceType</strong> and <strong>priority</strong> values.<br><br>If using an <strong>updateOffer</strong> call, and this field is defined for the offer being updated, this field must be supplied again, even if its value is not changing.<br><br>This field is returned in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer" target="_blank">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers" target="_blank">getOffers</a> calls if defined.
      * @param Amount|null $value Value to set for the shippingCost property.
     */
     public function setShippingCost(?Amount $value): void {
@@ -181,15 +181,15 @@ class ShippingCostOverride implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingServiceType property value. This enumerated value indicates whether the shipping service specified in the <strong>priority</strong> field is a domestic or an international shipping service option. To override the shipping costs for a specific domestic shipping service in the fulfillment listing policy, this field should be set to <code>DOMESTIC</code>, and to override the shipping costs for each international shipping service, this field should be set to <code>INTERNATIONAL</code>. This value, along with <strong>priority</strong> value, sets which domestic or international shipping service option in the fulfillment policy that will be modified with updated shipping costs. Specifically, the <strong>shippingCostOverrides.shippingServiceType</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.optionType</strong> value in a fulfillment listing policy, and the <strong>shippingCostOverrides.priority</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.shippingServices.sortOrderId</strong> value in a fulfillment listing policy.<br><br>This field is always required when overriding the shipping costs of a shipping service option, and will be always be returned for each shipping service option whose costs are being overridden. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:ShippingServiceTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the shippingServiceType property.
+     * Sets the shippingServiceType property value. This enumerated value indicates whether the shipping service specified in the <strong>priority</strong> field is a domestic or an international shipping service option. To override the shipping costs for a specific domestic shipping service in the fulfillment listing policy, this field should be set to <code>DOMESTIC</code>, and to override the shipping costs for each international shipping service, this field should be set to <code>INTERNATIONAL</code>. This value, along with <strong>priority</strong> value, sets which domestic or international shipping service option in the fulfillment policy that will be modified with updated shipping costs. Specifically, the <strong>shippingCostOverrides.shippingServiceType</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.optionType</strong> value in a fulfillment listing policy, and the <strong>shippingCostOverrides.priority</strong> value in a <strong>createOffer</strong> or <strong>updateOffer</strong> call must match the <strong>shippingOptions.shippingServices.sortOrderId</strong> value in a fulfillment listing policy.<br><br>This field is always required when overriding the shipping costs of a shipping service option, and will be always be returned for each shipping service option whose costs are being overridden.
+     * @param ShippingServiceTypeEnum|null $value Value to set for the shippingServiceType property.
     */
-    public function setShippingServiceType(?string $value): void {
+    public function setShippingServiceType(?ShippingServiceTypeEnum $value): void {
         $this->shippingServiceType = $value;
     }
 
     /**
-     * Sets the surcharge property value. This type is used to express a dollar value and the applicable currency.
+     * Sets the surcharge property value. <span class="tablenote"> <strong>Note:</strong> DO NOT USE THIS FIELD. Shipping surcharges for shipping service options can no longer be set with fulfillment business policies. To set a shipping surcharge for a shipping service option, only the <b>Shipping rate tables</b> tool in My eBay can be used. </span><br>The dollar value passed into this field will override the shipping surcharge that is currently set for the applicable shipping service option. The shipping service option in the fulfillment policy to override is controlled by the <strong>shippingServiceType</strong> and <strong>priority</strong> values.<br><br>If using an <strong>updateOffer</strong> call, and this field is defined for the offer being updated, this field must be supplied again, even if its value is not changing.<br><br>This field is returned in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer" target="_blank">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers" target="_blank">getOffers</a> calls if defined.
      * @param Amount|null $value Value to set for the surcharge property.
     */
     public function setSurcharge(?Amount $value): void {

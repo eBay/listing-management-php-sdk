@@ -30,14 +30,6 @@ use EBay\ListingManagement\Generated\Stores\Models\GetStoreTaskResponseType;
 use EBay\ListingManagement\Generated\Stores\Models\GetStoreTasksResponseType;
 use EBay\ListingManagement\Generated\Stores\Models\MoveStoreCategoryRequestType;
 use EBay\ListingManagement\Generated\Stores\Models\RenameStoreCategoryRequestType;
-use EBay\ListingManagement\Generated\Stores\Store\Categories\CategoriesRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Stores\Store\Categories\CategoriesRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Stores\Store\Categories\Item\WithCategory_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\ListingManagement\Generated\Stores\Store\Categories\Item\WithCategory_ItemRequestBuilderPutRequestConfiguration;
-use EBay\ListingManagement\Generated\Stores\Store\Categories\Move_category\Move_categoryRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Stores\Store\StoreRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Stores\Store\Tasks\Item\WithTask_ItemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Stores\Store\Tasks\TasksRequestBuilderGetRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -63,7 +55,7 @@ final class StoresClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->store()->categories()->get(
-                new CategoriesRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Stores\Store\Categories\CategoriesRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -74,7 +66,7 @@ final class StoresClient
         $this->call($accessToken, fn($api) =>
             $api->store()->categories()->post(
                 $body,
-                new CategoriesRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Stores\Store\Categories\CategoriesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -90,7 +82,7 @@ final class StoresClient
         $this->call($accessToken, fn($api) =>
             $api->store()->categories()->byCategory_id($categoryId)->put(
                 $body,
-                new WithCategory_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Stores\Store\Categories\Item\WithCategory_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -106,7 +98,7 @@ final class StoresClient
         $this->call($accessToken, fn($api) =>
             $api->store()->categories()->byCategory_id($categoryId)->delete(
                 $body,
-                new WithCategory_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Stores\Store\Categories\Item\WithCategory_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -116,7 +108,7 @@ final class StoresClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->store()->get(
-                new StoreRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Stores\Store\StoreRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -126,7 +118,7 @@ final class StoresClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->store()->tasks()->byTask_id($taskId)->get(
-                new WithTask_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Stores\Store\Tasks\Item\WithTask_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -136,7 +128,7 @@ final class StoresClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->store()->tasks()->get(
-                new TasksRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Stores\Store\Tasks\TasksRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -147,7 +139,7 @@ final class StoresClient
         $this->call($accessToken, fn($api) =>
             $api->store()->categories()->move_category()->post(
                 $body,
-                new Move_categoryRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Stores\Store\Categories\Move_category\Move_categoryRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

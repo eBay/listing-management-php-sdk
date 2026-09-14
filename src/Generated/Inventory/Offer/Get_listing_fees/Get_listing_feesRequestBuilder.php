@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Inventory\Offer\Get_listing_fees;
 
+use EBay\ListingManagement\Generated\Inventory\Models\Error;
 use EBay\ListingManagement\Generated\Inventory\Models\FeesSummaryResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\OfferKeysWithId;
 use Exception;
@@ -45,20 +46,25 @@ class Get_listing_feesRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This call is used to retrieve the expected listing fees for up to 250 unpublished offers. An array of one or more <strong>offerId</strong> values are passed in under the <strong>offers</strong> container.<br><br>In the response payload, all listing fees are grouped by eBay marketplace, and listing fees per offer are not shown. A <strong>fees</strong> container will be returned for each eBay marketplace where the seller is selling the products associated with the specified offers. <br><br>Errors will occur if the seller passes in <strong>offerIds</strong> that represent published offers, so this call should be made before the seller publishes offers with the <strong>publishOffer</strong>.
-     * @param OfferKeysWithId $body This type is used by the base request payload of the <strong>getListingFees</strong> call.
+     * This call is used to retrieve the expected listing fees for up to 250 unpublished offers. An array of one or more <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.offerkeywithid.offerid" target="_blank">>offerId</a> values are passed in under the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.offerkeyswithid.offers" target="_blank">offers</a> container.<br><br>In the response payload, all listing fees are grouped by eBay marketplace, and listing fees per offer are not shown. A <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.feesummary.fees" target="_blank">fees</a> container will be returned for each eBay marketplace where the seller is selling the products associated with the specified offers. <br><br>Errors will occur if the seller passes in <strong>offerIds</strong> that represent published offers, so this call should be made before the seller publishes offers with the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-publishoffer" target="_blank">publishOffer</a>.
+     * @param OfferKeysWithId $body List of offers that needs fee information
      * @param Get_listing_feesRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<FeesSummaryResponse|null>
      * @throws Exception
     */
     public function post(OfferKeysWithId $body, ?Get_listing_feesRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [FeesSummaryResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [FeesSummaryResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This call is used to retrieve the expected listing fees for up to 250 unpublished offers. An array of one or more <strong>offerId</strong> values are passed in under the <strong>offers</strong> container.<br><br>In the response payload, all listing fees are grouped by eBay marketplace, and listing fees per offer are not shown. A <strong>fees</strong> container will be returned for each eBay marketplace where the seller is selling the products associated with the specified offers. <br><br>Errors will occur if the seller passes in <strong>offerIds</strong> that represent published offers, so this call should be made before the seller publishes offers with the <strong>publishOffer</strong>.
-     * @param OfferKeysWithId $body This type is used by the base request payload of the <strong>getListingFees</strong> call.
+     * This call is used to retrieve the expected listing fees for up to 250 unpublished offers. An array of one or more <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.offerkeywithid.offerid" target="_blank">>offerId</a> values are passed in under the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.offerkeyswithid.offers" target="_blank">offers</a> container.<br><br>In the response payload, all listing fees are grouped by eBay marketplace, and listing fees per offer are not shown. A <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.feesummary.fees" target="_blank">fees</a> container will be returned for each eBay marketplace where the seller is selling the products associated with the specified offers. <br><br>Errors will occur if the seller passes in <strong>offerIds</strong> that represent published offers, so this call should be made before the seller publishes offers with the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-publishoffer" target="_blank">publishOffer</a>.
+     * @param OfferKeysWithId $body List of offers that needs fee information
      * @param Get_listing_feesRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

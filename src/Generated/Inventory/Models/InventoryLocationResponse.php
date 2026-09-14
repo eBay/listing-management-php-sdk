@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * This type is used by the base response of the <strong>getInventoryLocation</strong> and <strong>getInventoryLocations</strong> calls. These responses provide details about inventory location(s) defined for the merchant's account.
@@ -33,12 +32,12 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var FulfillmentCenterSpecifications|null $fulfillmentCenterSpecifications This type is used to provide shipping specification details, such as the weekly cut-off schedule for order handling and cut-off override(s), for a fulfillment center location. 
+     * @var FulfillmentCenterSpecifications|null $fulfillmentCenterSpecifications This container provides information about a fulfillment center's shipping specifications, such as the weekly cut-off time schedule for order handling and any cut-off time overrides.<br><br><span class="tablenote"><b>Note:</b> This field is only returned for fulfillment center locations.</span>
     */
     private ?FulfillmentCenterSpecifications $fulfillmentCenterSpecifications = null;
     
     /**
-     * @var Location|null $location A complex type that is used to provide the physical address of a location, and it geo-coordinates.
+     * @var Location|null $location This container provides location details of an inventory location. The <strong>address</strong> container will always be returned, but it will not always have a complete street address. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location. The <strong>geoCoordinates</strong> container will only be returned if the merchant provided geographical coordinates. The <strong>locationId</strong> field is always returned, but this value is only used internally by eBay.
     */
     private ?Location $location = null;
     
@@ -53,7 +52,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     private ?string $locationInstructions = null;
     
     /**
-     * @var array<string>|null $locationTypes This container defines the function of the inventory location. Typically, a location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.
+     * @var array<StoreTypeEnum>|null $locationTypes This container defines the function of the inventory location. Typically, a location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.
     */
     private ?array $locationTypes = null;
     
@@ -68,9 +67,9 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     private ?string $merchantLocationKey = null;
     
     /**
-     * @var string|null $merchantLocationStatus This field indicates whether the inventory location is enabled (inventory can be loaded to location) or disabled (inventory can not be loaded to location). The merchant can use the <strong>enableInventoryLocation</strong> call to enable a location in disabled status, or the <strong>disableInventoryLocation</strong> call to disable a location in enabled status. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/api:StatusEnum'>eBay API documentation</a>
+     * @var StatusEnum|null $merchantLocationStatus This field indicates whether the inventory location is enabled (inventory can be loaded to location) or disabled (inventory cannot be loaded to location). The merchant can use the <strong>enableInventoryLocation</strong> call to enable a location in disabled status, or the <strong>disableInventoryLocation</strong> call to disable a location in enabled status.
     */
-    private ?string $merchantLocationStatus = null;
+    private ?StatusEnum $merchantLocationStatus = null;
     
     /**
      * @var string|null $name The name of the inventory location. This name should be a human-friendly name as it will be displayed in In-Store Pickup and Click and Collect listings. For store inventory locations, this field is not required for the <strong>createInventoryLocation</strong> call, but a store inventory location must have a defined <strong>name</strong> value before an In-Store Pickup and Click and Collect enabled offer is published. So, if the seller omits this field in the <strong>createInventoryLocation</strong> call, it will have to be added later through a <strong>updateInventoryLocation</strong> call.
@@ -132,17 +131,10 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
             'location' => fn(ParseNode $n) => $o->setLocation($n->getObjectValue([Location::class, 'createFromDiscriminatorValue'])),
             'locationAdditionalInformation' => fn(ParseNode $n) => $o->setLocationAdditionalInformation($n->getStringValue()),
             'locationInstructions' => fn(ParseNode $n) => $o->setLocationInstructions($n->getStringValue()),
-            'locationTypes' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setLocationTypes($val);
-            },
+            'locationTypes' => fn(ParseNode $n) => $o->setLocationTypes($n->getCollectionOfEnumValues(StoreTypeEnum::class)),
             'locationWebUrl' => fn(ParseNode $n) => $o->setLocationWebUrl($n->getStringValue()),
             'merchantLocationKey' => fn(ParseNode $n) => $o->setMerchantLocationKey($n->getStringValue()),
-            'merchantLocationStatus' => fn(ParseNode $n) => $o->setMerchantLocationStatus($n->getStringValue()),
+            'merchantLocationStatus' => fn(ParseNode $n) => $o->setMerchantLocationStatus($n->getEnumValue(StatusEnum::class)),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
             'operatingHours' => fn(ParseNode $n) => $o->setOperatingHours($n->getCollectionOfObjectValues([OperatingHours::class, 'createFromDiscriminatorValue'])),
             'phone' => fn(ParseNode $n) => $o->setPhone($n->getStringValue()),
@@ -152,7 +144,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the fulfillmentCenterSpecifications property value. This type is used to provide shipping specification details, such as the weekly cut-off schedule for order handling and cut-off override(s), for a fulfillment center location. 
+     * Gets the fulfillmentCenterSpecifications property value. This container provides information about a fulfillment center's shipping specifications, such as the weekly cut-off time schedule for order handling and any cut-off time overrides.<br><br><span class="tablenote"><b>Note:</b> This field is only returned for fulfillment center locations.</span>
      * @return FulfillmentCenterSpecifications|null
     */
     public function getFulfillmentCenterSpecifications(): ?FulfillmentCenterSpecifications {
@@ -160,7 +152,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the location property value. A complex type that is used to provide the physical address of a location, and it geo-coordinates.
+     * Gets the location property value. This container provides location details of an inventory location. The <strong>address</strong> container will always be returned, but it will not always have a complete street address. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location. The <strong>geoCoordinates</strong> container will only be returned if the merchant provided geographical coordinates. The <strong>locationId</strong> field is always returned, but this value is only used internally by eBay.
      * @return Location|null
     */
     public function getLocation(): ?Location {
@@ -185,7 +177,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the locationTypes property value. This container defines the function of the inventory location. Typically, a location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.
-     * @return array<string>|null
+     * @return array<StoreTypeEnum>|null
     */
     public function getLocationTypes(): ?array {
         return $this->locationTypes;
@@ -208,10 +200,10 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the merchantLocationStatus property value. This field indicates whether the inventory location is enabled (inventory can be loaded to location) or disabled (inventory can not be loaded to location). The merchant can use the <strong>enableInventoryLocation</strong> call to enable a location in disabled status, or the <strong>disableInventoryLocation</strong> call to disable a location in enabled status. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/api:StatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the merchantLocationStatus property value. This field indicates whether the inventory location is enabled (inventory can be loaded to location) or disabled (inventory cannot be loaded to location). The merchant can use the <strong>enableInventoryLocation</strong> call to enable a location in disabled status, or the <strong>disableInventoryLocation</strong> call to disable a location in enabled status.
+     * @return StatusEnum|null
     */
-    public function getMerchantLocationStatus(): ?string {
+    public function getMerchantLocationStatus(): ?StatusEnum {
         return $this->merchantLocationStatus;
     }
 
@@ -264,10 +256,10 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('location', $this->getLocation());
         $writer->writeStringValue('locationAdditionalInformation', $this->getLocationAdditionalInformation());
         $writer->writeStringValue('locationInstructions', $this->getLocationInstructions());
-        $writer->writeCollectionOfPrimitiveValues('locationTypes', $this->getLocationTypes());
+        $writer->writeCollectionOfEnumValues('locationTypes', $this->getLocationTypes());
         $writer->writeStringValue('locationWebUrl', $this->getLocationWebUrl());
         $writer->writeStringValue('merchantLocationKey', $this->getMerchantLocationKey());
-        $writer->writeStringValue('merchantLocationStatus', $this->getMerchantLocationStatus());
+        $writer->writeEnumValue('merchantLocationStatus', $this->getMerchantLocationStatus());
         $writer->writeStringValue('name', $this->getName());
         $writer->writeCollectionOfObjectValues('operatingHours', $this->getOperatingHours());
         $writer->writeStringValue('phone', $this->getPhone());
@@ -285,7 +277,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the fulfillmentCenterSpecifications property value. This type is used to provide shipping specification details, such as the weekly cut-off schedule for order handling and cut-off override(s), for a fulfillment center location. 
+     * Sets the fulfillmentCenterSpecifications property value. This container provides information about a fulfillment center's shipping specifications, such as the weekly cut-off time schedule for order handling and any cut-off time overrides.<br><br><span class="tablenote"><b>Note:</b> This field is only returned for fulfillment center locations.</span>
      * @param FulfillmentCenterSpecifications|null $value Value to set for the fulfillmentCenterSpecifications property.
     */
     public function setFulfillmentCenterSpecifications(?FulfillmentCenterSpecifications $value): void {
@@ -293,7 +285,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the location property value. A complex type that is used to provide the physical address of a location, and it geo-coordinates.
+     * Sets the location property value. This container provides location details of an inventory location. The <strong>address</strong> container will always be returned, but it will not always have a complete street address. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location. The <strong>geoCoordinates</strong> container will only be returned if the merchant provided geographical coordinates. The <strong>locationId</strong> field is always returned, but this value is only used internally by eBay.
      * @param Location|null $value Value to set for the location property.
     */
     public function setLocation(?Location $value): void {
@@ -318,7 +310,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the locationTypes property value. This container defines the function of the inventory location. Typically, a location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.
-     * @param array<string>|null $value Value to set for the locationTypes property.
+     * @param array<StoreTypeEnum>|null $value Value to set for the locationTypes property.
     */
     public function setLocationTypes(?array $value): void {
         $this->locationTypes = $value;
@@ -341,10 +333,10 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the merchantLocationStatus property value. This field indicates whether the inventory location is enabled (inventory can be loaded to location) or disabled (inventory can not be loaded to location). The merchant can use the <strong>enableInventoryLocation</strong> call to enable a location in disabled status, or the <strong>disableInventoryLocation</strong> call to disable a location in enabled status. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/api:StatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the merchantLocationStatus property.
+     * Sets the merchantLocationStatus property value. This field indicates whether the inventory location is enabled (inventory can be loaded to location) or disabled (inventory cannot be loaded to location). The merchant can use the <strong>enableInventoryLocation</strong> call to enable a location in disabled status, or the <strong>disableInventoryLocation</strong> call to disable a location in enabled status.
+     * @param StatusEnum|null $value Value to set for the merchantLocationStatus property.
     */
-    public function setMerchantLocationStatus(?string $value): void {
+    public function setMerchantLocationStatus(?StatusEnum $value): void {
         $this->merchantLocationStatus = $value;
     }
 

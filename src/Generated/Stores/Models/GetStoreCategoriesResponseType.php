@@ -32,7 +32,7 @@ class GetStoreCategoriesResponseType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<StoreCategoryType>|null $storeCategories An array of top-level categories defined for the eBay store. A childrenCategories array is used for second and third-level categories, if defined for the store.
+     * @var array<StoreCategoryType>|null $storeCategories An array of top-level categories defined for the eBay store. A <strong>childrenCategories</strong> array is used for second and third-level categories, if defined for the store.
     */
     private ?array $storeCategories = null;
     
@@ -72,7 +72,7 @@ class GetStoreCategoriesResponseType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the storeCategories property value. An array of top-level categories defined for the eBay store. A childrenCategories array is used for second and third-level categories, if defined for the store.
+     * Gets the storeCategories property value. An array of top-level categories defined for the eBay store. A <strong>childrenCategories</strong> array is used for second and third-level categories, if defined for the store.
      * @return array<StoreCategoryType>|null
     */
     public function getStoreCategories(): ?array {
@@ -97,7 +97,7 @@ class GetStoreCategoriesResponseType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the storeCategories property value. An array of top-level categories defined for the eBay store. A childrenCategories array is used for second and third-level categories, if defined for the store.
+     * Sets the storeCategories property value. An array of top-level categories defined for the eBay store. A <strong>childrenCategories</strong> array is used for second and third-level categories, if defined for the store.
      * @param array<StoreCategoryType>|null $value Value to set for the storeCategories property.
     */
     public function setStoreCategories(?array $value): void {

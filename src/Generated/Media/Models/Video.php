@@ -20,10 +20,9 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * A response field that retrieves all the metadata for the video, including its <b>title</b>, <b>classification</b>, <b>size</b>, <b>description</b>, <b>status</b>, <b>status message</b> (if any), and <b>expiration date</b>.
+ * A response field that retrieves all the metadata for the video, including its <strong>title</strong>, <strong>classification</strong>, <strong>size</strong>, <strong>description</strong>, <strong>status</strong>, <strong>status message</strong> (if any), and <strong>expiration date</strong>.
 */
 class Video implements AdditionalDataHolder, Parsable 
 {
@@ -33,12 +32,12 @@ class Video implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<string>|null $classification The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>.
+     * @var array<Classification>|null $classification The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>. This array is always returned.
     */
     private ?array $classification = null;
     
     /**
-     * @var string|null $description The description of the video. The video description is an optional field that can be set using the <a href=" /api-docs/commerce/media/resources/video/methods/createVideo" target="_blank">createVideo</a> method.
+     * @var string|null $description The description of the video. The video description is an optional field that can be set using the <a href=" /develop/api/sell/media_api#sell-media_api-video-createvideo">createVideo</a> method.
     */
     private ?string $description = null;
     
@@ -48,37 +47,37 @@ class Video implements AdditionalDataHolder, Parsable
     private ?string $expirationDate = null;
     
     /**
-     * @var Moderation|null $moderation A container that provides video moderation information when calling the <strong>getVideo</strong> method.<br /><br />This container is returned if the specified video has been blocked by moderators.<br /><br /><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> See <a href="https://www.ebay.com/help/selling/listings/creating-managing-listings/add-video-to-listing?id=5272#section2" target="_blank">Video moderation and restrictions</a> in the eBay Seller Center for details about video moderation.</span>
+     * @var Moderation|null $moderation The video moderation information that is returned if a video is blocked by moderators.<br /><br /><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> See <a href="https://www.ebay.com/help/selling/listings/creating-managing-listings/add-video-to-listing?id=5272#section2" target="_blank">Video moderation and restrictions</a> in the eBay Seller Center for details about video moderation.</span><br /><br />If the video status is <code>BLOCKED</code>, ensure that the video complies with eBay's video formatting and content guidelines. Afterwards, begin the video creation and upload procedure anew using the <strong>createVideo</strong> and <strong>uploadVideo</strong> methods.
     */
     private ?Moderation $moderation = null;
     
     /**
-     * @var array<Play>|null $playLists The playlist created for the uploaded video, which provides the streaming video URLs to play the video. The supported streaming video protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming). The playlist will only be generated if a video is successfully uploaded with a status of <code>LIVE</code>.
+     * @var array<Play>|null $playLists The playlist created for the uploaded video, which provides the streaming video URLs to play the video. The supported streaming video protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming). The playlist will only be generated if a video is successfully uploaded with a status of <code>LIVE</code>.
     */
     private ?array $playLists = null;
     
     /**
-     * @var int|null $size The size, in bytes, of the video content.
+     * @var int|null $size The size, in bytes, of the video content. This field is always returned.
     */
     private ?int $size = null;
     
     /**
-     * @var string|null $status The status of the current video resource. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:VideoStatusEnum'>eBay API documentation</a>
+     * @var VideoStatusEnum|null $status The status of the current video resource.
     */
-    private ?string $status = null;
+    private ?VideoStatusEnum $status = null;
     
     /**
-     * @var string|null $statusMessage The <b>statusMessage</b> field contains additional information on the status. For example, information on why processing might have failed or if the video was blocked.
+     * @var string|null $statusMessage The <strong>statusMessage</strong> field contains additional information on the status. For example, information on why processing might have failed or if the video was blocked.
     */
     private ?string $statusMessage = null;
     
     /**
-     * @var Image|null $thumbnail A type that provides the location of the image.
+     * @var Image|null $thumbnail The URL of the thumbnail image of the video. The thumbnail image's URL must be an eBayPictureURL (EPS URL).
     */
     private ?Image $thumbnail = null;
     
     /**
-     * @var string|null $title The title of the video.
+     * @var string|null $title The title of the video. This field is always returned.
     */
     private ?string $title = null;
     
@@ -112,15 +111,15 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the classification property value. The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>.
-     * @return array<string>|null
+     * Gets the classification property value. The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>. This array is always returned.
+     * @return array<Classification>|null
     */
     public function getClassification(): ?array {
         return $this->classification;
     }
 
     /**
-     * Gets the description property value. The description of the video. The video description is an optional field that can be set using the <a href=" /api-docs/commerce/media/resources/video/methods/createVideo" target="_blank">createVideo</a> method.
+     * Gets the description property value. The description of the video. The video description is an optional field that can be set using the <a href=" /develop/api/sell/media_api#sell-media_api-video-createvideo">createVideo</a> method.
      * @return string|null
     */
     public function getDescription(): ?string {
@@ -142,20 +141,13 @@ class Video implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'classification' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setClassification($val);
-            },
+            'classification' => fn(ParseNode $n) => $o->setClassification($n->getCollectionOfEnumValues(Classification::class)),
             'description' => fn(ParseNode $n) => $o->setDescription($n->getStringValue()),
             'expirationDate' => fn(ParseNode $n) => $o->setExpirationDate($n->getStringValue()),
             'moderation' => fn(ParseNode $n) => $o->setModeration($n->getObjectValue([Moderation::class, 'createFromDiscriminatorValue'])),
             'playLists' => fn(ParseNode $n) => $o->setPlayLists($n->getCollectionOfObjectValues([Play::class, 'createFromDiscriminatorValue'])),
             'size' => fn(ParseNode $n) => $o->setSize($n->getIntegerValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(VideoStatusEnum::class)),
             'statusMessage' => fn(ParseNode $n) => $o->setStatusMessage($n->getStringValue()),
             'thumbnail' => fn(ParseNode $n) => $o->setThumbnail($n->getObjectValue([Image::class, 'createFromDiscriminatorValue'])),
             'title' => fn(ParseNode $n) => $o->setTitle($n->getStringValue()),
@@ -164,7 +156,7 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the moderation property value. A container that provides video moderation information when calling the <strong>getVideo</strong> method.<br /><br />This container is returned if the specified video has been blocked by moderators.<br /><br /><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> See <a href="https://www.ebay.com/help/selling/listings/creating-managing-listings/add-video-to-listing?id=5272#section2" target="_blank">Video moderation and restrictions</a> in the eBay Seller Center for details about video moderation.</span>
+     * Gets the moderation property value. The video moderation information that is returned if a video is blocked by moderators.<br /><br /><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> See <a href="https://www.ebay.com/help/selling/listings/creating-managing-listings/add-video-to-listing?id=5272#section2" target="_blank">Video moderation and restrictions</a> in the eBay Seller Center for details about video moderation.</span><br /><br />If the video status is <code>BLOCKED</code>, ensure that the video complies with eBay's video formatting and content guidelines. Afterwards, begin the video creation and upload procedure anew using the <strong>createVideo</strong> and <strong>uploadVideo</strong> methods.
      * @return Moderation|null
     */
     public function getModeration(): ?Moderation {
@@ -172,7 +164,7 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the playLists property value. The playlist created for the uploaded video, which provides the streaming video URLs to play the video. The supported streaming video protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming). The playlist will only be generated if a video is successfully uploaded with a status of <code>LIVE</code>.
+     * Gets the playLists property value. The playlist created for the uploaded video, which provides the streaming video URLs to play the video. The supported streaming video protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming). The playlist will only be generated if a video is successfully uploaded with a status of <code>LIVE</code>.
      * @return array<Play>|null
     */
     public function getPlayLists(): ?array {
@@ -180,7 +172,7 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the size property value. The size, in bytes, of the video content.
+     * Gets the size property value. The size, in bytes, of the video content. This field is always returned.
      * @return int|null
     */
     public function getSize(): ?int {
@@ -188,15 +180,15 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. The status of the current video resource. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:VideoStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. The status of the current video resource.
+     * @return VideoStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?VideoStatusEnum {
         return $this->status;
     }
 
     /**
-     * Gets the statusMessage property value. The <b>statusMessage</b> field contains additional information on the status. For example, information on why processing might have failed or if the video was blocked.
+     * Gets the statusMessage property value. The <strong>statusMessage</strong> field contains additional information on the status. For example, information on why processing might have failed or if the video was blocked.
      * @return string|null
     */
     public function getStatusMessage(): ?string {
@@ -204,7 +196,7 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the thumbnail property value. A type that provides the location of the image.
+     * Gets the thumbnail property value. The URL of the thumbnail image of the video. The thumbnail image's URL must be an eBayPictureURL (EPS URL).
      * @return Image|null
     */
     public function getThumbnail(): ?Image {
@@ -212,7 +204,7 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the title property value. The title of the video.
+     * Gets the title property value. The title of the video. This field is always returned.
      * @return string|null
     */
     public function getTitle(): ?string {
@@ -232,13 +224,13 @@ class Video implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeCollectionOfPrimitiveValues('classification', $this->getClassification());
+        $writer->writeCollectionOfEnumValues('classification', $this->getClassification());
         $writer->writeStringValue('description', $this->getDescription());
         $writer->writeStringValue('expirationDate', $this->getExpirationDate());
         $writer->writeObjectValue('moderation', $this->getModeration());
         $writer->writeCollectionOfObjectValues('playLists', $this->getPlayLists());
         $writer->writeIntegerValue('size', $this->getSize());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeStringValue('statusMessage', $this->getStatusMessage());
         $writer->writeObjectValue('thumbnail', $this->getThumbnail());
         $writer->writeStringValue('title', $this->getTitle());
@@ -255,15 +247,15 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the classification property value. The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>.
-     * @param array<string>|null $value Value to set for the classification property.
+     * Sets the classification property value. The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>. This array is always returned.
+     * @param array<Classification>|null $value Value to set for the classification property.
     */
     public function setClassification(?array $value): void {
         $this->classification = $value;
     }
 
     /**
-     * Sets the description property value. The description of the video. The video description is an optional field that can be set using the <a href=" /api-docs/commerce/media/resources/video/methods/createVideo" target="_blank">createVideo</a> method.
+     * Sets the description property value. The description of the video. The video description is an optional field that can be set using the <a href=" /develop/api/sell/media_api#sell-media_api-video-createvideo">createVideo</a> method.
      * @param string|null $value Value to set for the description property.
     */
     public function setDescription(?string $value): void {
@@ -279,7 +271,7 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the moderation property value. A container that provides video moderation information when calling the <strong>getVideo</strong> method.<br /><br />This container is returned if the specified video has been blocked by moderators.<br /><br /><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> See <a href="https://www.ebay.com/help/selling/listings/creating-managing-listings/add-video-to-listing?id=5272#section2" target="_blank">Video moderation and restrictions</a> in the eBay Seller Center for details about video moderation.</span>
+     * Sets the moderation property value. The video moderation information that is returned if a video is blocked by moderators.<br /><br /><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> See <a href="https://www.ebay.com/help/selling/listings/creating-managing-listings/add-video-to-listing?id=5272#section2" target="_blank">Video moderation and restrictions</a> in the eBay Seller Center for details about video moderation.</span><br /><br />If the video status is <code>BLOCKED</code>, ensure that the video complies with eBay's video formatting and content guidelines. Afterwards, begin the video creation and upload procedure anew using the <strong>createVideo</strong> and <strong>uploadVideo</strong> methods.
      * @param Moderation|null $value Value to set for the moderation property.
     */
     public function setModeration(?Moderation $value): void {
@@ -287,7 +279,7 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the playLists property value. The playlist created for the uploaded video, which provides the streaming video URLs to play the video. The supported streaming video protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming). The playlist will only be generated if a video is successfully uploaded with a status of <code>LIVE</code>.
+     * Sets the playLists property value. The playlist created for the uploaded video, which provides the streaming video URLs to play the video. The supported streaming video protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming). The playlist will only be generated if a video is successfully uploaded with a status of <code>LIVE</code>.
      * @param array<Play>|null $value Value to set for the playLists property.
     */
     public function setPlayLists(?array $value): void {
@@ -295,7 +287,7 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the size property value. The size, in bytes, of the video content.
+     * Sets the size property value. The size, in bytes, of the video content. This field is always returned.
      * @param int|null $value Value to set for the size property.
     */
     public function setSize(?int $value): void {
@@ -303,15 +295,15 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. The status of the current video resource. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:VideoStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. The status of the current video resource.
+     * @param VideoStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?VideoStatusEnum $value): void {
         $this->status = $value;
     }
 
     /**
-     * Sets the statusMessage property value. The <b>statusMessage</b> field contains additional information on the status. For example, information on why processing might have failed or if the video was blocked.
+     * Sets the statusMessage property value. The <strong>statusMessage</strong> field contains additional information on the status. For example, information on why processing might have failed or if the video was blocked.
      * @param string|null $value Value to set for the statusMessage property.
     */
     public function setStatusMessage(?string $value): void {
@@ -319,7 +311,7 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the thumbnail property value. A type that provides the location of the image.
+     * Sets the thumbnail property value. The URL of the thumbnail image of the video. The thumbnail image's URL must be an eBayPictureURL (EPS URL).
      * @param Image|null $value Value to set for the thumbnail property.
     */
     public function setThumbnail(?Image $value): void {
@@ -327,7 +319,7 @@ class Video implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the title property value. The title of the video.
+     * Sets the title property value. The title of the video. This field is always returned.
      * @param string|null $value Value to set for the title property.
     */
     public function setTitle(?string $value): void {

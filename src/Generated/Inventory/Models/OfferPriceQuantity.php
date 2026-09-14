@@ -32,17 +32,17 @@ class OfferPriceQuantity implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var int|null $availableQuantity This field is used if the seller wants to modify the current quantity of the inventory item that will be available for purchase in the offer (identified by the corresponding <strong>offerId</strong> value).<br><br>This value represents the quantity of the item that is available in the marketplace specified within the offer, not the total quantity available. Because of this, this value should not exceed the value specified in the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/bulkUpdatePriceQuantity#request.requests.shipToLocationAvailability.quantity"><b>quantity</b></a> field of the <b>shipToLocationAvailability</b> container (the total available quantity of the item across all marketplaces).<br><br><span class="tablenote"> <strong>Note:</strong> To ensure that the available quantity allocated to a specific marketplace doesn't exceed the total available stock, the quantity specified on a listing will be the minimum value between this field and the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/bulkUpdatePriceQuantity#request.requests.shipToLocationAvailability.quantity"><b>quantity</b></a> field.</span><br>Either the <strong>availableQuantity</strong> field or the <strong>price</strong> container is required, but not necessarily both.
+     * @var int|null $availableQuantity This field is used if the seller wants to modify the current quantity of the inventory item that will be available for purchase in the offer (identified by the corresponding <strong>offerId</strong> value).<br><br>This value represents the quantity of the item that is available in the marketplace specified within the offer, not the total quantity available. Because of this, this value should not exceed the value specified in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkupdatepricequantity.shiptolocationavailability.quantity">quantity</a> field of the <b>shipToLocationAvailability</b> container (the total available quantity of the item across all marketplaces).<br><br><span class="tablenote"> <strong>Note:</strong> To ensure that the available quantity allocated to a specific marketplace doesn't exceed the total available stock, the quantity specified on a listing will be the minimum value between this field and the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkupdatepricequantity.shiptolocationavailability.quantity"><b>quantity</b></a> field.</span><br>Either the <strong>availableQuantity</strong> field or the <strong>price</strong> container is required, but not necessarily both.
     */
     private ?int $availableQuantity = null;
     
     /**
-     * @var string|null $offerId This field is the unique identifier of the offer. If an <strong>offers</strong> container is used to update one or more offers associated to a specific inventory item, the <strong>offerId</strong> value is required in order to identify the offer to update with a modified price and/or quantity.<br><br>The seller can use the <a href="/api-docs/sell/inventory/resources/offer/methods/getOffers" target="_blank ">getOffers</a> method (passing in the correct SKU value as a query parameter) to retrieve <strong>offerId</strong> values for offers associated with the SKU.
+     * @var string|null $offerId This field is the unique identifier of the offer. If an <strong>offers</strong> container is used to update one or more offers associated to a specific inventory item, the <strong>offerId</strong> value is required in order to identify the offer to update with a modified price and/or quantity.<br><br>The seller can use the <a href="/develop/api/sell/inventory_api#method-offer-getOffers" target="_blank ">getOffers</a> method (passing in the correct SKU value as a query parameter) to retrieve <strong>offerId</strong> values for offers associated with the SKU.
     */
     private ?string $offerId = null;
     
     /**
-     * @var Amount|null $price This type is used to express a dollar value and the applicable currency.
+     * @var Amount|null $price This container is used if the seller wants to modify the current price of the inventory item. The dollar value set here will be the new price of the inventory item in the offer (identified by the corresponding <strong>offerId</strong> value). Either the <strong>availableQuantity</strong> field or the <strong>price</strong> container is required, but not necessarily both.
     */
     private ?Amount $price = null;
     
@@ -71,7 +71,7 @@ class OfferPriceQuantity implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the availableQuantity property value. This field is used if the seller wants to modify the current quantity of the inventory item that will be available for purchase in the offer (identified by the corresponding <strong>offerId</strong> value).<br><br>This value represents the quantity of the item that is available in the marketplace specified within the offer, not the total quantity available. Because of this, this value should not exceed the value specified in the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/bulkUpdatePriceQuantity#request.requests.shipToLocationAvailability.quantity"><b>quantity</b></a> field of the <b>shipToLocationAvailability</b> container (the total available quantity of the item across all marketplaces).<br><br><span class="tablenote"> <strong>Note:</strong> To ensure that the available quantity allocated to a specific marketplace doesn't exceed the total available stock, the quantity specified on a listing will be the minimum value between this field and the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/bulkUpdatePriceQuantity#request.requests.shipToLocationAvailability.quantity"><b>quantity</b></a> field.</span><br>Either the <strong>availableQuantity</strong> field or the <strong>price</strong> container is required, but not necessarily both.
+     * Gets the availableQuantity property value. This field is used if the seller wants to modify the current quantity of the inventory item that will be available for purchase in the offer (identified by the corresponding <strong>offerId</strong> value).<br><br>This value represents the quantity of the item that is available in the marketplace specified within the offer, not the total quantity available. Because of this, this value should not exceed the value specified in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkupdatepricequantity.shiptolocationavailability.quantity">quantity</a> field of the <b>shipToLocationAvailability</b> container (the total available quantity of the item across all marketplaces).<br><br><span class="tablenote"> <strong>Note:</strong> To ensure that the available quantity allocated to a specific marketplace doesn't exceed the total available stock, the quantity specified on a listing will be the minimum value between this field and the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkupdatepricequantity.shiptolocationavailability.quantity"><b>quantity</b></a> field.</span><br>Either the <strong>availableQuantity</strong> field or the <strong>price</strong> container is required, but not necessarily both.
      * @return int|null
     */
     public function getAvailableQuantity(): ?int {
@@ -92,7 +92,7 @@ class OfferPriceQuantity implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the offerId property value. This field is the unique identifier of the offer. If an <strong>offers</strong> container is used to update one or more offers associated to a specific inventory item, the <strong>offerId</strong> value is required in order to identify the offer to update with a modified price and/or quantity.<br><br>The seller can use the <a href="/api-docs/sell/inventory/resources/offer/methods/getOffers" target="_blank ">getOffers</a> method (passing in the correct SKU value as a query parameter) to retrieve <strong>offerId</strong> values for offers associated with the SKU.
+     * Gets the offerId property value. This field is the unique identifier of the offer. If an <strong>offers</strong> container is used to update one or more offers associated to a specific inventory item, the <strong>offerId</strong> value is required in order to identify the offer to update with a modified price and/or quantity.<br><br>The seller can use the <a href="/develop/api/sell/inventory_api#method-offer-getOffers" target="_blank ">getOffers</a> method (passing in the correct SKU value as a query parameter) to retrieve <strong>offerId</strong> values for offers associated with the SKU.
      * @return string|null
     */
     public function getOfferId(): ?string {
@@ -100,7 +100,7 @@ class OfferPriceQuantity implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the price property value. This type is used to express a dollar value and the applicable currency.
+     * Gets the price property value. This container is used if the seller wants to modify the current price of the inventory item. The dollar value set here will be the new price of the inventory item in the offer (identified by the corresponding <strong>offerId</strong> value). Either the <strong>availableQuantity</strong> field or the <strong>price</strong> container is required, but not necessarily both.
      * @return Amount|null
     */
     public function getPrice(): ?Amount {
@@ -127,7 +127,7 @@ class OfferPriceQuantity implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the availableQuantity property value. This field is used if the seller wants to modify the current quantity of the inventory item that will be available for purchase in the offer (identified by the corresponding <strong>offerId</strong> value).<br><br>This value represents the quantity of the item that is available in the marketplace specified within the offer, not the total quantity available. Because of this, this value should not exceed the value specified in the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/bulkUpdatePriceQuantity#request.requests.shipToLocationAvailability.quantity"><b>quantity</b></a> field of the <b>shipToLocationAvailability</b> container (the total available quantity of the item across all marketplaces).<br><br><span class="tablenote"> <strong>Note:</strong> To ensure that the available quantity allocated to a specific marketplace doesn't exceed the total available stock, the quantity specified on a listing will be the minimum value between this field and the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/bulkUpdatePriceQuantity#request.requests.shipToLocationAvailability.quantity"><b>quantity</b></a> field.</span><br>Either the <strong>availableQuantity</strong> field or the <strong>price</strong> container is required, but not necessarily both.
+     * Sets the availableQuantity property value. This field is used if the seller wants to modify the current quantity of the inventory item that will be available for purchase in the offer (identified by the corresponding <strong>offerId</strong> value).<br><br>This value represents the quantity of the item that is available in the marketplace specified within the offer, not the total quantity available. Because of this, this value should not exceed the value specified in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkupdatepricequantity.shiptolocationavailability.quantity">quantity</a> field of the <b>shipToLocationAvailability</b> container (the total available quantity of the item across all marketplaces).<br><br><span class="tablenote"> <strong>Note:</strong> To ensure that the available quantity allocated to a specific marketplace doesn't exceed the total available stock, the quantity specified on a listing will be the minimum value between this field and the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkupdatepricequantity.shiptolocationavailability.quantity"><b>quantity</b></a> field.</span><br>Either the <strong>availableQuantity</strong> field or the <strong>price</strong> container is required, but not necessarily both.
      * @param int|null $value Value to set for the availableQuantity property.
     */
     public function setAvailableQuantity(?int $value): void {
@@ -135,7 +135,7 @@ class OfferPriceQuantity implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the offerId property value. This field is the unique identifier of the offer. If an <strong>offers</strong> container is used to update one or more offers associated to a specific inventory item, the <strong>offerId</strong> value is required in order to identify the offer to update with a modified price and/or quantity.<br><br>The seller can use the <a href="/api-docs/sell/inventory/resources/offer/methods/getOffers" target="_blank ">getOffers</a> method (passing in the correct SKU value as a query parameter) to retrieve <strong>offerId</strong> values for offers associated with the SKU.
+     * Sets the offerId property value. This field is the unique identifier of the offer. If an <strong>offers</strong> container is used to update one or more offers associated to a specific inventory item, the <strong>offerId</strong> value is required in order to identify the offer to update with a modified price and/or quantity.<br><br>The seller can use the <a href="/develop/api/sell/inventory_api#method-offer-getOffers" target="_blank ">getOffers</a> method (passing in the correct SKU value as a query parameter) to retrieve <strong>offerId</strong> values for offers associated with the SKU.
      * @param string|null $value Value to set for the offerId property.
     */
     public function setOfferId(?string $value): void {
@@ -143,7 +143,7 @@ class OfferPriceQuantity implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the price property value. This type is used to express a dollar value and the applicable currency.
+     * Sets the price property value. This container is used if the seller wants to modify the current price of the inventory item. The dollar value set here will be the new price of the inventory item in the offer (identified by the corresponding <strong>offerId</strong> value). Either the <strong>availableQuantity</strong> field or the <strong>price</strong> container is required, but not necessarily both.
      * @param Amount|null $value Value to set for the price property.
     */
     public function setPrice(?Amount $value): void {

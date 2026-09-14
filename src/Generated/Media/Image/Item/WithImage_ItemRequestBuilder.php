@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Media\Image\Item;
 
+use EBay\ListingManagement\Generated\Media\Models\Error;
 use EBay\ListingManagement\Generated\Media\Models\ImageResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -44,18 +45,24 @@ class WithImage_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method retrieves an EPS image URL and its expiration details for the unique identifier specified in the path parameter <b>image_id</b>. Use the retrieved EPS image URL to add the image to a listing through the <b>Inventory API</b> or the <b>Trading API</b>. See <a href="/api-docs/sell/static/inventory/managing-image-media.html"  target="_blank">Managing images</a> for additional details.<br><br><span class="tablenote"><b>Note:</b> If a user inputs a valid <b>image_id</b> as a path parameter but the EPS image associated with that ID has expired, the call will fail and a <b>404 Not Found</b> status code will be returned.</span>
+     * This method retrieves an EPS image URL and its expiration details for the unique identifier specified in the path parameter <strong>image_id</strong>. Use the retrieved EPS image URL to add the image to a listing through the <strong>Inventory API</strong> or the <strong>Trading API</strong>. See <a href="/api-docs/sell/static/inventory/managing-image-media.html"  target="_blank">Managing images</a> for additional details.<br><br><span class="tablenote"><strong>Note:</strong> If a user inputs a valid <strong>image_id</strong> as a path parameter but the EPS image associated with that ID has expired, the call will fail and a <strong>404 Not Found</strong> status code will be returned.</span>
      * @param WithImage_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<ImageResponse|null>
      * @throws Exception
     */
     public function get(?WithImage_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [ImageResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [ImageResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method retrieves an EPS image URL and its expiration details for the unique identifier specified in the path parameter <b>image_id</b>. Use the retrieved EPS image URL to add the image to a listing through the <b>Inventory API</b> or the <b>Trading API</b>. See <a href="/api-docs/sell/static/inventory/managing-image-media.html"  target="_blank">Managing images</a> for additional details.<br><br><span class="tablenote"><b>Note:</b> If a user inputs a valid <b>image_id</b> as a path parameter but the EPS image associated with that ID has expired, the call will fail and a <b>404 Not Found</b> status code will be returned.</span>
+     * This method retrieves an EPS image URL and its expiration details for the unique identifier specified in the path parameter <strong>image_id</strong>. Use the retrieved EPS image URL to add the image to a listing through the <strong>Inventory API</strong> or the <strong>Trading API</strong>. See <a href="/api-docs/sell/static/inventory/managing-image-media.html"  target="_blank">Managing images</a> for additional details.<br><br><span class="tablenote"><strong>Note:</strong> If a user inputs a valid <strong>image_id</strong> as a path parameter but the EPS image associated with that ID has expired, the call will fail and a <strong>404 Not Found</strong> status code will be returned.</span>
      * @param WithImage_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

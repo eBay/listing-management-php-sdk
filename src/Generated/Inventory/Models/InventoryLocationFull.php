@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * This type is used by the <strong>createInventoryLocation</strong> call to provide details on the inventory location, including the location's name, physical address, operating hours, special hours, phone number and other details of an inventory location.
@@ -33,17 +32,17 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var FulfillmentCenterSpecifications|null $fulfillmentCenterSpecifications This type is used to provide shipping specification details, such as the weekly cut-off schedule for order handling and cut-off override(s), for a fulfillment center location. 
+     * @var FulfillmentCenterSpecifications|null $fulfillmentCenterSpecifications This container is used to specify information about a fulfillment center's shipping specifications, such as the weekly cut-off time schedule for order handling and any cut-off time overrides.<br><br><span class="tablenote"><b>Note:</b> This container is required if one of the <b>locationTypes</b> of the inventory location is <code>FULFILLMENT_CENTER</code>, and is not applicable to other location types.</span>
     */
     private ?FulfillmentCenterSpecifications $fulfillmentCenterSpecifications = null;
     
     /**
-     * @var LocationDetails|null $location This type is used by the <b>createInventoryLocation</b> call to provide an full or partial address of an inventory location.
+     * @var LocationDetails|null $location This required container is used to set the physical address and geographical coordinates of a warehouse, store, or fulfillment center inventory location. A warehouse location only requires the postal code and country OR city, province/state, and country, and does not require a full street address. However, the seller may still supply a full street address for a warehouse location. A complete address (<b>addressLine1</b>, <b>city</b>, <b>stateOrProvince</b>, <b>postalCode</b>, and <b>country</b>) is required for store and fulfillment center locations.<br><br><span class="tablenote"><b>Note:</b> For fulfillment center locations, the <b>addressLine1</b>, <b>stateOrProvince</b>, <b>country</b> and <b>postalCode</b> fields cannot be changed once they have been set, though they can be added through the <strong>updateInventoryLocation</strong> method if they were omitted during location creation.</span>
     */
     private ?LocationDetails $location = null;
     
     /**
-     * @var string|null $locationAdditionalInformation This text field is used by the merchant to provide additional information about an inventory location. <br><br><b>Max length</b>: 256
+     * @var string|null $locationAdditionalInformation This text field is used by the merchant to provide additional information about an inventory location. <br><br><b>Maximum length</b>: 256
     */
     private ?string $locationAdditionalInformation = null;
     
@@ -53,22 +52,22 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     private ?string $locationInstructions = null;
     
     /**
-     * @var array<string>|null $locationTypes This container is used to define the function of the inventory location. Typically, an inventory location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.<br><br>For In-Store Pickup inventory, set <b>StoreTypeEnum</b> to <code>STORE</code>.<br><br>To utilize the Multi-warehouse program, set <b>StoreTypeEnum</b> to <code>FULFILLMENT_CENTER</code>.<br><br>If this container is omitted, the location type of the inventory location will default to <code>WAREHOUSE</code>. See <a href="/api-docs/sell/inventory/types/api:StoreTypeEnum">StoreTypeEnum</a> for the supported values.<br><br><b>Default</b>: <code>WAREHOUSE</code>
+     * @var array<StoreTypeEnum>|null $locationTypes This container is used to define the function of the inventory location. Typically, an inventory location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.<br><br>For In-Store Pickup inventory, set <b>StoreTypeEnum</b> to <code>STORE</code>.<br><br>To utilize the Multi-warehouse program, set <b>StoreTypeEnum</b> to <code>FULFILLMENT_CENTER</code>.<br><br>If this container is omitted, the location type of the inventory location will default to <code>WAREHOUSE</code>. See <a href="/develop/api/sell/inventory_api#sell-inventory_api-location-getinventorylocation.storetypeenum">StoreTypeEnum</a> for the supported values.<br><br><b>Default</b>: <code>WAREHOUSE</code>
     */
     private ?array $locationTypes = null;
     
     /**
-     * @var string|null $locationWebUrl This text field is used by the merchant to provide the Website address (URL) associated with the inventory location. <br><br><b>Max length</b>: 512
+     * @var string|null $locationWebUrl This text field is used by the merchant to provide the Website address (URL) associated with the inventory location. <br><br><b>Maximum length</b>: 512
     */
     private ?string $locationWebUrl = null;
     
     /**
-     * @var string|null $merchantLocationStatus This field is used to indicate whether the inventory location will be enabled (inventory can be loaded to location) or disabled (inventory can not be loaded to location). If this field is omitted, a successful <strong>createInventoryLocation</strong> call will automatically enable the location. A merchant may want to create a new location but leave it as disabled if the location is not yet ready for active inventory. Once the location is ready, the merchant can use the <strong>enableInventoryLocation</strong> call to enable a location that is in a disabled state.<br><br>See <a href="/api-docs/sell/inventory/types/api:StatusEnum">StatusEnum</a> for the supported values.  <br><br><b>Default</b>: ENABLED For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/api:StatusEnum'>eBay API documentation</a>
+     * @var StatusEnum|null $merchantLocationStatus This field is used to indicate whether the inventory location will be enabled (inventory can be loaded to location) or disabled (inventory cannot be loaded to location). If this field is omitted, a successful <strong>createInventoryLocation</strong> call will automatically enable the location. A merchant may want to create a new location but leave it as disabled if the location is not yet ready for active inventory. Once the location is ready, the merchant can use the <strong>enableInventoryLocation</strong> call to enable a location that is in a disabled state.<br><br>See <a href="/develop/api/sell/inventory_api#sell-inventory_api-location-getinventorylocation.statusenum">StatusEnum</a> for the supported values.  <br><br><b>Default</b>: ENABLED
     */
-    private ?string $merchantLocationStatus = null;
+    private ?StatusEnum $merchantLocationStatus = null;
     
     /**
-     * @var string|null $name The seller-defined name of the inventory location. This name should be a human-friendly name as it will be displayed in In-Store Pickup and Click and Collect listings. A name is not required for warehouse locations. For store locations, this field is not immediately required, but will be required before an offer enabled with the In-Store Pickup or Click and Collect capability can be published. So, if the seller omits this field in a <strong>createInventoryLocation</strong> call, it becomes required for an <strong>updateInventoryLocation</strong> call.<br><br><b>Max length</b>: 1000
+     * @var string|null $name The seller-defined name of the inventory location. This name should be a human-friendly name as it will be displayed in In-Store Pickup and Click and Collect listings. A name is not required for warehouse locations. For store locations, this field is not immediately required, but will be required before an offer enabled with the In-Store Pickup or Click and Collect capability can be published. So, if the seller omits this field in a <strong>createInventoryLocation</strong> call, it becomes required for an <strong>updateInventoryLocation</strong> call.<br><br><b>Maximum length</b>: 1000
     */
     private ?string $name = null;
     
@@ -78,7 +77,7 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     private ?array $operatingHours = null;
     
     /**
-     * @var string|null $phone This field is used to specify the phone number for an inventory location.<br><br><b>Max length</b>: 36
+     * @var string|null $phone This field is used to specify the phone number for an inventory location.<br><br><b>Maximum length</b>: 36
     */
     private ?string $phone = null;
     
@@ -127,16 +126,9 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
             'location' => fn(ParseNode $n) => $o->setLocation($n->getObjectValue([LocationDetails::class, 'createFromDiscriminatorValue'])),
             'locationAdditionalInformation' => fn(ParseNode $n) => $o->setLocationAdditionalInformation($n->getStringValue()),
             'locationInstructions' => fn(ParseNode $n) => $o->setLocationInstructions($n->getStringValue()),
-            'locationTypes' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setLocationTypes($val);
-            },
+            'locationTypes' => fn(ParseNode $n) => $o->setLocationTypes($n->getCollectionOfEnumValues(StoreTypeEnum::class)),
             'locationWebUrl' => fn(ParseNode $n) => $o->setLocationWebUrl($n->getStringValue()),
-            'merchantLocationStatus' => fn(ParseNode $n) => $o->setMerchantLocationStatus($n->getStringValue()),
+            'merchantLocationStatus' => fn(ParseNode $n) => $o->setMerchantLocationStatus($n->getEnumValue(StatusEnum::class)),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
             'operatingHours' => fn(ParseNode $n) => $o->setOperatingHours($n->getCollectionOfObjectValues([OperatingHours::class, 'createFromDiscriminatorValue'])),
             'phone' => fn(ParseNode $n) => $o->setPhone($n->getStringValue()),
@@ -146,7 +138,7 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the fulfillmentCenterSpecifications property value. This type is used to provide shipping specification details, such as the weekly cut-off schedule for order handling and cut-off override(s), for a fulfillment center location. 
+     * Gets the fulfillmentCenterSpecifications property value. This container is used to specify information about a fulfillment center's shipping specifications, such as the weekly cut-off time schedule for order handling and any cut-off time overrides.<br><br><span class="tablenote"><b>Note:</b> This container is required if one of the <b>locationTypes</b> of the inventory location is <code>FULFILLMENT_CENTER</code>, and is not applicable to other location types.</span>
      * @return FulfillmentCenterSpecifications|null
     */
     public function getFulfillmentCenterSpecifications(): ?FulfillmentCenterSpecifications {
@@ -154,7 +146,7 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the location property value. This type is used by the <b>createInventoryLocation</b> call to provide an full or partial address of an inventory location.
+     * Gets the location property value. This required container is used to set the physical address and geographical coordinates of a warehouse, store, or fulfillment center inventory location. A warehouse location only requires the postal code and country OR city, province/state, and country, and does not require a full street address. However, the seller may still supply a full street address for a warehouse location. A complete address (<b>addressLine1</b>, <b>city</b>, <b>stateOrProvince</b>, <b>postalCode</b>, and <b>country</b>) is required for store and fulfillment center locations.<br><br><span class="tablenote"><b>Note:</b> For fulfillment center locations, the <b>addressLine1</b>, <b>stateOrProvince</b>, <b>country</b> and <b>postalCode</b> fields cannot be changed once they have been set, though they can be added through the <strong>updateInventoryLocation</strong> method if they were omitted during location creation.</span>
      * @return LocationDetails|null
     */
     public function getLocation(): ?LocationDetails {
@@ -162,7 +154,7 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the locationAdditionalInformation property value. This text field is used by the merchant to provide additional information about an inventory location. <br><br><b>Max length</b>: 256
+     * Gets the locationAdditionalInformation property value. This text field is used by the merchant to provide additional information about an inventory location. <br><br><b>Maximum length</b>: 256
      * @return string|null
     */
     public function getLocationAdditionalInformation(): ?string {
@@ -178,15 +170,15 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the locationTypes property value. This container is used to define the function of the inventory location. Typically, an inventory location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.<br><br>For In-Store Pickup inventory, set <b>StoreTypeEnum</b> to <code>STORE</code>.<br><br>To utilize the Multi-warehouse program, set <b>StoreTypeEnum</b> to <code>FULFILLMENT_CENTER</code>.<br><br>If this container is omitted, the location type of the inventory location will default to <code>WAREHOUSE</code>. See <a href="/api-docs/sell/inventory/types/api:StoreTypeEnum">StoreTypeEnum</a> for the supported values.<br><br><b>Default</b>: <code>WAREHOUSE</code>
-     * @return array<string>|null
+     * Gets the locationTypes property value. This container is used to define the function of the inventory location. Typically, an inventory location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.<br><br>For In-Store Pickup inventory, set <b>StoreTypeEnum</b> to <code>STORE</code>.<br><br>To utilize the Multi-warehouse program, set <b>StoreTypeEnum</b> to <code>FULFILLMENT_CENTER</code>.<br><br>If this container is omitted, the location type of the inventory location will default to <code>WAREHOUSE</code>. See <a href="/develop/api/sell/inventory_api#sell-inventory_api-location-getinventorylocation.storetypeenum">StoreTypeEnum</a> for the supported values.<br><br><b>Default</b>: <code>WAREHOUSE</code>
+     * @return array<StoreTypeEnum>|null
     */
     public function getLocationTypes(): ?array {
         return $this->locationTypes;
     }
 
     /**
-     * Gets the locationWebUrl property value. This text field is used by the merchant to provide the Website address (URL) associated with the inventory location. <br><br><b>Max length</b>: 512
+     * Gets the locationWebUrl property value. This text field is used by the merchant to provide the Website address (URL) associated with the inventory location. <br><br><b>Maximum length</b>: 512
      * @return string|null
     */
     public function getLocationWebUrl(): ?string {
@@ -194,15 +186,15 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the merchantLocationStatus property value. This field is used to indicate whether the inventory location will be enabled (inventory can be loaded to location) or disabled (inventory can not be loaded to location). If this field is omitted, a successful <strong>createInventoryLocation</strong> call will automatically enable the location. A merchant may want to create a new location but leave it as disabled if the location is not yet ready for active inventory. Once the location is ready, the merchant can use the <strong>enableInventoryLocation</strong> call to enable a location that is in a disabled state.<br><br>See <a href="/api-docs/sell/inventory/types/api:StatusEnum">StatusEnum</a> for the supported values.  <br><br><b>Default</b>: ENABLED For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/api:StatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the merchantLocationStatus property value. This field is used to indicate whether the inventory location will be enabled (inventory can be loaded to location) or disabled (inventory cannot be loaded to location). If this field is omitted, a successful <strong>createInventoryLocation</strong> call will automatically enable the location. A merchant may want to create a new location but leave it as disabled if the location is not yet ready for active inventory. Once the location is ready, the merchant can use the <strong>enableInventoryLocation</strong> call to enable a location that is in a disabled state.<br><br>See <a href="/develop/api/sell/inventory_api#sell-inventory_api-location-getinventorylocation.statusenum">StatusEnum</a> for the supported values.  <br><br><b>Default</b>: ENABLED
+     * @return StatusEnum|null
     */
-    public function getMerchantLocationStatus(): ?string {
+    public function getMerchantLocationStatus(): ?StatusEnum {
         return $this->merchantLocationStatus;
     }
 
     /**
-     * Gets the name property value. The seller-defined name of the inventory location. This name should be a human-friendly name as it will be displayed in In-Store Pickup and Click and Collect listings. A name is not required for warehouse locations. For store locations, this field is not immediately required, but will be required before an offer enabled with the In-Store Pickup or Click and Collect capability can be published. So, if the seller omits this field in a <strong>createInventoryLocation</strong> call, it becomes required for an <strong>updateInventoryLocation</strong> call.<br><br><b>Max length</b>: 1000
+     * Gets the name property value. The seller-defined name of the inventory location. This name should be a human-friendly name as it will be displayed in In-Store Pickup and Click and Collect listings. A name is not required for warehouse locations. For store locations, this field is not immediately required, but will be required before an offer enabled with the In-Store Pickup or Click and Collect capability can be published. So, if the seller omits this field in a <strong>createInventoryLocation</strong> call, it becomes required for an <strong>updateInventoryLocation</strong> call.<br><br><b>Maximum length</b>: 1000
      * @return string|null
     */
     public function getName(): ?string {
@@ -218,7 +210,7 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the phone property value. This field is used to specify the phone number for an inventory location.<br><br><b>Max length</b>: 36
+     * Gets the phone property value. This field is used to specify the phone number for an inventory location.<br><br><b>Maximum length</b>: 36
      * @return string|null
     */
     public function getPhone(): ?string {
@@ -250,9 +242,9 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('location', $this->getLocation());
         $writer->writeStringValue('locationAdditionalInformation', $this->getLocationAdditionalInformation());
         $writer->writeStringValue('locationInstructions', $this->getLocationInstructions());
-        $writer->writeCollectionOfPrimitiveValues('locationTypes', $this->getLocationTypes());
+        $writer->writeCollectionOfEnumValues('locationTypes', $this->getLocationTypes());
         $writer->writeStringValue('locationWebUrl', $this->getLocationWebUrl());
-        $writer->writeStringValue('merchantLocationStatus', $this->getMerchantLocationStatus());
+        $writer->writeEnumValue('merchantLocationStatus', $this->getMerchantLocationStatus());
         $writer->writeStringValue('name', $this->getName());
         $writer->writeCollectionOfObjectValues('operatingHours', $this->getOperatingHours());
         $writer->writeStringValue('phone', $this->getPhone());
@@ -270,7 +262,7 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the fulfillmentCenterSpecifications property value. This type is used to provide shipping specification details, such as the weekly cut-off schedule for order handling and cut-off override(s), for a fulfillment center location. 
+     * Sets the fulfillmentCenterSpecifications property value. This container is used to specify information about a fulfillment center's shipping specifications, such as the weekly cut-off time schedule for order handling and any cut-off time overrides.<br><br><span class="tablenote"><b>Note:</b> This container is required if one of the <b>locationTypes</b> of the inventory location is <code>FULFILLMENT_CENTER</code>, and is not applicable to other location types.</span>
      * @param FulfillmentCenterSpecifications|null $value Value to set for the fulfillmentCenterSpecifications property.
     */
     public function setFulfillmentCenterSpecifications(?FulfillmentCenterSpecifications $value): void {
@@ -278,7 +270,7 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the location property value. This type is used by the <b>createInventoryLocation</b> call to provide an full or partial address of an inventory location.
+     * Sets the location property value. This required container is used to set the physical address and geographical coordinates of a warehouse, store, or fulfillment center inventory location. A warehouse location only requires the postal code and country OR city, province/state, and country, and does not require a full street address. However, the seller may still supply a full street address for a warehouse location. A complete address (<b>addressLine1</b>, <b>city</b>, <b>stateOrProvince</b>, <b>postalCode</b>, and <b>country</b>) is required for store and fulfillment center locations.<br><br><span class="tablenote"><b>Note:</b> For fulfillment center locations, the <b>addressLine1</b>, <b>stateOrProvince</b>, <b>country</b> and <b>postalCode</b> fields cannot be changed once they have been set, though they can be added through the <strong>updateInventoryLocation</strong> method if they were omitted during location creation.</span>
      * @param LocationDetails|null $value Value to set for the location property.
     */
     public function setLocation(?LocationDetails $value): void {
@@ -286,7 +278,7 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the locationAdditionalInformation property value. This text field is used by the merchant to provide additional information about an inventory location. <br><br><b>Max length</b>: 256
+     * Sets the locationAdditionalInformation property value. This text field is used by the merchant to provide additional information about an inventory location. <br><br><b>Maximum length</b>: 256
      * @param string|null $value Value to set for the locationAdditionalInformation property.
     */
     public function setLocationAdditionalInformation(?string $value): void {
@@ -302,15 +294,15 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the locationTypes property value. This container is used to define the function of the inventory location. Typically, an inventory location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.<br><br>For In-Store Pickup inventory, set <b>StoreTypeEnum</b> to <code>STORE</code>.<br><br>To utilize the Multi-warehouse program, set <b>StoreTypeEnum</b> to <code>FULFILLMENT_CENTER</code>.<br><br>If this container is omitted, the location type of the inventory location will default to <code>WAREHOUSE</code>. See <a href="/api-docs/sell/inventory/types/api:StoreTypeEnum">StoreTypeEnum</a> for the supported values.<br><br><b>Default</b>: <code>WAREHOUSE</code>
-     * @param array<string>|null $value Value to set for the locationTypes property.
+     * Sets the locationTypes property value. This container is used to define the function of the inventory location. Typically, an inventory location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.<br><br>For In-Store Pickup inventory, set <b>StoreTypeEnum</b> to <code>STORE</code>.<br><br>To utilize the Multi-warehouse program, set <b>StoreTypeEnum</b> to <code>FULFILLMENT_CENTER</code>.<br><br>If this container is omitted, the location type of the inventory location will default to <code>WAREHOUSE</code>. See <a href="/develop/api/sell/inventory_api#sell-inventory_api-location-getinventorylocation.storetypeenum">StoreTypeEnum</a> for the supported values.<br><br><b>Default</b>: <code>WAREHOUSE</code>
+     * @param array<StoreTypeEnum>|null $value Value to set for the locationTypes property.
     */
     public function setLocationTypes(?array $value): void {
         $this->locationTypes = $value;
     }
 
     /**
-     * Sets the locationWebUrl property value. This text field is used by the merchant to provide the Website address (URL) associated with the inventory location. <br><br><b>Max length</b>: 512
+     * Sets the locationWebUrl property value. This text field is used by the merchant to provide the Website address (URL) associated with the inventory location. <br><br><b>Maximum length</b>: 512
      * @param string|null $value Value to set for the locationWebUrl property.
     */
     public function setLocationWebUrl(?string $value): void {
@@ -318,15 +310,15 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the merchantLocationStatus property value. This field is used to indicate whether the inventory location will be enabled (inventory can be loaded to location) or disabled (inventory can not be loaded to location). If this field is omitted, a successful <strong>createInventoryLocation</strong> call will automatically enable the location. A merchant may want to create a new location but leave it as disabled if the location is not yet ready for active inventory. Once the location is ready, the merchant can use the <strong>enableInventoryLocation</strong> call to enable a location that is in a disabled state.<br><br>See <a href="/api-docs/sell/inventory/types/api:StatusEnum">StatusEnum</a> for the supported values.  <br><br><b>Default</b>: ENABLED For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/api:StatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the merchantLocationStatus property.
+     * Sets the merchantLocationStatus property value. This field is used to indicate whether the inventory location will be enabled (inventory can be loaded to location) or disabled (inventory cannot be loaded to location). If this field is omitted, a successful <strong>createInventoryLocation</strong> call will automatically enable the location. A merchant may want to create a new location but leave it as disabled if the location is not yet ready for active inventory. Once the location is ready, the merchant can use the <strong>enableInventoryLocation</strong> call to enable a location that is in a disabled state.<br><br>See <a href="/develop/api/sell/inventory_api#sell-inventory_api-location-getinventorylocation.statusenum">StatusEnum</a> for the supported values.  <br><br><b>Default</b>: ENABLED
+     * @param StatusEnum|null $value Value to set for the merchantLocationStatus property.
     */
-    public function setMerchantLocationStatus(?string $value): void {
+    public function setMerchantLocationStatus(?StatusEnum $value): void {
         $this->merchantLocationStatus = $value;
     }
 
     /**
-     * Sets the name property value. The seller-defined name of the inventory location. This name should be a human-friendly name as it will be displayed in In-Store Pickup and Click and Collect listings. A name is not required for warehouse locations. For store locations, this field is not immediately required, but will be required before an offer enabled with the In-Store Pickup or Click and Collect capability can be published. So, if the seller omits this field in a <strong>createInventoryLocation</strong> call, it becomes required for an <strong>updateInventoryLocation</strong> call.<br><br><b>Max length</b>: 1000
+     * Sets the name property value. The seller-defined name of the inventory location. This name should be a human-friendly name as it will be displayed in In-Store Pickup and Click and Collect listings. A name is not required for warehouse locations. For store locations, this field is not immediately required, but will be required before an offer enabled with the In-Store Pickup or Click and Collect capability can be published. So, if the seller omits this field in a <strong>createInventoryLocation</strong> call, it becomes required for an <strong>updateInventoryLocation</strong> call.<br><br><b>Maximum length</b>: 1000
      * @param string|null $value Value to set for the name property.
     */
     public function setName(?string $value): void {
@@ -342,7 +334,7 @@ class InventoryLocationFull implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the phone property value. This field is used to specify the phone number for an inventory location.<br><br><b>Max length</b>: 36
+     * Sets the phone property value. This field is used to specify the phone number for an inventory location.<br><br><b>Maximum length</b>: 36
      * @param string|null $value Value to set for the phone property.
     */
     public function setPhone(?string $value): void {

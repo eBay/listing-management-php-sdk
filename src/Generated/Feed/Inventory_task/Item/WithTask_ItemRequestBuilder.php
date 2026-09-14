@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Feed\Inventory_task\Item;
 
+use EBay\ListingManagement\Generated\Feed\Models\Error;
 use EBay\ListingManagement\Generated\Feed\Models\InventoryTask;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,13 @@ class WithTask_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?WithTask_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [InventoryTask::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [InventoryTask::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

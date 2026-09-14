@@ -47,7 +47,7 @@ class LocationResponse implements AdditionalDataHolder, Parsable
     private ?array $locations = null;
     
     /**
-     * @var string|null $next The URI for the following page of results. This value is returned only if there is an additional page of results to display from the result set. <br><br><b>Max length</b>: 2048
+     * @var string|null $next The URI for the following page of results. This value is returned only if there is an additional page of results to display from the result set. <br><br><b>Maximum length</b>: 2048
     */
     private ?string $next = null;
     
@@ -57,7 +57,7 @@ class LocationResponse implements AdditionalDataHolder, Parsable
     private ?int $offset = null;
     
     /**
-     * @var string|null $prev The URI for the preceding page of results. This value is returned only if there is a previous page of results to display from the result set. <br><br><b>Max length</b>: 2048
+     * @var string|null $prev The URI for the preceding page of results. This value is returned only if there is a previous page of results to display from the result set. <br><br><b>Maximum length</b>: 2048
     */
     private ?string $prev = null;
     
@@ -132,7 +132,7 @@ class LocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the next property value. The URI for the following page of results. This value is returned only if there is an additional page of results to display from the result set. <br><br><b>Max length</b>: 2048
+     * Gets the next property value. The URI for the following page of results. This value is returned only if there is an additional page of results to display from the result set. <br><br><b>Maximum length</b>: 2048
      * @return string|null
     */
     public function getNext(): ?string {
@@ -148,7 +148,7 @@ class LocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the prev property value. The URI for the preceding page of results. This value is returned only if there is a previous page of results to display from the result set. <br><br><b>Max length</b>: 2048
+     * Gets the prev property value. The URI for the preceding page of results. This value is returned only if there is a previous page of results to display from the result set. <br><br><b>Maximum length</b>: 2048
      * @return string|null
     */
     public function getPrev(): ?string {
@@ -211,7 +211,7 @@ class LocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the next property value. The URI for the following page of results. This value is returned only if there is an additional page of results to display from the result set. <br><br><b>Max length</b>: 2048
+     * Sets the next property value. The URI for the following page of results. This value is returned only if there is an additional page of results to display from the result set. <br><br><b>Maximum length</b>: 2048
      * @param string|null $value Value to set for the next property.
     */
     public function setNext(?string $value): void {
@@ -227,7 +227,7 @@ class LocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the prev property value. The URI for the preceding page of results. This value is returned only if there is a previous page of results to display from the result set. <br><br><b>Max length</b>: 2048
+     * Sets the prev property value. The URI for the preceding page of results. This value is returned only if there is a previous page of results to display from the result set. <br><br><b>Maximum length</b>: 2048
      * @param string|null $value Value to set for the prev property.
     */
     public function setPrev(?string $value): void {

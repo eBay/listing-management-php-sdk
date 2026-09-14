@@ -22,28 +22,28 @@ echo "Regenerating REST clients via Kiota..."
 rm -rf src/Generated
 
 kiota generate -l php \
-  -d specs/openapi/feed.yaml \
+  -d specs/openapi/feed.json \
   -c FeedApiClient \
   -n 'EBay\ListingManagement\Generated\Feed' \
   -o src/Generated/Feed \
   --ebc --co
 
 kiota generate -l php \
-  -d specs/openapi/inventory.yaml \
+  -d specs/openapi/inventory.json \
   -c InventoryApiClient \
   -n 'EBay\ListingManagement\Generated\Inventory' \
   -o src/Generated/Inventory \
   --ebc --co
 
 kiota generate -l php \
-  -d specs/openapi/media.yaml \
+  -d specs/openapi/media.json \
   -c MediaApiClient \
   -n 'EBay\ListingManagement\Generated\Media' \
   -o src/Generated/Media \
   --ebc --co
 
 kiota generate -l php \
-  -d specs/openapi/stores.yaml \
+  -d specs/openapi/stores.json \
   -c StoresApiClient \
   -n 'EBay\ListingManagement\Generated\Stores' \
   -o src/Generated/Stores \

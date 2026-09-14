@@ -71,6 +71,9 @@ class CustomerServiceMetricTaskCollection implements AdditionalDataHolder, Parsa
     */
     public function __construct() {
         $this->setAdditionalData([]);
+        $this->setLimit(10);
+        $this->setOffset(0);
+        $this->setTotal(0);
     }
 
     /**

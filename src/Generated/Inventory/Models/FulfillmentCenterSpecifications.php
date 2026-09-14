@@ -32,7 +32,7 @@ class FulfillmentCenterSpecifications implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var SameDayShippingCutOffTimes|null $sameDayShippingCutOffTimes This type is used by the <b>createInventoryLocation</b> call to specify cut-off time(s) for an inventory location, as well as any overrides for these times.
+     * @var SameDayShippingCutOffTimes|null $sameDayShippingCutOffTimes <span class="tablenote"><b>Note:</b> This container only applies to listings with same-day handling.</span><br>This container specifies cut-off time(s) for order handling (and optionally cut-off overrides) at a fulfillment center location.<br><br>For example, if the cut-off time for order handling is <code>14:00</code>, any orders made after this time will be handled on the next available business day.<br><br><span class="tablenote"><b>Note:</b> Shipping cut-off times must be specified if one of the <b>locationTypes</b> of the inventory location is <code>FULFILLMENT_CENTER</code>.</span>
     */
     private ?SameDayShippingCutOffTimes $sameDayShippingCutOffTimes = null;
     
@@ -72,7 +72,7 @@ class FulfillmentCenterSpecifications implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sameDayShippingCutOffTimes property value. This type is used by the <b>createInventoryLocation</b> call to specify cut-off time(s) for an inventory location, as well as any overrides for these times.
+     * Gets the sameDayShippingCutOffTimes property value. <span class="tablenote"><b>Note:</b> This container only applies to listings with same-day handling.</span><br>This container specifies cut-off time(s) for order handling (and optionally cut-off overrides) at a fulfillment center location.<br><br>For example, if the cut-off time for order handling is <code>14:00</code>, any orders made after this time will be handled on the next available business day.<br><br><span class="tablenote"><b>Note:</b> Shipping cut-off times must be specified if one of the <b>locationTypes</b> of the inventory location is <code>FULFILLMENT_CENTER</code>.</span>
      * @return SameDayShippingCutOffTimes|null
     */
     public function getSameDayShippingCutOffTimes(): ?SameDayShippingCutOffTimes {
@@ -97,7 +97,7 @@ class FulfillmentCenterSpecifications implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sameDayShippingCutOffTimes property value. This type is used by the <b>createInventoryLocation</b> call to specify cut-off time(s) for an inventory location, as well as any overrides for these times.
+     * Sets the sameDayShippingCutOffTimes property value. <span class="tablenote"><b>Note:</b> This container only applies to listings with same-day handling.</span><br>This container specifies cut-off time(s) for order handling (and optionally cut-off overrides) at a fulfillment center location.<br><br>For example, if the cut-off time for order handling is <code>14:00</code>, any orders made after this time will be handled on the next available business day.<br><br><span class="tablenote"><b>Note:</b> Shipping cut-off times must be specified if one of the <b>locationTypes</b> of the inventory location is <code>FULFILLMENT_CENTER</code>.</span>
      * @param SameDayShippingCutOffTimes|null $value Value to set for the sameDayShippingCutOffTimes property.
     */
     public function setSameDayShippingCutOffTimes(?SameDayShippingCutOffTimes $value): void {

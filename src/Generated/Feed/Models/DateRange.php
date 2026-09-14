@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The type that defines the fields for a date range.
+ * This type defines the fields for a date range.
 */
 class DateRange implements AdditionalDataHolder, Parsable 
 {
@@ -32,12 +32,12 @@ class DateRange implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $from The beginning date in the range. If the parent type is included, both the <strong>from</strong> and/or the <strong>to</strong> fields become conditionally required.<br /><br /><b>Format: </b>UTC <code>yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> <b> For example: </b> Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021  <br /><code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>    
+     * @var string|null $from The beginning date in the range. If the parent type is included, both the <strong>from</strong> and the <strong>to</strong> fields become conditionally required.<br /><br /><strong>Format: </strong>UTC <code>yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /><strong>For example: </strong> Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021<br /><code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>    
     */
     private ?string $from = null;
     
     /**
-     * @var string|null $to The end date for the date range, which is inclusive. If the parent type is included, both the <strong>from</strong> and/or the <strong>to</strong> fields become conditionally required.  <br /><br /> <b> For example: </b> <br /><br />Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021 <br /> <code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>  
+     * @var string|null $to The end date for the date range, which is inclusive. If the parent type is included, both the <strong>from</strong> and the <strong>to</strong> fields become conditionally required.  <br /><br /><strong>For example: </strong> <br /><br />Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021<br /> <code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>  
     */
     private ?string $to = null;
     
@@ -78,7 +78,7 @@ class DateRange implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the from property value. The beginning date in the range. If the parent type is included, both the <strong>from</strong> and/or the <strong>to</strong> fields become conditionally required.<br /><br /><b>Format: </b>UTC <code>yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> <b> For example: </b> Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021  <br /><code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>    
+     * Gets the from property value. The beginning date in the range. If the parent type is included, both the <strong>from</strong> and the <strong>to</strong> fields become conditionally required.<br /><br /><strong>Format: </strong>UTC <code>yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /><strong>For example: </strong> Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021<br /><code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>    
      * @return string|null
     */
     public function getFrom(): ?string {
@@ -86,7 +86,7 @@ class DateRange implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the to property value. The end date for the date range, which is inclusive. If the parent type is included, both the <strong>from</strong> and/or the <strong>to</strong> fields become conditionally required.  <br /><br /> <b> For example: </b> <br /><br />Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021 <br /> <code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>  
+     * Gets the to property value. The end date for the date range, which is inclusive. If the parent type is included, both the <strong>from</strong> and the <strong>to</strong> fields become conditionally required.  <br /><br /><strong>For example: </strong> <br /><br />Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021<br /> <code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>  
      * @return string|null
     */
     public function getTo(): ?string {
@@ -112,7 +112,7 @@ class DateRange implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the from property value. The beginning date in the range. If the parent type is included, both the <strong>from</strong> and/or the <strong>to</strong> fields become conditionally required.<br /><br /><b>Format: </b>UTC <code>yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> <b> For example: </b> Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021  <br /><code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>    
+     * Sets the from property value. The beginning date in the range. If the parent type is included, both the <strong>from</strong> and the <strong>to</strong> fields become conditionally required.<br /><br /><strong>Format: </strong>UTC <code>yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /><strong>For example: </strong> Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021<br /><code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>    
      * @param string|null $value Value to set for the from property.
     */
     public function setFrom(?string $value): void {
@@ -120,7 +120,7 @@ class DateRange implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the to property value. The end date for the date range, which is inclusive. If the parent type is included, both the <strong>from</strong> and/or the <strong>to</strong> fields become conditionally required.  <br /><br /> <b> For example: </b> <br /><br />Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021 <br /> <code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>  
+     * Sets the to property value. The end date for the date range, which is inclusive. If the parent type is included, both the <strong>from</strong> and the <strong>to</strong> fields become conditionally required.  <br /><br /><strong>For example: </strong> <br /><br />Tasks within a range  <br /> <code>yyyy-MM-ddThh:mm:ss.SSSZ..yyyy-MM-ddThh:mm:ss.SSSZ </code> <br /><br /> Tasks created on March 31, 2021<br /> <code>2021-03-31T00:00:00.000Z..2021-03-31T00:00:00.000Z</code>  
      * @param string|null $value Value to set for the to property.
     */
     public function setTo(?string $value): void {
