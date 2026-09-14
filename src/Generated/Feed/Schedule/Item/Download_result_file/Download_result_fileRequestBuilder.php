@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Feed\Schedule\Item\Download_result_file;
 
+use EBay\ListingManagement\Generated\Feed\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -51,8 +52,14 @@ class Download_result_fileRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Download_result_fileRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
+        $errorMappings = [
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
         /** @var Promise<StreamInterface|null> $result */
-        $result = $this->requestAdapter->sendPrimitiveAsync($requestInfo, StreamInterface::class, null);
+        $result = $this->requestAdapter->sendPrimitiveAsync($requestInfo, StreamInterface::class, $errorMappings);
         return $result;
     }
 
@@ -70,7 +77,7 @@ class Download_result_fileRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
-        $requestInfo->tryAddHeader('Accept', "application/octet-stream");
+        $requestInfo->tryAddHeader('Accept', "application/octet-stream, application/json");
         return $requestInfo;
     }
 

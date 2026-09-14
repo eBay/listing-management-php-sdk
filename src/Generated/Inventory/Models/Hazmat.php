@@ -33,22 +33,22 @@ class Hazmat implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $component This field is used by the seller to provide component information for the listing. For example, component information can provide the specific material of Hazmat concern.<br><br><b>Max length:</b> 120
+     * @var string|null $component This field is used by the seller to provide component information for the listing. For example, component information can provide the specific material of Hazmat concern.<br><br><b>Maximum length:</b> 120
     */
     private ?string $component = null;
     
     /**
-     * @var array<string>|null $pictograms An array of comma-separated string values listing applicable pictogram code(s) for Hazard Pictogram(s).<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard pictograms that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getHazardousMaterialsLabels " target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Pictogra" target="_blank">Pictogram sample values</a> for additional information.</span>
+     * @var array<string>|null $pictograms An array of comma-separated string values listing applicable pictogram code(s) for Hazard Pictogram(s).<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard pictograms that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-gethazardousmaterialslabels" target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Pictogra" target="_blank">Pictogram sample values</a> for additional information.</span>
     */
     private ?array $pictograms = null;
     
     /**
-     * @var string|null $signalWord This field sets the signal word for hazardous materials in the listing.<br><br>If your product contains hazardous substances or mixtures, please select a value corresponding to the signal word that is stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getHazardousMaterialsLabels " target="_blank">getHazardousMaterialsLabels</a> method in the <a href="/api-docs/sell/metadata/resources/methods " target="_blank">Metadata API</a> to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Signal" target="_blank">Signal word information</a> for additional information.</span>
+     * @var string|null $signalWord This field sets the signal word for hazardous materials in the listing.<br><br>If your product contains hazardous substances or mixtures, please select a value corresponding to the signal word that is stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-gethazardousmaterialslabels" target="_blank">getHazardousMaterialsLabels</a> method in the <a href="/develop/api/sell/metadata_api" target="_blank">Metadata API</a> to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Signal" target="_blank">Signal word information</a> for additional information.</span>
     */
     private ?string $signalWord = null;
     
     /**
-     * @var array<string>|null $statements An array of comma-separated string values specifying applicable statement code(s) for hazard statement(s) for the listing.<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard statements that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getHazardousMaterialsLabels " target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Hazard" target="_blank">Hazard statement sample values</a> for additional information.</span><br>This field is required if hazardous material information is provided for the listing.
+     * @var array<string>|null $statements An array of comma-separated string values specifying applicable statement code(s) for hazard statement(s) for the listing.<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard statements that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-gethazardousmaterialslabels" target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Hazard" target="_blank">Hazard statement sample values</a> for additional information.</span><br>This field is required if hazardous material information is provided for the listing.
     */
     private ?array $statements = null;
     
@@ -77,7 +77,7 @@ class Hazmat implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the component property value. This field is used by the seller to provide component information for the listing. For example, component information can provide the specific material of Hazmat concern.<br><br><b>Max length:</b> 120
+     * Gets the component property value. This field is used by the seller to provide component information for the listing. For example, component information can provide the specific material of Hazmat concern.<br><br><b>Maximum length:</b> 120
      * @return string|null
     */
     public function getComponent(): ?string {
@@ -113,7 +113,7 @@ class Hazmat implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the pictograms property value. An array of comma-separated string values listing applicable pictogram code(s) for Hazard Pictogram(s).<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard pictograms that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getHazardousMaterialsLabels " target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Pictogra" target="_blank">Pictogram sample values</a> for additional information.</span>
+     * Gets the pictograms property value. An array of comma-separated string values listing applicable pictogram code(s) for Hazard Pictogram(s).<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard pictograms that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-gethazardousmaterialslabels" target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Pictogra" target="_blank">Pictogram sample values</a> for additional information.</span>
      * @return array<string>|null
     */
     public function getPictograms(): ?array {
@@ -121,7 +121,7 @@ class Hazmat implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the signalWord property value. This field sets the signal word for hazardous materials in the listing.<br><br>If your product contains hazardous substances or mixtures, please select a value corresponding to the signal word that is stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getHazardousMaterialsLabels " target="_blank">getHazardousMaterialsLabels</a> method in the <a href="/api-docs/sell/metadata/resources/methods " target="_blank">Metadata API</a> to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Signal" target="_blank">Signal word information</a> for additional information.</span>
+     * Gets the signalWord property value. This field sets the signal word for hazardous materials in the listing.<br><br>If your product contains hazardous substances or mixtures, please select a value corresponding to the signal word that is stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-gethazardousmaterialslabels" target="_blank">getHazardousMaterialsLabels</a> method in the <a href="/develop/api/sell/metadata_api" target="_blank">Metadata API</a> to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Signal" target="_blank">Signal word information</a> for additional information.</span>
      * @return string|null
     */
     public function getSignalWord(): ?string {
@@ -129,7 +129,7 @@ class Hazmat implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the statements property value. An array of comma-separated string values specifying applicable statement code(s) for hazard statement(s) for the listing.<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard statements that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getHazardousMaterialsLabels " target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Hazard" target="_blank">Hazard statement sample values</a> for additional information.</span><br>This field is required if hazardous material information is provided for the listing.
+     * Gets the statements property value. An array of comma-separated string values specifying applicable statement code(s) for hazard statement(s) for the listing.<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard statements that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-gethazardousmaterialslabels" target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Hazard" target="_blank">Hazard statement sample values</a> for additional information.</span><br>This field is required if hazardous material information is provided for the listing.
      * @return array<string>|null
     */
     public function getStatements(): ?array {
@@ -157,7 +157,7 @@ class Hazmat implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the component property value. This field is used by the seller to provide component information for the listing. For example, component information can provide the specific material of Hazmat concern.<br><br><b>Max length:</b> 120
+     * Sets the component property value. This field is used by the seller to provide component information for the listing. For example, component information can provide the specific material of Hazmat concern.<br><br><b>Maximum length:</b> 120
      * @param string|null $value Value to set for the component property.
     */
     public function setComponent(?string $value): void {
@@ -165,7 +165,7 @@ class Hazmat implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the pictograms property value. An array of comma-separated string values listing applicable pictogram code(s) for Hazard Pictogram(s).<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard pictograms that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getHazardousMaterialsLabels " target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Pictogra" target="_blank">Pictogram sample values</a> for additional information.</span>
+     * Sets the pictograms property value. An array of comma-separated string values listing applicable pictogram code(s) for Hazard Pictogram(s).<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard pictograms that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-gethazardousmaterialslabels" target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Pictogra" target="_blank">Pictogram sample values</a> for additional information.</span>
      * @param array<string>|null $value Value to set for the pictograms property.
     */
     public function setPictograms(?array $value): void {
@@ -173,7 +173,7 @@ class Hazmat implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the signalWord property value. This field sets the signal word for hazardous materials in the listing.<br><br>If your product contains hazardous substances or mixtures, please select a value corresponding to the signal word that is stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getHazardousMaterialsLabels " target="_blank">getHazardousMaterialsLabels</a> method in the <a href="/api-docs/sell/metadata/resources/methods " target="_blank">Metadata API</a> to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Signal" target="_blank">Signal word information</a> for additional information.</span>
+     * Sets the signalWord property value. This field sets the signal word for hazardous materials in the listing.<br><br>If your product contains hazardous substances or mixtures, please select a value corresponding to the signal word that is stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-gethazardousmaterialslabels" target="_blank">getHazardousMaterialsLabels</a> method in the <a href="/develop/api/sell/metadata_api" target="_blank">Metadata API</a> to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Signal" target="_blank">Signal word information</a> for additional information.</span>
      * @param string|null $value Value to set for the signalWord property.
     */
     public function setSignalWord(?string $value): void {
@@ -181,7 +181,7 @@ class Hazmat implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the statements property value. An array of comma-separated string values specifying applicable statement code(s) for hazard statement(s) for the listing.<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard statements that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getHazardousMaterialsLabels " target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Hazard" target="_blank">Hazard statement sample values</a> for additional information.</span><br>This field is required if hazardous material information is provided for the listing.
+     * Sets the statements property value. An array of comma-separated string values specifying applicable statement code(s) for hazard statement(s) for the listing.<br><br>If your product contains hazardous substances or mixtures, please select the values corresponding to the hazard statements that are stated on your product's Safety Data Sheet. The selected hazard information will be displayed on your listing.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-gethazardousmaterialslabels" target="_blank">getHazardousMaterialsLabels</a> method in the Metadata API to find supported values for a specific marketplace/site. Refer to <a href="/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html#Hazard" target="_blank">Hazard statement sample values</a> for additional information.</span><br>This field is required if hazardous material information is provided for the listing.
      * @param array<string>|null $value Value to set for the statements property.
     */
     public function setStatements(?array $value): void {

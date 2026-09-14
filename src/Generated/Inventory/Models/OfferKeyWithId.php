@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type is used by the <strong>getListingFees</strong> call to indicate the unpublished offer(s) for which expected listing fees will be retrieved. The user passes in one or more <strong>offerId</strong> values (a maximum of 250). See the <a href="https://pages.ebay.com/help/sell/fees.html " target="_blank">Standard selling fees</a> help page for more information on listing fees.
+ * This type is used by the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees" target="_blank">getListingFees</a> call to indicate the unpublished offer(s) for which expected listing fees will be retrieved. The user passes in one or more <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-bulkpublishoffer.offerkeywithid.offerid" target="_blank">offerId</a> values (a maximum of 250). See the <a href="https://pages.ebay.com/help/sell/fees.html" target="_blank">Standard selling fees</a> help page for more information on listing fees.
 */
 class OfferKeyWithId implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class OfferKeyWithId implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $offerId The unique identifier of an unpublished offer for which expected listing fees will be retrieved. One to 250 <strong>offerId</strong> values can be passed in to the <strong>offers</strong> container for one <strong>getListingFees</strong> call. <br><br>Use the <a href="/api-docs/sell/inventory/resources/offer/methods/getOffers">getOffers</a> method to retrieve offer IDs.<br><br><span class="tablenote"><b>Note:</b> Errors will occur if <strong>offerId</strong> values representing published offers are passed in.</span>
+     * @var string|null $offerId The unique identifier of an unpublished offer for which expected listing fees will be retrieved. One to 250 <strong>offerId</strong> values can be passed in to the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.offerkeyswithid.offers" target="_blank">offers</a> container for one <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.offerkeyswithid.offers" target="_blank">getListingFees</a> call. <br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers">getOffers</a> method to retrieve offer IDs.<br><br><span class="tablenote"><b>Note:</b> Errors will occur if <strong>offerId</strong> values representing published offers are passed in.</span>
     */
     private ?string $offerId = null;
     
@@ -72,7 +72,7 @@ class OfferKeyWithId implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the offerId property value. The unique identifier of an unpublished offer for which expected listing fees will be retrieved. One to 250 <strong>offerId</strong> values can be passed in to the <strong>offers</strong> container for one <strong>getListingFees</strong> call. <br><br>Use the <a href="/api-docs/sell/inventory/resources/offer/methods/getOffers">getOffers</a> method to retrieve offer IDs.<br><br><span class="tablenote"><b>Note:</b> Errors will occur if <strong>offerId</strong> values representing published offers are passed in.</span>
+     * Gets the offerId property value. The unique identifier of an unpublished offer for which expected listing fees will be retrieved. One to 250 <strong>offerId</strong> values can be passed in to the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.offerkeyswithid.offers" target="_blank">offers</a> container for one <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.offerkeyswithid.offers" target="_blank">getListingFees</a> call. <br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers">getOffers</a> method to retrieve offer IDs.<br><br><span class="tablenote"><b>Note:</b> Errors will occur if <strong>offerId</strong> values representing published offers are passed in.</span>
      * @return string|null
     */
     public function getOfferId(): ?string {
@@ -97,7 +97,7 @@ class OfferKeyWithId implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the offerId property value. The unique identifier of an unpublished offer for which expected listing fees will be retrieved. One to 250 <strong>offerId</strong> values can be passed in to the <strong>offers</strong> container for one <strong>getListingFees</strong> call. <br><br>Use the <a href="/api-docs/sell/inventory/resources/offer/methods/getOffers">getOffers</a> method to retrieve offer IDs.<br><br><span class="tablenote"><b>Note:</b> Errors will occur if <strong>offerId</strong> values representing published offers are passed in.</span>
+     * Sets the offerId property value. The unique identifier of an unpublished offer for which expected listing fees will be retrieved. One to 250 <strong>offerId</strong> values can be passed in to the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.offerkeyswithid.offers" target="_blank">offers</a> container for one <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getlistingfees.offerkeyswithid.offers" target="_blank">getListingFees</a> call. <br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers">getOffers</a> method to retrieve offer IDs.<br><br><span class="tablenote"><b>Note:</b> Errors will occur if <strong>offerId</strong> values representing published offers are passed in.</span>
      * @param string|null $value Value to set for the offerId property.
     */
     public function setOfferId(?string $value): void {

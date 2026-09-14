@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The two streaming video URLs available for a successfully uploaded video with a status of <code>LIVE</code>. The supported streaming video protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming).
+ * The two streaming video URLs available for a successfully uploaded video with a status of <code>LIVE</code>. The supported streaming video protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming).
 */
 class Play implements AdditionalDataHolder, Parsable 
 {
@@ -37,9 +37,9 @@ class Play implements AdditionalDataHolder, Parsable
     private ?string $playUrl = null;
     
     /**
-     * @var string|null $protocol The protocol for the video playlist. Supported protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:ProtocolEnum'>eBay API documentation</a>
+     * @var ProtocolEnum|null $protocol The protocol for the video playlist. Supported protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming).
     */
-    private ?string $protocol = null;
+    private ?ProtocolEnum $protocol = null;
     
     /**
      * Instantiates a new Play and sets the default values.
@@ -73,7 +73,7 @@ class Play implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'playUrl' => fn(ParseNode $n) => $o->setPlayUrl($n->getStringValue()),
-            'protocol' => fn(ParseNode $n) => $o->setProtocol($n->getStringValue()),
+            'protocol' => fn(ParseNode $n) => $o->setProtocol($n->getEnumValue(ProtocolEnum::class)),
         ];
     }
 
@@ -86,10 +86,10 @@ class Play implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the protocol property value. The protocol for the video playlist. Supported protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:ProtocolEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the protocol property value. The protocol for the video playlist. Supported protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming).
+     * @return ProtocolEnum|null
     */
-    public function getProtocol(): ?string {
+    public function getProtocol(): ?ProtocolEnum {
         return $this->protocol;
     }
 
@@ -99,7 +99,7 @@ class Play implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('playUrl', $this->getPlayUrl());
-        $writer->writeStringValue('protocol', $this->getProtocol());
+        $writer->writeEnumValue('protocol', $this->getProtocol());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class Play implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the protocol property value. The protocol for the video playlist. Supported protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:ProtocolEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the protocol property.
+     * Sets the protocol property value. The protocol for the video playlist. Supported protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming).
+     * @param ProtocolEnum|null $value Value to set for the protocol property.
     */
-    public function setProtocol(?string $value): void {
+    public function setProtocol(?ProtocolEnum $value): void {
         $this->protocol = $value;
     }
 

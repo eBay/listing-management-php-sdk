@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The base request type of the <b>addStoreCategory</b> method. It is used to provide the name and location for the new category.
+ * This call allows you to add the category of an eBay Store.Sellers must have an eBay Store subscription in order to use this call.
 */
 class AddStoreCategoryRequestType implements AdditionalDataHolder, Parsable 
 {
@@ -37,12 +37,12 @@ class AddStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     private ?string $categoryName = null;
     
     /**
-     * @var string|null $destinationParentCategoryId This field is used to specify the parent category to which the new category belongs. To specify the new category as a top-level category, set the value of this field to -999, or just omit this field, as the default value is -999.<br>The <a href="/api-docs/sell/stores/resources/store/methods/getStoreCategories"><b>getStoreCategories</b></a> method can be used to retrieve store category IDs.<br><br><b>Default: ROOT</b> category ID<b>(-999)</b> if it's null.
+     * @var string|null $destinationParentCategoryId This field is used to specify the parent category to which the new category belongs. To specify the new category as a top-level category, set the value of this field to -999, or just omit this field, as the default value is -999.<br><br>The <a href="/develop/api/sell/stores_api#sell-stores_api-store-getstorecategories">getStoreCategories</a> method can be used to retrieve store category IDs.<br><br><b>Default: ROOT</b> category ID<b>(-999)</b> if it's null.
     */
     private ?string $destinationParentCategoryId = null;
     
     /**
-     * @var string|null $listingDestinationCategoryId If the store category specified as the <b>destinationParentCategoryId</b> is a leaf category with active listings, those listings are moved to the store category identified through this <b>listingDestinationCategoryId</b>. If this field is omitted, the new store category being added under the parent category inherits those listings.<br>The <a href="/api-docs/sell/stores/resources/store/methods/getStoreCategories"><b>getStoreCategories</b></a> method can be used to retrieve store category IDs.<br><br><b>Default:</b> Newly added category ID if it's null.
+     * @var string|null $listingDestinationCategoryId When adding store category, if the destination category destinationParentCategoryId is a leaf category and it has active items, you must specify listingDestinationCategoryId. The system will move the items from destinationParentCategoryId to listingDestinationCategoryId. The listingDestinationCategoryId should be a leaf category which has no child categories. Default value: Newly added category ID if it's null.
     */
     private ?string $listingDestinationCategoryId = null;
     
@@ -79,7 +79,7 @@ class AddStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the destinationParentCategoryId property value. This field is used to specify the parent category to which the new category belongs. To specify the new category as a top-level category, set the value of this field to -999, or just omit this field, as the default value is -999.<br>The <a href="/api-docs/sell/stores/resources/store/methods/getStoreCategories"><b>getStoreCategories</b></a> method can be used to retrieve store category IDs.<br><br><b>Default: ROOT</b> category ID<b>(-999)</b> if it's null.
+     * Gets the destinationParentCategoryId property value. This field is used to specify the parent category to which the new category belongs. To specify the new category as a top-level category, set the value of this field to -999, or just omit this field, as the default value is -999.<br><br>The <a href="/develop/api/sell/stores_api#sell-stores_api-store-getstorecategories">getStoreCategories</a> method can be used to retrieve store category IDs.<br><br><b>Default: ROOT</b> category ID<b>(-999)</b> if it's null.
      * @return string|null
     */
     public function getDestinationParentCategoryId(): ?string {
@@ -100,7 +100,7 @@ class AddStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the listingDestinationCategoryId property value. If the store category specified as the <b>destinationParentCategoryId</b> is a leaf category with active listings, those listings are moved to the store category identified through this <b>listingDestinationCategoryId</b>. If this field is omitted, the new store category being added under the parent category inherits those listings.<br>The <a href="/api-docs/sell/stores/resources/store/methods/getStoreCategories"><b>getStoreCategories</b></a> method can be used to retrieve store category IDs.<br><br><b>Default:</b> Newly added category ID if it's null.
+     * Gets the listingDestinationCategoryId property value. When adding store category, if the destination category destinationParentCategoryId is a leaf category and it has active items, you must specify listingDestinationCategoryId. The system will move the items from destinationParentCategoryId to listingDestinationCategoryId. The listingDestinationCategoryId should be a leaf category which has no child categories. Default value: Newly added category ID if it's null.
      * @return string|null
     */
     public function getListingDestinationCategoryId(): ?string {
@@ -135,7 +135,7 @@ class AddStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the destinationParentCategoryId property value. This field is used to specify the parent category to which the new category belongs. To specify the new category as a top-level category, set the value of this field to -999, or just omit this field, as the default value is -999.<br>The <a href="/api-docs/sell/stores/resources/store/methods/getStoreCategories"><b>getStoreCategories</b></a> method can be used to retrieve store category IDs.<br><br><b>Default: ROOT</b> category ID<b>(-999)</b> if it's null.
+     * Sets the destinationParentCategoryId property value. This field is used to specify the parent category to which the new category belongs. To specify the new category as a top-level category, set the value of this field to -999, or just omit this field, as the default value is -999.<br><br>The <a href="/develop/api/sell/stores_api#sell-stores_api-store-getstorecategories">getStoreCategories</a> method can be used to retrieve store category IDs.<br><br><b>Default: ROOT</b> category ID<b>(-999)</b> if it's null.
      * @param string|null $value Value to set for the destinationParentCategoryId property.
     */
     public function setDestinationParentCategoryId(?string $value): void {
@@ -143,7 +143,7 @@ class AddStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingDestinationCategoryId property value. If the store category specified as the <b>destinationParentCategoryId</b> is a leaf category with active listings, those listings are moved to the store category identified through this <b>listingDestinationCategoryId</b>. If this field is omitted, the new store category being added under the parent category inherits those listings.<br>The <a href="/api-docs/sell/stores/resources/store/methods/getStoreCategories"><b>getStoreCategories</b></a> method can be used to retrieve store category IDs.<br><br><b>Default:</b> Newly added category ID if it's null.
+     * Sets the listingDestinationCategoryId property value. When adding store category, if the destination category destinationParentCategoryId is a leaf category and it has active items, you must specify listingDestinationCategoryId. The system will move the items from destinationParentCategoryId to listingDestinationCategoryId. The listingDestinationCategoryId should be a leaf category which has no child categories. Default value: Newly added category ID if it's null.
      * @param string|null $value Value to set for the listingDestinationCategoryId property.
     */
     public function setListingDestinationCategoryId(?string $value): void {

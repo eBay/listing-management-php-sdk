@@ -32,7 +32,7 @@ class ShipToLocationAvailabilityWithAll implements AdditionalDataHolder, Parsabl
     private ?array $additionalData = null;
     
     /**
-     * @var FormatAllocation|null $allocationByFormat This type is used to indicate the quantities of the inventory items that are reserved for the different listing formats of the SKU offers.
+     * @var FormatAllocation|null $allocationByFormat This container is used to specify the quantity of the inventory item that is available for purchase, allocated by the offer types.
     */
     private ?FormatAllocation $allocationByFormat = null;
     
@@ -71,7 +71,7 @@ class ShipToLocationAvailabilityWithAll implements AdditionalDataHolder, Parsabl
     }
 
     /**
-     * Gets the allocationByFormat property value. This type is used to indicate the quantities of the inventory items that are reserved for the different listing formats of the SKU offers.
+     * Gets the allocationByFormat property value. This container is used to specify the quantity of the inventory item that is available for purchase, allocated by the offer types.
      * @return FormatAllocation|null
     */
     public function getAllocationByFormat(): ?FormatAllocation {
@@ -127,7 +127,7 @@ class ShipToLocationAvailabilityWithAll implements AdditionalDataHolder, Parsabl
     }
 
     /**
-     * Sets the allocationByFormat property value. This type is used to indicate the quantities of the inventory items that are reserved for the different listing formats of the SKU offers.
+     * Sets the allocationByFormat property value. This container is used to specify the quantity of the inventory item that is available for purchase, allocated by the offer types.
      * @param FormatAllocation|null $value Value to set for the allocationByFormat property.
     */
     public function setAllocationByFormat(?FormatAllocation $value): void {

@@ -32,14 +32,14 @@ class PackageWeightAndSize implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Dimension|null $dimensions This type is used to specify the dimensions (and the unit used to measure those dimensions) of a shipping package. The <strong>dimensions</strong> container is conditionally required if the seller will be offering calculated shipping rates to determine shipping cost. See the <a href="https://pages.ebay.com/help/pay/calculated-shipping.html " target="_blank">Calculated shipping</a> help page for more information on calculated shipping.
+     * @var Dimension|null $dimensions This container is used to indicate the length, width, and height of the shipping package that will be used to ship the inventory item. The dimensions of a shipping package are needed when calculated shipping is used.<br><br>This container will be returned if package dimensions are set for the inventory item.
     */
     private ?Dimension $dimensions = null;
     
     /**
-     * @var string|null $packageType This enumeration value indicates the type of shipping package used to ship the inventory item. The supported values for this field can be found in the <a href="/api-docs/sell/inventory/types/slr:PackageTypeEnum" target="_blank">PackageTypeEnum</a> type.<br><br>This field will be returned if the package type is set for the inventory item.<br><br><span class="tablenote"> <strong>Note:</strong> You can use the <a href="/Devzone/XML/docs/Reference/eBay/GeteBayDetails.html#Response.ShippingPackageDetails" target="_blank">GeteBayDetails</a> Trading API call to retrieve a list of supported package types for a specific marketplace.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:PackageTypeEnum'>eBay API documentation</a>
+     * @var PackageTypeEnum|null $packageType This enumeration value indicates the type of shipping package used to ship the inventory item. The supported values for this field can be found in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkcreateorreplaceinventoryitem.packagetypeenum" target="_blank">PackageTypeEnum</a> type.<br><br>This field will be returned if the package type is set for the inventory item.<br><br><span class="tablenote"> <strong>Note:</strong> You can use the <a href="/Devzone/XML/docs/Reference/eBay/GeteBayDetails.html#Response.ShippingPackageDetails" target="_blank">GeteBayDetails</a> Trading API call to retrieve a list of supported package types for a specific marketplace.</span>
     */
-    private ?string $packageType = null;
+    private ?PackageTypeEnum $packageType = null;
     
     /**
      * @var bool|null $shippingIrregular A value of <code>true</code> indicates that the package is irregular and cannot go through the stamping machine at the shipping service office. This field applies to calculated shipping only. Irregular packages require special or fragile handling.
@@ -47,7 +47,7 @@ class PackageWeightAndSize implements AdditionalDataHolder, Parsable
     private ?bool $shippingIrregular = null;
     
     /**
-     * @var Weight|null $weight This type is used to specify the weight (and the unit used to measure that weight) of a shipping package. The <strong>weight</strong> container is conditionally required if the seller will be offering calculated shipping rates to determine shipping cost, or is using flat-rate costs, but charging a weight surcharge. See the <a href="https://pages.ebay.com/help/pay/calculated-shipping.html " target="_blank">Calculated shipping</a> help page for more information on calculated shipping.
+     * @var Weight|null $weight This container is used to specify the weight of the shipping package that will be used to ship the inventory item. The weight of a shipping package are needed when calculated shipping is used, or if flat-rate shipping rates are used, but with a weight surcharge.<br><br>This field will be returned if package weight is set for the inventory item.
     */
     private ?Weight $weight = null;
     
@@ -76,7 +76,7 @@ class PackageWeightAndSize implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dimensions property value. This type is used to specify the dimensions (and the unit used to measure those dimensions) of a shipping package. The <strong>dimensions</strong> container is conditionally required if the seller will be offering calculated shipping rates to determine shipping cost. See the <a href="https://pages.ebay.com/help/pay/calculated-shipping.html " target="_blank">Calculated shipping</a> help page for more information on calculated shipping.
+     * Gets the dimensions property value. This container is used to indicate the length, width, and height of the shipping package that will be used to ship the inventory item. The dimensions of a shipping package are needed when calculated shipping is used.<br><br>This container will be returned if package dimensions are set for the inventory item.
      * @return Dimension|null
     */
     public function getDimensions(): ?Dimension {
@@ -91,17 +91,17 @@ class PackageWeightAndSize implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'dimensions' => fn(ParseNode $n) => $o->setDimensions($n->getObjectValue([Dimension::class, 'createFromDiscriminatorValue'])),
-            'packageType' => fn(ParseNode $n) => $o->setPackageType($n->getStringValue()),
+            'packageType' => fn(ParseNode $n) => $o->setPackageType($n->getEnumValue(PackageTypeEnum::class)),
             'shippingIrregular' => fn(ParseNode $n) => $o->setShippingIrregular($n->getBooleanValue()),
             'weight' => fn(ParseNode $n) => $o->setWeight($n->getObjectValue([Weight::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the packageType property value. This enumeration value indicates the type of shipping package used to ship the inventory item. The supported values for this field can be found in the <a href="/api-docs/sell/inventory/types/slr:PackageTypeEnum" target="_blank">PackageTypeEnum</a> type.<br><br>This field will be returned if the package type is set for the inventory item.<br><br><span class="tablenote"> <strong>Note:</strong> You can use the <a href="/Devzone/XML/docs/Reference/eBay/GeteBayDetails.html#Response.ShippingPackageDetails" target="_blank">GeteBayDetails</a> Trading API call to retrieve a list of supported package types for a specific marketplace.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:PackageTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the packageType property value. This enumeration value indicates the type of shipping package used to ship the inventory item. The supported values for this field can be found in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkcreateorreplaceinventoryitem.packagetypeenum" target="_blank">PackageTypeEnum</a> type.<br><br>This field will be returned if the package type is set for the inventory item.<br><br><span class="tablenote"> <strong>Note:</strong> You can use the <a href="/Devzone/XML/docs/Reference/eBay/GeteBayDetails.html#Response.ShippingPackageDetails" target="_blank">GeteBayDetails</a> Trading API call to retrieve a list of supported package types for a specific marketplace.</span>
+     * @return PackageTypeEnum|null
     */
-    public function getPackageType(): ?string {
+    public function getPackageType(): ?PackageTypeEnum {
         return $this->packageType;
     }
 
@@ -114,7 +114,7 @@ class PackageWeightAndSize implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the weight property value. This type is used to specify the weight (and the unit used to measure that weight) of a shipping package. The <strong>weight</strong> container is conditionally required if the seller will be offering calculated shipping rates to determine shipping cost, or is using flat-rate costs, but charging a weight surcharge. See the <a href="https://pages.ebay.com/help/pay/calculated-shipping.html " target="_blank">Calculated shipping</a> help page for more information on calculated shipping.
+     * Gets the weight property value. This container is used to specify the weight of the shipping package that will be used to ship the inventory item. The weight of a shipping package are needed when calculated shipping is used, or if flat-rate shipping rates are used, but with a weight surcharge.<br><br>This field will be returned if package weight is set for the inventory item.
      * @return Weight|null
     */
     public function getWeight(): ?Weight {
@@ -127,7 +127,7 @@ class PackageWeightAndSize implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('dimensions', $this->getDimensions());
-        $writer->writeStringValue('packageType', $this->getPackageType());
+        $writer->writeEnumValue('packageType', $this->getPackageType());
         $writer->writeBooleanValue('shippingIrregular', $this->getShippingIrregular());
         $writer->writeObjectValue('weight', $this->getWeight());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -142,7 +142,7 @@ class PackageWeightAndSize implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dimensions property value. This type is used to specify the dimensions (and the unit used to measure those dimensions) of a shipping package. The <strong>dimensions</strong> container is conditionally required if the seller will be offering calculated shipping rates to determine shipping cost. See the <a href="https://pages.ebay.com/help/pay/calculated-shipping.html " target="_blank">Calculated shipping</a> help page for more information on calculated shipping.
+     * Sets the dimensions property value. This container is used to indicate the length, width, and height of the shipping package that will be used to ship the inventory item. The dimensions of a shipping package are needed when calculated shipping is used.<br><br>This container will be returned if package dimensions are set for the inventory item.
      * @param Dimension|null $value Value to set for the dimensions property.
     */
     public function setDimensions(?Dimension $value): void {
@@ -150,10 +150,10 @@ class PackageWeightAndSize implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the packageType property value. This enumeration value indicates the type of shipping package used to ship the inventory item. The supported values for this field can be found in the <a href="/api-docs/sell/inventory/types/slr:PackageTypeEnum" target="_blank">PackageTypeEnum</a> type.<br><br>This field will be returned if the package type is set for the inventory item.<br><br><span class="tablenote"> <strong>Note:</strong> You can use the <a href="/Devzone/XML/docs/Reference/eBay/GeteBayDetails.html#Response.ShippingPackageDetails" target="_blank">GeteBayDetails</a> Trading API call to retrieve a list of supported package types for a specific marketplace.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:PackageTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the packageType property.
+     * Sets the packageType property value. This enumeration value indicates the type of shipping package used to ship the inventory item. The supported values for this field can be found in the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-bulkcreateorreplaceinventoryitem.packagetypeenum" target="_blank">PackageTypeEnum</a> type.<br><br>This field will be returned if the package type is set for the inventory item.<br><br><span class="tablenote"> <strong>Note:</strong> You can use the <a href="/Devzone/XML/docs/Reference/eBay/GeteBayDetails.html#Response.ShippingPackageDetails" target="_blank">GeteBayDetails</a> Trading API call to retrieve a list of supported package types for a specific marketplace.</span>
+     * @param PackageTypeEnum|null $value Value to set for the packageType property.
     */
-    public function setPackageType(?string $value): void {
+    public function setPackageType(?PackageTypeEnum $value): void {
         $this->packageType = $value;
     }
 
@@ -166,7 +166,7 @@ class PackageWeightAndSize implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the weight property value. This type is used to specify the weight (and the unit used to measure that weight) of a shipping package. The <strong>weight</strong> container is conditionally required if the seller will be offering calculated shipping rates to determine shipping cost, or is using flat-rate costs, but charging a weight surcharge. See the <a href="https://pages.ebay.com/help/pay/calculated-shipping.html " target="_blank">Calculated shipping</a> help page for more information on calculated shipping.
+     * Sets the weight property value. This container is used to specify the weight of the shipping package that will be used to ship the inventory item. The weight of a shipping package are needed when calculated shipping is used, or if flat-rate shipping rates are used, but with a weight surcharge.<br><br>This field will be returned if package weight is set for the inventory item.
      * @param Weight|null $value Value to set for the weight property.
     */
     public function setWeight(?Weight $value): void {

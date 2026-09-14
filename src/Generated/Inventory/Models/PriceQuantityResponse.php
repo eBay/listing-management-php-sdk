@@ -32,7 +32,7 @@ class PriceQuantityResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<Error>|null $errors This array will be returned if there were one or more errors associated with the update to the offer or inventory item record.
+     * @var array<ErrorDetailV3>|null $errors This array will be returned if there were one or more errors associated with the update to the offer or inventory item record.
     */
     private ?array $errors = null;
     
@@ -42,7 +42,7 @@ class PriceQuantityResponse implements AdditionalDataHolder, Parsable
     private ?string $offerId = null;
     
     /**
-     * @var string|null $sku This is the seller-defined SKU value of the product. This field is returned whether the seller attempted to update an offer with the SKU value or just attempted to update the total 'ship-to-home' quantity of an inventory item record.<br><br><strong>Max Length</strong>: 50<br>
+     * @var string|null $sku This is the seller-defined SKU value of the product. This field is returned whether the seller attempted to update an offer with the SKU value or just attempted to update the total 'ship-to-home' quantity of an inventory item record.<br><br><strong>Maximum length</strong>: 50<br>
     */
     private ?string $sku = null;
     
@@ -52,7 +52,7 @@ class PriceQuantityResponse implements AdditionalDataHolder, Parsable
     private ?int $statusCode = null;
     
     /**
-     * @var array<Error>|null $warnings This array will be returned if there were one or more warnings associated with the update to the offer or inventory item record.
+     * @var array<ErrorDetailV3>|null $warnings This array will be returned if there were one or more warnings associated with the update to the offer or inventory item record.
     */
     private ?array $warnings = null;
     
@@ -82,7 +82,7 @@ class PriceQuantityResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the errors property value. This array will be returned if there were one or more errors associated with the update to the offer or inventory item record.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -95,11 +95,11 @@ class PriceQuantityResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
             'offerId' => fn(ParseNode $n) => $o->setOfferId($n->getStringValue()),
             'sku' => fn(ParseNode $n) => $o->setSku($n->getStringValue()),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
-            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
@@ -112,7 +112,7 @@ class PriceQuantityResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sku property value. This is the seller-defined SKU value of the product. This field is returned whether the seller attempted to update an offer with the SKU value or just attempted to update the total 'ship-to-home' quantity of an inventory item record.<br><br><strong>Max Length</strong>: 50<br>
+     * Gets the sku property value. This is the seller-defined SKU value of the product. This field is returned whether the seller attempted to update an offer with the SKU value or just attempted to update the total 'ship-to-home' quantity of an inventory item record.<br><br><strong>Maximum length</strong>: 50<br>
      * @return string|null
     */
     public function getSku(): ?string {
@@ -129,7 +129,7 @@ class PriceQuantityResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the warnings property value. This array will be returned if there were one or more warnings associated with the update to the offer or inventory item record.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getWarnings(): ?array {
         return $this->warnings;
@@ -158,7 +158,7 @@ class PriceQuantityResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the errors property value. This array will be returned if there were one or more errors associated with the update to the offer or inventory item record.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;
@@ -173,7 +173,7 @@ class PriceQuantityResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sku property value. This is the seller-defined SKU value of the product. This field is returned whether the seller attempted to update an offer with the SKU value or just attempted to update the total 'ship-to-home' quantity of an inventory item record.<br><br><strong>Max Length</strong>: 50<br>
+     * Sets the sku property value. This is the seller-defined SKU value of the product. This field is returned whether the seller attempted to update an offer with the SKU value or just attempted to update the total 'ship-to-home' quantity of an inventory item record.<br><br><strong>Maximum length</strong>: 50<br>
      * @param string|null $value Value to set for the sku property.
     */
     public function setSku(?string $value): void {
@@ -190,7 +190,7 @@ class PriceQuantityResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the warnings property value. This array will be returned if there were one or more warnings associated with the update to the offer or inventory item record.
-     * @param array<Error>|null $value Value to set for the warnings property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the warnings property.
     */
     public function setWarnings(?array $value): void {
         $this->warnings = $value;

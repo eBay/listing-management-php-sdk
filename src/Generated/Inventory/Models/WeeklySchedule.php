@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * This type describes the weekly schedule for cut-off times.
@@ -38,7 +37,7 @@ class WeeklySchedule implements AdditionalDataHolder, Parsable
     private ?string $cutOffTime = null;
     
     /**
-     * @var array<string>|null $dayOfWeekEnum This comma-separated array defines the days of week for which the specified <b>cutOffTime</b> is used.
+     * @var array<DayOfWeekEnum>|null $dayOfWeekEnum This comma-separated array defines the days of week for which the specified <b>cutOffTime</b> is used.
     */
     private ?array $dayOfWeekEnum = null;
     
@@ -76,7 +75,7 @@ class WeeklySchedule implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the dayOfWeekEnum property value. This comma-separated array defines the days of week for which the specified <b>cutOffTime</b> is used.
-     * @return array<string>|null
+     * @return array<DayOfWeekEnum>|null
     */
     public function getDayOfWeekEnum(): ?array {
         return $this->dayOfWeekEnum;
@@ -90,14 +89,7 @@ class WeeklySchedule implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'cutOffTime' => fn(ParseNode $n) => $o->setCutOffTime($n->getStringValue()),
-            'dayOfWeekEnum' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setDayOfWeekEnum($val);
-            },
+            'dayOfWeekEnum' => fn(ParseNode $n) => $o->setDayOfWeekEnum($n->getCollectionOfEnumValues(DayOfWeekEnum::class)),
         ];
     }
 
@@ -107,7 +99,7 @@ class WeeklySchedule implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('cutOffTime', $this->getCutOffTime());
-        $writer->writeCollectionOfPrimitiveValues('dayOfWeekEnum', $this->getDayOfWeekEnum());
+        $writer->writeCollectionOfEnumValues('dayOfWeekEnum', $this->getDayOfWeekEnum());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -129,7 +121,7 @@ class WeeklySchedule implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the dayOfWeekEnum property value. This comma-separated array defines the days of week for which the specified <b>cutOffTime</b> is used.
-     * @param array<string>|null $value Value to set for the dayOfWeekEnum property.
+     * @param array<DayOfWeekEnum>|null $value Value to set for the dayOfWeekEnum property.
     */
     public function setDayOfWeekEnum(?array $value): void {
         $this->dayOfWeekEnum = $value;

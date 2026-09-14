@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The base response type of the <b>getStoreTask</b> method.
+ * The base response of a getStoreTask call.
 */
 class GetStoreTaskResponseType implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class GetStoreTaskResponseType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var StoreTaskType|null $task This type is used to provide details about the status of the Store Task.
+     * @var StoreTaskType|null $task An object describe the task information.
     */
     private ?StoreTaskType $task = null;
     
@@ -72,7 +72,7 @@ class GetStoreTaskResponseType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the task property value. This type is used to provide details about the status of the Store Task.
+     * Gets the task property value. An object describe the task information.
      * @return StoreTaskType|null
     */
     public function getTask(): ?StoreTaskType {
@@ -97,7 +97,7 @@ class GetStoreTaskResponseType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the task property value. This type is used to provide details about the status of the Store Task.
+     * Sets the task property value. An object describe the task information.
      * @param StoreTaskType|null $value Value to set for the task property.
     */
     public function setTask(?StoreTaskType $value): void {

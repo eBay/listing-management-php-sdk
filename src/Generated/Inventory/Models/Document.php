@@ -32,7 +32,7 @@ class Document implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $documentId The unique identifier of a regulatory document associated with the listing.<br><br>This value can be found in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method of the Media API.
+     * @var string|null $documentId The unique identifier of a regulatory document associated with the listing.<br><br>This value can be found in the response of the <a href="/develop/api/sell/media_api#sell-media_api-document-createdocument" target="_blank">createDocument</a> method of the Media API.
     */
     private ?string $documentId = null;
     
@@ -61,7 +61,7 @@ class Document implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the documentId property value. The unique identifier of a regulatory document associated with the listing.<br><br>This value can be found in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method of the Media API.
+     * Gets the documentId property value. The unique identifier of a regulatory document associated with the listing.<br><br>This value can be found in the response of the <a href="/develop/api/sell/media_api#sell-media_api-document-createdocument" target="_blank">createDocument</a> method of the Media API.
      * @return string|null
     */
     public function getDocumentId(): ?string {
@@ -97,7 +97,7 @@ class Document implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the documentId property value. The unique identifier of a regulatory document associated with the listing.<br><br>This value can be found in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method of the Media API.
+     * Sets the documentId property value. The unique identifier of a regulatory document associated with the listing.<br><br>This value can be found in the response of the <a href="/develop/api/sell/media_api#sell-media_api-document-createdocument" target="_blank">createDocument</a> method of the Media API.
      * @param string|null $value Value to set for the documentId property.
     */
     public function setDocumentId(?string $value): void {

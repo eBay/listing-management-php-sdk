@@ -56,42 +56,6 @@ use EBay\ListingManagement\Generated\Inventory\Models\PublishByInventoryItemGrou
 use EBay\ListingManagement\Generated\Inventory\Models\PublishResponse;
 use EBay\ListingManagement\Generated\Inventory\Models\WithdrawByInventoryItemGroupRequest;
 use EBay\ListingManagement\Generated\Inventory\Models\WithdrawResponse;
-use EBay\ListingManagement\Generated\Inventory\Bulk_create_offer\Bulk_create_offerRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Bulk_create_or_replace_inventory_item\Bulk_create_or_replace_inventory_itemRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Bulk_get_inventory_item\Bulk_get_inventory_itemRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Bulk_migrate_listing\Bulk_migrate_listingRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Bulk_publish_offer\Bulk_publish_offerRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Bulk_update_price_quantity\Bulk_update_price_quantityRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item_group\Item\WithInventoryItemGroupKeyItemRequestBuilderDeleteRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item_group\Item\WithInventoryItemGroupKeyItemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item_group\Item\WithInventoryItemGroupKeyItemRequestBuilderPutRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Inventory_itemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderDeleteRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderPutRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderDeleteRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderPutRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Listing\Item\Sku\Item\Locations\LocationsRequestBuilderDeleteRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Listing\Item\Sku\Item\Locations\LocationsRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Listing\Item\Sku\Item\Locations\LocationsRequestBuilderPutRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Location\Item\Disable\DisableRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Location\Item\Enable\EnableRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Location\Item\Update_location_details\Update_location_detailsRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Location\Item\WithMerchantLocationKeyItemRequestBuilderDeleteRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Location\Item\WithMerchantLocationKeyItemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Location\Item\WithMerchantLocationKeyItemRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Location\LocationRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Offer\Get_listing_fees\Get_listing_feesRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Offer\Item\Publish\PublishRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Offer\Item\Withdraw\WithdrawRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Offer\Item\WithOfferItemRequestBuilderDeleteRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Offer\Item\WithOfferItemRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Offer\Item\WithOfferItemRequestBuilderPutRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Offer\OfferRequestBuilderGetRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Offer\OfferRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Offer\Publish_by_inventory_item_group\Publish_by_inventory_item_groupRequestBuilderPostRequestConfiguration;
-use EBay\ListingManagement\Generated\Inventory\Offer\Withdraw_by_inventory_item_group\Withdraw_by_inventory_item_groupRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -118,7 +82,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->bulk_create_or_replace_inventory_item()->post(
                 $body,
-                new Bulk_create_or_replace_inventory_itemRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Bulk_create_or_replace_inventory_item\Bulk_create_or_replace_inventory_itemRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -129,7 +93,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->bulk_get_inventory_item()->post(
                 $body,
-                new Bulk_get_inventory_itemRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Bulk_get_inventory_item\Bulk_get_inventory_itemRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -140,7 +104,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->bulk_update_price_quantity()->post(
                 $body,
-                new Bulk_update_price_quantityRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Bulk_update_price_quantity\Bulk_update_price_quantityRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -150,7 +114,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->inventory_item()->bySku($sku)->get(
-                new WithSkuItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -166,7 +130,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->inventory_item()->bySku($sku)->put(
                 $body,
-                new WithSkuItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -176,7 +140,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->inventory_item()->bySku($sku)->delete(
-                new WithSkuItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -191,9 +155,9 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->inventory_item()->get(
-                new Inventory_itemRequestBuilderGetRequestConfiguration(
+                new \EBay\ListingManagement\Generated\Inventory\Inventory_item\Inventory_itemRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Inventory_itemRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\ListingManagement\Generated\Inventory\Inventory_item\Inventory_itemRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         offset: $offset,
                     ),
@@ -207,7 +171,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->inventory_item()->bySku($sku)->product_compatibility()->get(
-                new Product_compatibilityRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -223,7 +187,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->inventory_item()->bySku($sku)->product_compatibility()->put(
                 $body,
-                new Product_compatibilityRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -233,7 +197,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->inventory_item()->bySku($sku)->product_compatibility()->delete(
-                new Product_compatibilityRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\Product_compatibility\Product_compatibilityRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -243,7 +207,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->get(
-                new WithInventoryItemGroupKeyItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Inventory_item_group\Item\WithInventoryItemGroupKeyItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -259,7 +223,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->put(
                 $body,
-                new WithInventoryItemGroupKeyItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Inventory_item_group\Item\WithInventoryItemGroupKeyItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -269,7 +233,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->inventory_item_group()->byInventoryItemGroupKey($inventoryItemGroupKey)->delete(
-                new WithInventoryItemGroupKeyItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Inventory_item_group\Item\WithInventoryItemGroupKeyItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -280,7 +244,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->bulk_migrate_listing()->post(
                 $body,
-                new Bulk_migrate_listingRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Bulk_migrate_listing\Bulk_migrate_listingRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -295,7 +259,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->listing()->byListingId($listingId)->sku()->bySku($sku)->locations()->get(
-                new LocationsRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Listing\Item\Sku\Item\Locations\LocationsRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -312,7 +276,7 @@ final class InventoryClient
         $this->call($accessToken, fn($api) =>
             $api->listing()->byListingId($listingId)->sku()->bySku($sku)->locations()->put(
                 $body,
-                new LocationsRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Listing\Item\Sku\Item\Locations\LocationsRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -327,7 +291,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->listing()->byListingId($listingId)->sku()->bySku($sku)->locations()->delete(
-                new LocationsRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Listing\Item\Sku\Item\Locations\LocationsRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -338,7 +302,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->bulk_create_offer()->post(
                 $body,
-                new Bulk_create_offerRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Bulk_create_offer\Bulk_create_offerRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -349,7 +313,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->bulk_publish_offer()->post(
                 $body,
-                new Bulk_publish_offerRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Bulk_publish_offer\Bulk_publish_offerRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -367,9 +331,9 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->offer()->get(
-                new OfferRequestBuilderGetRequestConfiguration(
+                new \EBay\ListingManagement\Generated\Inventory\Offer\OfferRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: OfferRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\ListingManagement\Generated\Inventory\Offer\OfferRequestBuilderGetRequestConfiguration::createQueryParameters(
                         format: $format,
                         limit: $limit,
                         marketplace_id: $marketplaceId,
@@ -387,7 +351,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->offer()->post(
                 $body,
-                new OfferRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Offer\OfferRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -397,7 +361,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->offer()->byOfferId($offerId)->get(
-                new WithOfferItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Offer\Item\WithOfferItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -413,7 +377,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->offer()->byOfferId($offerId)->put(
                 $body,
-                new WithOfferItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Offer\Item\WithOfferItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -423,7 +387,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->offer()->byOfferId($offerId)->delete(
-                new WithOfferItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Offer\Item\WithOfferItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -434,7 +398,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->offer()->get_listing_fees()->post(
                 $body,
-                new Get_listing_feesRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Offer\Get_listing_fees\Get_listing_feesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -444,7 +408,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->offer()->byOfferId($offerId)->publish()->post(
-                new PublishRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Offer\Item\Publish\PublishRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -455,7 +419,7 @@ final class InventoryClient
         return $this->call($accessToken, fn($api) =>
             $api->offer()->publish_by_inventory_item_group()->post(
                 $body,
-                new Publish_by_inventory_item_groupRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Offer\Publish_by_inventory_item_group\Publish_by_inventory_item_groupRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -465,7 +429,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->offer()->byOfferId($offerId)->withdraw()->post(
-                new WithdrawRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Offer\Item\Withdraw\WithdrawRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -476,7 +440,7 @@ final class InventoryClient
         $this->call($accessToken, fn($api) =>
             $api->offer()->withdraw_by_inventory_item_group()->post(
                 $body,
-                new Withdraw_by_inventory_item_groupRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Offer\Withdraw_by_inventory_item_group\Withdraw_by_inventory_item_groupRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -486,7 +450,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->location()->byMerchantLocationKey($merchantLocationKey)->get(
-                new WithMerchantLocationKeyItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Location\Item\WithMerchantLocationKeyItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -502,7 +466,7 @@ final class InventoryClient
         $this->call($accessToken, fn($api) =>
             $api->location()->byMerchantLocationKey($merchantLocationKey)->post(
                 $body,
-                new WithMerchantLocationKeyItemRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Location\Item\WithMerchantLocationKeyItemRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -512,7 +476,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->location()->byMerchantLocationKey($merchantLocationKey)->delete(
-                new WithMerchantLocationKeyItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Location\Item\WithMerchantLocationKeyItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -522,7 +486,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->location()->byMerchantLocationKey($merchantLocationKey)->disable()->post(
-                new DisableRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Location\Item\Disable\DisableRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -532,7 +496,7 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->location()->byMerchantLocationKey($merchantLocationKey)->enable()->post(
-                new EnableRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Location\Item\Enable\EnableRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -547,9 +511,9 @@ final class InventoryClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->location()->get(
-                new LocationRequestBuilderGetRequestConfiguration(
+                new \EBay\ListingManagement\Generated\Inventory\Location\LocationRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: LocationRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\ListingManagement\Generated\Inventory\Location\LocationRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         offset: $offset,
                     ),
@@ -569,7 +533,7 @@ final class InventoryClient
         $this->call($accessToken, fn($api) =>
             $api->location()->byMerchantLocationKey($merchantLocationKey)->update_location_details()->post(
                 $body,
-                new Update_location_detailsRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\ListingManagement\Generated\Inventory\Location\Item\Update_location_details\Update_location_detailsRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

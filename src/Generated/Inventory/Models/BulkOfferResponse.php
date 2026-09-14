@@ -32,7 +32,7 @@ class BulkOfferResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<OfferSkuResponse>|null $responses The responses property
+     * @var array<OfferSkuResponse>|null $responses This object contains the responses that show the status of each offer that the seller attempted to create with the method call.
     */
     private ?array $responses = null;
     
@@ -72,7 +72,7 @@ class BulkOfferResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the responses property value. The responses property
+     * Gets the responses property value. This object contains the responses that show the status of each offer that the seller attempted to create with the method call.
      * @return array<OfferSkuResponse>|null
     */
     public function getResponses(): ?array {
@@ -97,7 +97,7 @@ class BulkOfferResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the responses property value. The responses property
+     * Sets the responses property value. This object contains the responses that show the status of each offer that the seller attempted to create with the method call.
      * @param array<OfferSkuResponse>|null $value Value to set for the responses property.
     */
     public function setResponses(?array $value): void {

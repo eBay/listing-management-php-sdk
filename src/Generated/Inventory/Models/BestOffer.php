@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type is used by the <strong>bestOfferTerms</strong> container, which is used if the seller would like to support the Best Offer feature on their listing.
+ * This type is used by the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-createoffer.listingpolicies.bestofferterms" target="_blank">bestOfferTerms</a> container, which is used if the seller would like to support the Best Offer feature on their listing.
 */
 class BestOffer implements AdditionalDataHolder, Parsable 
 {
@@ -32,12 +32,12 @@ class BestOffer implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $autoAcceptPrice This type is used to express a dollar value and the applicable currency.
+     * @var Amount|null $autoAcceptPrice This is the price at which Best Offers are automatically accepted. If a buyer submits a Best Offer that is equal to or above this value, the offer is automatically accepted on behalf of the seller. This field is only applicable if the <strong>bestOfferEnabled</strong> value is set to <code>true</code>.<br><br>The price set here must be lower than the current 'Buy it Now' price. This field is only returned by <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers">getOffers</a> if set.
     */
     private ?Amount $autoAcceptPrice = null;
     
     /**
-     * @var Amount|null $autoDeclinePrice This type is used to express a dollar value and the applicable currency.
+     * @var Amount|null $autoDeclinePrice This is the price at which Best Offers are automatically declined. If a buyer submits a Best Offer that is equal to or below this value, the offer is automatically declined on behalf of the seller. This field is only applicable if the <strong>bestOfferEnabled</strong> value is set to <code>true</code>.<br><br>The price set here must be lower than the current 'Buy it Now' price and the price set in the <strong>autoAcceptPrice</strong> field (if used). This field is only returned by <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers">getOffers</a> if set.
     */
     private ?Amount $autoDeclinePrice = null;
     
@@ -71,7 +71,7 @@ class BestOffer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the autoAcceptPrice property value. This type is used to express a dollar value and the applicable currency.
+     * Gets the autoAcceptPrice property value. This is the price at which Best Offers are automatically accepted. If a buyer submits a Best Offer that is equal to or above this value, the offer is automatically accepted on behalf of the seller. This field is only applicable if the <strong>bestOfferEnabled</strong> value is set to <code>true</code>.<br><br>The price set here must be lower than the current 'Buy it Now' price. This field is only returned by <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers">getOffers</a> if set.
      * @return Amount|null
     */
     public function getAutoAcceptPrice(): ?Amount {
@@ -79,7 +79,7 @@ class BestOffer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the autoDeclinePrice property value. This type is used to express a dollar value and the applicable currency.
+     * Gets the autoDeclinePrice property value. This is the price at which Best Offers are automatically declined. If a buyer submits a Best Offer that is equal to or below this value, the offer is automatically declined on behalf of the seller. This field is only applicable if the <strong>bestOfferEnabled</strong> value is set to <code>true</code>.<br><br>The price set here must be lower than the current 'Buy it Now' price and the price set in the <strong>autoAcceptPrice</strong> field (if used). This field is only returned by <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers">getOffers</a> if set.
      * @return Amount|null
     */
     public function getAutoDeclinePrice(): ?Amount {
@@ -127,7 +127,7 @@ class BestOffer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the autoAcceptPrice property value. This type is used to express a dollar value and the applicable currency.
+     * Sets the autoAcceptPrice property value. This is the price at which Best Offers are automatically accepted. If a buyer submits a Best Offer that is equal to or above this value, the offer is automatically accepted on behalf of the seller. This field is only applicable if the <strong>bestOfferEnabled</strong> value is set to <code>true</code>.<br><br>The price set here must be lower than the current 'Buy it Now' price. This field is only returned by <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers">getOffers</a> if set.
      * @param Amount|null $value Value to set for the autoAcceptPrice property.
     */
     public function setAutoAcceptPrice(?Amount $value): void {
@@ -135,7 +135,7 @@ class BestOffer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the autoDeclinePrice property value. This type is used to express a dollar value and the applicable currency.
+     * Sets the autoDeclinePrice property value. This is the price at which Best Offers are automatically declined. If a buyer submits a Best Offer that is equal to or below this value, the offer is automatically declined on behalf of the seller. This field is only applicable if the <strong>bestOfferEnabled</strong> value is set to <code>true</code>.<br><br>The price set here must be lower than the current 'Buy it Now' price and the price set in the <strong>autoAcceptPrice</strong> field (if used). This field is only returned by <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffer">getOffer</a> and <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-getoffers">getOffers</a> if set.
      * @param Amount|null $value Value to set for the autoDeclinePrice property.
     */
     public function setAutoDeclinePrice(?Amount $value): void {

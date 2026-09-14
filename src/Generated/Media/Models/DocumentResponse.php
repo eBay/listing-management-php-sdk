@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * This type provides information returned about a created document ID, which may or may not have been uploaded.
@@ -38,22 +37,22 @@ class DocumentResponse implements AdditionalDataHolder, Parsable
     private ?string $documentId = null;
     
     /**
-     * @var DocumentMetadata|null $documentMetadata This type provides information about the <b>documentId</b>.
+     * @var DocumentMetadata|null $documentMetadata This container provides the name, size, and type of the specified file.
     */
     private ?DocumentMetadata $documentMetadata = null;
     
     /**
-     * @var string|null $documentStatus The status of the document resource.<br><br>Once a document has been uploaded using the <b>uploadDocument</b> method, the <b>documentStatus</b> will be <code>SUBMITTED</code>. The document will then either be accepted or rejected. Only documents with the status of <code>ACCEPTED</code> are available to be added to a listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentStatusEnum'>eBay API documentation</a>
+     * @var DocumentStatusEnum|null $documentStatus The status of the document resource.<br><br>Once a document has been uploaded using the <strong>uploadDocument</strong> method, the <strong>documentStatus</strong> will be <code>SUBMITTED</code>. The document will then either be accepted or rejected. Only documents with the status of <code>ACCEPTED</code> are available to be added to a listing.
     */
-    private ?string $documentStatus = null;
+    private ?DocumentStatusEnum $documentStatus = null;
     
     /**
-     * @var string|null $documentType The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum'>eBay API documentation</a>
+     * @var DocumentTypeEnum|null $documentType The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>.
     */
-    private ?string $documentType = null;
+    private ?DocumentTypeEnum $documentType = null;
     
     /**
-     * @var array<string>|null $languages This array shows the language(s) used in the document.
+     * @var array<LanguageEnum>|null $languages This array shows the language(s) used in the document.
     */
     private ?array $languages = null;
     
@@ -90,7 +89,7 @@ class DocumentResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the documentMetadata property value. This type provides information about the <b>documentId</b>.
+     * Gets the documentMetadata property value. This container provides the name, size, and type of the specified file.
      * @return DocumentMetadata|null
     */
     public function getDocumentMetadata(): ?DocumentMetadata {
@@ -98,18 +97,18 @@ class DocumentResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the documentStatus property value. The status of the document resource.<br><br>Once a document has been uploaded using the <b>uploadDocument</b> method, the <b>documentStatus</b> will be <code>SUBMITTED</code>. The document will then either be accepted or rejected. Only documents with the status of <code>ACCEPTED</code> are available to be added to a listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the documentStatus property value. The status of the document resource.<br><br>Once a document has been uploaded using the <strong>uploadDocument</strong> method, the <strong>documentStatus</strong> will be <code>SUBMITTED</code>. The document will then either be accepted or rejected. Only documents with the status of <code>ACCEPTED</code> are available to be added to a listing.
+     * @return DocumentStatusEnum|null
     */
-    public function getDocumentStatus(): ?string {
+    public function getDocumentStatus(): ?DocumentStatusEnum {
         return $this->documentStatus;
     }
 
     /**
-     * Gets the documentType property value. The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the documentType property value. The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>.
+     * @return DocumentTypeEnum|null
     */
-    public function getDocumentType(): ?string {
+    public function getDocumentType(): ?DocumentTypeEnum {
         return $this->documentType;
     }
 
@@ -122,22 +121,15 @@ class DocumentResponse implements AdditionalDataHolder, Parsable
         return  [
             'documentId' => fn(ParseNode $n) => $o->setDocumentId($n->getStringValue()),
             'documentMetadata' => fn(ParseNode $n) => $o->setDocumentMetadata($n->getObjectValue([DocumentMetadata::class, 'createFromDiscriminatorValue'])),
-            'documentStatus' => fn(ParseNode $n) => $o->setDocumentStatus($n->getStringValue()),
-            'documentType' => fn(ParseNode $n) => $o->setDocumentType($n->getStringValue()),
-            'languages' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setLanguages($val);
-            },
+            'documentStatus' => fn(ParseNode $n) => $o->setDocumentStatus($n->getEnumValue(DocumentStatusEnum::class)),
+            'documentType' => fn(ParseNode $n) => $o->setDocumentType($n->getEnumValue(DocumentTypeEnum::class)),
+            'languages' => fn(ParseNode $n) => $o->setLanguages($n->getCollectionOfEnumValues(LanguageEnum::class)),
         ];
     }
 
     /**
      * Gets the languages property value. This array shows the language(s) used in the document.
-     * @return array<string>|null
+     * @return array<LanguageEnum>|null
     */
     public function getLanguages(): ?array {
         return $this->languages;
@@ -150,9 +142,9 @@ class DocumentResponse implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('documentId', $this->getDocumentId());
         $writer->writeObjectValue('documentMetadata', $this->getDocumentMetadata());
-        $writer->writeStringValue('documentStatus', $this->getDocumentStatus());
-        $writer->writeStringValue('documentType', $this->getDocumentType());
-        $writer->writeCollectionOfPrimitiveValues('languages', $this->getLanguages());
+        $writer->writeEnumValue('documentStatus', $this->getDocumentStatus());
+        $writer->writeEnumValue('documentType', $this->getDocumentType());
+        $writer->writeCollectionOfEnumValues('languages', $this->getLanguages());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -173,7 +165,7 @@ class DocumentResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the documentMetadata property value. This type provides information about the <b>documentId</b>.
+     * Sets the documentMetadata property value. This container provides the name, size, and type of the specified file.
      * @param DocumentMetadata|null $value Value to set for the documentMetadata property.
     */
     public function setDocumentMetadata(?DocumentMetadata $value): void {
@@ -181,24 +173,24 @@ class DocumentResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the documentStatus property value. The status of the document resource.<br><br>Once a document has been uploaded using the <b>uploadDocument</b> method, the <b>documentStatus</b> will be <code>SUBMITTED</code>. The document will then either be accepted or rejected. Only documents with the status of <code>ACCEPTED</code> are available to be added to a listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the documentStatus property.
+     * Sets the documentStatus property value. The status of the document resource.<br><br>Once a document has been uploaded using the <strong>uploadDocument</strong> method, the <strong>documentStatus</strong> will be <code>SUBMITTED</code>. The document will then either be accepted or rejected. Only documents with the status of <code>ACCEPTED</code> are available to be added to a listing.
+     * @param DocumentStatusEnum|null $value Value to set for the documentStatus property.
     */
-    public function setDocumentStatus(?string $value): void {
+    public function setDocumentStatus(?DocumentStatusEnum $value): void {
         $this->documentStatus = $value;
     }
 
     /**
-     * Sets the documentType property value. The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the documentType property.
+     * Sets the documentType property value. The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>.
+     * @param DocumentTypeEnum|null $value Value to set for the documentType property.
     */
-    public function setDocumentType(?string $value): void {
+    public function setDocumentType(?DocumentTypeEnum $value): void {
         $this->documentType = $value;
     }
 
     /**
      * Sets the languages property value. This array shows the language(s) used in the document.
-     * @param array<string>|null $value Value to set for the languages property.
+     * @param array<LanguageEnum>|null $value Value to set for the languages property.
     */
     public function setLanguages(?array $value): void {
         $this->languages = $value;

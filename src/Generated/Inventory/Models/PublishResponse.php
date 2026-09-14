@@ -37,7 +37,7 @@ class PublishResponse implements AdditionalDataHolder, Parsable
     private ?string $listingId = null;
     
     /**
-     * @var array<Error>|null $warnings This container will contain an array of errors and/or warnings if any occur when a <strong>publishOffer</strong> or <strong>publishOfferByInventoryItemGroup</strong> call is made.
+     * @var array<ErrorDetailV3>|null $warnings This container will contain an array of errors and/or warnings if any occur when a <strong>publishOffer</strong> or <strong>publishOfferByInventoryItemGroup</strong> call is made.
     */
     private ?array $warnings = null;
     
@@ -73,7 +73,7 @@ class PublishResponse implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'listingId' => fn(ParseNode $n) => $o->setListingId($n->getStringValue()),
-            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
@@ -87,7 +87,7 @@ class PublishResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the warnings property value. This container will contain an array of errors and/or warnings if any occur when a <strong>publishOffer</strong> or <strong>publishOfferByInventoryItemGroup</strong> call is made.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getWarnings(): ?array {
         return $this->warnings;
@@ -121,7 +121,7 @@ class PublishResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the warnings property value. This container will contain an array of errors and/or warnings if any occur when a <strong>publishOffer</strong> or <strong>publishOfferByInventoryItemGroup</strong> call is made.
-     * @param array<Error>|null $value Value to set for the warnings property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the warnings property.
     */
     public function setWarnings(?array $value): void {
         $this->warnings = $value;

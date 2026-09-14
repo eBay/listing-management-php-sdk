@@ -17,6 +17,7 @@
 namespace EBay\ListingManagement\Generated\Stores\Store\Categories;
 
 use EBay\ListingManagement\Generated\Stores\Models\AddStoreCategoryRequestType;
+use EBay\ListingManagement\Generated\Stores\Models\Error;
 use EBay\ListingManagement\Generated\Stores\Models\GetStoreCategoriesResponseType;
 use EBay\ListingManagement\Generated\Stores\Store\Categories\Item\WithCategory_ItemRequestBuilder;
 use EBay\ListingManagement\Generated\Stores\Store\Categories\Move_category\Move_categoryRequestBuilder;
@@ -72,19 +73,27 @@ class CategoriesRequestBuilder extends BaseRequestBuilder
     */
     public function get(?CategoriesRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetStoreCategoriesResponseType::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetStoreCategoriesResponseType::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method is used to add a single new custom category to a user's eBay store through an asynchronous request. A successful call returns the <b>getStoreTask</b> URI in the Location response header. Call <b>getStoreTask</b> (or <b>getStoreTasks</b>) method to retrieve the status of the add category operation.<br><br><span class="tablenote"><strong>Note:</strong> Three levels of store categories are supported.</span><br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> If you initiate a category change, you cannot make additional category changes until the previous change request has completed. Use getStoreTask (or getStoreTasks) method to get latest status of your last request.</p></div>
-     * @param AddStoreCategoryRequestType $body The base request type of the <b>addStoreCategory</b> method. It is used to provide the name and location for the new category.
+     * This method is used to add a single new custom category to a user's eBay store through an asynchronous request. A successful call returns the <b>getStoreTask</b> URI in the Location response header. Call <b>getStoreTask</b> (or <b>getStoreTasks</b>) method to retrieve the status of the add category operation.<br><br><span class="tablenote"><strong>Note:</strong> Three levels of store categories are supported.</span><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> If you initiate a category change, you cannot make additional category changes until the previous change request has completed. Use getStoreTask (or getStoreTasks) method to get latest status of your last request.</p></div>
+     * @param AddStoreCategoryRequestType $body This call is used to add single new category of a user's eBay store.
      * @param CategoriesRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(AddStoreCategoryRequestType $body, ?CategoriesRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
@@ -106,8 +115,8 @@ class CategoriesRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method is used to add a single new custom category to a user's eBay store through an asynchronous request. A successful call returns the <b>getStoreTask</b> URI in the Location response header. Call <b>getStoreTask</b> (or <b>getStoreTasks</b>) method to retrieve the status of the add category operation.<br><br><span class="tablenote"><strong>Note:</strong> Three levels of store categories are supported.</span><br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> If you initiate a category change, you cannot make additional category changes until the previous change request has completed. Use getStoreTask (or getStoreTasks) method to get latest status of your last request.</p></div>
-     * @param AddStoreCategoryRequestType $body The base request type of the <b>addStoreCategory</b> method. It is used to provide the name and location for the new category.
+     * This method is used to add a single new custom category to a user's eBay store through an asynchronous request. A successful call returns the <b>getStoreTask</b> URI in the Location response header. Call <b>getStoreTask</b> (or <b>getStoreTasks</b>) method to retrieve the status of the add category operation.<br><br><span class="tablenote"><strong>Note:</strong> Three levels of store categories are supported.</span><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> If you initiate a category change, you cannot make additional category changes until the previous change request has completed. Use getStoreTask (or getStoreTasks) method to get latest status of your last request.</p></div>
+     * @param AddStoreCategoryRequestType $body This call is used to add single new category of a user's eBay store.
      * @param CategoriesRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -120,6 +129,7 @@ class CategoriesRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

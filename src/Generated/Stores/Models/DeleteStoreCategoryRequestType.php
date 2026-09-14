@@ -32,7 +32,7 @@ class DeleteStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $listingDestinationCategoryId This field is only needed if the category to be deleted or any of its children categories have one or more active listings. The operation will fail otherwise. All active listings in or under the category to be deleted will be moved to the store category specified in this field.<br>The <a href="/api-docs/sell/stores/resources/store/methods/getStoreCategories"><b>getStoreCategories</b></a> method can be used to retrieve store category IDs.<br><br> <b>Default: OTHER</b> category ID <b>(1)</b> if it's null.
+     * @var string|null $listingDestinationCategoryId When deleting store category, if the deleted category category_id is a leaf category and it has active items, you must specify listingDestinationCategoryId. The system will move the items from category_id to listingDestinationCategoryId. The listingDestinationCategoryId should be a leaf category which has no child categories. Default value: OTHER category ID (1) if it's null.
     */
     private ?string $listingDestinationCategoryId = null;
     
@@ -72,7 +72,7 @@ class DeleteStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the listingDestinationCategoryId property value. This field is only needed if the category to be deleted or any of its children categories have one or more active listings. The operation will fail otherwise. All active listings in or under the category to be deleted will be moved to the store category specified in this field.<br>The <a href="/api-docs/sell/stores/resources/store/methods/getStoreCategories"><b>getStoreCategories</b></a> method can be used to retrieve store category IDs.<br><br> <b>Default: OTHER</b> category ID <b>(1)</b> if it's null.
+     * Gets the listingDestinationCategoryId property value. When deleting store category, if the deleted category category_id is a leaf category and it has active items, you must specify listingDestinationCategoryId. The system will move the items from category_id to listingDestinationCategoryId. The listingDestinationCategoryId should be a leaf category which has no child categories. Default value: OTHER category ID (1) if it's null.
      * @return string|null
     */
     public function getListingDestinationCategoryId(): ?string {
@@ -97,7 +97,7 @@ class DeleteStoreCategoryRequestType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingDestinationCategoryId property value. This field is only needed if the category to be deleted or any of its children categories have one or more active listings. The operation will fail otherwise. All active listings in or under the category to be deleted will be moved to the store category specified in this field.<br>The <a href="/api-docs/sell/stores/resources/store/methods/getStoreCategories"><b>getStoreCategories</b></a> method can be used to retrieve store category IDs.<br><br> <b>Default: OTHER</b> category ID <b>(1)</b> if it's null.
+     * Sets the listingDestinationCategoryId property value. When deleting store category, if the deleted category category_id is a leaf category and it has active items, you must specify listingDestinationCategoryId. The system will move the items from category_id to listingDestinationCategoryId. The listingDestinationCategoryId should be a leaf category which has no child categories. Default value: OTHER category ID (1) if it's null.
      * @param string|null $value Value to set for the listingDestinationCategoryId property.
     */
     public function setListingDestinationCategoryId(?string $value): void {

@@ -32,12 +32,12 @@ class NameValueList implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $name This string value identifies the motor vehicle aspect, such as 'make', 'model', 'year', 'trim', and 'engine'. Typically, the make, model, and year of the motor vehicle are always required, with the trim and engine being necessary sometimes, but it will be dependent on the part or accessory, and on the vehicle class.<br><br>The <a href="/api-docs/commerce/taxonomy/resources/category_tree/methods/getCompatibilityProperties" target="_blank">getCompatibilityProperties</a> method of the Taxonomy API can be used to retrieve applicable vehicle aspect names for a specified category.
+     * @var string|null $name This string value identifies the motor vehicle aspect, such as 'make', 'model', 'year', 'trim', and 'engine'. Typically, the make, model, and year of the motor vehicle are always required, with the trim and engine being necessary sometimes, but it will be dependent on the part or accessory, and on the vehicle class.<br><br>The <a href="/develop/api/sell/taxonomy_api#sell-taxonomy_api-category_tree-getcompatibilityproperties" target="_blank">getCompatibilityProperties</a> method of the Taxonomy API can be used to retrieve applicable vehicle aspect names for a specified category.
     */
     private ?string $name = null;
     
     /**
-     * @var string|null $value This string value identifies the motor vehicle aspect specified in the corresponding <strong>name</strong> field. For example, if the <strong>name</strong> field is 'make', this field may be 'Toyota', or if the <strong>name</strong> field is 'model', this field may be 'Camry'.<br><br>The <a href="/api-docs/commerce/taxonomy/resources/category_tree/methods/getCompatibilityPropertyValues" target="_blank">getCompatibilityPropertyValues</a> method of the Taxonomy API can be used to retrieve possible values for vehicle aspect names.
+     * @var string|null $value This string value identifies the motor vehicle aspect specified in the corresponding <strong>name</strong> field. For example, if the <strong>name</strong> field is 'make', this field may be 'Toyota', or if the <strong>name</strong> field is 'model', this field may be 'Camry'.<br><br>The <a href="/develop/api/sell/taxonomy_api#sell-taxonomy_api-category_tree-getcompatibilitypropertyvalues" target="_blank">getCompatibilityPropertyValues</a> method of the Taxonomy API can be used to retrieve possible values for vehicle aspect names.
     */
     private ?string $value = null;
     
@@ -78,7 +78,7 @@ class NameValueList implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the name property value. This string value identifies the motor vehicle aspect, such as 'make', 'model', 'year', 'trim', and 'engine'. Typically, the make, model, and year of the motor vehicle are always required, with the trim and engine being necessary sometimes, but it will be dependent on the part or accessory, and on the vehicle class.<br><br>The <a href="/api-docs/commerce/taxonomy/resources/category_tree/methods/getCompatibilityProperties" target="_blank">getCompatibilityProperties</a> method of the Taxonomy API can be used to retrieve applicable vehicle aspect names for a specified category.
+     * Gets the name property value. This string value identifies the motor vehicle aspect, such as 'make', 'model', 'year', 'trim', and 'engine'. Typically, the make, model, and year of the motor vehicle are always required, with the trim and engine being necessary sometimes, but it will be dependent on the part or accessory, and on the vehicle class.<br><br>The <a href="/develop/api/sell/taxonomy_api#sell-taxonomy_api-category_tree-getcompatibilityproperties" target="_blank">getCompatibilityProperties</a> method of the Taxonomy API can be used to retrieve applicable vehicle aspect names for a specified category.
      * @return string|null
     */
     public function getName(): ?string {
@@ -86,7 +86,7 @@ class NameValueList implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the value property value. This string value identifies the motor vehicle aspect specified in the corresponding <strong>name</strong> field. For example, if the <strong>name</strong> field is 'make', this field may be 'Toyota', or if the <strong>name</strong> field is 'model', this field may be 'Camry'.<br><br>The <a href="/api-docs/commerce/taxonomy/resources/category_tree/methods/getCompatibilityPropertyValues" target="_blank">getCompatibilityPropertyValues</a> method of the Taxonomy API can be used to retrieve possible values for vehicle aspect names.
+     * Gets the value property value. This string value identifies the motor vehicle aspect specified in the corresponding <strong>name</strong> field. For example, if the <strong>name</strong> field is 'make', this field may be 'Toyota', or if the <strong>name</strong> field is 'model', this field may be 'Camry'.<br><br>The <a href="/develop/api/sell/taxonomy_api#sell-taxonomy_api-category_tree-getcompatibilitypropertyvalues" target="_blank">getCompatibilityPropertyValues</a> method of the Taxonomy API can be used to retrieve possible values for vehicle aspect names.
      * @return string|null
     */
     public function getValue(): ?string {
@@ -112,7 +112,7 @@ class NameValueList implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the name property value. This string value identifies the motor vehicle aspect, such as 'make', 'model', 'year', 'trim', and 'engine'. Typically, the make, model, and year of the motor vehicle are always required, with the trim and engine being necessary sometimes, but it will be dependent on the part or accessory, and on the vehicle class.<br><br>The <a href="/api-docs/commerce/taxonomy/resources/category_tree/methods/getCompatibilityProperties" target="_blank">getCompatibilityProperties</a> method of the Taxonomy API can be used to retrieve applicable vehicle aspect names for a specified category.
+     * Sets the name property value. This string value identifies the motor vehicle aspect, such as 'make', 'model', 'year', 'trim', and 'engine'. Typically, the make, model, and year of the motor vehicle are always required, with the trim and engine being necessary sometimes, but it will be dependent on the part or accessory, and on the vehicle class.<br><br>The <a href="/develop/api/sell/taxonomy_api#sell-taxonomy_api-category_tree-getcompatibilityproperties" target="_blank">getCompatibilityProperties</a> method of the Taxonomy API can be used to retrieve applicable vehicle aspect names for a specified category.
      * @param string|null $value Value to set for the name property.
     */
     public function setName(?string $value): void {
@@ -120,7 +120,7 @@ class NameValueList implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the value property value. This string value identifies the motor vehicle aspect specified in the corresponding <strong>name</strong> field. For example, if the <strong>name</strong> field is 'make', this field may be 'Toyota', or if the <strong>name</strong> field is 'model', this field may be 'Camry'.<br><br>The <a href="/api-docs/commerce/taxonomy/resources/category_tree/methods/getCompatibilityPropertyValues" target="_blank">getCompatibilityPropertyValues</a> method of the Taxonomy API can be used to retrieve possible values for vehicle aspect names.
+     * Sets the value property value. This string value identifies the motor vehicle aspect specified in the corresponding <strong>name</strong> field. For example, if the <strong>name</strong> field is 'make', this field may be 'Toyota', or if the <strong>name</strong> field is 'model', this field may be 'Camry'.<br><br>The <a href="/develop/api/sell/taxonomy_api#sell-taxonomy_api-category_tree-getcompatibilitypropertyvalues" target="_blank">getCompatibilityPropertyValues</a> method of the Taxonomy API can be used to retrieve possible values for vehicle aspect names.
      * @param string|null $value Value to set for the value property.
     */
     public function setValue(?string $value): void {

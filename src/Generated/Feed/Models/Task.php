@@ -32,7 +32,7 @@ class Task implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $completionDate The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller’s filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
+     * @var string|null $completionDate The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller's filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
     */
     private ?string $completionDate = null;
     
@@ -42,7 +42,7 @@ class Task implements AdditionalDataHolder, Parsable
     private ?string $creationDate = null;
     
     /**
-     * @var string|null $detailHref The path to the call URI used to retrieve the task. This field points to the GetOrderTask URI if the task is for <code>LMS_ORDER_REPORT</code> or will be null if this task is for <code>LMS_ORDER_ACK</code>.
+     * @var string|null $detailHref The path to the call URI used to retrieve the task. This field points to the <strong>GetOrderTask</strong> URI if the task is for <code>LMS_ORDER_REPORT</code>, or it will be null if this task is for <code>LMS_ORDER_ACK</code>.
     */
     private ?string $detailHref = null;
     
@@ -57,9 +57,9 @@ class Task implements AdditionalDataHolder, Parsable
     private ?string $schemaVersion = null;
     
     /**
-     * @var string|null $status The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED </code>and<code> COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
+     * @var FeedStatusEnum|null $status The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED</code> and <code>COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p>
     */
-    private ?string $status = null;
+    private ?FeedStatusEnum $status = null;
     
     /**
      * @var string|null $taskId The ID of the task that was submitted in the request.
@@ -96,7 +96,7 @@ class Task implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the completionDate property value. The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller’s filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
+     * Gets the completionDate property value. The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller's filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
      * @return string|null
     */
     public function getCompletionDate(): ?string {
@@ -112,7 +112,7 @@ class Task implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the detailHref property value. The path to the call URI used to retrieve the task. This field points to the GetOrderTask URI if the task is for <code>LMS_ORDER_REPORT</code> or will be null if this task is for <code>LMS_ORDER_ACK</code>.
+     * Gets the detailHref property value. The path to the call URI used to retrieve the task. This field points to the <strong>GetOrderTask</strong> URI if the task is for <code>LMS_ORDER_REPORT</code>, or it will be null if this task is for <code>LMS_ORDER_ACK</code>.
      * @return string|null
     */
     public function getDetailHref(): ?string {
@@ -139,7 +139,7 @@ class Task implements AdditionalDataHolder, Parsable
             'detailHref' => fn(ParseNode $n) => $o->setDetailHref($n->getStringValue()),
             'feedType' => fn(ParseNode $n) => $o->setFeedType($n->getStringValue()),
             'schemaVersion' => fn(ParseNode $n) => $o->setSchemaVersion($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(FeedStatusEnum::class)),
             'taskId' => fn(ParseNode $n) => $o->setTaskId($n->getStringValue()),
             'uploadSummary' => fn(ParseNode $n) => $o->setUploadSummary($n->getObjectValue([UploadSummary::class, 'createFromDiscriminatorValue'])),
         ];
@@ -154,10 +154,10 @@ class Task implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED </code>and<code> COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED</code> and <code>COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p>
+     * @return FeedStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?FeedStatusEnum {
         return $this->status;
     }
 
@@ -187,7 +187,7 @@ class Task implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('detailHref', $this->getDetailHref());
         $writer->writeStringValue('feedType', $this->getFeedType());
         $writer->writeStringValue('schemaVersion', $this->getSchemaVersion());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeStringValue('taskId', $this->getTaskId());
         $writer->writeObjectValue('uploadSummary', $this->getUploadSummary());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -202,7 +202,7 @@ class Task implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the completionDate property value. The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller’s filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
+     * Sets the completionDate property value. The timestamp when the task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This state means that eBay has compiled the report for the seller based on the seller's filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
      * @param string|null $value Value to set for the completionDate property.
     */
     public function setCompletionDate(?string $value): void {
@@ -218,7 +218,7 @@ class Task implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the detailHref property value. The path to the call URI used to retrieve the task. This field points to the GetOrderTask URI if the task is for <code>LMS_ORDER_REPORT</code> or will be null if this task is for <code>LMS_ORDER_ACK</code>.
+     * Sets the detailHref property value. The path to the call URI used to retrieve the task. This field points to the <strong>GetOrderTask</strong> URI if the task is for <code>LMS_ORDER_REPORT</code>, or it will be null if this task is for <code>LMS_ORDER_ACK</code>.
      * @param string|null $value Value to set for the detailHref property.
     */
     public function setDetailHref(?string $value): void {
@@ -242,10 +242,10 @@ class Task implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED </code>and<code> COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED</code> and <code>COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p>
+     * @param FeedStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?FeedStatusEnum $value): void {
         $this->status = $value;
     }
 

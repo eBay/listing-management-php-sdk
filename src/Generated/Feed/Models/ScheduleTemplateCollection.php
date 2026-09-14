@@ -47,7 +47,7 @@ class ScheduleTemplateCollection implements AdditionalDataHolder, Parsable
     private ?string $next = null;
     
     /**
-     * @var int|null $offset The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <b>offset</b> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
+     * @var int|null $offset The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <strong>offset</strong> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
     */
     private ?int $offset = null;
     
@@ -132,7 +132,7 @@ class ScheduleTemplateCollection implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the offset property value. The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <b>offset</b> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
+     * Gets the offset property value. The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <strong>offset</strong> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
      * @return int|null
     */
     public function getOffset(): ?int {
@@ -211,7 +211,7 @@ class ScheduleTemplateCollection implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the offset property value. The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <b>offset</b> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
+     * Sets the offset property value. The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <strong>offset</strong> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
      * @param int|null $value Value to set for the offset property.
     */
     public function setOffset(?int $value): void {

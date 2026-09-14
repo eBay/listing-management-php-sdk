@@ -18,6 +18,7 @@ namespace EBay\ListingManagement\Generated\Inventory\Bulk_get_inventory_item;
 
 use EBay\ListingManagement\Generated\Inventory\Models\BulkGetInventoryItem;
 use EBay\ListingManagement\Generated\Inventory\Models\BulkGetInventoryItemResponse;
+use EBay\ListingManagement\Generated\Inventory\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -45,20 +46,24 @@ class Bulk_get_inventory_itemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This call retrieves up to 25 inventory item records. The SKU value of each inventory item record to retrieve is specified in the request payload.<br><br><span class="tablenote"><b>Note:</b> In addition to the <code>authorization</code> header, which is required for all Inventory API calls, this call also requires the <code>Content-Type</code> header. See the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/bulkGetInventoryItem#h3-request-headers">HTTP request headers</a> for more information.</span><br>For those who prefer to retrieve only one inventory item record by SKU value, the <strong>getInventoryItem</strong> method can be used. To retrieve all inventory item records defined on the seller's account, the <strong>getInventoryItems</strong> method can be used (with pagination control if desired).
-     * @param BulkGetInventoryItem $body This type is used by the base request of the <strong>bulkGetInventoryItem</strong> method.
+     * This call retrieves up to 25 inventory item records. The SKU value of each inventory item record to retrieve is specified in the request payload.<br><br><span class="tablenote"><b>Note:</b> In addition to the <code>authorization</code> header, which is required for all Inventory API calls, this call also requires the <code>Content-Type</code> header.</span><br>For those who prefer to retrieve only one inventory item record by SKU value, the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-getinventoryitem" target="_blank">getInventoryItem</a> method can be used. To retrieve all inventory item records defined on the seller's account, the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-getinventoryitems" target="_blank">getInventoryItems</a> method can be used (with pagination control if desired).
+     * @param BulkGetInventoryItem $body Details of the inventories with sku and locale
      * @param Bulk_get_inventory_itemRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<BulkGetInventoryItemResponse|null>
      * @throws Exception
     */
     public function post(BulkGetInventoryItem $body, ?Bulk_get_inventory_itemRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [BulkGetInventoryItemResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [BulkGetInventoryItemResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This call retrieves up to 25 inventory item records. The SKU value of each inventory item record to retrieve is specified in the request payload.<br><br><span class="tablenote"><b>Note:</b> In addition to the <code>authorization</code> header, which is required for all Inventory API calls, this call also requires the <code>Content-Type</code> header. See the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/bulkGetInventoryItem#h3-request-headers">HTTP request headers</a> for more information.</span><br>For those who prefer to retrieve only one inventory item record by SKU value, the <strong>getInventoryItem</strong> method can be used. To retrieve all inventory item records defined on the seller's account, the <strong>getInventoryItems</strong> method can be used (with pagination control if desired).
-     * @param BulkGetInventoryItem $body This type is used by the base request of the <strong>bulkGetInventoryItem</strong> method.
+     * This call retrieves up to 25 inventory item records. The SKU value of each inventory item record to retrieve is specified in the request payload.<br><br><span class="tablenote"><b>Note:</b> In addition to the <code>authorization</code> header, which is required for all Inventory API calls, this call also requires the <code>Content-Type</code> header.</span><br>For those who prefer to retrieve only one inventory item record by SKU value, the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-getinventoryitem" target="_blank">getInventoryItem</a> method can be used. To retrieve all inventory item records defined on the seller's account, the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-getinventoryitems" target="_blank">getInventoryItems</a> method can be used (with pagination control if desired).
+     * @param BulkGetInventoryItem $body Details of the inventories with sku and locale
      * @param Bulk_get_inventory_itemRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

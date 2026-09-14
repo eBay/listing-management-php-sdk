@@ -20,10 +20,9 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * The request to create a video, which must contain the video's <b>title</b>, <b>size</b>, and <b>classification</b>. <b>Description</b> is an optional field when creating videos.
+ * The request to create a video, which must contain the video's <strong>title</strong>, <strong>size</strong>, and <strong>classification</strong>. <strong>Description</strong> is an optional field when creating videos.
 */
 class CreateVideoRequest implements AdditionalDataHolder, Parsable 
 {
@@ -33,7 +32,7 @@ class CreateVideoRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<string>|null $classification The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>.
+     * @var array<Classification>|null $classification The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>.
     */
     private ?array $classification = null;
     
@@ -43,7 +42,7 @@ class CreateVideoRequest implements AdditionalDataHolder, Parsable
     private ?string $description = null;
     
     /**
-     * @var int|null $size The size, in bytes, of the video content. <br><br><b>Max:</b> 157,286,400 bytes
+     * @var int|null $size The size, in bytes, of the video content. <br><br><strong>Max:</strong> 157,286,400 bytes
     */
     private ?int $size = null;
     
@@ -78,7 +77,7 @@ class CreateVideoRequest implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the classification property value. The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>.
-     * @return array<string>|null
+     * @return array<Classification>|null
     */
     public function getClassification(): ?array {
         return $this->classification;
@@ -99,14 +98,7 @@ class CreateVideoRequest implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'classification' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setClassification($val);
-            },
+            'classification' => fn(ParseNode $n) => $o->setClassification($n->getCollectionOfEnumValues(Classification::class)),
             'description' => fn(ParseNode $n) => $o->setDescription($n->getStringValue()),
             'size' => fn(ParseNode $n) => $o->setSize($n->getIntegerValue()),
             'title' => fn(ParseNode $n) => $o->setTitle($n->getStringValue()),
@@ -114,7 +106,7 @@ class CreateVideoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the size property value. The size, in bytes, of the video content. <br><br><b>Max:</b> 157,286,400 bytes
+     * Gets the size property value. The size, in bytes, of the video content. <br><br><strong>Max:</strong> 157,286,400 bytes
      * @return int|null
     */
     public function getSize(): ?int {
@@ -134,7 +126,7 @@ class CreateVideoRequest implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeCollectionOfPrimitiveValues('classification', $this->getClassification());
+        $writer->writeCollectionOfEnumValues('classification', $this->getClassification());
         $writer->writeStringValue('description', $this->getDescription());
         $writer->writeIntegerValue('size', $this->getSize());
         $writer->writeStringValue('title', $this->getTitle());
@@ -151,7 +143,7 @@ class CreateVideoRequest implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the classification property value. The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>.
-     * @param array<string>|null $value Value to set for the classification property.
+     * @param array<Classification>|null $value Value to set for the classification property.
     */
     public function setClassification(?array $value): void {
         $this->classification = $value;
@@ -166,7 +158,7 @@ class CreateVideoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the size property value. The size, in bytes, of the video content. <br><br><b>Max:</b> 157,286,400 bytes
+     * Sets the size property value. The size, in bytes, of the video content. <br><br><strong>Max:</strong> 157,286,400 bytes
      * @param int|null $value Value to set for the size property.
     */
     public function setSize(?int $value): void {

@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Inventory\Location\Item\Enable;
 
+use EBay\ListingManagement\Generated\Inventory\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -43,18 +44,23 @@ class EnableRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * <p>This call enables a disabled inventory location that is specified in the <code>merchantLocationKey</code> path parameter. Once a disabled location is enabled, sellers can start loading/modifying inventory to that location. </p><p>A successful call will return an HTTP status value of <i>200 OK</i>.</p>
+     * This call enables a disabled inventory location that is specified in the <strong>merchantLocationKey</strong> path parameter. Once a disabled location is enabled, sellers can start loading/modifying inventory to that location.<br><br>A successful call will return an HTTP status value of <code>200 OK</code>.
      * @param EnableRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<EnablePostResponse|null>
      * @throws Exception
     */
     public function post(?EnableRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [EnablePostResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [EnablePostResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * <p>This call enables a disabled inventory location that is specified in the <code>merchantLocationKey</code> path parameter. Once a disabled location is enabled, sellers can start loading/modifying inventory to that location. </p><p>A successful call will return an HTTP status value of <i>200 OK</i>.</p>
+     * This call enables a disabled inventory location that is specified in the <strong>merchantLocationKey</strong> path parameter. Once a disabled location is enabled, sellers can start loading/modifying inventory to that location.<br><br>A successful call will return an HTTP status value of <code>200 OK</code>.
      * @param EnableRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

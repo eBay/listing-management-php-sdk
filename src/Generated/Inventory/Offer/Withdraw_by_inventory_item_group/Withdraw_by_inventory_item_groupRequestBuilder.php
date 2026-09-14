@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Inventory\Offer\Withdraw_by_inventory_item_group;
 
+use EBay\ListingManagement\Generated\Inventory\Models\Error;
 use EBay\ListingManagement\Generated\Inventory\Models\WithdrawByInventoryItemGroupRequest;
 use Exception;
 use Http\Promise\Promise;
@@ -44,20 +45,24 @@ class Withdraw_by_inventory_item_groupRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This call is used to end a multiple-variation eBay listing that is associated with the specified inventory item group. This call only ends multiple-variation eBay listing associated with the inventory item group but does not delete the inventory item group object. Similarly, this call also does not delete any of the offers associated with the inventory item group, but instead all of these offers go into the unpublished state. If the seller wanted to relist the multiple-variation eBay listing, they could use the <strong>publishOfferByInventoryItemGroup</strong> method.
-     * @param WithdrawByInventoryItemGroupRequest $body This type is used by the base request of the <strong>WithdrawByInventoryItemGroup</strong> method, which is used to end a multiple-variation listing.
+     * This call is used to end a multiple-variation eBay listing that is associated with the specified inventory item group. This call only ends multiple-variation eBay listing associated with the inventory item group but does not delete the inventory item group object. Similarly, this call also does not delete any of the offers associated with the inventory item group, but instead all of these offers go into the unpublished state. If the seller wanted to relist the multiple-variation eBay listing, they could use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-publishofferbyinventoryitemgroup" target="_blank">publishOfferByInventoryItemGroup</a> method.
+     * @param WithdrawByInventoryItemGroupRequest $body The base request of the <strong>withdrawOfferByInventoryItemGroup</strong> call.
      * @param Withdraw_by_inventory_item_groupRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(WithdrawByInventoryItemGroupRequest $body, ?Withdraw_by_inventory_item_groupRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
-     * This call is used to end a multiple-variation eBay listing that is associated with the specified inventory item group. This call only ends multiple-variation eBay listing associated with the inventory item group but does not delete the inventory item group object. Similarly, this call also does not delete any of the offers associated with the inventory item group, but instead all of these offers go into the unpublished state. If the seller wanted to relist the multiple-variation eBay listing, they could use the <strong>publishOfferByInventoryItemGroup</strong> method.
-     * @param WithdrawByInventoryItemGroupRequest $body This type is used by the base request of the <strong>WithdrawByInventoryItemGroup</strong> method, which is used to end a multiple-variation listing.
+     * This call is used to end a multiple-variation eBay listing that is associated with the specified inventory item group. This call only ends multiple-variation eBay listing associated with the inventory item group but does not delete the inventory item group object. Similarly, this call also does not delete any of the offers associated with the inventory item group, but instead all of these offers go into the unpublished state. If the seller wanted to relist the multiple-variation eBay listing, they could use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-offer-publishofferbyinventoryitemgroup" target="_blank">publishOfferByInventoryItemGroup</a> method.
+     * @param WithdrawByInventoryItemGroupRequest $body The base request of the <strong>withdrawOfferByInventoryItemGroup</strong> call.
      * @param Withdraw_by_inventory_item_groupRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -70,6 +75,7 @@ class Withdraw_by_inventory_item_groupRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

@@ -32,19 +32,19 @@ class OfferSkuResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<Error>|null $errors This container will be returned at the offer level, and will contain one or more errors if any occurred with the attempted creation of the corresponding offer.
+     * @var array<ErrorDetailV3>|null $errors This container will be returned at the offer level, and will contain one or more errors if any occurred with the attempted creation of the corresponding offer.
     */
     private ?array $errors = null;
     
     /**
-     * @var string|null $format This enumeration value indicates the listing format of the offer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:FormatTypeEnum'>eBay API documentation</a>
+     * @var FormatTypeEnum|null $format This enumeration value indicates the listing format of the offer.
     */
-    private ?string $format = null;
+    private ?FormatTypeEnum $format = null;
     
     /**
-     * @var string|null $marketplaceId This enumeration value is the unique identifier of the eBay marketplace for which the offer will be made available. This enumeration value should be the same for all offers since the <strong>bulkCreateOffer</strong> method can only be used to create offers for one eBay marketplace at a time. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:MarketplaceEnum'>eBay API documentation</a>
+     * @var MarketplaceEnum|null $marketplaceId This enumeration value is the unique identifier of the eBay marketplace for which the offer will be made available. This enumeration value should be the same for all offers since the <strong>bulkCreateOffer</strong> method can only be used to create offers for one eBay marketplace at a time.
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceEnum $marketplaceId = null;
     
     /**
      * @var string|null $offerId The unique identifier of the newly-created offer. This identifier should be automatically created by eBay if the creation of the offer was successful. It is not returned if the creation of the offer was not successful. In which case, the user may want to scan the corresponding <strong>errors</strong> and/or <strong>warnings</strong> container to see what the issue may be.
@@ -62,7 +62,7 @@ class OfferSkuResponse implements AdditionalDataHolder, Parsable
     private ?int $statusCode = null;
     
     /**
-     * @var array<Error>|null $warnings This container will be returned at the offer level, and will contain one or more warnings if any occurred with the attempted creation of the corresponding offer. Note that it is possible that an offer can be created successfully even if one or more warnings are triggered.
+     * @var array<ErrorDetailV3>|null $warnings This container will be returned at the offer level, and will contain one or more warnings if any occurred with the attempted creation of the corresponding offer. Note that it is possible that an offer can be created successfully even if one or more warnings are triggered.
     */
     private ?array $warnings = null;
     
@@ -92,7 +92,7 @@ class OfferSkuResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the errors property value. This container will be returned at the offer level, and will contain one or more errors if any occurred with the attempted creation of the corresponding offer.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -105,29 +105,29 @@ class OfferSkuResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
-            'format' => fn(ParseNode $n) => $o->setFormat($n->getStringValue()),
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
+            'format' => fn(ParseNode $n) => $o->setFormat($n->getEnumValue(FormatTypeEnum::class)),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceEnum::class)),
             'offerId' => fn(ParseNode $n) => $o->setOfferId($n->getStringValue()),
             'sku' => fn(ParseNode $n) => $o->setSku($n->getStringValue()),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
-            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the format property value. This enumeration value indicates the listing format of the offer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:FormatTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the format property value. This enumeration value indicates the listing format of the offer.
+     * @return FormatTypeEnum|null
     */
-    public function getFormat(): ?string {
+    public function getFormat(): ?FormatTypeEnum {
         return $this->format;
     }
 
     /**
-     * Gets the marketplaceId property value. This enumeration value is the unique identifier of the eBay marketplace for which the offer will be made available. This enumeration value should be the same for all offers since the <strong>bulkCreateOffer</strong> method can only be used to create offers for one eBay marketplace at a time. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:MarketplaceEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. This enumeration value is the unique identifier of the eBay marketplace for which the offer will be made available. This enumeration value should be the same for all offers since the <strong>bulkCreateOffer</strong> method can only be used to create offers for one eBay marketplace at a time.
+     * @return MarketplaceEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceEnum {
         return $this->marketplaceId;
     }
 
@@ -157,7 +157,7 @@ class OfferSkuResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the warnings property value. This container will be returned at the offer level, and will contain one or more warnings if any occurred with the attempted creation of the corresponding offer. Note that it is possible that an offer can be created successfully even if one or more warnings are triggered.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getWarnings(): ?array {
         return $this->warnings;
@@ -169,8 +169,8 @@ class OfferSkuResponse implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfObjectValues('errors', $this->getErrors());
-        $writer->writeStringValue('format', $this->getFormat());
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('format', $this->getFormat());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeStringValue('offerId', $this->getOfferId());
         $writer->writeStringValue('sku', $this->getSku());
         $writer->writeIntegerValue('statusCode', $this->getStatusCode());
@@ -188,25 +188,25 @@ class OfferSkuResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the errors property value. This container will be returned at the offer level, and will contain one or more errors if any occurred with the attempted creation of the corresponding offer.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;
     }
 
     /**
-     * Sets the format property value. This enumeration value indicates the listing format of the offer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:FormatTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the format property.
+     * Sets the format property value. This enumeration value indicates the listing format of the offer.
+     * @param FormatTypeEnum|null $value Value to set for the format property.
     */
-    public function setFormat(?string $value): void {
+    public function setFormat(?FormatTypeEnum $value): void {
         $this->format = $value;
     }
 
     /**
-     * Sets the marketplaceId property value. This enumeration value is the unique identifier of the eBay marketplace for which the offer will be made available. This enumeration value should be the same for all offers since the <strong>bulkCreateOffer</strong> method can only be used to create offers for one eBay marketplace at a time. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:MarketplaceEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. This enumeration value is the unique identifier of the eBay marketplace for which the offer will be made available. This enumeration value should be the same for all offers since the <strong>bulkCreateOffer</strong> method can only be used to create offers for one eBay marketplace at a time.
+     * @param MarketplaceEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceEnum $value): void {
         $this->marketplaceId = $value;
     }
 
@@ -236,7 +236,7 @@ class OfferSkuResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the warnings property value. This container will be returned at the offer level, and will contain one or more warnings if any occurred with the attempted creation of the corresponding offer. Note that it is possible that an offer can be created successfully even if one or more warnings are triggered.
-     * @param array<Error>|null $value Value to set for the warnings property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the warnings property.
     */
     public function setWarnings(?array $value): void {
         $this->warnings = $value;

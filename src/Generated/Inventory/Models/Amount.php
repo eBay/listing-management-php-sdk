@@ -32,7 +32,7 @@ class Amount implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $currency A three-digit string value representing the type of currency being used. Both the <strong>value</strong> and <strong>currency</strong> fields are required/always returned when expressing prices. <br><br>See the <a href="/api-docs/sell/inventory/types/ba:CurrencyCodeEnum" target="_blank">CurrencyCodeEnum</a> type for the full list of currencies and their corresponding three-digit string values.
+     * @var string|null $currency A three-letter string value representing the type of currency being used. Both the <strong>value</strong> and <strong>currency</strong> fields are required/always returned when expressing prices. <br><br>See <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank">ISO 4217</a> for more information and links to the full list of currencies and their corresponding three-letter string values.
     */
     private ?string $currency = null;
     
@@ -66,7 +66,7 @@ class Amount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the currency property value. A three-digit string value representing the type of currency being used. Both the <strong>value</strong> and <strong>currency</strong> fields are required/always returned when expressing prices. <br><br>See the <a href="/api-docs/sell/inventory/types/ba:CurrencyCodeEnum" target="_blank">CurrencyCodeEnum</a> type for the full list of currencies and their corresponding three-digit string values.
+     * Gets the currency property value. A three-letter string value representing the type of currency being used. Both the <strong>value</strong> and <strong>currency</strong> fields are required/always returned when expressing prices. <br><br>See <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank">ISO 4217</a> for more information and links to the full list of currencies and their corresponding three-letter string values.
      * @return string|null
     */
     public function getCurrency(): ?string {
@@ -112,7 +112,7 @@ class Amount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the currency property value. A three-digit string value representing the type of currency being used. Both the <strong>value</strong> and <strong>currency</strong> fields are required/always returned when expressing prices. <br><br>See the <a href="/api-docs/sell/inventory/types/ba:CurrencyCodeEnum" target="_blank">CurrencyCodeEnum</a> type for the full list of currencies and their corresponding three-digit string values.
+     * Sets the currency property value. A three-letter string value representing the type of currency being used. Both the <strong>value</strong> and <strong>currency</strong> fields are required/always returned when expressing prices. <br><br>See <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank">ISO 4217</a> for more information and links to the full list of currencies and their corresponding three-letter string values.
      * @param string|null $value Value to set for the currency property.
     */
     public function setCurrency(?string $value): void {

@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Stores\Store;
 
+use EBay\ListingManagement\Generated\Stores\Models\Error;
 use EBay\ListingManagement\Generated\Stores\Models\GetStoreResponseType;
 use EBay\ListingManagement\Generated\Stores\Store\Categories\CategoriesRequestBuilder;
 use EBay\ListingManagement\Generated\Stores\Store\Tasks\TasksRequestBuilder;
@@ -67,7 +68,11 @@ class StoreRequestBuilder extends BaseRequestBuilder
     */
     public function get(?StoreRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetStoreResponseType::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetStoreResponseType::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

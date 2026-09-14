@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * This type provides information about the created document ID.
@@ -33,22 +32,22 @@ class CreateDocumentResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $documentId The unique identifier of the document to be uploaded.<br><br>This value is returned in the response and <b>location</b> header of the <b>createDocument</b> and <b>createDocumentFromUrl</b> methods. This ID can be used with the <b>getDocument</b> and <b>uploadDocument</b> methods, and to add an uploaded document to a listing. See <a href="/api-docs/sell/static/inventory/managing-document-media.html#add-documents" target="_blank">Adding documents to listings</a> for more information. 
+     * @var string|null $documentId The unique identifier of the document to be uploaded.<br><br>This value is returned in the response and <strong>location</strong> header of the <strong>createDocument</strong> and <strong>createDocumentFromUrl</strong> methods. This ID can be used with the <strong>getDocument</strong> and <strong>uploadDocument</strong> methods, and to add an uploaded document to a listing. See <a href="/api-docs/sell/static/inventory/managing-document-media.html#add-documents" target="_blank">Adding documents to listings</a> for more information. 
     */
     private ?string $documentId = null;
     
     /**
-     * @var string|null $documentStatus The status of the document resource.<br><br>For example, the value <code>PENDING_UPLOAD</code> is the initial state when the reference to the document has been created using the <b>createDocument</b> method. When creating a document using the <b>createDocumentFromUrl</b> method, the initial state will be <code>SUBMITTED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentStatusEnum'>eBay API documentation</a>
+     * @var DocumentStatusEnum|null $documentStatus The status of the document resource.<br><br>For example, the value <code>PENDING_UPLOAD</code> is the initial state when the reference to the document has been created using the <strong>createDocument</strong> method. When creating a document using the <strong>createDocumentFromUrl</strong> method, the initial state will be <code>SUBMITTED</code>.
     */
-    private ?string $documentStatus = null;
+    private ?DocumentStatusEnum $documentStatus = null;
     
     /**
-     * @var string|null $documentType The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum'>eBay API documentation</a>
+     * @var DocumentTypeEnum|null $documentType The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>.
     */
-    private ?string $documentType = null;
+    private ?DocumentTypeEnum $documentType = null;
     
     /**
-     * @var array<string>|null $languages This array shows the language(s) used in the document.
+     * @var array<LanguageEnum>|null $languages This array shows the language(s) used in the document.
     */
     private ?array $languages = null;
     
@@ -77,7 +76,7 @@ class CreateDocumentResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the documentId property value. The unique identifier of the document to be uploaded.<br><br>This value is returned in the response and <b>location</b> header of the <b>createDocument</b> and <b>createDocumentFromUrl</b> methods. This ID can be used with the <b>getDocument</b> and <b>uploadDocument</b> methods, and to add an uploaded document to a listing. See <a href="/api-docs/sell/static/inventory/managing-document-media.html#add-documents" target="_blank">Adding documents to listings</a> for more information. 
+     * Gets the documentId property value. The unique identifier of the document to be uploaded.<br><br>This value is returned in the response and <strong>location</strong> header of the <strong>createDocument</strong> and <strong>createDocumentFromUrl</strong> methods. This ID can be used with the <strong>getDocument</strong> and <strong>uploadDocument</strong> methods, and to add an uploaded document to a listing. See <a href="/api-docs/sell/static/inventory/managing-document-media.html#add-documents" target="_blank">Adding documents to listings</a> for more information. 
      * @return string|null
     */
     public function getDocumentId(): ?string {
@@ -85,18 +84,18 @@ class CreateDocumentResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the documentStatus property value. The status of the document resource.<br><br>For example, the value <code>PENDING_UPLOAD</code> is the initial state when the reference to the document has been created using the <b>createDocument</b> method. When creating a document using the <b>createDocumentFromUrl</b> method, the initial state will be <code>SUBMITTED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the documentStatus property value. The status of the document resource.<br><br>For example, the value <code>PENDING_UPLOAD</code> is the initial state when the reference to the document has been created using the <strong>createDocument</strong> method. When creating a document using the <strong>createDocumentFromUrl</strong> method, the initial state will be <code>SUBMITTED</code>.
+     * @return DocumentStatusEnum|null
     */
-    public function getDocumentStatus(): ?string {
+    public function getDocumentStatus(): ?DocumentStatusEnum {
         return $this->documentStatus;
     }
 
     /**
-     * Gets the documentType property value. The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the documentType property value. The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>.
+     * @return DocumentTypeEnum|null
     */
-    public function getDocumentType(): ?string {
+    public function getDocumentType(): ?DocumentTypeEnum {
         return $this->documentType;
     }
 
@@ -108,22 +107,15 @@ class CreateDocumentResponse implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'documentId' => fn(ParseNode $n) => $o->setDocumentId($n->getStringValue()),
-            'documentStatus' => fn(ParseNode $n) => $o->setDocumentStatus($n->getStringValue()),
-            'documentType' => fn(ParseNode $n) => $o->setDocumentType($n->getStringValue()),
-            'languages' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setLanguages($val);
-            },
+            'documentStatus' => fn(ParseNode $n) => $o->setDocumentStatus($n->getEnumValue(DocumentStatusEnum::class)),
+            'documentType' => fn(ParseNode $n) => $o->setDocumentType($n->getEnumValue(DocumentTypeEnum::class)),
+            'languages' => fn(ParseNode $n) => $o->setLanguages($n->getCollectionOfEnumValues(LanguageEnum::class)),
         ];
     }
 
     /**
      * Gets the languages property value. This array shows the language(s) used in the document.
-     * @return array<string>|null
+     * @return array<LanguageEnum>|null
     */
     public function getLanguages(): ?array {
         return $this->languages;
@@ -135,9 +127,9 @@ class CreateDocumentResponse implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('documentId', $this->getDocumentId());
-        $writer->writeStringValue('documentStatus', $this->getDocumentStatus());
-        $writer->writeStringValue('documentType', $this->getDocumentType());
-        $writer->writeCollectionOfPrimitiveValues('languages', $this->getLanguages());
+        $writer->writeEnumValue('documentStatus', $this->getDocumentStatus());
+        $writer->writeEnumValue('documentType', $this->getDocumentType());
+        $writer->writeCollectionOfEnumValues('languages', $this->getLanguages());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -150,7 +142,7 @@ class CreateDocumentResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the documentId property value. The unique identifier of the document to be uploaded.<br><br>This value is returned in the response and <b>location</b> header of the <b>createDocument</b> and <b>createDocumentFromUrl</b> methods. This ID can be used with the <b>getDocument</b> and <b>uploadDocument</b> methods, and to add an uploaded document to a listing. See <a href="/api-docs/sell/static/inventory/managing-document-media.html#add-documents" target="_blank">Adding documents to listings</a> for more information. 
+     * Sets the documentId property value. The unique identifier of the document to be uploaded.<br><br>This value is returned in the response and <strong>location</strong> header of the <strong>createDocument</strong> and <strong>createDocumentFromUrl</strong> methods. This ID can be used with the <strong>getDocument</strong> and <strong>uploadDocument</strong> methods, and to add an uploaded document to a listing. See <a href="/api-docs/sell/static/inventory/managing-document-media.html#add-documents" target="_blank">Adding documents to listings</a> for more information. 
      * @param string|null $value Value to set for the documentId property.
     */
     public function setDocumentId(?string $value): void {
@@ -158,24 +150,24 @@ class CreateDocumentResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the documentStatus property value. The status of the document resource.<br><br>For example, the value <code>PENDING_UPLOAD</code> is the initial state when the reference to the document has been created using the <b>createDocument</b> method. When creating a document using the <b>createDocumentFromUrl</b> method, the initial state will be <code>SUBMITTED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the documentStatus property.
+     * Sets the documentStatus property value. The status of the document resource.<br><br>For example, the value <code>PENDING_UPLOAD</code> is the initial state when the reference to the document has been created using the <strong>createDocument</strong> method. When creating a document using the <strong>createDocumentFromUrl</strong> method, the initial state will be <code>SUBMITTED</code>.
+     * @param DocumentStatusEnum|null $value Value to set for the documentStatus property.
     */
-    public function setDocumentStatus(?string $value): void {
+    public function setDocumentStatus(?DocumentStatusEnum $value): void {
         $this->documentStatus = $value;
     }
 
     /**
-     * Sets the documentType property value. The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the documentType property.
+     * Sets the documentType property value. The type of the document uploaded. For example, <code>USER_GUIDE_OR_MANUAL</code>.
+     * @param DocumentTypeEnum|null $value Value to set for the documentType property.
     */
-    public function setDocumentType(?string $value): void {
+    public function setDocumentType(?DocumentTypeEnum $value): void {
         $this->documentType = $value;
     }
 
     /**
      * Sets the languages property value. This array shows the language(s) used in the document.
-     * @param array<string>|null $value Value to set for the languages property.
+     * @param array<LanguageEnum>|null $value Value to set for the languages property.
     */
     public function setLanguages(?array $value): void {
         $this->languages = $value;

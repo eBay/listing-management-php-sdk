@@ -37,12 +37,12 @@ class PriceQuantity implements AdditionalDataHolder, Parsable
     private ?array $offers = null;
     
     /**
-     * @var ShipToLocationAvailability|null $shipToLocationAvailability This type is used to specify the total 'ship-to-home' quantity of the inventory item that will be available for purchase through one or more published offers.
+     * @var ShipToLocationAvailability|null $shipToLocationAvailability This container is needed if the seller is updating the total 'ship-to-home' quantity for the corresponding inventory item (specified in the <strong>sku</strong> field). A successful call will update the inventory item record associated with the <strong>sku</strong> value.
     */
     private ?ShipToLocationAvailability $shipToLocationAvailability = null;
     
     /**
-     * @var string|null $sku This is the seller-defined SKU value of the inventory item whose total 'ship-to-home' quantity will be updated. This field is only required when the seller is updating the total quantity of an inventory item using the <strong>shipToLocationAvailability</strong> container. If the seller is updating the price and/or quantity of one or more specific offers, one or more <strong>offerId</strong> values are used instead, and the <strong>sku</strong> value is not needed.<br><br>If the seller wants to update the price and/or quantity of one or more offers, and also wants to update the total 'ship-to-home' quantity of the corresponding inventory item, the SKU value associated with the <strong>offerId</strong> value(s) must be the same as the corresponding <strong>sku</strong> value that is passed in, or an error will occur.<br><br>Use the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/getInventoryItems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.<br><br><strong>Max Length</strong>: 50<br>
+     * @var string|null $sku This is the seller-defined SKU value of the inventory item whose total 'ship-to-home' quantity will be updated. This field is only required when the seller is updating the total quantity of an inventory item using the <strong>shipToLocationAvailability</strong> container. If the seller is updating the price and/or quantity of one or more specific offers, one or more <strong>offerId</strong> values are used instead, and the <strong>sku</strong> value is not needed.<br><br>If the seller wants to update the price and/or quantity of one or more offers, and also wants to update the total 'ship-to-home' quantity of the corresponding inventory item, the SKU value associated with the <strong>offerId</strong> value(s) must be the same as the corresponding <strong>sku</strong> value that is passed in, or an error will occur.<br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-getinventoryitems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.<br><br><strong>Maximum length</strong>: 50<br>
     */
     private ?string $sku = null;
     
@@ -92,7 +92,7 @@ class PriceQuantity implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shipToLocationAvailability property value. This type is used to specify the total 'ship-to-home' quantity of the inventory item that will be available for purchase through one or more published offers.
+     * Gets the shipToLocationAvailability property value. This container is needed if the seller is updating the total 'ship-to-home' quantity for the corresponding inventory item (specified in the <strong>sku</strong> field). A successful call will update the inventory item record associated with the <strong>sku</strong> value.
      * @return ShipToLocationAvailability|null
     */
     public function getShipToLocationAvailability(): ?ShipToLocationAvailability {
@@ -100,7 +100,7 @@ class PriceQuantity implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sku property value. This is the seller-defined SKU value of the inventory item whose total 'ship-to-home' quantity will be updated. This field is only required when the seller is updating the total quantity of an inventory item using the <strong>shipToLocationAvailability</strong> container. If the seller is updating the price and/or quantity of one or more specific offers, one or more <strong>offerId</strong> values are used instead, and the <strong>sku</strong> value is not needed.<br><br>If the seller wants to update the price and/or quantity of one or more offers, and also wants to update the total 'ship-to-home' quantity of the corresponding inventory item, the SKU value associated with the <strong>offerId</strong> value(s) must be the same as the corresponding <strong>sku</strong> value that is passed in, or an error will occur.<br><br>Use the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/getInventoryItems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.<br><br><strong>Max Length</strong>: 50<br>
+     * Gets the sku property value. This is the seller-defined SKU value of the inventory item whose total 'ship-to-home' quantity will be updated. This field is only required when the seller is updating the total quantity of an inventory item using the <strong>shipToLocationAvailability</strong> container. If the seller is updating the price and/or quantity of one or more specific offers, one or more <strong>offerId</strong> values are used instead, and the <strong>sku</strong> value is not needed.<br><br>If the seller wants to update the price and/or quantity of one or more offers, and also wants to update the total 'ship-to-home' quantity of the corresponding inventory item, the SKU value associated with the <strong>offerId</strong> value(s) must be the same as the corresponding <strong>sku</strong> value that is passed in, or an error will occur.<br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-getinventoryitems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.<br><br><strong>Maximum length</strong>: 50<br>
      * @return string|null
     */
     public function getSku(): ?string {
@@ -135,7 +135,7 @@ class PriceQuantity implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shipToLocationAvailability property value. This type is used to specify the total 'ship-to-home' quantity of the inventory item that will be available for purchase through one or more published offers.
+     * Sets the shipToLocationAvailability property value. This container is needed if the seller is updating the total 'ship-to-home' quantity for the corresponding inventory item (specified in the <strong>sku</strong> field). A successful call will update the inventory item record associated with the <strong>sku</strong> value.
      * @param ShipToLocationAvailability|null $value Value to set for the shipToLocationAvailability property.
     */
     public function setShipToLocationAvailability(?ShipToLocationAvailability $value): void {
@@ -143,7 +143,7 @@ class PriceQuantity implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sku property value. This is the seller-defined SKU value of the inventory item whose total 'ship-to-home' quantity will be updated. This field is only required when the seller is updating the total quantity of an inventory item using the <strong>shipToLocationAvailability</strong> container. If the seller is updating the price and/or quantity of one or more specific offers, one or more <strong>offerId</strong> values are used instead, and the <strong>sku</strong> value is not needed.<br><br>If the seller wants to update the price and/or quantity of one or more offers, and also wants to update the total 'ship-to-home' quantity of the corresponding inventory item, the SKU value associated with the <strong>offerId</strong> value(s) must be the same as the corresponding <strong>sku</strong> value that is passed in, or an error will occur.<br><br>Use the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/getInventoryItems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.<br><br><strong>Max Length</strong>: 50<br>
+     * Sets the sku property value. This is the seller-defined SKU value of the inventory item whose total 'ship-to-home' quantity will be updated. This field is only required when the seller is updating the total quantity of an inventory item using the <strong>shipToLocationAvailability</strong> container. If the seller is updating the price and/or quantity of one or more specific offers, one or more <strong>offerId</strong> values are used instead, and the <strong>sku</strong> value is not needed.<br><br>If the seller wants to update the price and/or quantity of one or more offers, and also wants to update the total 'ship-to-home' quantity of the corresponding inventory item, the SKU value associated with the <strong>offerId</strong> value(s) must be the same as the corresponding <strong>sku</strong> value that is passed in, or an error will occur.<br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-getinventoryitems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.<br><br><strong>Maximum length</strong>: 50<br>
      * @param string|null $value Value to set for the sku property.
     */
     public function setSku(?string $value): void {

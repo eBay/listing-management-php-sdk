@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * This type contains the metadata used to create the document ID.
@@ -33,12 +32,12 @@ class CreateDocumentRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $documentType The type of the document being uploaded. For example, a <code>USER_GUIDE_OR_MANUAL</code> or a <code>SAFETY_DATA_SHEET</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum'>eBay API documentation</a>
+     * @var DocumentTypeEnum|null $documentType The type of the document being uploaded. For example, a <code>USER_GUIDE_OR_MANUAL</code> or a <code>SAFETY_DATA_SHEET</code>.
     */
-    private ?string $documentType = null;
+    private ?DocumentTypeEnum $documentType = null;
     
     /**
-     * @var array<string>|null $languages This array shows the language(s) used in the document.
+     * @var array<LanguageEnum>|null $languages This array shows the language(s) used in the document.
     */
     private ?array $languages = null;
     
@@ -67,10 +66,10 @@ class CreateDocumentRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the documentType property value. The type of the document being uploaded. For example, a <code>USER_GUIDE_OR_MANUAL</code> or a <code>SAFETY_DATA_SHEET</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the documentType property value. The type of the document being uploaded. For example, a <code>USER_GUIDE_OR_MANUAL</code> or a <code>SAFETY_DATA_SHEET</code>.
+     * @return DocumentTypeEnum|null
     */
-    public function getDocumentType(): ?string {
+    public function getDocumentType(): ?DocumentTypeEnum {
         return $this->documentType;
     }
 
@@ -81,21 +80,14 @@ class CreateDocumentRequest implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'documentType' => fn(ParseNode $n) => $o->setDocumentType($n->getStringValue()),
-            'languages' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setLanguages($val);
-            },
+            'documentType' => fn(ParseNode $n) => $o->setDocumentType($n->getEnumValue(DocumentTypeEnum::class)),
+            'languages' => fn(ParseNode $n) => $o->setLanguages($n->getCollectionOfEnumValues(LanguageEnum::class)),
         ];
     }
 
     /**
      * Gets the languages property value. This array shows the language(s) used in the document.
-     * @return array<string>|null
+     * @return array<LanguageEnum>|null
     */
     public function getLanguages(): ?array {
         return $this->languages;
@@ -106,8 +98,8 @@ class CreateDocumentRequest implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('documentType', $this->getDocumentType());
-        $writer->writeCollectionOfPrimitiveValues('languages', $this->getLanguages());
+        $writer->writeEnumValue('documentType', $this->getDocumentType());
+        $writer->writeCollectionOfEnumValues('languages', $this->getLanguages());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,16 +112,16 @@ class CreateDocumentRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the documentType property value. The type of the document being uploaded. For example, a <code>USER_GUIDE_OR_MANUAL</code> or a <code>SAFETY_DATA_SHEET</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the documentType property.
+     * Sets the documentType property value. The type of the document being uploaded. For example, a <code>USER_GUIDE_OR_MANUAL</code> or a <code>SAFETY_DATA_SHEET</code>.
+     * @param DocumentTypeEnum|null $value Value to set for the documentType property.
     */
-    public function setDocumentType(?string $value): void {
+    public function setDocumentType(?DocumentTypeEnum $value): void {
         $this->documentType = $value;
     }
 
     /**
      * Sets the languages property value. This array shows the language(s) used in the document.
-     * @param array<string>|null $value Value to set for the languages property.
+     * @param array<LanguageEnum>|null $value Value to set for the languages property.
     */
     public function setLanguages(?array $value): void {
         $this->languages = $value;

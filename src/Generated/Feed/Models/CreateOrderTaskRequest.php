@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The type that defines the fields for the <b> createOrderTask</b> request.
+ * The type that defines the fields for the <strong>createOrderTask</strong> request.
 */
 class CreateOrderTaskRequest implements AdditionalDataHolder, Parsable 
 {
@@ -37,12 +37,12 @@ class CreateOrderTaskRequest implements AdditionalDataHolder, Parsable
     private ?string $feedType = null;
     
     /**
-     * @var OrderFilterCriteria|null $filterCriteria The type that defines the fields for the order filters.
+     * @var OrderFilterCriteria|null $filterCriteria The container for the filter fields. This container is used to set the filter criteria for the order report. A seller can set date range filters and/or can retrieve orders in a specific state.
     */
     private ?OrderFilterCriteria $filterCriteria = null;
     
     /**
-     * @var string|null $schemaVersion The schema version of the LMS OrderReport. For the <code>LMS_ORDER_REPORT</code> feed type, see the <a href="/devzone/merchant-data/CallRef/OrderReport.html#OrderReport">OrderReport</a> reference page to see the present schema version. The <b> schemaVersion</b> value is the version number shown at the top of the <b> OrderReport</b> page. <br /><br /><b>Restriction: </b> This value must be 1113 or higher. The OrderReport schema version is updated about every two weeks. All version numbers are odd numbers (even numbers are skipped). For example, the next release version after '1113' is '1115'.
+     * @var string|null $schemaVersion The schema version of the LMS OrderReport. For the <code>LMS_ORDER_REPORT</code> feed type, see the <a href="/devzone/merchant-data/CallRef/OrderReport.html#OrderReport" target="_blank">OrderReport</a> reference page to see the present schema version. The <strong>schemaVersion</strong> value is the version number shown at the top of the <strong>OrderReport</strong> page. <br /><br /><strong>Restriction: </strong> This value must be 1113 or higher. The OrderReport schema version is updated about every two weeks. All version numbers are odd numbers (even numbers are skipped). For example, the next release version after '1113' is '1115'.
     */
     private ?string $schemaVersion = null;
     
@@ -92,7 +92,7 @@ class CreateOrderTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the filterCriteria property value. The type that defines the fields for the order filters.
+     * Gets the filterCriteria property value. The container for the filter fields. This container is used to set the filter criteria for the order report. A seller can set date range filters and/or can retrieve orders in a specific state.
      * @return OrderFilterCriteria|null
     */
     public function getFilterCriteria(): ?OrderFilterCriteria {
@@ -100,7 +100,7 @@ class CreateOrderTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the schemaVersion property value. The schema version of the LMS OrderReport. For the <code>LMS_ORDER_REPORT</code> feed type, see the <a href="/devzone/merchant-data/CallRef/OrderReport.html#OrderReport">OrderReport</a> reference page to see the present schema version. The <b> schemaVersion</b> value is the version number shown at the top of the <b> OrderReport</b> page. <br /><br /><b>Restriction: </b> This value must be 1113 or higher. The OrderReport schema version is updated about every two weeks. All version numbers are odd numbers (even numbers are skipped). For example, the next release version after '1113' is '1115'.
+     * Gets the schemaVersion property value. The schema version of the LMS OrderReport. For the <code>LMS_ORDER_REPORT</code> feed type, see the <a href="/devzone/merchant-data/CallRef/OrderReport.html#OrderReport" target="_blank">OrderReport</a> reference page to see the present schema version. The <strong>schemaVersion</strong> value is the version number shown at the top of the <strong>OrderReport</strong> page. <br /><br /><strong>Restriction: </strong> This value must be 1113 or higher. The OrderReport schema version is updated about every two weeks. All version numbers are odd numbers (even numbers are skipped). For example, the next release version after '1113' is '1115'.
      * @return string|null
     */
     public function getSchemaVersion(): ?string {
@@ -135,7 +135,7 @@ class CreateOrderTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the filterCriteria property value. The type that defines the fields for the order filters.
+     * Sets the filterCriteria property value. The container for the filter fields. This container is used to set the filter criteria for the order report. A seller can set date range filters and/or can retrieve orders in a specific state.
      * @param OrderFilterCriteria|null $value Value to set for the filterCriteria property.
     */
     public function setFilterCriteria(?OrderFilterCriteria $value): void {
@@ -143,7 +143,7 @@ class CreateOrderTaskRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the schemaVersion property value. The schema version of the LMS OrderReport. For the <code>LMS_ORDER_REPORT</code> feed type, see the <a href="/devzone/merchant-data/CallRef/OrderReport.html#OrderReport">OrderReport</a> reference page to see the present schema version. The <b> schemaVersion</b> value is the version number shown at the top of the <b> OrderReport</b> page. <br /><br /><b>Restriction: </b> This value must be 1113 or higher. The OrderReport schema version is updated about every two weeks. All version numbers are odd numbers (even numbers are skipped). For example, the next release version after '1113' is '1115'.
+     * Sets the schemaVersion property value. The schema version of the LMS OrderReport. For the <code>LMS_ORDER_REPORT</code> feed type, see the <a href="/devzone/merchant-data/CallRef/OrderReport.html#OrderReport" target="_blank">OrderReport</a> reference page to see the present schema version. The <strong>schemaVersion</strong> value is the version number shown at the top of the <strong>OrderReport</strong> page. <br /><br /><strong>Restriction: </strong> This value must be 1113 or higher. The OrderReport schema version is updated about every two weeks. All version numbers are odd numbers (even numbers are skipped). For example, the next release version after '1113' is '1115'.
      * @param string|null $value Value to set for the schemaVersion property.
     */
     public function setSchemaVersion(?string $value): void {

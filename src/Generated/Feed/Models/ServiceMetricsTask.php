@@ -32,7 +32,7 @@ class ServiceMetricsTask implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $completionDate The timestamp when the customer service metrics task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This field is only returned if the status is one of the two completed values. This state means that eBay has compiled the report for the seller based on the seller’s filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
+     * @var string|null $completionDate The timestamp when the customer service metrics task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This field is only returned if the status is one of the two completed values. This state means that eBay has compiled the report for the seller based on the seller's filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
     */
     private ?string $completionDate = null;
     
@@ -52,19 +52,19 @@ class ServiceMetricsTask implements AdditionalDataHolder, Parsable
     private ?string $feedType = null;
     
     /**
-     * @var CustomerServiceMetricsFilterCriteria|null $filterCriteria A complex data type that filters data for report creation. See <strong>CustomerServiceMetricsFilterCriteria</strong> for fields and descriptions.
+     * @var CustomerServiceMetricsFilterCriteria|null $filterCriteria This container shows the criteria set for the report.
     */
     private ?CustomerServiceMetricsFilterCriteria $filterCriteria = null;
     
     /**
-     * @var string|null $schemaVersion The schema version number of the file format. If omitted, the default value is used. <p><b>Default value: </b><code>1.0</code><p>
+     * @var string|null $schemaVersion The schema version number of the file format. If omitted, the default value is used. <p><strong>Default value: </strong><code>1.0</code><p>
     */
     private ?string $schemaVersion = null;
     
     /**
-     * @var string|null $status An enumeration value that indicates the state of the task. See <strong>FeedStatusEnum</strong> for values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
+     * @var FeedStatusEnum|null $status An enumeration value that indicates the state of the task.
     */
-    private ?string $status = null;
+    private ?FeedStatusEnum $status = null;
     
     /**
      * @var string|null $taskId The unique eBay-assigned ID of the task.
@@ -96,7 +96,7 @@ class ServiceMetricsTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the completionDate property value. The timestamp when the customer service metrics task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This field is only returned if the status is one of the two completed values. This state means that eBay has compiled the report for the seller based on the seller’s filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
+     * Gets the completionDate property value. The timestamp when the customer service metrics task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This field is only returned if the status is one of the two completed values. This state means that eBay has compiled the report for the seller based on the seller's filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
      * @return string|null
     */
     public function getCompletionDate(): ?string {
@@ -140,13 +140,13 @@ class ServiceMetricsTask implements AdditionalDataHolder, Parsable
             'feedType' => fn(ParseNode $n) => $o->setFeedType($n->getStringValue()),
             'filterCriteria' => fn(ParseNode $n) => $o->setFilterCriteria($n->getObjectValue([CustomerServiceMetricsFilterCriteria::class, 'createFromDiscriminatorValue'])),
             'schemaVersion' => fn(ParseNode $n) => $o->setSchemaVersion($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(FeedStatusEnum::class)),
             'taskId' => fn(ParseNode $n) => $o->setTaskId($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the filterCriteria property value. A complex data type that filters data for report creation. See <strong>CustomerServiceMetricsFilterCriteria</strong> for fields and descriptions.
+     * Gets the filterCriteria property value. This container shows the criteria set for the report.
      * @return CustomerServiceMetricsFilterCriteria|null
     */
     public function getFilterCriteria(): ?CustomerServiceMetricsFilterCriteria {
@@ -154,7 +154,7 @@ class ServiceMetricsTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the schemaVersion property value. The schema version number of the file format. If omitted, the default value is used. <p><b>Default value: </b><code>1.0</code><p>
+     * Gets the schemaVersion property value. The schema version number of the file format. If omitted, the default value is used. <p><strong>Default value: </strong><code>1.0</code><p>
      * @return string|null
     */
     public function getSchemaVersion(): ?string {
@@ -162,10 +162,10 @@ class ServiceMetricsTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. An enumeration value that indicates the state of the task. See <strong>FeedStatusEnum</strong> for values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. An enumeration value that indicates the state of the task.
+     * @return FeedStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?FeedStatusEnum {
         return $this->status;
     }
 
@@ -188,7 +188,7 @@ class ServiceMetricsTask implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('feedType', $this->getFeedType());
         $writer->writeObjectValue('filterCriteria', $this->getFilterCriteria());
         $writer->writeStringValue('schemaVersion', $this->getSchemaVersion());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeStringValue('taskId', $this->getTaskId());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -202,7 +202,7 @@ class ServiceMetricsTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the completionDate property value. The timestamp when the customer service metrics task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This field is only returned if the status is one of the two completed values. This state means that eBay has compiled the report for the seller based on the seller’s filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
+     * Sets the completionDate property value. The timestamp when the customer service metrics task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This field is only returned if the status is one of the two completed values. This state means that eBay has compiled the report for the seller based on the seller's filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report.
      * @param string|null $value Value to set for the completionDate property.
     */
     public function setCompletionDate(?string $value): void {
@@ -234,7 +234,7 @@ class ServiceMetricsTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the filterCriteria property value. A complex data type that filters data for report creation. See <strong>CustomerServiceMetricsFilterCriteria</strong> for fields and descriptions.
+     * Sets the filterCriteria property value. This container shows the criteria set for the report.
      * @param CustomerServiceMetricsFilterCriteria|null $value Value to set for the filterCriteria property.
     */
     public function setFilterCriteria(?CustomerServiceMetricsFilterCriteria $value): void {
@@ -242,7 +242,7 @@ class ServiceMetricsTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the schemaVersion property value. The schema version number of the file format. If omitted, the default value is used. <p><b>Default value: </b><code>1.0</code><p>
+     * Sets the schemaVersion property value. The schema version number of the file format. If omitted, the default value is used. <p><strong>Default value: </strong><code>1.0</code><p>
      * @param string|null $value Value to set for the schemaVersion property.
     */
     public function setSchemaVersion(?string $value): void {
@@ -250,10 +250,10 @@ class ServiceMetricsTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. An enumeration value that indicates the state of the task. See <strong>FeedStatusEnum</strong> for values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. An enumeration value that indicates the state of the task.
+     * @param FeedStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?FeedStatusEnum $value): void {
         $this->status = $value;
     }
 

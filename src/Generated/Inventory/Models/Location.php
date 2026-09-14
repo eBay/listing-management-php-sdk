@@ -32,12 +32,12 @@ class Location implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Address|null $address This type is used to define the physical address of an inventory location.
+     * @var Address|null $address The <strong>address</strong> container is always returned in <strong>getInventoryLocation</strong>/<strong>getInventoryLocations</strong> calls. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location.
     */
     private ?Address $address = null;
     
     /**
-     * @var GeoCoordinates|null $geoCoordinates This type is used to express the Global Positioning System (GPS) latitude and longitude coordinates of an inventory location.
+     * @var GeoCoordinates|null $geoCoordinates This container displays the Global Positioning System (GPS) latitude and longitude coordinates for the inventory location.<br><br>This container is only returned if the geo-coordinates are set for an inventory location.
     */
     private ?GeoCoordinates $geoCoordinates = null;
     
@@ -71,7 +71,7 @@ class Location implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the address property value. This type is used to define the physical address of an inventory location.
+     * Gets the address property value. The <strong>address</strong> container is always returned in <strong>getInventoryLocation</strong>/<strong>getInventoryLocations</strong> calls. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location.
      * @return Address|null
     */
     public function getAddress(): ?Address {
@@ -92,7 +92,7 @@ class Location implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the geoCoordinates property value. This type is used to express the Global Positioning System (GPS) latitude and longitude coordinates of an inventory location.
+     * Gets the geoCoordinates property value. This container displays the Global Positioning System (GPS) latitude and longitude coordinates for the inventory location.<br><br>This container is only returned if the geo-coordinates are set for an inventory location.
      * @return GeoCoordinates|null
     */
     public function getGeoCoordinates(): ?GeoCoordinates {
@@ -127,7 +127,7 @@ class Location implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the address property value. This type is used to define the physical address of an inventory location.
+     * Sets the address property value. The <strong>address</strong> container is always returned in <strong>getInventoryLocation</strong>/<strong>getInventoryLocations</strong> calls. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location.
      * @param Address|null $value Value to set for the address property.
     */
     public function setAddress(?Address $value): void {
@@ -135,7 +135,7 @@ class Location implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the geoCoordinates property value. This type is used to express the Global Positioning System (GPS) latitude and longitude coordinates of an inventory location.
+     * Sets the geoCoordinates property value. This container displays the Global Positioning System (GPS) latitude and longitude coordinates for the inventory location.<br><br>This container is only returned if the geo-coordinates are set for an inventory location.
      * @param GeoCoordinates|null $value Value to set for the geoCoordinates property.
     */
     public function setGeoCoordinates(?GeoCoordinates $value): void {

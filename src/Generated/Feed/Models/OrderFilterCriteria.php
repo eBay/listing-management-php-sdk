@@ -32,19 +32,19 @@ class OrderFilterCriteria implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var DateRange|null $creationDateRange The type that defines the fields for a date range.
+     * @var DateRange|null $creationDateRange The creation date range of the orders you want returned. Set the date range so it contains less than 10 days (maximum). If you do not specify a <strong>DateRange</strong>, results from the last 10 days will be returned by default.
     */
     private ?DateRange $creationDateRange = null;
     
     /**
-     * @var DateRange|null $modifiedDateRange The type that defines the fields for a date range.
+     * @var DateRange|null $modifiedDateRange The modified date range of the orders you want returned. <p> <span class="tablenote"><strong>Note:</strong> This container is for future use. At this time, the <strong>createOrderTask</strong> method only supports order creation date filters and not modified order date filters.</span></p>
     */
     private ?DateRange $modifiedDateRange = null;
     
     /**
-     * @var string|null $orderStatus The order status of the orders returned. If the filter is omitted from createOrderTask call, orders that are in both <code>ACTIVE </code>and<code> COMPLETED</code> states are returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:OrderStatusEnum'>eBay API documentation</a>
+     * @var OrderStatusEnum|null $orderStatus The order status of the orders returned. If the filter is omitted from the <strong>createOrderTask</strong> call, orders that are in both <code>ACTIVE</code> and <code>COMPLETED</code> states are returned.
     */
-    private ?string $orderStatus = null;
+    private ?OrderStatusEnum $orderStatus = null;
     
     /**
      * Instantiates a new OrderFilterCriteria and sets the default values.
@@ -71,7 +71,7 @@ class OrderFilterCriteria implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the creationDateRange property value. The type that defines the fields for a date range.
+     * Gets the creationDateRange property value. The creation date range of the orders you want returned. Set the date range so it contains less than 10 days (maximum). If you do not specify a <strong>DateRange</strong>, results from the last 10 days will be returned by default.
      * @return DateRange|null
     */
     public function getCreationDateRange(): ?DateRange {
@@ -87,12 +87,12 @@ class OrderFilterCriteria implements AdditionalDataHolder, Parsable
         return  [
             'creationDateRange' => fn(ParseNode $n) => $o->setCreationDateRange($n->getObjectValue([DateRange::class, 'createFromDiscriminatorValue'])),
             'modifiedDateRange' => fn(ParseNode $n) => $o->setModifiedDateRange($n->getObjectValue([DateRange::class, 'createFromDiscriminatorValue'])),
-            'orderStatus' => fn(ParseNode $n) => $o->setOrderStatus($n->getStringValue()),
+            'orderStatus' => fn(ParseNode $n) => $o->setOrderStatus($n->getEnumValue(OrderStatusEnum::class)),
         ];
     }
 
     /**
-     * Gets the modifiedDateRange property value. The type that defines the fields for a date range.
+     * Gets the modifiedDateRange property value. The modified date range of the orders you want returned. <p> <span class="tablenote"><strong>Note:</strong> This container is for future use. At this time, the <strong>createOrderTask</strong> method only supports order creation date filters and not modified order date filters.</span></p>
      * @return DateRange|null
     */
     public function getModifiedDateRange(): ?DateRange {
@@ -100,10 +100,10 @@ class OrderFilterCriteria implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the orderStatus property value. The order status of the orders returned. If the filter is omitted from createOrderTask call, orders that are in both <code>ACTIVE </code>and<code> COMPLETED</code> states are returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:OrderStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the orderStatus property value. The order status of the orders returned. If the filter is omitted from the <strong>createOrderTask</strong> call, orders that are in both <code>ACTIVE</code> and <code>COMPLETED</code> states are returned.
+     * @return OrderStatusEnum|null
     */
-    public function getOrderStatus(): ?string {
+    public function getOrderStatus(): ?OrderStatusEnum {
         return $this->orderStatus;
     }
 
@@ -114,7 +114,7 @@ class OrderFilterCriteria implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('creationDateRange', $this->getCreationDateRange());
         $writer->writeObjectValue('modifiedDateRange', $this->getModifiedDateRange());
-        $writer->writeStringValue('orderStatus', $this->getOrderStatus());
+        $writer->writeEnumValue('orderStatus', $this->getOrderStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -127,7 +127,7 @@ class OrderFilterCriteria implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the creationDateRange property value. The type that defines the fields for a date range.
+     * Sets the creationDateRange property value. The creation date range of the orders you want returned. Set the date range so it contains less than 10 days (maximum). If you do not specify a <strong>DateRange</strong>, results from the last 10 days will be returned by default.
      * @param DateRange|null $value Value to set for the creationDateRange property.
     */
     public function setCreationDateRange(?DateRange $value): void {
@@ -135,7 +135,7 @@ class OrderFilterCriteria implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the modifiedDateRange property value. The type that defines the fields for a date range.
+     * Sets the modifiedDateRange property value. The modified date range of the orders you want returned. <p> <span class="tablenote"><strong>Note:</strong> This container is for future use. At this time, the <strong>createOrderTask</strong> method only supports order creation date filters and not modified order date filters.</span></p>
      * @param DateRange|null $value Value to set for the modifiedDateRange property.
     */
     public function setModifiedDateRange(?DateRange $value): void {
@@ -143,10 +143,10 @@ class OrderFilterCriteria implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the orderStatus property value. The order status of the orders returned. If the filter is omitted from createOrderTask call, orders that are in both <code>ACTIVE </code>and<code> COMPLETED</code> states are returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:OrderStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the orderStatus property.
+     * Sets the orderStatus property value. The order status of the orders returned. If the filter is omitted from the <strong>createOrderTask</strong> call, orders that are in both <code>ACTIVE</code> and <code>COMPLETED</code> states are returned.
+     * @param OrderStatusEnum|null $value Value to set for the orderStatus property.
     */
-    public function setOrderStatus(?string $value): void {
+    public function setOrderStatus(?OrderStatusEnum $value): void {
         $this->orderStatus = $value;
     }
 

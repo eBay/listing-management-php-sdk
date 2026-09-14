@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The base response type of the <b>getStoreTasks</b> method.
+ * The base response of a getStoreTasks call.
 */
 class GetStoreTasksResponseType implements AdditionalDataHolder, Parsable 
 {

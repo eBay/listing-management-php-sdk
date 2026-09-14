@@ -17,6 +17,7 @@
 namespace EBay\ListingManagement\Generated\Inventory\Inventory_item;
 
 use EBay\ListingManagement\Generated\Inventory\Inventory_item\Item\WithSkuItemRequestBuilder;
+use EBay\ListingManagement\Generated\Inventory\Models\Error;
 use EBay\ListingManagement\Generated\Inventory\Models\InventoryItems;
 use Exception;
 use Http\Promise\Promise;
@@ -32,7 +33,7 @@ class Inventory_itemRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/ListingManagement/Generated/Inventory.inventory_item.item collection
-     * @param string $sku This path parameter specifies the seller-defined SKU value of the product whose inventory item record you wish to retrieve.<br><br>Use the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/getInventoryItems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.<br><br><strong>Max length</strong>: 50
+     * @param string $sku This path parameter specifies the seller-defined SKU value of the product whose inventory item record you wish to retrieve.<br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-getinventoryitems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.<br><br><strong>Maximum length</strong>: 50
      * @return WithSkuItemRequestBuilder
     */
     public function bySku(string $sku): WithSkuItemRequestBuilder {
@@ -63,7 +64,12 @@ class Inventory_itemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Inventory_itemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [InventoryItems::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [InventoryItems::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

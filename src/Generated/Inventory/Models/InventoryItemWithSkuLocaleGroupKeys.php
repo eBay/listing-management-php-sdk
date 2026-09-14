@@ -33,22 +33,22 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     private ?array $additionalData = null;
     
     /**
-     * @var AvailabilityWithAll|null $availability This type is used to specify the quantity of the inventory items that are available for purchase if the items will be shipped to the buyer, and the quantity of the inventory items that are available for In-Store Pickup at one or more of the merchant's physical stores.<br><br>In-Store Pickup is only available to large merchants selling on the US, UK, Germany, and Australia sites.
+     * @var AvailabilityWithAll|null $availability This container shows the quantity of the inventory item that is available for purchase if the item will be shipped to the buyer, and/or the quantity of the inventory item that is available for In-Store Pickup at one or more of the merchant's physical stores.
     */
     private ?AvailabilityWithAll $availability = null;
     
     /**
-     * @var string|null $condition This enumeration value indicates the condition of the item. Supported item condition values will vary by eBay site and category. <br><br>Since the condition of an inventory item must be specified before being published in an offer, this field is always returned in the 'Get' calls for SKUs that are part of a published offer. If a SKU is not part of a published offer, this field will only be returned if set for the inventory item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:ConditionEnum'>eBay API documentation</a>
+     * @var ConditionEnum|null $condition This enumeration value indicates the condition of the item. Supported item condition values will vary by eBay site and category. <br><br>Since the condition of an inventory item must be specified before being published in an offer, this field is always returned in the 'Get' calls for SKUs that are part of a published offer. If a SKU is not part of a published offer, this field will only be returned if set for the inventory item.
     */
-    private ?string $condition = null;
+    private ?ConditionEnum $condition = null;
     
     /**
-     * @var string|null $conditionDescription This string field is used by the seller to more clearly describe the condition of used items, or items that are not 'Brand New', 'New with tags', or 'New in box'. The ConditionDescription field is available for all categories. If the ConditionDescription field is used with an item in a new condition (Condition IDs 1000-1499), eBay will simply ignore this field if included, and eBay will return a warning message to the user. This field should only be used to further clarify the condition of the used item. It should not be used for branding, promotions, shipping, returns, payment or other information unrelated to the condition of the item. Make sure that the condition value, condition description, listing description, and the item's pictures do not contradict one another.Max length: 1000.
+     * @var string|null $conditionDescription This string field is used by the seller to more clearly describe the condition of used items, or items that are not 'Brand New', 'New with tags', or 'New in box'. The ConditionDescription field is available for all categories. If the ConditionDescription field is used with an item in a new condition (Condition IDs 1000-1499), eBay will simply ignore this field if included, and eBay will return a warning message to the user. This field should only be used to further clarify the condition of the used item. It should not be used for branding, promotions, shipping, returns, payment or other information unrelated to the condition of the item. Make sure that the condition value, condition description, listing description, and the item's pictures do not contradict one another.<br /><br />Maximum length: 1000
     */
     private ?string $conditionDescription = null;
     
     /**
-     * @var array<ConditionDescriptor>|null $conditionDescriptors This container is used by the seller to provide additional information about the condition of an item in a structured format. Descriptors are name-value attributes that can be either closed set or open text.<br><br>For trading card listings in <b>Non-Sport Trading Card Singles</b> (183050), <b>CCG Individual Cards</b> (183454), and <b>Sports Trading Card Singles</b> (261328) categories, sellers must use either <code>LIKE_NEW</code> (2750) or <code>USED_VERY_GOOD</code> (4000) item condition to specify the card as <b>Graded</b> or <b>Ungraded</b>, respectively. Use of either of these conditions requires the seller to use this array to provide one or more applicable Condition Descriptor name-value pairs.<br><br>For more information on the numeric IDs and their text equivalents, use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getItemConditionPolicies" target="_blank">getItemConditionPolicies</a> method of the Metadata API.
+     * @var array<ConditionDescriptor>|null $conditionDescriptors This container is used by the seller to provide additional information about the condition of an item in a structured format. Condition descriptors are name-value attributes that can be either closed set or open text.<br><br>For trading card coin listings in applicable categories, sellers must use either <code>LIKE_NEW</code> (2750) or <code>USED_VERY_GOOD</code> (4000) item condition to specify the item as <b>Graded</b> or <b>Ungraded</b>, respectively. Use of either of these conditions requires the seller to use this array to provide one or more applicable Condition Descriptor name-value pairs.<br><br>>To retrieve all condition descriptor numeric IDs for a category, use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getitemconditionpolicies" target="_blank">getItemConditionPolicies</a> method of the Metadata API.
     */
     private ?array $conditionDescriptors = null;
     
@@ -58,17 +58,17 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     private ?array $inventoryItemGroupKeys = null;
     
     /**
-     * @var string|null $locale This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:LocaleEnum'>eBay API documentation</a>
+     * @var LocaleEnum|null $locale This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE).
     */
-    private ?string $locale = null;
+    private ?LocaleEnum $locale = null;
     
     /**
-     * @var PackageWeightAndSize|null $packageWeightAndSize This type is used to indicate the package type, weight, and dimensions of the shipping package. Package weight and dimensions are required when calculated shipping rates are used, and weight alone is required when flat-rate shipping is used, but with a weight surcharge. See the <a href="https://pages.ebay.com/help/pay/calculated-shipping.html " target="_blank">Calculated shipping</a> help page for more information on calculated shipping.
+     * @var PackageWeightAndSize|null $packageWeightAndSize This container is used to specify the dimensions and weight of a shipping package.
     */
     private ?PackageWeightAndSize $packageWeightAndSize = null;
     
     /**
-     * @var Product|null $product This type is used to define the product details, such as a title, a product description, product aspects/item specifics, and links to images for the product. Optionally, in a <strong>createOrReplaceInventoryItem</strong> call, a seller can pass in an eBay Product Identifier (ePID) or a Global Trade Item Number (GTIN) value, such as an EAN, an ISBN, a UPC, to identify a product to be matched with a product in the eBay Catalog. The information in this type is also returned in the <strong>getInventoryItem</strong>, <strong>getInventoryItems</strong>, and <strong>bulkGetInventoryItem</strong> calls if defined.
+     * @var Product|null $product This container is used in a <strong>createOrReplaceInventoryItem</strong> call to pass in a Global Trade Item Number (GTIN) or a Brand and Manufacturer Part Number (MPN) pair to identify a product to be matched with a product in the eBay catalog. If a match is found in the eBay product catalog, the inventory item is automatically populated with available product details such as a title, a subtitle, a product description, item specifics, and links to stock images for the product.
     */
     private ?Product $product = null;
     
@@ -102,7 +102,7 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Gets the availability property value. This type is used to specify the quantity of the inventory items that are available for purchase if the items will be shipped to the buyer, and the quantity of the inventory items that are available for In-Store Pickup at one or more of the merchant's physical stores.<br><br>In-Store Pickup is only available to large merchants selling on the US, UK, Germany, and Australia sites.
+     * Gets the availability property value. This container shows the quantity of the inventory item that is available for purchase if the item will be shipped to the buyer, and/or the quantity of the inventory item that is available for In-Store Pickup at one or more of the merchant's physical stores.
      * @return AvailabilityWithAll|null
     */
     public function getAvailability(): ?AvailabilityWithAll {
@@ -110,15 +110,15 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Gets the condition property value. This enumeration value indicates the condition of the item. Supported item condition values will vary by eBay site and category. <br><br>Since the condition of an inventory item must be specified before being published in an offer, this field is always returned in the 'Get' calls for SKUs that are part of a published offer. If a SKU is not part of a published offer, this field will only be returned if set for the inventory item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:ConditionEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the condition property value. This enumeration value indicates the condition of the item. Supported item condition values will vary by eBay site and category. <br><br>Since the condition of an inventory item must be specified before being published in an offer, this field is always returned in the 'Get' calls for SKUs that are part of a published offer. If a SKU is not part of a published offer, this field will only be returned if set for the inventory item.
+     * @return ConditionEnum|null
     */
-    public function getCondition(): ?string {
+    public function getCondition(): ?ConditionEnum {
         return $this->condition;
     }
 
     /**
-     * Gets the conditionDescription property value. This string field is used by the seller to more clearly describe the condition of used items, or items that are not 'Brand New', 'New with tags', or 'New in box'. The ConditionDescription field is available for all categories. If the ConditionDescription field is used with an item in a new condition (Condition IDs 1000-1499), eBay will simply ignore this field if included, and eBay will return a warning message to the user. This field should only be used to further clarify the condition of the used item. It should not be used for branding, promotions, shipping, returns, payment or other information unrelated to the condition of the item. Make sure that the condition value, condition description, listing description, and the item's pictures do not contradict one another.Max length: 1000.
+     * Gets the conditionDescription property value. This string field is used by the seller to more clearly describe the condition of used items, or items that are not 'Brand New', 'New with tags', or 'New in box'. The ConditionDescription field is available for all categories. If the ConditionDescription field is used with an item in a new condition (Condition IDs 1000-1499), eBay will simply ignore this field if included, and eBay will return a warning message to the user. This field should only be used to further clarify the condition of the used item. It should not be used for branding, promotions, shipping, returns, payment or other information unrelated to the condition of the item. Make sure that the condition value, condition description, listing description, and the item's pictures do not contradict one another.<br /><br />Maximum length: 1000
      * @return string|null
     */
     public function getConditionDescription(): ?string {
@@ -126,7 +126,7 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Gets the conditionDescriptors property value. This container is used by the seller to provide additional information about the condition of an item in a structured format. Descriptors are name-value attributes that can be either closed set or open text.<br><br>For trading card listings in <b>Non-Sport Trading Card Singles</b> (183050), <b>CCG Individual Cards</b> (183454), and <b>Sports Trading Card Singles</b> (261328) categories, sellers must use either <code>LIKE_NEW</code> (2750) or <code>USED_VERY_GOOD</code> (4000) item condition to specify the card as <b>Graded</b> or <b>Ungraded</b>, respectively. Use of either of these conditions requires the seller to use this array to provide one or more applicable Condition Descriptor name-value pairs.<br><br>For more information on the numeric IDs and their text equivalents, use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getItemConditionPolicies" target="_blank">getItemConditionPolicies</a> method of the Metadata API.
+     * Gets the conditionDescriptors property value. This container is used by the seller to provide additional information about the condition of an item in a structured format. Condition descriptors are name-value attributes that can be either closed set or open text.<br><br>For trading card coin listings in applicable categories, sellers must use either <code>LIKE_NEW</code> (2750) or <code>USED_VERY_GOOD</code> (4000) item condition to specify the item as <b>Graded</b> or <b>Ungraded</b>, respectively. Use of either of these conditions requires the seller to use this array to provide one or more applicable Condition Descriptor name-value pairs.<br><br>>To retrieve all condition descriptor numeric IDs for a category, use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getitemconditionpolicies" target="_blank">getItemConditionPolicies</a> method of the Metadata API.
      * @return array<ConditionDescriptor>|null
     */
     public function getConditionDescriptors(): ?array {
@@ -141,7 +141,7 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
         $o = $this;
         return  [
             'availability' => fn(ParseNode $n) => $o->setAvailability($n->getObjectValue([AvailabilityWithAll::class, 'createFromDiscriminatorValue'])),
-            'condition' => fn(ParseNode $n) => $o->setCondition($n->getStringValue()),
+            'condition' => fn(ParseNode $n) => $o->setCondition($n->getEnumValue(ConditionEnum::class)),
             'conditionDescription' => fn(ParseNode $n) => $o->setConditionDescription($n->getStringValue()),
             'conditionDescriptors' => fn(ParseNode $n) => $o->setConditionDescriptors($n->getCollectionOfObjectValues([ConditionDescriptor::class, 'createFromDiscriminatorValue'])),
             'inventoryItemGroupKeys' => function (ParseNode $n) {
@@ -152,7 +152,7 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
                 /** @var array<string>|null $val */
                 $this->setInventoryItemGroupKeys($val);
             },
-            'locale' => fn(ParseNode $n) => $o->setLocale($n->getStringValue()),
+            'locale' => fn(ParseNode $n) => $o->setLocale($n->getEnumValue(LocaleEnum::class)),
             'packageWeightAndSize' => fn(ParseNode $n) => $o->setPackageWeightAndSize($n->getObjectValue([PackageWeightAndSize::class, 'createFromDiscriminatorValue'])),
             'product' => fn(ParseNode $n) => $o->setProduct($n->getObjectValue([Product::class, 'createFromDiscriminatorValue'])),
             'sku' => fn(ParseNode $n) => $o->setSku($n->getStringValue()),
@@ -168,15 +168,15 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Gets the locale property value. This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:LocaleEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the locale property value. This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE).
+     * @return LocaleEnum|null
     */
-    public function getLocale(): ?string {
+    public function getLocale(): ?LocaleEnum {
         return $this->locale;
     }
 
     /**
-     * Gets the packageWeightAndSize property value. This type is used to indicate the package type, weight, and dimensions of the shipping package. Package weight and dimensions are required when calculated shipping rates are used, and weight alone is required when flat-rate shipping is used, but with a weight surcharge. See the <a href="https://pages.ebay.com/help/pay/calculated-shipping.html " target="_blank">Calculated shipping</a> help page for more information on calculated shipping.
+     * Gets the packageWeightAndSize property value. This container is used to specify the dimensions and weight of a shipping package.
      * @return PackageWeightAndSize|null
     */
     public function getPackageWeightAndSize(): ?PackageWeightAndSize {
@@ -184,7 +184,7 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Gets the product property value. This type is used to define the product details, such as a title, a product description, product aspects/item specifics, and links to images for the product. Optionally, in a <strong>createOrReplaceInventoryItem</strong> call, a seller can pass in an eBay Product Identifier (ePID) or a Global Trade Item Number (GTIN) value, such as an EAN, an ISBN, a UPC, to identify a product to be matched with a product in the eBay Catalog. The information in this type is also returned in the <strong>getInventoryItem</strong>, <strong>getInventoryItems</strong>, and <strong>bulkGetInventoryItem</strong> calls if defined.
+     * Gets the product property value. This container is used in a <strong>createOrReplaceInventoryItem</strong> call to pass in a Global Trade Item Number (GTIN) or a Brand and Manufacturer Part Number (MPN) pair to identify a product to be matched with a product in the eBay catalog. If a match is found in the eBay product catalog, the inventory item is automatically populated with available product details such as a title, a subtitle, a product description, item specifics, and links to stock images for the product.
      * @return Product|null
     */
     public function getProduct(): ?Product {
@@ -205,11 +205,11 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('availability', $this->getAvailability());
-        $writer->writeStringValue('condition', $this->getCondition());
+        $writer->writeEnumValue('condition', $this->getCondition());
         $writer->writeStringValue('conditionDescription', $this->getConditionDescription());
         $writer->writeCollectionOfObjectValues('conditionDescriptors', $this->getConditionDescriptors());
         $writer->writeCollectionOfPrimitiveValues('inventoryItemGroupKeys', $this->getInventoryItemGroupKeys());
-        $writer->writeStringValue('locale', $this->getLocale());
+        $writer->writeEnumValue('locale', $this->getLocale());
         $writer->writeObjectValue('packageWeightAndSize', $this->getPackageWeightAndSize());
         $writer->writeObjectValue('product', $this->getProduct());
         $writer->writeStringValue('sku', $this->getSku());
@@ -225,7 +225,7 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Sets the availability property value. This type is used to specify the quantity of the inventory items that are available for purchase if the items will be shipped to the buyer, and the quantity of the inventory items that are available for In-Store Pickup at one or more of the merchant's physical stores.<br><br>In-Store Pickup is only available to large merchants selling on the US, UK, Germany, and Australia sites.
+     * Sets the availability property value. This container shows the quantity of the inventory item that is available for purchase if the item will be shipped to the buyer, and/or the quantity of the inventory item that is available for In-Store Pickup at one or more of the merchant's physical stores.
      * @param AvailabilityWithAll|null $value Value to set for the availability property.
     */
     public function setAvailability(?AvailabilityWithAll $value): void {
@@ -233,15 +233,15 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Sets the condition property value. This enumeration value indicates the condition of the item. Supported item condition values will vary by eBay site and category. <br><br>Since the condition of an inventory item must be specified before being published in an offer, this field is always returned in the 'Get' calls for SKUs that are part of a published offer. If a SKU is not part of a published offer, this field will only be returned if set for the inventory item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:ConditionEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the condition property.
+     * Sets the condition property value. This enumeration value indicates the condition of the item. Supported item condition values will vary by eBay site and category. <br><br>Since the condition of an inventory item must be specified before being published in an offer, this field is always returned in the 'Get' calls for SKUs that are part of a published offer. If a SKU is not part of a published offer, this field will only be returned if set for the inventory item.
+     * @param ConditionEnum|null $value Value to set for the condition property.
     */
-    public function setCondition(?string $value): void {
+    public function setCondition(?ConditionEnum $value): void {
         $this->condition = $value;
     }
 
     /**
-     * Sets the conditionDescription property value. This string field is used by the seller to more clearly describe the condition of used items, or items that are not 'Brand New', 'New with tags', or 'New in box'. The ConditionDescription field is available for all categories. If the ConditionDescription field is used with an item in a new condition (Condition IDs 1000-1499), eBay will simply ignore this field if included, and eBay will return a warning message to the user. This field should only be used to further clarify the condition of the used item. It should not be used for branding, promotions, shipping, returns, payment or other information unrelated to the condition of the item. Make sure that the condition value, condition description, listing description, and the item's pictures do not contradict one another.Max length: 1000.
+     * Sets the conditionDescription property value. This string field is used by the seller to more clearly describe the condition of used items, or items that are not 'Brand New', 'New with tags', or 'New in box'. The ConditionDescription field is available for all categories. If the ConditionDescription field is used with an item in a new condition (Condition IDs 1000-1499), eBay will simply ignore this field if included, and eBay will return a warning message to the user. This field should only be used to further clarify the condition of the used item. It should not be used for branding, promotions, shipping, returns, payment or other information unrelated to the condition of the item. Make sure that the condition value, condition description, listing description, and the item's pictures do not contradict one another.<br /><br />Maximum length: 1000
      * @param string|null $value Value to set for the conditionDescription property.
     */
     public function setConditionDescription(?string $value): void {
@@ -249,7 +249,7 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Sets the conditionDescriptors property value. This container is used by the seller to provide additional information about the condition of an item in a structured format. Descriptors are name-value attributes that can be either closed set or open text.<br><br>For trading card listings in <b>Non-Sport Trading Card Singles</b> (183050), <b>CCG Individual Cards</b> (183454), and <b>Sports Trading Card Singles</b> (261328) categories, sellers must use either <code>LIKE_NEW</code> (2750) or <code>USED_VERY_GOOD</code> (4000) item condition to specify the card as <b>Graded</b> or <b>Ungraded</b>, respectively. Use of either of these conditions requires the seller to use this array to provide one or more applicable Condition Descriptor name-value pairs.<br><br>For more information on the numeric IDs and their text equivalents, use the <a href="/api-docs/sell/metadata/resources/marketplace/methods/getItemConditionPolicies" target="_blank">getItemConditionPolicies</a> method of the Metadata API.
+     * Sets the conditionDescriptors property value. This container is used by the seller to provide additional information about the condition of an item in a structured format. Condition descriptors are name-value attributes that can be either closed set or open text.<br><br>For trading card coin listings in applicable categories, sellers must use either <code>LIKE_NEW</code> (2750) or <code>USED_VERY_GOOD</code> (4000) item condition to specify the item as <b>Graded</b> or <b>Ungraded</b>, respectively. Use of either of these conditions requires the seller to use this array to provide one or more applicable Condition Descriptor name-value pairs.<br><br>>To retrieve all condition descriptor numeric IDs for a category, use the <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getitemconditionpolicies" target="_blank">getItemConditionPolicies</a> method of the Metadata API.
      * @param array<ConditionDescriptor>|null $value Value to set for the conditionDescriptors property.
     */
     public function setConditionDescriptors(?array $value): void {
@@ -265,15 +265,15 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Sets the locale property value. This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/inventory/types/slr:LocaleEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the locale property.
+     * Sets the locale property value. This field returns the natural language that was provided in the field values of the request payload (i.e., en_AU, en_GB or de_DE).
+     * @param LocaleEnum|null $value Value to set for the locale property.
     */
-    public function setLocale(?string $value): void {
+    public function setLocale(?LocaleEnum $value): void {
         $this->locale = $value;
     }
 
     /**
-     * Sets the packageWeightAndSize property value. This type is used to indicate the package type, weight, and dimensions of the shipping package. Package weight and dimensions are required when calculated shipping rates are used, and weight alone is required when flat-rate shipping is used, but with a weight surcharge. See the <a href="https://pages.ebay.com/help/pay/calculated-shipping.html " target="_blank">Calculated shipping</a> help page for more information on calculated shipping.
+     * Sets the packageWeightAndSize property value. This container is used to specify the dimensions and weight of a shipping package.
      * @param PackageWeightAndSize|null $value Value to set for the packageWeightAndSize property.
     */
     public function setPackageWeightAndSize(?PackageWeightAndSize $value): void {
@@ -281,7 +281,7 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Sets the product property value. This type is used to define the product details, such as a title, a product description, product aspects/item specifics, and links to images for the product. Optionally, in a <strong>createOrReplaceInventoryItem</strong> call, a seller can pass in an eBay Product Identifier (ePID) or a Global Trade Item Number (GTIN) value, such as an EAN, an ISBN, a UPC, to identify a product to be matched with a product in the eBay Catalog. The information in this type is also returned in the <strong>getInventoryItem</strong>, <strong>getInventoryItems</strong>, and <strong>bulkGetInventoryItem</strong> calls if defined.
+     * Sets the product property value. This container is used in a <strong>createOrReplaceInventoryItem</strong> call to pass in a Global Trade Item Number (GTIN) or a Brand and Manufacturer Part Number (MPN) pair to identify a product to be matched with a product in the eBay catalog. If a match is found in the eBay product catalog, the inventory item is automatically populated with available product details such as a title, a subtitle, a product description, item specifics, and links to stock images for the product.
      * @param Product|null $value Value to set for the product property.
     */
     public function setProduct(?Product $value): void {

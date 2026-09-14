@@ -32,7 +32,7 @@ class GetInventoryItem implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $sku An array of SKU values are passed in under the <strong>sku</strong> container to retrieve up to 25 inventory item records.<br><br>Use the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/getInventoryItems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.
+     * @var string|null $sku An array of SKU values are passed in under the <strong>sku</strong> container to retrieve up to 25 inventory item records.<br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-getinventoryitems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.
     */
     private ?string $sku = null;
     
@@ -72,7 +72,7 @@ class GetInventoryItem implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sku property value. An array of SKU values are passed in under the <strong>sku</strong> container to retrieve up to 25 inventory item records.<br><br>Use the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/getInventoryItems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.
+     * Gets the sku property value. An array of SKU values are passed in under the <strong>sku</strong> container to retrieve up to 25 inventory item records.<br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-getinventoryitems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.
      * @return string|null
     */
     public function getSku(): ?string {
@@ -97,7 +97,7 @@ class GetInventoryItem implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sku property value. An array of SKU values are passed in under the <strong>sku</strong> container to retrieve up to 25 inventory item records.<br><br>Use the <a href="/api-docs/sell/inventory/resources/inventory_item/methods/getInventoryItems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.
+     * Sets the sku property value. An array of SKU values are passed in under the <strong>sku</strong> container to retrieve up to 25 inventory item records.<br><br>Use the <a href="/develop/api/sell/inventory_api#sell-inventory_api-inventory_item-getinventoryitems" target="_blank ">getInventoryItems</a> method to retrieve SKU values.
      * @param string|null $value Value to set for the sku property.
     */
     public function setSku(?string $value): void {

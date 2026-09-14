@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The type that defines the fields for the <b> createTask</b> method.
+ * The type that defines the fields for the <strong>createTask</strong> method.
 */
 class CreateTaskRequest implements AdditionalDataHolder, Parsable 
 {

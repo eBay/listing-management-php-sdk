@@ -16,6 +16,7 @@
 
 namespace EBay\ListingManagement\Generated\Stores\Store\Tasks\Item;
 
+use EBay\ListingManagement\Generated\Stores\Models\Error;
 use EBay\ListingManagement\Generated\Stores\Models\GetStoreTaskResponseType;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,11 @@ class WithTask_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?WithTask_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetStoreTaskResponseType::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetStoreTaskResponseType::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

@@ -32,7 +32,7 @@ class Fee implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount This type is used to express a dollar value and the applicable currency.
+     * @var Amount|null $amount This dollar value in this container is the actual dollar value of the listing fee type specified in the <strong>feeType</strong> field.
     */
     private ?Amount $amount = null;
     
@@ -42,7 +42,7 @@ class Fee implements AdditionalDataHolder, Parsable
     private ?string $feeType = null;
     
     /**
-     * @var Amount|null $promotionalDiscount This type is used to express a dollar value and the applicable currency.
+     * @var Amount|null $promotionalDiscount The dollar value in this container indicates any eBay promotional discount applied toward the listing fee type specified in the <strong>feeType</strong> field. If there was no discount applied toward the fee, this container is still returned but its value is <code>0.0</code>.
     */
     private ?Amount $promotionalDiscount = null;
     
@@ -71,7 +71,7 @@ class Fee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. This type is used to express a dollar value and the applicable currency.
+     * Gets the amount property value. This dollar value in this container is the actual dollar value of the listing fee type specified in the <strong>feeType</strong> field.
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -100,7 +100,7 @@ class Fee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the promotionalDiscount property value. This type is used to express a dollar value and the applicable currency.
+     * Gets the promotionalDiscount property value. The dollar value in this container indicates any eBay promotional discount applied toward the listing fee type specified in the <strong>feeType</strong> field. If there was no discount applied toward the fee, this container is still returned but its value is <code>0.0</code>.
      * @return Amount|null
     */
     public function getPromotionalDiscount(): ?Amount {
@@ -127,7 +127,7 @@ class Fee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. This type is used to express a dollar value and the applicable currency.
+     * Sets the amount property value. This dollar value in this container is the actual dollar value of the listing fee type specified in the <strong>feeType</strong> field.
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {
@@ -143,7 +143,7 @@ class Fee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the promotionalDiscount property value. This type is used to express a dollar value and the applicable currency.
+     * Sets the promotionalDiscount property value. The dollar value in this container indicates any eBay promotional discount applied toward the listing fee type specified in the <strong>feeType</strong> field. If there was no discount applied toward the fee, this container is still returned but its value is <code>0.0</code>.
      * @param Amount|null $value Value to set for the promotionalDiscount property.
     */
     public function setPromotionalDiscount(?Amount $value): void {

@@ -32,7 +32,7 @@ class ExtendedProducerResponsibility implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $ecoParticipationFee This type is used to express a dollar value and the applicable currency.
+     * @var Amount|null $ecoParticipationFee This is the fee paid for new items to the eco-organization (for example, "eco-organisme" in France). It is a contribution to the financing of the elimination of the item responsibly.<br><br><span class="tablenote"><b>Note:</b> <code>0</code> should not be used as a default value.</span></br><b>Minimum:</b> 0.0
     */
     private ?Amount $ecoParticipationFee = null;
     
@@ -81,7 +81,7 @@ class ExtendedProducerResponsibility implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the ecoParticipationFee property value. This type is used to express a dollar value and the applicable currency.
+     * Gets the ecoParticipationFee property value. This is the fee paid for new items to the eco-organization (for example, "eco-organisme" in France). It is a contribution to the financing of the elimination of the item responsibly.<br><br><span class="tablenote"><b>Note:</b> <code>0</code> should not be used as a default value.</span></br><b>Minimum:</b> 0.0
      * @return Amount|null
     */
     public function getEcoParticipationFee(): ?Amount {
@@ -157,7 +157,7 @@ class ExtendedProducerResponsibility implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the ecoParticipationFee property value. This type is used to express a dollar value and the applicable currency.
+     * Sets the ecoParticipationFee property value. This is the fee paid for new items to the eco-organization (for example, "eco-organisme" in France). It is a contribution to the financing of the elimination of the item responsibly.<br><br><span class="tablenote"><b>Note:</b> <code>0</code> should not be used as a default value.</span></br><b>Minimum:</b> 0.0
      * @param Amount|null $value Value to set for the ecoParticipationFee property.
     */
     public function setEcoParticipationFee(?Amount $value): void {
