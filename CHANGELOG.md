@@ -10,37 +10,37 @@
 
 | Operation | Previous parameters | Current parameters |
 | --- | --- | --- |
-| `createCustomerServiceMetricTask` | `(CreateServiceMetricsTaskRequest, ?string, ?RequestOptions)` | `(CreateServiceMetricsTaskRequest, ?string, ?string, ?RequestOptions)` |
-| `createTask` | `(CreateTaskRequest, ?string, ?RequestOptions)` | `(CreateTaskRequest, ?string, ?string, ?string, ?RequestOptions)` |
-| `getCustomerServiceMetricTasks` | `(?string, ?string, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(?string, ?string, ?int, ?int, ?int, ?string, ?RequestOptions)` |
-| `getInventoryTasks` | `(?string, ?string, ?string, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(?string, ?string, ?int, ?string, ?int, ?int, ?string, ?RequestOptions)` |
-| `getOrderTasks` | `(?string, ?string, ?string, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(?string, ?string, ?int, ?int, ?int, ?string, ?string, ?RequestOptions)` |
-| `getSchedules` | `(?string, ?string, ?string, ?string, ?RequestOptions)` | `(?string, ?int, ?int, ?string, ?RequestOptions)` |
-| `getScheduleTemplates` | `(?string, ?string, ?string, ?string, ?RequestOptions)` | `(?string, ?int, ?int, ?string, ?RequestOptions)` |
-| `getTasks` | `(?string, ?string, ?string, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(?string, ?string, ?int, ?int, ?int, ?string, ?string, ?RequestOptions)` |
+| `createCustomerServiceMetricTask` | `(CreateServiceMetricsTaskRequest $body, ?string $accessToken, ?RequestOptions $requestOptions)` | `(CreateServiceMetricsTaskRequest $body, ?string $acceptLanguage, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `createTask` | `(CreateTaskRequest $body, ?string $accessToken, ?RequestOptions $requestOptions)` | `(CreateTaskRequest $body, ?string $xEBAYCMARKETPLACEID, ?string $acceptLanguage, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getCustomerServiceMetricTasks` | `(?string $dateRange, ?string $feedType, ?string $limit, ?string $lookBackDays, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $dateRange, ?string $feedType, ?int $limit, ?int $lookBackDays, ?int $offset, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getInventoryTasks` | `(?string $dateRange, ?string $feedType, ?string $limit, ?string $lookBackDays, ?string $offset, ?string $scheduleId, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $feedType, ?string $scheduleId, ?int $lookBackDays, ?string $dateRange, ?int $limit, ?int $offset, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getOrderTasks` | `(?string $dateRange, ?string $feedType, ?string $limit, ?string $lookBackDays, ?string $offset, ?string $scheduleId, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $dateRange, ?string $feedType, ?int $limit, ?int $lookBackDays, ?int $offset, ?string $scheduleId, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getSchedules` | `(?string $feedType, ?string $limit, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $feedType, ?int $limit, ?int $offset, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getScheduleTemplates` | `(?string $feedType, ?string $limit, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $feedType, ?int $limit, ?int $offset, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getTasks` | `(?string $dateRange, ?string $feedType, ?string $limit, ?string $lookBackDays, ?string $offset, ?string $scheduleId, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $dateRange, ?string $feedType, ?int $limit, ?int $lookBackDays, ?int $offset, ?string $scheduleId, ?string $accessToken, ?RequestOptions $requestOptions)` |
 
 `InventoryClient`:
 
 | Operation | Previous parameters | Current parameters |
 | --- | --- | --- |
-| `bulkCreateOffer` | `(mixed, ?string, ?RequestOptions)` | `(BulkEbayOfferDetailsWithKeys, ?string, ?RequestOptions)` |
-| `bulkPublishOffer` | `(mixed, ?string, ?RequestOptions)` | `(BulkOffer, ?string, ?RequestOptions)` |
-| `createOrReplaceSkuLocationMapping` | `(string, string, mixed, ?string, ?RequestOptions)` | `(string, string, LocationMapping, ?string, ?RequestOptions)` |
-| `updateInventoryLocation` | `(string, mixed, ?string, ?RequestOptions)` | `(string, InventoryLocation, ?string, ?RequestOptions)` |
+| `bulkCreateOffer` | `(mixed $body, ?string $accessToken, ?RequestOptions $requestOptions)` | `(BulkEbayOfferDetailsWithKeys $body, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `bulkPublishOffer` | `(mixed $body, ?string $accessToken, ?RequestOptions $requestOptions)` | `(BulkOffer $body, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `createOrReplaceSkuLocationMapping` | `(string $listingId, string $sku, mixed $body, ?string $accessToken, ?RequestOptions $requestOptions)` | `(string $listingId, string $sku, LocationMapping $body, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `updateInventoryLocation` | `(string $merchantLocationKey, mixed $body, ?string $accessToken, ?RequestOptions $requestOptions)` | `(string $merchantLocationKey, InventoryLocation $body, ?string $accessToken, ?RequestOptions $requestOptions)` |
 
 `ListingGraphQLClient`:
 
 | Operation | Previous parameters | Current parameters |
 | --- | --- | --- |
-| `videosByIds` | `(VideosByIdsInput, ?string, ?RequestOptions)` | `(?VideosByIdsInput, ?string, ?RequestOptions)` |
+| `videosByIds` | `(VideosByIdsInput $input, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?VideosByIdsInput $input, ?string $accessToken, ?RequestOptions $requestOptions)` |
 
 `MediaClient`:
 
 | Operation | Previous parameters | Current parameters |
 | --- | --- | --- |
-| `createImageFromFile` | `(?string, ?RequestOptions)` | `(mixed, ?string, ?RequestOptions)` |
-| `uploadDocument` | `(string, ?string, ?RequestOptions)` | `(string, mixed, ?string, ?RequestOptions)` |
-| `uploadVideo` | `(string, StreamInterface, ?string, ?RequestOptions)` | `(string $videoId, ?string $contentLength, ?string $contentRange, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `createImageFromFile` | `(?string $accessToken, ?RequestOptions $requestOptions)` | `(mixed $body, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `uploadDocument` | `(string $documentId, ?string $accessToken, ?RequestOptions $requestOptions)` | `(string $documentId, mixed $body, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `uploadVideo` | `(string $videoId, StreamInterface $body, ?string $accessToken, ?RequestOptions $requestOptions)` | `(string $videoId, ?string $contentLength, ?string $contentRange, ?string $accessToken, ?RequestOptions $requestOptions)` |
 
 ### Added
 
