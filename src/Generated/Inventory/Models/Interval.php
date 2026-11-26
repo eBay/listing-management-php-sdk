@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type is used by the <strong>intervals</strong> container to define the opening and closing times of a store location's working day. Local time (in Military format) is used, with the following format: <code>hh:mm:ss</code>.
+ * <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
 */
 class Interval implements AdditionalDataHolder, Parsable 
 {

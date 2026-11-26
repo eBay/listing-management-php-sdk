@@ -1,5 +1,6 @@
 {
   "sellerListings": {
+    "__typename": "ListingsSuccess",
     "listings": [
       {
         "__typename": "ListingSuccess",

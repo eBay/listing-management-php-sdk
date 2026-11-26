@@ -32,7 +32,7 @@ class Location implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Address|null $address The <strong>address</strong> container is always returned in <strong>getInventoryLocation</strong>/<strong>getInventoryLocations</strong> calls. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location.
+     * @var Address|null $address The <strong>address</strong> container is always returned in <strong>getInventoryLocation</strong>/<strong>getInventoryLocations</strong> calls. Except in the case of a fulfillment center location, a full address is not a requirement when setting up an inventory location.
     */
     private ?Address $address = null;
     
@@ -71,7 +71,7 @@ class Location implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the address property value. The <strong>address</strong> container is always returned in <strong>getInventoryLocation</strong>/<strong>getInventoryLocations</strong> calls. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location.
+     * Gets the address property value. The <strong>address</strong> container is always returned in <strong>getInventoryLocation</strong>/<strong>getInventoryLocations</strong> calls. Except in the case of a fulfillment center location, a full address is not a requirement when setting up an inventory location.
      * @return Address|null
     */
     public function getAddress(): ?Address {
@@ -127,7 +127,7 @@ class Location implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the address property value. The <strong>address</strong> container is always returned in <strong>getInventoryLocation</strong>/<strong>getInventoryLocations</strong> calls. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location.
+     * Sets the address property value. The <strong>address</strong> container is always returned in <strong>getInventoryLocation</strong>/<strong>getInventoryLocations</strong> calls. Except in the case of a fulfillment center location, a full address is not a requirement when setting up an inventory location.
      * @param Address|null $value Value to set for the address property.
     */
     public function setAddress(?Address $value): void {

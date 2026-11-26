@@ -46,7 +46,9 @@ use EBay\ListingManagement\GraphQL\Types\Results\CreateSecondChanceListingValida
 use EBay\ListingManagement\GraphQL\Types\Results\EndListingOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\EndListingSuccess;
 use EBay\ListingManagement\GraphQL\Types\Results\EndListingValidationError;
+use EBay\ListingManagement\GraphQL\Types\Results\ListingIdsMaxLimitError;
 use EBay\ListingManagement\GraphQL\Types\Results\ListingPreviewsCreationTaskByIdOutput;
+use EBay\ListingManagement\GraphQL\Types\Results\ListingsSuccess;
 use EBay\ListingManagement\GraphQL\Types\Results\MaxVideoIdsAllowedExceeded;
 use EBay\ListingManagement\GraphQL\Types\Results\RelistListingOutput;
 use EBay\ListingManagement\GraphQL\Types\Results\RelistListingSuccess;
@@ -133,7 +135,7 @@ final class ListingGraphQLClient
         return RelistListingOutput::fromArray($data['relistListing'] ?? []);
     }
 
-    public function sellerListings(SellerListingsInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): SellerListingsResult
+    public function sellerListings(SellerListingsInput $input, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ListingIdsMaxLimitError|ListingsSuccess
     {
         $data = $this->dynamic->execute(
             ListingOperations::SELLER_LISTINGS(),

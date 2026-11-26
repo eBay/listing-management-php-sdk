@@ -25,8 +25,6 @@ readonly class UpdateListingShippingOptionsInput
         public ?string $costType = null,
         public ?string $packageHandlingCost = null,
         public ?bool $promotionalShipping = null,
-        public ?string $rateTableId = null,
-        public ?string $shippingDiscountRuleId = null,
         public ?string $shippingRateTableId = null,
     ) {}
 
@@ -38,8 +36,6 @@ readonly class UpdateListingShippingOptionsInput
             costType: $data['costType'] ?? null,
             packageHandlingCost: $data['packageHandlingCost'] ?? null,
             promotionalShipping: $data['promotionalShipping'] ?? null,
-            rateTableId: $data['rateTableId'] ?? null,
-            shippingDiscountRuleId: $data['shippingDiscountRuleId'] ?? null,
             shippingRateTableId: $data['shippingRateTableId'] ?? null,
         );
     }
@@ -53,8 +49,6 @@ readonly class UpdateListingShippingOptionsInput
                 'costType' => $this->costType,
                 'packageHandlingCost' => $this->packageHandlingCost,
                 'promotionalShipping' => $this->promotionalShipping,
-                'rateTableId' => $this->rateTableId,
-                'shippingDiscountRuleId' => $this->shippingDiscountRuleId,
                 'shippingRateTableId' => $this->shippingRateTableId,
             ],
             static fn($value) => $value !== null,

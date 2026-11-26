@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type is used to specify/indicate the quantity of the inventory item that is available for an In-Store Pickup order at the merchant's physical store (specified by the <strong>merchantLocationKey</strong> field).
+ * <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
 */
 class PickupAtLocationAvailability implements AdditionalDataHolder, Parsable 
 {

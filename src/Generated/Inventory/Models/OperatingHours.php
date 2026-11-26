@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type is used to express the regular operating hours of a merchant's store or fulfillment center during the days of the week.
+ * <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
 */
 class OperatingHours implements AdditionalDataHolder, Parsable 
 {

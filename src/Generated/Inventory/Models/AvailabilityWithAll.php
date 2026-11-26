@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type is used to specify the quantity of the inventory items that are available for purchase if the items will be shipped to the buyer, and the quantity of the inventory items that are available for In-Store Pickup at one or more of the merchant's physical stores.<br><br>In-Store Pickup is only available to large merchants selling on the US, UK, Germany, and Australia sites.
+ * This type is used to specify the quantity of the inventory items that are available for purchase if the items will be shipped to the buyer.
 */
 class AvailabilityWithAll implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class AvailabilityWithAll implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<PickupAtLocationAvailability>|null $pickupAtLocationAvailability This container consists of an array of one or more of the merchant's physical stores where the inventory item is available for in-store pickup.<br><br>The store ID, the quantity available, and the fulfillment time (how soon the item will be ready for pickup after the order occurs) are all returned in this container.
+     * @var array<PickupAtLocationAvailability>|null $pickupAtLocationAvailability <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
     */
     private ?array $pickupAtLocationAvailability = null;
     
@@ -78,7 +78,7 @@ class AvailabilityWithAll implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the pickupAtLocationAvailability property value. This container consists of an array of one or more of the merchant's physical stores where the inventory item is available for in-store pickup.<br><br>The store ID, the quantity available, and the fulfillment time (how soon the item will be ready for pickup after the order occurs) are all returned in this container.
+     * Gets the pickupAtLocationAvailability property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @return array<PickupAtLocationAvailability>|null
     */
     public function getPickupAtLocationAvailability(): ?array {
@@ -112,7 +112,7 @@ class AvailabilityWithAll implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the pickupAtLocationAvailability property value. This container consists of an array of one or more of the merchant's physical stores where the inventory item is available for in-store pickup.<br><br>The store ID, the quantity available, and the fulfillment time (how soon the item will be ready for pickup after the order occurs) are all returned in this container.
+     * Sets the pickupAtLocationAvailability property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @param array<PickupAtLocationAvailability>|null $value Value to set for the pickupAtLocationAvailability property.
     */
     public function setPickupAtLocationAvailability(?array $value): void {

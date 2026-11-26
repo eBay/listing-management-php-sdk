@@ -45,6 +45,11 @@ final class DynamicGraphQLClient
                 'No access token. Pass $accessToken per-call or set ListingManagementConfiguration::$accessToken.'
             );
 
+        $problem = ListingManagementConfiguration::untrustedReason($this->config->graphQLBaseUrl, $this->config->getAllowedHosts());
+        if ($problem !== null) {
+            throw new \RuntimeException('graphQLBaseUrl: ' . $problem . ': ' . $this->config->graphQLBaseUrl);
+        }
+
         $payload = ['query' => $query];
         if (!empty($variables)) {
             $payload['variables'] = $variables;

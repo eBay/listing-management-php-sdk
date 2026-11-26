@@ -230,10 +230,10 @@ final class FeedClient
         );
     }
 
-    public function getLatestResultFile(string $scheduleId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    public function getLatestResultFile(string $scheduleId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
+        return $this->call($accessToken, fn($api) =>
             $api->schedule()->bySchedule_id($scheduleId)->download_result_file()->get(
                 new \EBay\ListingManagement\Generated\Feed\Schedule\Item\Download_result_file\Download_result_fileRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
@@ -325,20 +325,20 @@ final class FeedClient
         );
     }
 
-    public function getInputFile(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    public function getInputFile(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
+        return $this->call($accessToken, fn($api) =>
             $api->task()->byTask_id($taskId)->download_input_file()->get(
                 new \EBay\ListingManagement\Generated\Feed\Task\Item\Download_input_file\Download_input_fileRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
-    public function getResultFile(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    public function getResultFile(string $taskId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
+        return $this->call($accessToken, fn($api) =>
             $api->task()->byTask_id($taskId)->download_result_file()->get(
                 new \EBay\ListingManagement\Generated\Feed\Task\Item\Download_result_file\Download_result_fileRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
@@ -365,7 +365,7 @@ final class FeedClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->task()->byTask_id($taskId)->upload_file()->post(
-                $body,
+                new MultipartFile("file", $body),
                 new \EBay\ListingManagement\Generated\Feed\Task\Item\Upload_file\Upload_fileRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );

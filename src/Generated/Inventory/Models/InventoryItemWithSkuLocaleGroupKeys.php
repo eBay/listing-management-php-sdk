@@ -33,7 +33,7 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     private ?array $additionalData = null;
     
     /**
-     * @var AvailabilityWithAll|null $availability This container shows the quantity of the inventory item that is available for purchase if the item will be shipped to the buyer, and/or the quantity of the inventory item that is available for In-Store Pickup at one or more of the merchant's physical stores.
+     * @var AvailabilityWithAll|null $availability This container shows the quantity of the inventory item that is available for purchase if the item will be shipped to the buyer.
     */
     private ?AvailabilityWithAll $availability = null;
     
@@ -102,7 +102,7 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Gets the availability property value. This container shows the quantity of the inventory item that is available for purchase if the item will be shipped to the buyer, and/or the quantity of the inventory item that is available for In-Store Pickup at one or more of the merchant's physical stores.
+     * Gets the availability property value. This container shows the quantity of the inventory item that is available for purchase if the item will be shipped to the buyer.
      * @return AvailabilityWithAll|null
     */
     public function getAvailability(): ?AvailabilityWithAll {
@@ -225,7 +225,7 @@ class InventoryItemWithSkuLocaleGroupKeys implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Sets the availability property value. This container shows the quantity of the inventory item that is available for purchase if the item will be shipped to the buyer, and/or the quantity of the inventory item that is available for In-Store Pickup at one or more of the merchant's physical stores.
+     * Sets the availability property value. This container shows the quantity of the inventory item that is available for purchase if the item will be shipped to the buyer.
      * @param AvailabilityWithAll|null $value Value to set for the availability property.
     */
     public function setAvailability(?AvailabilityWithAll $value): void {
