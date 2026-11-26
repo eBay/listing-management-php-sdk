@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type is used to indicate the fulfillment time for an In-Store Pickup order, or for an order than will be shipped to the buyer.
+ * This type is used to indicate the fulfillment time for an order that will be shipped to the buyer.
 */
 class TimeDuration implements AdditionalDataHolder, Parsable 
 {

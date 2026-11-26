@@ -22,12 +22,15 @@ readonly class SellerListingInput
 {
     public function __construct(
         public string $listingId,
+        /** @var SellerListingItemsSelectionInput[] */
+        public ?array $itemsFilter = null,
     ) {}
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
+            itemsFilter: array_map(fn($item) => SellerListingItemsSelectionInput::fromArray($item), $data['itemsFilter'] ?? []),
             listingId: $data['listingId'],
         );
     }
@@ -35,8 +38,12 @@ readonly class SellerListingInput
     /** @return array<string, mixed> */
     public function toArray(): array
     {
-        return [
+        return array_filter(
+            [
+                'itemsFilter' => $this->itemsFilter !== null ? array_map(fn(SellerListingItemsSelectionInput $item) => $item->toArray(), $this->itemsFilter) : null,
                 'listingId' => $this->listingId,
-        ];
+            ],
+            static fn($value) => $value !== null,
+        );
     }
 }

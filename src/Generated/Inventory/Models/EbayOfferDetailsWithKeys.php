@@ -48,7 +48,7 @@ class EbayOfferDetailsWithKeys implements AdditionalDataHolder, Parsable
     private ?Charity $charity = null;
     
     /**
-     * @var ExtendedProducerResponsibility|null $extendedProducerResponsibility This container is used to provide the eco-participation fee for a product.<br><br>Use the <a href="develop/api/sell/metadata_api#sell-metadata_api-marketplace-getextendedproducerresponsibilitypolicies" >getExtendedProducerResponsibilityPolicies</a>Â method of theÂ <strong>Sell Metadata API</strong> to retrieve categories that support eco-participation fee for a specified marketplace.
+     * @var ExtendedProducerResponsibility|null $extendedProducerResponsibility This container is used to provide the eco-participation fee for a product.<br><br>Use the <a href="develop/api/sell/metadata_api#sell-metadata_api-marketplace-getextendedproducerresponsibilitypolicies" >getExtendedProducerResponsibilityPolicies</a> method of the <strong>Sell Metadata API</strong> to retrieve categories that support eco-participation fee for a specified marketplace.
     */
     private ?ExtendedProducerResponsibility $extendedProducerResponsibility = null;
     
@@ -186,7 +186,7 @@ class EbayOfferDetailsWithKeys implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the extendedProducerResponsibility property value. This container is used to provide the eco-participation fee for a product.<br><br>Use the <a href="develop/api/sell/metadata_api#sell-metadata_api-marketplace-getextendedproducerresponsibilitypolicies" >getExtendedProducerResponsibilityPolicies</a>Â method of theÂ <strong>Sell Metadata API</strong> to retrieve categories that support eco-participation fee for a specified marketplace.
+     * Gets the extendedProducerResponsibility property value. This container is used to provide the eco-participation fee for a product.<br><br>Use the <a href="develop/api/sell/metadata_api#sell-metadata_api-marketplace-getextendedproducerresponsibilitypolicies" >getExtendedProducerResponsibilityPolicies</a> method of the <strong>Sell Metadata API</strong> to retrieve categories that support eco-participation fee for a specified marketplace.
      * @return ExtendedProducerResponsibility|null
     */
     public function getExtendedProducerResponsibility(): ?ExtendedProducerResponsibility {
@@ -429,7 +429,7 @@ class EbayOfferDetailsWithKeys implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the extendedProducerResponsibility property value. This container is used to provide the eco-participation fee for a product.<br><br>Use the <a href="develop/api/sell/metadata_api#sell-metadata_api-marketplace-getextendedproducerresponsibilitypolicies" >getExtendedProducerResponsibilityPolicies</a>Â method of theÂ <strong>Sell Metadata API</strong> to retrieve categories that support eco-participation fee for a specified marketplace.
+     * Sets the extendedProducerResponsibility property value. This container is used to provide the eco-participation fee for a product.<br><br>Use the <a href="develop/api/sell/metadata_api#sell-metadata_api-marketplace-getextendedproducerresponsibilitypolicies" >getExtendedProducerResponsibilityPolicies</a> method of the <strong>Sell Metadata API</strong> to retrieve categories that support eco-participation fee for a specified marketplace.
      * @param ExtendedProducerResponsibility|null $value Value to set for the extendedProducerResponsibility property.
     */
     public function setExtendedProducerResponsibility(?ExtendedProducerResponsibility $value): void {

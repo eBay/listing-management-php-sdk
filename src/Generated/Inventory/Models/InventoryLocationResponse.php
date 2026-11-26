@@ -37,7 +37,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     private ?FulfillmentCenterSpecifications $fulfillmentCenterSpecifications = null;
     
     /**
-     * @var Location|null $location This container provides location details of an inventory location. The <strong>address</strong> container will always be returned, but it will not always have a complete street address. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location. The <strong>geoCoordinates</strong> container will only be returned if the merchant provided geographical coordinates. The <strong>locationId</strong> field is always returned, but this value is only used internally by eBay.
+     * @var Location|null $location This container provides details of an inventory location. The <strong>address</strong> container will always be returned, but it will not always have a complete street address, as a WAREHOUSE location does not require a full street address. The <strong>geoCoordinates</strong> container will only be returned if the seller provided geographical coordinates. The <strong>locationId</strong> field is always returned, but this value is only used internally by eBay.
     */
     private ?Location $location = null;
     
@@ -47,12 +47,12 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     private ?string $locationAdditionalInformation = null;
     
     /**
-     * @var string|null $locationInstructions This text field is used by the merchant to provide special pickup instructions for the store location. This field can help create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field was not set up through a <strong>createInventoryLocation</strong> or a <strong>updateInventoryLocation</strong> call, eBay will use the default pickup instructions contained in the merchant's profile.
+     * @var string|null $locationInstructions <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
     */
     private ?string $locationInstructions = null;
     
     /**
-     * @var array<StoreTypeEnum>|null $locationTypes This container defines the function of the inventory location. Typically, a location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.
+     * @var array<StoreTypeEnum>|null $locationTypes This array indicates if the inventory location is a warehouse or a fulfillment center.
     */
     private ?array $locationTypes = null;
     
@@ -72,22 +72,22 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     private ?StatusEnum $merchantLocationStatus = null;
     
     /**
-     * @var string|null $name The name of the inventory location. This name should be a human-friendly name as it will be displayed in In-Store Pickup and Click and Collect listings. For store inventory locations, this field is not required for the <strong>createInventoryLocation</strong> call, but a store inventory location must have a defined <strong>name</strong> value before an In-Store Pickup and Click and Collect enabled offer is published. So, if the seller omits this field in the <strong>createInventoryLocation</strong> call, it will have to be added later through a <strong>updateInventoryLocation</strong> call.
+     * @var string|null $name The name of the inventory location. This name should be a human-friendly name.
     */
     private ?string $name = null;
     
     /**
-     * @var array<OperatingHours>|null $operatingHours This container shows the regular operating hours for a store location during the days of the week. A <strong>dayOfWeekEnum</strong> field and an <strong>intervals</strong> container is shown for each day of the week that the location is open.
+     * @var array<OperatingHours>|null $operatingHours <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
     */
     private ?array $operatingHours = null;
     
     /**
-     * @var string|null $phone The phone number for an inventory location. This field will typically only be returned for store locations.
+     * @var string|null $phone <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
     */
     private ?string $phone = null;
     
     /**
-     * @var array<SpecialHours>|null $specialHours This container shows the special operating hours for a store or fulfillment center location on a specific date or dates.
+     * @var array<SpecialHours>|null $specialHours <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
     */
     private ?array $specialHours = null;
     
@@ -152,7 +152,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the location property value. This container provides location details of an inventory location. The <strong>address</strong> container will always be returned, but it will not always have a complete street address. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location. The <strong>geoCoordinates</strong> container will only be returned if the merchant provided geographical coordinates. The <strong>locationId</strong> field is always returned, but this value is only used internally by eBay.
+     * Gets the location property value. This container provides details of an inventory location. The <strong>address</strong> container will always be returned, but it will not always have a complete street address, as a WAREHOUSE location does not require a full street address. The <strong>geoCoordinates</strong> container will only be returned if the seller provided geographical coordinates. The <strong>locationId</strong> field is always returned, but this value is only used internally by eBay.
      * @return Location|null
     */
     public function getLocation(): ?Location {
@@ -168,7 +168,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the locationInstructions property value. This text field is used by the merchant to provide special pickup instructions for the store location. This field can help create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field was not set up through a <strong>createInventoryLocation</strong> or a <strong>updateInventoryLocation</strong> call, eBay will use the default pickup instructions contained in the merchant's profile.
+     * Gets the locationInstructions property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @return string|null
     */
     public function getLocationInstructions(): ?string {
@@ -176,7 +176,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the locationTypes property value. This container defines the function of the inventory location. Typically, a location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.
+     * Gets the locationTypes property value. This array indicates if the inventory location is a warehouse or a fulfillment center.
      * @return array<StoreTypeEnum>|null
     */
     public function getLocationTypes(): ?array {
@@ -208,7 +208,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the name property value. The name of the inventory location. This name should be a human-friendly name as it will be displayed in In-Store Pickup and Click and Collect listings. For store inventory locations, this field is not required for the <strong>createInventoryLocation</strong> call, but a store inventory location must have a defined <strong>name</strong> value before an In-Store Pickup and Click and Collect enabled offer is published. So, if the seller omits this field in the <strong>createInventoryLocation</strong> call, it will have to be added later through a <strong>updateInventoryLocation</strong> call.
+     * Gets the name property value. The name of the inventory location. This name should be a human-friendly name.
      * @return string|null
     */
     public function getName(): ?string {
@@ -216,7 +216,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the operatingHours property value. This container shows the regular operating hours for a store location during the days of the week. A <strong>dayOfWeekEnum</strong> field and an <strong>intervals</strong> container is shown for each day of the week that the location is open.
+     * Gets the operatingHours property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @return array<OperatingHours>|null
     */
     public function getOperatingHours(): ?array {
@@ -224,7 +224,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the phone property value. The phone number for an inventory location. This field will typically only be returned for store locations.
+     * Gets the phone property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @return string|null
     */
     public function getPhone(): ?string {
@@ -232,7 +232,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the specialHours property value. This container shows the special operating hours for a store or fulfillment center location on a specific date or dates.
+     * Gets the specialHours property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @return array<SpecialHours>|null
     */
     public function getSpecialHours(): ?array {
@@ -285,7 +285,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the location property value. This container provides location details of an inventory location. The <strong>address</strong> container will always be returned, but it will not always have a complete street address. Except in the case of a store or fulfillment center location, a full address is not a requirement when setting up an inventory location. The <strong>geoCoordinates</strong> container will only be returned if the merchant provided geographical coordinates. The <strong>locationId</strong> field is always returned, but this value is only used internally by eBay.
+     * Sets the location property value. This container provides details of an inventory location. The <strong>address</strong> container will always be returned, but it will not always have a complete street address, as a WAREHOUSE location does not require a full street address. The <strong>geoCoordinates</strong> container will only be returned if the seller provided geographical coordinates. The <strong>locationId</strong> field is always returned, but this value is only used internally by eBay.
      * @param Location|null $value Value to set for the location property.
     */
     public function setLocation(?Location $value): void {
@@ -301,7 +301,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the locationInstructions property value. This text field is used by the merchant to provide special pickup instructions for the store location. This field can help create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field was not set up through a <strong>createInventoryLocation</strong> or a <strong>updateInventoryLocation</strong> call, eBay will use the default pickup instructions contained in the merchant's profile.
+     * Sets the locationInstructions property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @param string|null $value Value to set for the locationInstructions property.
     */
     public function setLocationInstructions(?string $value): void {
@@ -309,7 +309,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the locationTypes property value. This container defines the function of the inventory location. Typically, a location will serve as a store, warehouse, or fulfillment center, but in some cases, an inventory location may be more than one type.
+     * Sets the locationTypes property value. This array indicates if the inventory location is a warehouse or a fulfillment center.
      * @param array<StoreTypeEnum>|null $value Value to set for the locationTypes property.
     */
     public function setLocationTypes(?array $value): void {
@@ -341,7 +341,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the name property value. The name of the inventory location. This name should be a human-friendly name as it will be displayed in In-Store Pickup and Click and Collect listings. For store inventory locations, this field is not required for the <strong>createInventoryLocation</strong> call, but a store inventory location must have a defined <strong>name</strong> value before an In-Store Pickup and Click and Collect enabled offer is published. So, if the seller omits this field in the <strong>createInventoryLocation</strong> call, it will have to be added later through a <strong>updateInventoryLocation</strong> call.
+     * Sets the name property value. The name of the inventory location. This name should be a human-friendly name.
      * @param string|null $value Value to set for the name property.
     */
     public function setName(?string $value): void {
@@ -349,7 +349,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the operatingHours property value. This container shows the regular operating hours for a store location during the days of the week. A <strong>dayOfWeekEnum</strong> field and an <strong>intervals</strong> container is shown for each day of the week that the location is open.
+     * Sets the operatingHours property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @param array<OperatingHours>|null $value Value to set for the operatingHours property.
     */
     public function setOperatingHours(?array $value): void {
@@ -357,7 +357,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the phone property value. The phone number for an inventory location. This field will typically only be returned for store locations.
+     * Sets the phone property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @param string|null $value Value to set for the phone property.
     */
     public function setPhone(?string $value): void {
@@ -365,7 +365,7 @@ class InventoryLocationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the specialHours property value. This container shows the special operating hours for a store or fulfillment center location on a specific date or dates.
+     * Sets the specialHours property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @param array<SpecialHours>|null $value Value to set for the specialHours property.
     */
     public function setSpecialHours(?array $value): void {

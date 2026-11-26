@@ -37,7 +37,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     private ?FulfillmentCenterSpecifications $fulfillmentCenterSpecifications = null;
     
     /**
-     * @var LocationDetails|null $location This container is used to add any addition physical address and geographical coordinate information for a warehouse, store, or fulfillment center inventory location.<br><br><span class="tablenote"><b>Note:</b> For warehouse and store inventory locations, address fields can be updated any number of times. For fulfilment center locations, address fields cannot be updated. However, if any address fields were omitted during the <b>createInventoryLocation</b> call, they can be added through this method.</span><br><span class="tablenote"><b>Note:</b> When updating a warehouse location to a fulfillment center, sellers can update any of the address fields a single time during the same call used to make this update. After this, they can no longer be updated.</span> 
+     * @var LocationDetails|null $location This container is used to add any additional physical address and geographical coordinate information for a warehouse or fulfillment center inventory location.<br><br><span class="tablenote"><b>Note:</b> For warehouse inventory locations, address fields can be updated any number of times. For fulfillment center locations, address fields cannot be updated. However, if any address fields were omitted during the <b>createInventoryLocation</b> call, they can be added through this method.</span><br><span class="tablenote"><b>Note:</b> When updating a warehouse location to a fulfillment center, sellers can update any of the address fields a single time during the same call used to make this update. After this, they can no longer be updated.</span>
     */
     private ?LocationDetails $location = null;
     
@@ -47,7 +47,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     private ?string $locationAdditionalInformation = null;
     
     /**
-     * @var string|null $locationInstructions This text field is generally used by the merchant to provide/update special pickup instructions for a store inventory location. Although this field is optional, it is recommended that merchants provide this field to create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field is not included in the call request payload, eBay will use the default pickup instructions contained in the merchant's profile (if available). Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Maximum length</b>: 1000
+     * @var string|null $locationInstructions <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
     */
     private ?string $locationInstructions = null;
     
@@ -62,12 +62,12 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     private ?string $locationWebUrl = null;
     
     /**
-     * @var string|null $name This text field is used by the merchant to update the name of the inventory location. This name should be a human-friendly name as it will be in In-Store Pickup and Click and Collect listings. A name is not required for warehouse locations. For store locations, this field is not immediately required, but will be required before an offer enabled with the In-Store Pickup or Click and Collect capability can be published. So, if the seller omitted this field in the <strong>createInventoryLocation</strong> call, it is required for an <strong>updateInventoryLocation</strong> call. The name that is passed in this field will replace any other name that may be defined for this field.
+     * @var string|null $name This text field is used by the merchant to update the name of the inventory location. This name should be a human-friendly name. A name is not required for warehouse locations. The name that is passed in this field will replace any other name that may be defined for this field.
     */
     private ?string $name = null;
     
     /**
-     * @var array<OperatingHours>|null $operatingHours This container is used to provide/update the regular operating hours for a store location during the days of the week. A <strong>dayOfWeekEnum</strong> field and an <strong>intervals</strong> container will be needed for each day of the week that the location is open. Note that if operating hours are already set for a location for a specific day of the week, whatever is set through an <strong>updateInventoryLocation</strong> call will override those existing hours.
+     * @var array<OperatingHours>|null $operatingHours <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
     */
     private ?array $operatingHours = null;
     
@@ -77,7 +77,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     private ?string $phone = null;
     
     /**
-     * @var array<SpecialHours>|null $specialHours This container is used to provide/update the special operating hours for a store location on a specific date, such as a holiday. The special hours specified for the specific date will override the normal operating hours for that particular day of the week. If special hours have already been set up for an inventory location, specifying special hours through an <strong>updateInventoryLocation</strong> call will only add to the list, unless the date(s) used are the same special date(s) already set up, in which case, the special hours set up through the <strong>updateInventoryLocation</strong> call will override the existing special hours.
+     * @var array<SpecialHours>|null $specialHours <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
     */
     private ?array $specialHours = null;
     
@@ -140,7 +140,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the location property value. This container is used to add any addition physical address and geographical coordinate information for a warehouse, store, or fulfillment center inventory location.<br><br><span class="tablenote"><b>Note:</b> For warehouse and store inventory locations, address fields can be updated any number of times. For fulfilment center locations, address fields cannot be updated. However, if any address fields were omitted during the <b>createInventoryLocation</b> call, they can be added through this method.</span><br><span class="tablenote"><b>Note:</b> When updating a warehouse location to a fulfillment center, sellers can update any of the address fields a single time during the same call used to make this update. After this, they can no longer be updated.</span> 
+     * Gets the location property value. This container is used to add any additional physical address and geographical coordinate information for a warehouse or fulfillment center inventory location.<br><br><span class="tablenote"><b>Note:</b> For warehouse inventory locations, address fields can be updated any number of times. For fulfillment center locations, address fields cannot be updated. However, if any address fields were omitted during the <b>createInventoryLocation</b> call, they can be added through this method.</span><br><span class="tablenote"><b>Note:</b> When updating a warehouse location to a fulfillment center, sellers can update any of the address fields a single time during the same call used to make this update. After this, they can no longer be updated.</span>
      * @return LocationDetails|null
     */
     public function getLocation(): ?LocationDetails {
@@ -156,7 +156,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the locationInstructions property value. This text field is generally used by the merchant to provide/update special pickup instructions for a store inventory location. Although this field is optional, it is recommended that merchants provide this field to create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field is not included in the call request payload, eBay will use the default pickup instructions contained in the merchant's profile (if available). Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Maximum length</b>: 1000
+     * Gets the locationInstructions property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @return string|null
     */
     public function getLocationInstructions(): ?string {
@@ -180,7 +180,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the name property value. This text field is used by the merchant to update the name of the inventory location. This name should be a human-friendly name as it will be in In-Store Pickup and Click and Collect listings. A name is not required for warehouse locations. For store locations, this field is not immediately required, but will be required before an offer enabled with the In-Store Pickup or Click and Collect capability can be published. So, if the seller omitted this field in the <strong>createInventoryLocation</strong> call, it is required for an <strong>updateInventoryLocation</strong> call. The name that is passed in this field will replace any other name that may be defined for this field.
+     * Gets the name property value. This text field is used by the merchant to update the name of the inventory location. This name should be a human-friendly name. A name is not required for warehouse locations. The name that is passed in this field will replace any other name that may be defined for this field.
      * @return string|null
     */
     public function getName(): ?string {
@@ -188,7 +188,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the operatingHours property value. This container is used to provide/update the regular operating hours for a store location during the days of the week. A <strong>dayOfWeekEnum</strong> field and an <strong>intervals</strong> container will be needed for each day of the week that the location is open. Note that if operating hours are already set for a location for a specific day of the week, whatever is set through an <strong>updateInventoryLocation</strong> call will override those existing hours.
+     * Gets the operatingHours property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @return array<OperatingHours>|null
     */
     public function getOperatingHours(): ?array {
@@ -204,7 +204,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the specialHours property value. This container is used to provide/update the special operating hours for a store location on a specific date, such as a holiday. The special hours specified for the specific date will override the normal operating hours for that particular day of the week. If special hours have already been set up for an inventory location, specifying special hours through an <strong>updateInventoryLocation</strong> call will only add to the list, unless the date(s) used are the same special date(s) already set up, in which case, the special hours set up through the <strong>updateInventoryLocation</strong> call will override the existing special hours.
+     * Gets the specialHours property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @return array<SpecialHours>|null
     */
     public function getSpecialHours(): ?array {
@@ -255,7 +255,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the location property value. This container is used to add any addition physical address and geographical coordinate information for a warehouse, store, or fulfillment center inventory location.<br><br><span class="tablenote"><b>Note:</b> For warehouse and store inventory locations, address fields can be updated any number of times. For fulfilment center locations, address fields cannot be updated. However, if any address fields were omitted during the <b>createInventoryLocation</b> call, they can be added through this method.</span><br><span class="tablenote"><b>Note:</b> When updating a warehouse location to a fulfillment center, sellers can update any of the address fields a single time during the same call used to make this update. After this, they can no longer be updated.</span> 
+     * Sets the location property value. This container is used to add any additional physical address and geographical coordinate information for a warehouse or fulfillment center inventory location.<br><br><span class="tablenote"><b>Note:</b> For warehouse inventory locations, address fields can be updated any number of times. For fulfillment center locations, address fields cannot be updated. However, if any address fields were omitted during the <b>createInventoryLocation</b> call, they can be added through this method.</span><br><span class="tablenote"><b>Note:</b> When updating a warehouse location to a fulfillment center, sellers can update any of the address fields a single time during the same call used to make this update. After this, they can no longer be updated.</span>
      * @param LocationDetails|null $value Value to set for the location property.
     */
     public function setLocation(?LocationDetails $value): void {
@@ -271,7 +271,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the locationInstructions property value. This text field is generally used by the merchant to provide/update special pickup instructions for a store inventory location. Although this field is optional, it is recommended that merchants provide this field to create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field is not included in the call request payload, eBay will use the default pickup instructions contained in the merchant's profile (if available). Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. <br><br><b>Maximum length</b>: 1000
+     * Sets the locationInstructions property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @param string|null $value Value to set for the locationInstructions property.
     */
     public function setLocationInstructions(?string $value): void {
@@ -295,7 +295,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the name property value. This text field is used by the merchant to update the name of the inventory location. This name should be a human-friendly name as it will be in In-Store Pickup and Click and Collect listings. A name is not required for warehouse locations. For store locations, this field is not immediately required, but will be required before an offer enabled with the In-Store Pickup or Click and Collect capability can be published. So, if the seller omitted this field in the <strong>createInventoryLocation</strong> call, it is required for an <strong>updateInventoryLocation</strong> call. The name that is passed in this field will replace any other name that may be defined for this field.
+     * Sets the name property value. This text field is used by the merchant to update the name of the inventory location. This name should be a human-friendly name. A name is not required for warehouse locations. The name that is passed in this field will replace any other name that may be defined for this field.
      * @param string|null $value Value to set for the name property.
     */
     public function setName(?string $value): void {
@@ -303,7 +303,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the operatingHours property value. This container is used to provide/update the regular operating hours for a store location during the days of the week. A <strong>dayOfWeekEnum</strong> field and an <strong>intervals</strong> container will be needed for each day of the week that the location is open. Note that if operating hours are already set for a location for a specific day of the week, whatever is set through an <strong>updateInventoryLocation</strong> call will override those existing hours.
+     * Sets the operatingHours property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @param array<OperatingHours>|null $value Value to set for the operatingHours property.
     */
     public function setOperatingHours(?array $value): void {
@@ -319,7 +319,7 @@ class InventoryLocation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the specialHours property value. This container is used to provide/update the special operating hours for a store location on a specific date, such as a holiday. The special hours specified for the specific date will override the normal operating hours for that particular day of the week. If special hours have already been set up for an inventory location, specifying special hours through an <strong>updateInventoryLocation</strong> call will only add to the list, unless the date(s) used are the same special date(s) already set up, in which case, the special hours set up through the <strong>updateInventoryLocation</strong> call will override the existing special hours.
+     * Sets the specialHours property value. <b>Deprecated.</b> Do not use as STORE location types are no longer supported.
      * @param array<SpecialHours>|null $value Value to set for the specialHours property.
     */
     public function setSpecialHours(?array $value): void {

@@ -21,9 +21,10 @@ namespace EBay\ListingManagement\GraphQL\Types\Results;
 abstract readonly class SellerListingOutput
 {
     /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): ListingSuccess
+    public static function fromArray(array $data): ListingPartialSuccess|ListingSuccess
     {
         return match ($data['__typename'] ?? null) {
+            'ListingPartialSuccess' => ListingPartialSuccess::fromArray($data),
             'ListingSuccess' => ListingSuccess::fromArray($data),
             default => throw new \UnexpectedValueException(
                 'Unknown __typename for SellerListingOutput: ' . ($data['__typename'] ?? 'null')

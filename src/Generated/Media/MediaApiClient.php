@@ -78,7 +78,7 @@ class MediaApiClient extends BaseRequestBuilder
         ApiClientBuilder::registerDefaultDeserializer(TextParseNodeFactory::class);
         ApiClientBuilder::registerDefaultDeserializer(FormParseNodeFactory::class);
         if (empty($this->requestAdapter->getBaseUrl())) {
-            $this->requestAdapter->setBaseUrl('https://apim.ebay.com/commerce/media/v1_beta');
+            $this->requestAdapter->setBaseUrl('https://apim.ebay.com{basePath}');
         }
         $this->pathParameters['baseurl'] = $this->requestAdapter->getBaseUrl();
     }

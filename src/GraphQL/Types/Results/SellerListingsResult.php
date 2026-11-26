@@ -18,18 +18,17 @@ declare(strict_types=1);
 
 namespace EBay\ListingManagement\GraphQL\Types\Results;
 
-readonly class SellerListingsResult
+abstract readonly class SellerListingsResult
 {
-    public function __construct(
-        /** @var (ListingSuccess)[] */
-        public array $listings = [],
-    ) {}
-
     /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): ListingIdsMaxLimitError|ListingsSuccess
     {
-        return new self(
-            listings: array_map(fn($item) => SellerListingOutput::fromArray($item), $data['listings'] ?? []),
-        );
+        return match ($data['__typename'] ?? null) {
+            'ListingIdsMaxLimitError' => ListingIdsMaxLimitError::fromArray($data),
+            'ListingsSuccess' => ListingsSuccess::fromArray($data),
+            default => throw new \UnexpectedValueException(
+                'Unknown __typename for SellerListingsResult: ' . ($data['__typename'] ?? 'null')
+            ),
+        };
     }
 }

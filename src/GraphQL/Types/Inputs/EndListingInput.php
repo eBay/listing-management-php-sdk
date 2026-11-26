@@ -23,7 +23,6 @@ readonly class EndListingInput
     public function __construct(
         public string $endListingReason,
         public ListingIdentifierInput $listingIdentifier,
-        public ?ListingIdentifierInput $listingIdentifierInput = null,
     ) {}
 
     /** @param array<string, mixed> $data */
@@ -35,20 +34,15 @@ readonly class EndListingInput
         return new self(
             endListingReason: $data['endListingReason'],
             listingIdentifier: ListingIdentifierInput::fromArray($data['listingIdentifier']),
-            listingIdentifierInput: isset($data['listingIdentifierInput']) ? ListingIdentifierInput::fromArray($data['listingIdentifierInput']) : null,
         );
     }
 
     /** @return array<string, mixed> */
     public function toArray(): array
     {
-        return array_filter(
-            [
+        return [
                 'endListingReason' => $this->endListingReason,
                 'listingIdentifier' => (object)$this->listingIdentifier->toArray(),
-                'listingIdentifierInput' => $this->listingIdentifierInput !== null ? (object)$this->listingIdentifierInput->toArray() : null,
-            ],
-            static fn($value) => $value !== null,
-        );
+        ];
     }
 }

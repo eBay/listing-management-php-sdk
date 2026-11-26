@@ -28,6 +28,7 @@ readonly class SellerActiveListingSearchFilterInput
         /** @var array<int, mixed> */
         public ?array $marketplaces = null,
         public ?SellerListingDateTimeRangeInput $modifiedAtRange = null,
+        public ?SellerListingPriceRangeInput $priceRange = null,
         /** @var array<int, mixed> */
         public ?array $primaryCategoryIds = null,
         /** @var array<int, mixed> */
@@ -44,6 +45,7 @@ readonly class SellerActiveListingSearchFilterInput
             listingIds: $data['listingIds'] ?? [],
             marketplaces: $data['marketplaces'] ?? [],
             modifiedAtRange: isset($data['modifiedAtRange']) ? SellerListingDateTimeRangeInput::fromArray($data['modifiedAtRange']) : null,
+            priceRange: isset($data['priceRange']) ? SellerListingPriceRangeInput::fromArray($data['priceRange']) : null,
             primaryCategoryIds: $data['primaryCategoryIds'] ?? [],
             skus: $data['skus'] ?? [],
             startAtRange: isset($data['startAtRange']) ? SellerListingDateTimeRangeInput::fromArray($data['startAtRange']) : null,
@@ -60,6 +62,7 @@ readonly class SellerActiveListingSearchFilterInput
                 'listingIds' => $this->listingIds,
                 'marketplaces' => $this->marketplaces,
                 'modifiedAtRange' => $this->modifiedAtRange !== null ? (object)$this->modifiedAtRange->toArray() : null,
+                'priceRange' => $this->priceRange !== null ? (object)$this->priceRange->toArray() : null,
                 'primaryCategoryIds' => $this->primaryCategoryIds,
                 'skus' => $this->skus,
                 'startAtRange' => $this->startAtRange !== null ? (object)$this->startAtRange->toArray() : null,

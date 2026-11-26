@@ -23,7 +23,6 @@ readonly class UpdateListingSellerContactInput
     public function __construct(
         public ?string $addressLine1 = null,
         public ?string $addressLine2 = null,
-        public ?string $companyName = null,
         public ?bool $contactByEmailEnabled = null,
         public ?string $country = null,
         public ?string $county = null,
@@ -38,7 +37,6 @@ readonly class UpdateListingSellerContactInput
         return new self(
             addressLine1: $data['addressLine1'] ?? null,
             addressLine2: $data['addressLine2'] ?? null,
-            companyName: $data['companyName'] ?? null,
             contactByEmailEnabled: $data['contactByEmailEnabled'] ?? null,
             country: $data['country'] ?? null,
             county: $data['county'] ?? null,
@@ -55,7 +53,6 @@ readonly class UpdateListingSellerContactInput
             [
                 'addressLine1' => $this->addressLine1,
                 'addressLine2' => $this->addressLine2,
-                'companyName' => $this->companyName,
                 'contactByEmailEnabled' => $this->contactByEmailEnabled,
                 'country' => $this->country,
                 'county' => $this->county,

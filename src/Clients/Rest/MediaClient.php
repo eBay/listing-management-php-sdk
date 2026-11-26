@@ -55,7 +55,7 @@ final class MediaClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->image()->create_image_from_file()->post(
-                $body,
+                new MultipartFile("image", $body),
                 new \EBay\ListingManagement\Generated\Media\Image\Create_image_from_file\Create_image_from_fileRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -82,10 +82,10 @@ final class MediaClient
         );
     }
 
-    public function createVideo(CreateVideoRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    public function createVideo(CreateVideoRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
+        return $this->call($accessToken, fn($api) =>
             $api->video()->post(
                 $body,
                 new \EBay\ListingManagement\Generated\Media\Video\VideoRequestBuilderPostRequestConfiguration(headers: $headers)
@@ -105,11 +105,12 @@ final class MediaClient
 
     public function uploadVideo(
         string $videoId,
+        mixed $body,
         ?string $contentLength = null,
         ?string $contentRange = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): void
+    ): mixed
     {
         $headers = $this->mergedHeaders($requestOptions);
         if ($contentLength !== null) {
@@ -118,8 +119,9 @@ final class MediaClient
         if ($contentRange !== null) {
             $headers["Content-Range"] = $contentRange;
         }
-        $this->call($accessToken, fn($api) =>
+        return $this->call($accessToken, fn($api) =>
             $api->video()->byVideo_id($videoId)->upload()->post(
+                $body,
                 new \EBay\ListingManagement\Generated\Media\Video\Item\Upload\UploadRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -167,16 +169,16 @@ final class MediaClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->document()->byDocument_id($documentId)->upload()->post(
-                $body,
+                new MultipartFile("file", $body),
                 new \EBay\ListingManagement\Generated\Media\Document\Item\Upload\UploadRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
-    public function downloadPostOrderDocument(string $documentId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    public function downloadPostOrderDocument(string $documentId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
+        return $this->call($accessToken, fn($api) =>
             $api->post_order()->document()->byDocument_id($documentId)->get(
                 new \EBay\ListingManagement\Generated\Media\Post_order\Document\Item\WithDocument_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
@@ -198,7 +200,7 @@ final class MediaClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->post_order()->document()->post(
-                $body,
+                new MultipartFile("file", $body),
                 new \EBay\ListingManagement\Generated\Media\Post_order\Document\DocumentRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );

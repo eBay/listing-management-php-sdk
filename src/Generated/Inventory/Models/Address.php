@@ -32,7 +32,7 @@ class Address implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $addressLine1 The first line of a street address. This field is required for store and fulfillment center locations. A street address is not required for warehouse locations.<br><br>This field will be returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
+     * @var string|null $addressLine1 The first line of a street address. This field is required for fulfillment center locations. A street address is not required for warehouse locations.<br><br>This field will be returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
     */
     private ?string $addressLine1 = null;
     
@@ -42,7 +42,7 @@ class Address implements AdditionalDataHolder, Parsable
     private ?string $addressLine2 = null;
     
     /**
-     * @var string|null $city The city in which the inventory location resides. This field is required for store and fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the city is derived from the provided postal code and this field is technically optional.<br><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
+     * @var string|null $city The city in which the inventory location resides. This field is required for fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the city is derived from the provided postal code and this field is technically optional.<br><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
     */
     private ?string $city = null;
     
@@ -57,12 +57,12 @@ class Address implements AdditionalDataHolder, Parsable
     private ?string $county = null;
     
     /**
-     * @var string|null $postalCode The postal/zip code of the address. eBay uses postal codes to surface In-Store Pickup items within the vicinity of a buyer's location, and it also uses postal codes (origin and destination) to estimate shipping costs when the seller uses calculated shipping. This field is required for store and fulfillment center locations. <br><br>For warehouse locations, this field is conditionally required if a <strong>city</strong> and <strong>stateOrProvince</strong> pair is not provided.<br><br><span class="tablenote"> <strong>Note:</strong> For warehouse locations, <strong>city</strong> and <strong>stateOrProvince</strong> pair can be used instead of a <strong>postalCode</strong> value, and then the postal code is just derived from the city and state/province.</span><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 16
+     * @var string|null $postalCode The postal/zip code of the address. eBay also uses postal codes (origin and destination) to estimate shipping costs when the seller uses calculated shipping. This field is required for fulfillment center locations. <br><br>For warehouse locations, this field is conditionally required if a <strong>city</strong> and <strong>stateOrProvince</strong> pair is not provided.<br><br><span class="tablenote"> <strong>Note:</strong> For warehouse locations, <strong>city</strong> and <strong>stateOrProvince</strong> pair can be used instead of a <strong>postalCode</strong> value, and then the postal code is just derived from the city and state/province.</span><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 16
     */
     private ?string $postalCode = null;
     
     /**
-     * @var string|null $stateOrProvince The state/province in which the inventory location resides. This field is required for store and fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the state or province is derived from the provided zip code and this field is technically optional.<br><br><b>Maximum length</b>: 128
+     * @var string|null $stateOrProvince The state/province in which the inventory location resides. This field is required for fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the state or province is derived from the provided zip code and this field is technically optional.<br><br><b>Maximum length</b>: 128
     */
     private ?string $stateOrProvince = null;
     
@@ -91,7 +91,7 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the addressLine1 property value. The first line of a street address. This field is required for store and fulfillment center locations. A street address is not required for warehouse locations.<br><br>This field will be returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
+     * Gets the addressLine1 property value. The first line of a street address. This field is required for fulfillment center locations. A street address is not required for warehouse locations.<br><br>This field will be returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
      * @return string|null
     */
     public function getAddressLine1(): ?string {
@@ -107,7 +107,7 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the city property value. The city in which the inventory location resides. This field is required for store and fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the city is derived from the provided postal code and this field is technically optional.<br><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
+     * Gets the city property value. The city in which the inventory location resides. This field is required for fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the city is derived from the provided postal code and this field is technically optional.<br><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
      * @return string|null
     */
     public function getCity(): ?string {
@@ -148,7 +148,7 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the postalCode property value. The postal/zip code of the address. eBay uses postal codes to surface In-Store Pickup items within the vicinity of a buyer's location, and it also uses postal codes (origin and destination) to estimate shipping costs when the seller uses calculated shipping. This field is required for store and fulfillment center locations. <br><br>For warehouse locations, this field is conditionally required if a <strong>city</strong> and <strong>stateOrProvince</strong> pair is not provided.<br><br><span class="tablenote"> <strong>Note:</strong> For warehouse locations, <strong>city</strong> and <strong>stateOrProvince</strong> pair can be used instead of a <strong>postalCode</strong> value, and then the postal code is just derived from the city and state/province.</span><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 16
+     * Gets the postalCode property value. The postal/zip code of the address. eBay also uses postal codes (origin and destination) to estimate shipping costs when the seller uses calculated shipping. This field is required for fulfillment center locations. <br><br>For warehouse locations, this field is conditionally required if a <strong>city</strong> and <strong>stateOrProvince</strong> pair is not provided.<br><br><span class="tablenote"> <strong>Note:</strong> For warehouse locations, <strong>city</strong> and <strong>stateOrProvince</strong> pair can be used instead of a <strong>postalCode</strong> value, and then the postal code is just derived from the city and state/province.</span><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 16
      * @return string|null
     */
     public function getPostalCode(): ?string {
@@ -156,7 +156,7 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the stateOrProvince property value. The state/province in which the inventory location resides. This field is required for store and fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the state or province is derived from the provided zip code and this field is technically optional.<br><br><b>Maximum length</b>: 128
+     * Gets the stateOrProvince property value. The state/province in which the inventory location resides. This field is required for fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the state or province is derived from the provided zip code and this field is technically optional.<br><br><b>Maximum length</b>: 128
      * @return string|null
     */
     public function getStateOrProvince(): ?string {
@@ -187,7 +187,7 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the addressLine1 property value. The first line of a street address. This field is required for store and fulfillment center locations. A street address is not required for warehouse locations.<br><br>This field will be returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
+     * Sets the addressLine1 property value. The first line of a street address. This field is required for fulfillment center locations. A street address is not required for warehouse locations.<br><br>This field will be returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
      * @param string|null $value Value to set for the addressLine1 property.
     */
     public function setAddressLine1(?string $value): void {
@@ -203,7 +203,7 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the city property value. The city in which the inventory location resides. This field is required for store and fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the city is derived from the provided postal code and this field is technically optional.<br><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
+     * Sets the city property value. The city in which the inventory location resides. This field is required for fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the city is derived from the provided postal code and this field is technically optional.<br><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 128
      * @param string|null $value Value to set for the city property.
     */
     public function setCity(?string $value): void {
@@ -227,7 +227,7 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the postalCode property value. The postal/zip code of the address. eBay uses postal codes to surface In-Store Pickup items within the vicinity of a buyer's location, and it also uses postal codes (origin and destination) to estimate shipping costs when the seller uses calculated shipping. This field is required for store and fulfillment center locations. <br><br>For warehouse locations, this field is conditionally required if a <strong>city</strong> and <strong>stateOrProvince</strong> pair is not provided.<br><br><span class="tablenote"> <strong>Note:</strong> For warehouse locations, <strong>city</strong> and <strong>stateOrProvince</strong> pair can be used instead of a <strong>postalCode</strong> value, and then the postal code is just derived from the city and state/province.</span><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 16
+     * Sets the postalCode property value. The postal/zip code of the address. eBay also uses postal codes (origin and destination) to estimate shipping costs when the seller uses calculated shipping. This field is required for fulfillment center locations. <br><br>For warehouse locations, this field is conditionally required if a <strong>city</strong> and <strong>stateOrProvince</strong> pair is not provided.<br><br><span class="tablenote"> <strong>Note:</strong> For warehouse locations, <strong>city</strong> and <strong>stateOrProvince</strong> pair can be used instead of a <strong>postalCode</strong> value, and then the postal code is just derived from the city and state/province.</span><br>This field is returned if defined for an inventory location. <br><br><b>Maximum length</b>: 16
      * @param string|null $value Value to set for the postalCode property.
     */
     public function setPostalCode(?string $value): void {
@@ -235,7 +235,7 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the stateOrProvince property value. The state/province in which the inventory location resides. This field is required for store and fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the state or province is derived from the provided zip code and this field is technically optional.<br><br><b>Maximum length</b>: 128
+     * Sets the stateOrProvince property value. The state/province in which the inventory location resides. This field is required for fulfillment center locations. For warehouse locations, this field is conditionally required as part of a <strong>city</strong> and <strong>stateOrProvince</strong> pair if a <strong>postalCode</strong> is not provided. If a <strong>postalCode</strong> is provided, the state or province is derived from the provided zip code and this field is technically optional.<br><br><b>Maximum length</b>: 128
      * @param string|null $value Value to set for the stateOrProvince property.
     */
     public function setStateOrProvince(?string $value): void {
